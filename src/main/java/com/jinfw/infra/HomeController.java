@@ -31,7 +31,6 @@ public class HomeController {
 		logger.info("Server name is arin.");
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.info("server address => localhost:8080/");
-		logger.info("========= ############ =========");
 		
 		
 		
