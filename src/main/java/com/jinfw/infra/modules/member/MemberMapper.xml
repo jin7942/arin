@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jinfw.infra.modules.member.MemberMapper">
+
+    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.member.Member"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+	SELECT 
+		a.seq
+		,a.memberID
+		,a.memberName
+		,a.memberMobile
+		,a.memberMailName
+		,a.memberPlace
+		,a.memberSignDatetime
+		,a.memberModDatetime
+		,a.memberDelNY
+	FROM member a
+	WHERE 1=1
+	
+		
+		<!-- 문자열 검색 -->
+		<choose>
+			<when test="shOptionValue == 1">
+				AND a.memberName LIKE CONCAT('%',#{shValue},'%')
+			</when>
+		</choose>
+		
+		<!-- 삭제여부 -->
+		<choose>
+			<when test="shOptionDelNY == 0">
+				AND a.memberDelNY = 0
+			</when>
+			<when test="shOptionDelNY == 1">
+				AND a.memberDelNY = 1
+			</when>
+		</choose>
+		
+		<!-- 날짜 검색 -->
+		<choose>
+			<when test="shOptionDate == 1">
+				AND a.memberSignDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+			<when test="shOptionDate == 2">
+				AND a.memberModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+		</choose>
+
+		<!-- 정렬 -->
+		<choose>
+			<when test="shOptionSort == 1">
+				ORDER BY a.seq ASC
+			</when>
+			<when test="shOptionSort == 2">
+				ORDER BY a.memberSignDatetime ASC
+			</when>
+			<when test="shOptionSort == 3">
+				ORDER BY a.memberModDatetime ASC
+			</when>
+		</choose>
+		
+		<!-- 조회 개수 -->
+<!-- 		<choose>
+			<when test="shOptionRows == 1">
+				LIMIT 10
+			</when>
+			<when test="shOptionRows == 2">
+				LIMIT 20
+			</when>
+			<when test="shOptionRows == 3">
+				LIMIT 30
+			</when>
+		</choose> -->
+		LIMIT 20		
+	</select>
+</mapper>
