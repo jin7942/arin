@@ -64,17 +64,17 @@
 		</choose>
 		
 		<!-- 조회 개수 -->
-<!-- 		<choose>
-			<when test="shOptionRows == 1">
-				LIMIT 10
-			</when>
+		<choose>
 			<when test="shOptionRows == 2">
 				LIMIT 20
 			</when>
 			<when test="shOptionRows == 3">
 				LIMIT 30
 			</when>
-		</choose> -->
-		LIMIT 20		
+			<otherwise>
+				LIMIT 10
+			</otherwise>
+		</choose>
+
 	</select>
 </mapper>

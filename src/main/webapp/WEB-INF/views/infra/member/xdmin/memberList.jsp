@@ -240,7 +240,16 @@
 	                                     <form 
 	                                     	class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
 	                                     	method="GET"
-	                                     	action="/member/memberList"
+	                                     	action="/member/memberList?
+	                                     								shOptionDelNY=${vo.shOptionDelNY}
+	                                     								&shOptionSort=${vo.shOptionSort}
+	                                     								&shOptionDate=${vo.shOptionDate}
+	                                     								&shStartDate=${vo.shStartDate}
+	                                     								&shEndDate=${vo.shEndDate}
+	                                     								&shOptionRows=${vo.shOptionRows}
+	                                     								&shOptionValue=${vo.shOptionValue}
+	                                     								&shValue=${vo.shValue}
+	                                     								"
 	                                     >
                                             <select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
                                                 <option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
@@ -249,16 +258,16 @@
                                             </select>
 
                                             <select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
-                                                <option value="1" selected>정렬구분</option>
-                                                <option value="1">시퀀스</option>
-                                                <option value="2">등록일</option>
-                                                <option value="3">수정일</option>
+                                                <option value="1" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
+                                                <option value="1" <c:if test="${vo.shOptionSort eq 1}"  >selected</c:if>>시퀀스</option>
+                                                <option value="2" <c:if test="${vo.shOptionSort eq 2}"  >selected</c:if>>등록일</option>
+                                                <option value="3" <c:if test="${vo.shOptionSort eq 3}"  >selected</c:if>>수정일</option>
                                             </select>
 
                                              <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
-                                                <option value="" disabled selected> 검색구분</option>
-                                                <option value="1" >등록일</option>
-                                                <option value="2" >수정일</option>
+                                                <option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>> 검색구분</option>
+                                                <option value="1" <c:if test="${vo.shOptionDate eq 1}"  >selected</c:if>>등록일</option>
+                                                <option value="2" <c:if test="${vo.shOptionDate eq 2}"  >selected</c:if>>수정일</option>
                                             </select>
 
                                             <input
@@ -281,6 +290,13 @@
                                                 aria-label="Search"
                                                 aria-describedby="basic-addon2"
                                             />
+                                            	
+                                            	<!-- rows -->
+												<select id="shOptionRows" name="shOptionRows" class="select btn btn-secondary dropdown-toggle">
+													<option value="">10</option>
+													<option value="2" <c:if test="${vo.shOptionRows eq 2}"  >selected</c:if>>20</option>
+													<option value="3" <c:if test="${vo.shOptionRows eq 3}"  >selected</c:if>>30</option>
+												</select>
 
                                             <br />
                                             <br />
@@ -291,7 +307,7 @@
 													<option value="" <c:if test="${empty vo.shOptionValue}"  >selected</c:if>>검색구분</option>
 													<option value="1" <c:if test="${vo.shOptionValue eq 1}"  >selected</c:if>>이름</option>
                                             	</select>
-                                            	
+
                                                 <input
                                                 	id="shValue"
                                                 	name="shValue"
@@ -307,10 +323,12 @@
                                                     <button class="btn btn-primary" type="submit">
                                                         <i class="fas fa-search fa-sm"></i>
                                                     </button>
-                                                    <button class="btn btn-dark" type="button">
+                                                    <button class="btn btn-dark" type="button" onclick="refresh()">
                                                         <i class="fa-solid fa-arrow-rotate-right"></i>
                                                     </button>
                                                 </div>
+
+
                                             </div>
                                         </form>
                                         <!-- End Of Search Form -->
@@ -329,12 +347,7 @@
                                             <!-- table-caption -->
                                             <caption style="caption-side: top; text-align: right">
                                             
-<%-- 												<select id="shOptionRows" name="shOptionRows" class="select btn btn-secondary dropdown-toggle">
-													<option value="1" selected <c:if test="${empty vo.shOptionRows}"  >selected</c:if>>10</option>
-													<option value="2" <c:if test="${vo.shOptionRows eq 2}"  >selected</c:if>>20</option>
-													<option value="3" <c:if test="${vo.shOptionRows eq 3}"  >selected</c:if>>30</option>
-												</select>
-												 --%>
+												
 											</caption>
 										<!-- table-header -->
 										
@@ -476,5 +489,12 @@
 
         <!-- fontawesome-icon -->
         <script src="https://kit.fontawesome.com/287e3e129e.js" crossorigin="anonymous"></script>
+        
+        <!-- temp -->
+        <script type="text/javascript">
+        	function refresh() {
+        		location.href="/member/memberList";
+			}
+        </script>
     </body>
 </html>
