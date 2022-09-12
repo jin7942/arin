@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ page session="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,19 +14,31 @@
 
         <title>My Admin Page</title>
 
-        <!-- Custom fonts for this template-->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+ 		<!-- Custom fonts for this template-->
+        <link href="/resources/template_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
         <!-- Custom styles for this template-->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+        <link href="/resources/template_admin/css/sb-admin-2.min.css" rel="stylesheet" />
 
         <style>
             select option[value=''][disabled] {
                 display: none;
             }
         </style>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+            integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+            crossorigin="anonymous"
+        ></script>
     </head>
+
 
     <body id="page-top">
         <!-- Page Wrapper -->
@@ -75,8 +85,8 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="codeGroupList.html">코드 그룹 관리</a>
-                            <a class="collapse-item" href="code.html">코드 관리</a>
+                            <a class="collapse-item" href="/codegroup/codeGroupList">코드 그룹 관리</a>
+                            <a class="collapse-item" href="/code/codeList">코드 관리</a>
                         </div>
                     </div>
                 </li>
@@ -96,7 +106,7 @@
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="utilities-color.html">회원목록</a>
+                            <a class="collapse-item" href="/member/memberList">회원목록</a>
                         </div>
                     </div>
                 </li>
@@ -214,6 +224,8 @@
                     </nav>
                     <!-- End of Topbar -->
 
+            <!-- Content Wrapper -->
+          
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
@@ -224,127 +236,157 @@
                                 <!-- Search-area -->
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
-                                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                            <select class="select btn btn-secondary dropdown-toggle">
-                                                <option value="0">N</option>
-                                                <option value="1">Y</option>
+	                                 	<!-- Search Form -->
+	                                     <form 
+	                                     	class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
+	                                     	method="GET"
+	                                     	action="/member/memberList?
+	                                     								shOptionDelNY=${vo.shOptionDelNY}
+	                                     								&shOptionSort=${vo.shOptionSort}
+	                                     								&shOptionDate=${vo.shOptionDate}
+	                                     								&shStartDate=${vo.shStartDate}
+	                                     								&shEndDate=${vo.shEndDate}
+	                                     								&shOptionRows=${vo.shOptionRows}
+	                                     								&shOptionValue=${vo.shOptionValue}
+	                                     								&shValue=${vo.shValue}
+	                                     								"
+	                                     >
+                                            <select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
+                                                <option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
+                                                <option value="0" <c:if test="${vo.shOptionDelNY eq 0}"  >selected</c:if>>N</option>
+                                                <option value="1" <c:if test="${vo.shOptionDelNY eq 1}"  >selected</c:if>>Y</option>
                                             </select>
 
-                                            <select class="select btn btn-secondary dropdown-toggle">
-                                                <option value="" disabled selected>수정일</option>
-                                                <option value="1">N</option>
-                                                <option value="2">Y</option>
+                                            <select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
+                                                <option value="1" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
+                                                <option value="1" <c:if test="${vo.shOptionSort eq 1}"  >selected</c:if>>시퀀스</option>
+                                                <option value="2" <c:if test="${vo.shOptionSort eq 2}"  >selected</c:if>>등록일</option>
+                                                <option value="3" <c:if test="${vo.shOptionSort eq 3}"  >selected</c:if>>수정일</option>
                                             </select>
 
-                                            <select class="select btn btn-secondary dropdown-toggle">
-                                                <option value="" disabled selected>검색구분</option>
-                                                <option value="0">N</option>
-                                                <option value="1">Y</option>
+                                             <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
+                                                <option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>> 검색구분</option>
+                                                <option value="1" <c:if test="${vo.shOptionDate eq 1}"  >selected</c:if>>등록일</option>
+                                                <option value="2" <c:if test="${vo.shOptionDate eq 2}"  >selected</c:if>>수정일</option>
                                             </select>
 
                                             <input
-                                                type="text"
+                                            	id="shStartDate"
+                                            	name="shStartDate"
+                                                type="date"
+                                                value="<c:out value="${vo.shStartDate}"/>"
                                                 class="form-control bg-light border-0 small"
                                                 placeholder="시작일"
                                                 aria-label="Search"
                                                 aria-describedby="basic-addon2"
                                             />
                                             <input
-                                                type="text"
+                                            	id="shEndDate"
+                                            	name="shEndDate"
+                                                type="date"
+                                                value="<c:out value="${vo.shEndDate}"/>"
                                                 class="form-control bg-light border-0 small"
                                                 placeholder="종료일"
                                                 aria-label="Search"
                                                 aria-describedby="basic-addon2"
                                             />
+                                            	
+                                            	<!-- rows -->
+												<select id="shOptionRows" name="shOptionRows" class="select btn btn-secondary dropdown-toggle">
+													<option value="">10</option>
+													<option value="2" <c:if test="${vo.shOptionRows eq 2}"  >selected</c:if>>20</option>
+													<option value="3" <c:if test="${vo.shOptionRows eq 3}"  >selected</c:if>>30</option>
+												</select>
 
                                             <br />
                                             <br />
-
+	
                                             <div class="input-group">
+                                            	<!-- TODO : 검색 조건 추가 -->
+                                            	<select id="shOptionValue" name="shOptionValue" class="select btn btn-secondary dropdown-toggle">
+													<option value="" <c:if test="${empty vo.shOptionValue}"  >selected</c:if>>검색구분</option>
+													<option value="1" <c:if test="${vo.shOptionValue eq 1}"  >selected</c:if>>이름</option>
+                                            	</select>
+
                                                 <input
+                                                	id="shValue"
+                                                	name="shValue"
+                                                	value="<c:out value="${vo.shValue}"/>"
                                                     type="text"
                                                     class="form-control bg-light border-0 small"
                                                     placeholder="Search for..."
                                                     aria-label="Search"
                                                     aria-describedby="basic-addon2"
                                                 />
+	                                            <!-- icons -->
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="button">
+                                                    <button class="btn btn-primary" type="submit">
                                                         <i class="fas fa-search fa-sm"></i>
                                                     </button>
-                                                    <button class="btn btn-dark" type="button">
+                                                    <button class="btn btn-dark" type="button" onclick="refresh()">
                                                         <i class="fa-solid fa-arrow-rotate-right"></i>
                                                     </button>
                                                 </div>
+
+
                                             </div>
-                                            <!-- icons -->
                                         </form>
+                                        <!-- End Of Search Form -->
                                     </div>
-                                </div>
+                                </div>   
+                                        
+                                <!-- End of Search area -->
 
                                 <!-- Table area -->
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">total : 0</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">total : </h6>
                                     </div>
                                     <div class="card-body">
                                         <table class="table table-hover">
                                             <!-- table-caption -->
                                             <caption style="caption-side: top; text-align: right">
-                                                <button
-                                                    class="btn btn-secondary dropdown-toggle"
-                                                    type="button"
-                                                    id="dropdownMenuButton1"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    10
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li><a class="dropdown-item" href="#">20</a></li>
-                                                    <li><a class="dropdown-item" href="#">30</a></li>
-                                                    <li><a class="dropdown-item" href="#">40</a></li>
-                                                </ul>
-                                            </caption>
-                                            <!-- table-header -->
-                                            <tr>
-                                                <thead class="table-dark">
-                                                    <td>
-                                                        <input type="checkbox" name="" id="" />
-                                                    </td>
-                                                    <td>#</td>
-                                                    <td>코드그룹 코드</td>
-                                                    <td>코드그룹 이름 (한글)</td>
-                                                    <td>코드그룹 이름 (영문)</td>
-                                                    <td>코드갯수</td>
-                                                    <td>등록일</td>
-                                                    <td>수정일</td>
-                                                </thead>
-                                            </tr>
+                                            
+												
+											</caption>
+										<!-- table-header -->
+										
+										<thead class="table-dark">
+											<tr>
+												<td><input type="checkbox" name="" id="" /></td>
+												<td>#</td>
+												<td>seq</td>
+												<td>이름(영문)</td>
+												<td>이름(한글)</td>
+												<td>코드개수</td>
+												<td>등록일</td>
+												<td>수정일</td>
+											</tr>
+										</thead>
 
-                                            <!-- table-body -->
-                                            <c:forEach items="${list}" var="list" varStatus="status">
-	                                            <tr>
-	                                                <td>
-	                                                    <input type="checkbox" name="" id="" />
-	                                                </td>
-	                                                <td>
-	                                                	<c:out value="${list.seq }"/>
-	                                                </td>
-	                                                <td></td>
-	                                                <td>
-	                                                	<c:out value="${list.name }"/>
-	                                                </td>
-	                                                <td></td>
-	                                                <td>
-	                                                	<c:out value="${list.sum }"/>
-	                                                </td>
-	                                                <td></td>
-	                                                <td></td>
-	                                            </tr>
-                                            </c:forEach>
-
-                                        </table>
+										<!-- table-body -->
+										<c:choose>
+											<c:when test="${fn:length(list) eq 0 }">
+												<tr>
+													<td colspan="10" >No Data..</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${list}" var="list" varStatus="status">
+													<tr>
+														<td><input type="checkbox" name="" id="" /></td>
+														<td><%-- <c:out value="${vo.totalRows +((vo.thispage) * vo.rowNumToShow + status.index) + 1 }"></c:out> --%></td>
+														<td><a><c:out value="${list.ifcgSeq}"></c:out></a></td>
+														<td><a><c:out value="${list.ifcgNameEng}"></c:out></a></td>
+														<td><a><c:out value="${list.ifcgNameKor}"></c:out></a></td>
+														<td><a><c:out value="${list.codeCnt}"></c:out></a></td>
+														<td><a><c:out value="${list.ifcgRegDatetime}"></c:out></a></td>
+														<td><a><c:out value="${list.ifcgModDatetime}"></c:out></a></td>
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</table>
                                         <!-- End of Table -->
 
                                         <!-- pagination -->
@@ -378,7 +420,6 @@
                                             type="button"
                                             class="btn btn-success"
                                             style="float: right"
-                                            onclick="location.href='./memberRegForm.html'"
                                         >
                                             <i class="fa-solid fa-file-excel"></i>
                                         </button>
@@ -441,5 +482,12 @@
 
         <!-- fontawesome-icon -->
         <script src="https://kit.fontawesome.com/287e3e129e.js" crossorigin="anonymous"></script>
+        
+        <!-- temp -->
+        <script type="text/javascript">
+        	function refresh() {
+        		location.href="/member/memberList";
+			}
+        </script>
     </body>
 </html>

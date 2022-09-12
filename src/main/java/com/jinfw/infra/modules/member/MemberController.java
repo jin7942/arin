@@ -24,14 +24,6 @@ public class MemberController {
 	@RequestMapping (value = "memberList")
 	public String memberList(Model model, MemberVo vo) throws Exception {
 		
-		System.out.println("vo.shStartDate : " + vo.getShStartDate());
-		System.out.println("vo.shEnDate : " + vo.getShEndDate());
-		System.out.println("vo.shOption : " + vo.getShOptionDate());
-		System.out.println("vo.shValue : " + vo.getShValue());
-		System.out.println("vo.shOptionValue : " + vo.getShOptionValue());
-		System.out.println("vo.shOptionDelNY : " + vo.getShOptionDelNY());
-		System.out.println("vo.shOptionRows : " + vo.getShOptionRows());
-		
 		List<Member> list = service.selectList(vo);
 		
 		model.addAttribute("list", list);

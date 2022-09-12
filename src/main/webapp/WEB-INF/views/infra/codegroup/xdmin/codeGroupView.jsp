@@ -168,9 +168,9 @@
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
             </ul>
-            <!-- End of Sidebar -->
+            <!-- End of Sidebar -->->
 
-            <!-- Content Wrapper -->
+<!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
@@ -224,212 +224,77 @@
                     </nav>
                     <!-- End of Topbar -->
 
-            <!-- Content Wrapper -->
-          
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-4 text-gray-800">회원 관리</h1>
+                        <h1 class="h3 mb-4 text-gray-800">코드그룹 관리</h1>
 
                         <div class="row">
                             <div class="col-lg-12">
                                 <!-- Search-area -->
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
-	                                 	<!-- Search Form -->
-	                                     <form 
-	                                     	class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
-	                                     	method="GET"
-	                                     	action="/member/memberList?
-	                                     								shOptionDelNY=${vo.shOptionDelNY}
-	                                     								&shOptionSort=${vo.shOptionSort}
-	                                     								&shOptionDate=${vo.shOptionDate}
-	                                     								&shStartDate=${vo.shStartDate}
-	                                     								&shEndDate=${vo.shEndDate}
-	                                     								&shOptionRows=${vo.shOptionRows}
-	                                     								&shOptionValue=${vo.shOptionValue}
-	                                     								&shValue=${vo.shValue}
-	                                     								"
-	                                     >
-                                            <select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
-                                                <option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
-                                                <option value="0" <c:if test="${vo.shOptionDelNY eq 0}"  >selected</c:if>>N</option>
-                                                <option value="1" <c:if test="${vo.shOptionDelNY eq 1}"  >selected</c:if>>Y</option>
-                                            </select>
+                                        <form method="post" action="/codegroup/codeGroupInst" id="form">
+                                            <div style="display: flex">
+                                                <div class="col-6">
+                                                    <label for="input1" class="form-label">코드그룹 코드</label>
+                                                    <input type="text" id="input1" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                            <select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
-                                                <option value="1" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
-                                                <option value="1" <c:if test="${vo.shOptionSort eq 1}"  >selected</c:if>>시퀀스</option>
-                                                <option value="2" <c:if test="${vo.shOptionSort eq 2}"  >selected</c:if>>등록일</option>
-                                                <option value="3" <c:if test="${vo.shOptionSort eq 3}"  >selected</c:if>>수정일</option>
-                                            </select>
+                                                    <label for="input2" class="form-label">코드그룹 이름(한글)test</label>
+                                                    <input type="text" id="ifcgNameKor" name="ifcgNameKor" class="form-control" placeholder="한글, 숫자" 
+                                                    		value="<c:out value="${dto.ifcgNameKor}"/>" />
 
-                                             <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
-                                                <option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>> 검색구분</option>
-                                                <option value="1" <c:if test="${vo.shOptionDate eq 1}"  >selected</c:if>>등록일</option>
-                                                <option value="2" <c:if test="${vo.shOptionDate eq 2}"  >selected</c:if>>수정일</option>
-                                            </select>
+                                                    <label for="input4" class="form-label">설명</label>
+                                                    <textarea class="form-control" name="" id="input4" cols="30" rows="5"></textarea>
 
-                                            <input
-                                            	id="shStartDate"
-                                            	name="shStartDate"
-                                                type="date"
-                                                value="<c:out value="${vo.shStartDate}"/>"
-                                                class="form-control bg-light border-0 small"
-                                                placeholder="시작일"
-                                                aria-label="Search"
-                                                aria-describedby="basic-addon2"
-                                            />
-                                            <input
-                                            	id="shEndDate"
-                                            	name="shEndDate"
-                                                type="date"
-                                                value="<c:out value="${vo.shEndDate}"/>"
-                                                class="form-control bg-light border-0 small"
-                                                placeholder="종료일"
-                                                aria-label="Search"
-                                                aria-describedby="basic-addon2"
-                                            />
-                                            	
-                                            	<!-- rows -->
-												<select id="shOptionRows" name="shOptionRows" class="select btn btn-secondary dropdown-toggle">
-													<option value="">10</option>
-													<option value="2" <c:if test="${vo.shOptionRows eq 2}"  >selected</c:if>>20</option>
-													<option value="3" <c:if test="${vo.shOptionRows eq 3}"  >selected</c:if>>30</option>
-												</select>
+                                                    <label for="input5" class="form-label">예비1 (varchar type)</label>
+                                                    <input type="text" id="input5" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                            <br />
-                                            <br />
-	
-                                            <div class="input-group">
-                                            	<!-- TODO : 검색 조건 추가 -->
-                                            	<select id="shOptionValue" name="shOptionValue" class="select btn btn-secondary dropdown-toggle">
-													<option value="" <c:if test="${empty vo.shOptionValue}"  >selected</c:if>>검색구분</option>
-													<option value="1" <c:if test="${vo.shOptionValue eq 1}"  >selected</c:if>>이름</option>
-                                            	</select>
+                                                    <label for="input6" class="form-label">예비3 (varchar type)</label>
+                                                    <input type="text" id="input6" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                <input
-                                                	id="shValue"
-                                                	name="shValue"
-                                                	value="<c:out value="${vo.shValue}"/>"
-                                                    type="text"
-                                                    class="form-control bg-light border-0 small"
-                                                    placeholder="Search for..."
-                                                    aria-label="Search"
-                                                    aria-describedby="basic-addon2"
-                                                />
-	                                            <!-- icons -->
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="submit">
-                                                        <i class="fas fa-search fa-sm"></i>
-                                                    </button>
-                                                    <button class="btn btn-dark" type="button" onclick="refresh()">
-                                                        <i class="fa-solid fa-arrow-rotate-right"></i>
-                                                    </button>
+                                                    <label for="input7" class="form-label">예비1 (int type)</label>
+                                                    <input type="text" id="input7" class="form-control" placeholder="숫자" />
+
+                                                    <label for="input8" class="form-label">예비3 (int type)</label>
+                                                    <input type="text" id="input8" class="form-control" placeholder="숫자" />
                                                 </div>
 
+                                                <div class="col-6">
+                                                    <label for="input9" class="form-label">코드그룹 코드 (Another)</label>
+                                                    <input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" />
 
+                                                    <label for="input10" class="form-label">코드그룹 이름 (영문)</label>
+                                                    <input type="text" id="input10" class="form-control" placeholder="영문(대소문자),숫자"
+                                                    		value="<c:out value="${dto.ifcgNameEng}"/>" />
+
+                                                    <label for="input11" class="form-label">숫자</label>
+                                                    <input type="text" id="input11" class="form-control" placeholder="숫자" />
+
+                                                    <label for="input12" class="form-label">삭제여부</label>
+                                                    <select class="form-control" id="input12"></select>
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <label for="input13" class="form-label">예비2 (varchar type)</label>
+                                                    <input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <label for="input14" class="form-label">예비1 (int type)</label>
+                                                    <input type="text" id="input14" class="form-control" placeholder="숫자" />
+                                                    <div>
+                                                   		<button type="submit" class="btn btn-primary">등록</button>
+                                                   		<button type="button" onclick="test()">test</button>
+                                                   	</div>
+                                                </div>
                                             </div>
                                         </form>
-                                        <!-- End Of Search Form -->
-                                    </div>
-                                </div>   
-                                        
-                                <!-- End of Search area -->
-
-                                <!-- Table area -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">total : </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="table table-hover">
-                                            <!-- table-caption -->
-                                            <caption style="caption-side: top; text-align: right">
-                                            
-												
-											</caption>
-										<!-- table-header -->
-										
-										<thead class="table-dark">
-											<tr>
-												<td><input type="checkbox" name="" id="" /></td>
-												<td>#</td>
-												<td>seq</td>
-												<td>ID</td>
-												<td>이름</td>
-												<td>연락처</td>
-												<td>이메일</td>
-												<td>등록장소</td>
-												<td>등록일</td>
-												<td>수정일</td>
-												<td>삭제여부</td>
-											</tr>
-										</thead>
-
-										<!-- table-body -->
-										<c:choose>
-											<c:when test="${fn:length(list) eq 0 }">
-												<tr>
-													<td colspan="10" >No Data..</td>
-												</tr>
-											</c:when>
-											<c:otherwise>
-												<c:forEach items="${list}" var="list" varStatus="status">
-													<tr>
-														<td><input type="checkbox" name="" id="" /></td>
-														<td><%-- <c:out value="${vo.totalRows +((vo.thispage) * vo.rowNumToShow + status.index) + 1 }"></c:out> --%></td>
-														<td><a><c:out value="${list.seq}"></c:out></a></td>
-														<td><a><c:out value="${list.memberID}"></c:out></a></td>
-														<td><a><c:out value="${list.memberName}"></c:out></a></td>
-														<td><a><c:out value="${list.memberMobile}"></c:out></a></td>
-														<td><a><c:out value="${list.memberMailName}"></c:out></a></td>
-														<td><a><c:out value="${list.memberPlace}"></c:out></a></td>
-														<td><a><c:out value="${list.memberSignDatetime}"></c:out></a></td>
-														<td><a><c:out value="${list.memberModDatetime}"></c:out></a></td>
-														<td><a><c:out value="${list.memberDelNY}"></c:out></a></td>
-													</tr>
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>
-									</table>
-                                        <!-- End of Table -->
-
-                                        <!-- pagination -->
-                                        <nav aria-label="...">
-                                            <ul class="pagination pagination-sm justify-content-center">
-                                                <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            </ul>
-                                        </nav>
-                                        <!-- End of pagination -->
-                                        <button
-                                            type="button"
-                                            class="btn btn-danger"
-                                            style="float: left"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"
-                                        >
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </button>
-
-                                        <button
-                                            type="button "
-                                            class="btn btn-primary"
-                                            style="float: right"
-                                            onclick="location.href='./memberRegForm.html'"
-                                        >
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-success"
-                                            style="float: right"
-                                            onclick="location.href='./memberRegForm.html'"
-                                        >
-                                            <i class="fa-solid fa-file-excel"></i>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -490,11 +355,6 @@
         <!-- fontawesome-icon -->
         <script src="https://kit.fontawesome.com/287e3e129e.js" crossorigin="anonymous"></script>
         
-        <!-- temp -->
-        <script type="text/javascript">
-        	function refresh() {
-        		location.href="/member/memberList";
-			}
-        </script>
     </body>
 </html>
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jinfw.infra.modules.codegroup.CodeGroupMapper">
+
+    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.codegroup.CodeGroup"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+        SELECT DISTINCT
+			a.ifcgSeq
+		    ,a.ifcgNameEng
+		    ,a.ifcgNameKor
+		    ,a.ifcgRegDatetime
+		    ,a.ifcgModDatetime
+		    ,(select count(bb.ifccSeq) from infrCommonCode bb where bb.infrCodeGroup_ifcgSeq = a.ifcgSeq) as codeCnt
+		FROM infrCodeGroup a
+		INNER JOIN infrCommonCode b on a.ifcgSeq = b.infrCodeGroup_ifcgSeq
+		WHERE 1=1
+		
+		<!-- 문자열 검색 -->
+		<choose>
+			<when test="shOptionValue == 1">
+				AND a.icfgNameKor LIKE CONCAT('%',#{shValue},'%')
+			</when>
+		</choose>
+		
+		<!-- 삭제여부 -->
+<!-- 		<choose>
+			<when test="shOptionDelNY == 0">
+				AND a.memberDelNY = 0
+			</when>
+			<when test="shOptionDelNY == 1">
+				AND a.memberDelNY = 1
+			</when>
+		</choose> -->
+		
+		<!-- 날짜 검색 -->
+		<choose>
+			<when test="shOptionDate == 1">
+				AND a.ifcgRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+			<when test="shOptionDate == 2">
+				AND a.ifcgModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+		</choose>
+
+		<!-- 정렬 -->
+		<choose>
+			<when test="shOptionSort == 1">
+				ORDER BY a.ifcgSeq ASC
+			</when>
+			<when test="shOptionSort == 2">
+				ORDER BY a.ifcgRegDatetime ASC
+			</when>
+			<when test="shOptionSort == 3">
+				ORDER BY a.ifcgModDatetime ASC
+			</when>
+		</choose>
+		
+		<!-- 조회 개수 -->
+		<choose>
+			<when test="shOptionRows == 2">
+				LIMIT 20
+			</when>
+			<when test="shOptionRows == 3">
+				LIMIT 30
+			</when>
+			<otherwise>
+				LIMIT 10
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO infrCodeGroup (
+			ifcgNameKor
+		)
+		VALUES (
+			#{ifcgNameKor}
+		)
+		
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+
+</mapper>
