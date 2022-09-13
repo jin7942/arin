@@ -227,25 +227,43 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-4 text-gray-800">코드그룹 관리</h1>
+                        <h1 class="h3 mb-4 text-gray-800">코드 관리</h1>
 
                         <div class="row">
                             <div class="col-lg-12">
                                 <!-- Search-area -->
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
-                                        <form method="post" action="/codegroup/codeGroupInst" id="form">
+                                        <form method="GET" action="" id="form" name="form">
                                             <div style="display: flex">
                                                 <div class="col-6">
+                                                	<input type="hidden" id="ifccSeq" name="ifccSeq" value="<c:out value="${dto.ifccSeq}"/>" />
+                                                
+<%-- 	                                                <label for="input33" class="form-label">코드그룹</label>
+	                                                <select class="form-control" id="input33">
+	                                                <c:forEach items="${list}" var="list" varStatus="status">
+	                                                	<option value="<c:out value="${list.ifccSeq }"/>">
+	                                                		<c:out value="${list.ifccNameKor}"/>
+	                                                	</option>
+	                                                </c:forEach>
+	                                                </select> --%>
+                                                
                                                     <label for="input1" class="form-label">코드그룹 코드</label>
                                                     <input type="text" id="input1" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                    <label for="input2" class="form-label">코드그룹 이름(한글)test</label>
-                                                    <input type="text" id="ifcgNameKor" name="ifcgNameKor" class="form-control" placeholder="한글, 숫자" 
-                                                    		value="<c:out value="${dto.ifcgNameKor}"/>" />
+                                                    <label for="ifccNameKor" class="form-label">코드그룹 이름(한글) * </label>
+                                                    <input type="text" id="ifccNameKor" name="ifccNameKor" class="form-control" placeholder="한글, 숫자" 
+                                                    		value="<c:out value="${dto.ifccNameKor}"/>" />
 
-                                                    <label for="input4" class="form-label">설명</label>
-                                                    <textarea class="form-control" name="" id="input4" cols="30" rows="5"></textarea>
+                                                    <label for="ifccUseNY" class="form-label">사용여부  * </label>
+                                                    <select class="form-control" id="ifccUseNY" name="ifccUseNY">
+                                                        <option value="0" <c:if test="${dto.ifccUseNY eq 0}"  >selected</c:if>>N</option>
+                                                        <option value="1" <c:if test="${dto.ifccUseNY eq 1}"  >selected</c:if>>Y</option>
+                                                    </select>
+
+                                                    <label for="ifccDescription" class="form-label">설명</label>
+                                                    <textarea class="form-control" name="ifccDescription" id="ifccDescription" cols="10" rows="2" style="text-align: left;"><c:out value="${dto.ifccDescription}"/></textarea>
+                             
 
                                                     <label for="input5" class="form-label">예비1 (varchar type)</label>
                                                     <input type="text" id="input5" class="form-control" placeholder="영문(대소문자),숫자" />
@@ -264,33 +282,27 @@
                                                     <label for="input9" class="form-label">코드그룹 코드 (Another)</label>
                                                     <input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                    <label for="input10" class="form-label">코드그룹 이름 (영문)</label>
-                                                    <input type="text" id="input10" class="form-control" placeholder="영문(대소문자),숫자"
-                                                    		value="<c:out value="${dto.ifcgNameEng}"/>" />
+                                                    <label for="ifccNameEng" class="form-label">코드그룹 이름 (영문) * </label>
+                                                    <input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자"
+                                                    		value="<c:out value="${dto.ifccNameEng}"/>" />
 
                                                     <label for="input11" class="form-label">숫자</label>
                                                     <input type="text" id="input11" class="form-control" placeholder="숫자" />
 
-                                                    <label for="input12" class="form-label">삭제여부</label>
-                                                    <select class="form-control" id="input12"></select>
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
+                                                    <label for="ifccDelNY" class="form-label">삭제여부 * </label>
+                                                    <select class="form-control" id="ifccDelNY" name="ifccDelNY">
+                                                        <option value="0" <c:if test="${dto.ifccDelNY eq 0}"  >selected</c:if>>N</option>
+                                                        <option value="1" <c:if test="${dto.ifccDelNY eq 1}"  >selected</c:if>>Y</option>
+                                                    </select>
 
                                                     <label for="input13" class="form-label">예비2 (varchar type)</label>
                                                     <input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
                                                     <label for="input14" class="form-label">예비1 (int type)</label>
                                                     <input type="text" id="input14" class="form-control" placeholder="숫자" />
                                                     <div>
-                                                   		<button type="submit" class="btn btn-primary">등록</button>
-                                                   		<button type="button" onclick="test()">test</button>
+                                                   		<button type="button" class="btn btn-primary" id="btnSave">등록</button>
+                                                   		<button type="button" class="btn btn-danger" id="btnUelete">삭제</button>
                                                    	</div>
                                                 </div>
                                             </div>
@@ -355,6 +367,44 @@
         <!-- fontawesome-icon -->
         <script src="https://kit.fontawesome.com/287e3e129e.js" crossorigin="anonymous"></script>
         
+        <script type="text/javascript">
+	    	var goUrlList = "/code/codeList"; 			/* #-> */
+	    	var goUrlInst = "/code/codeInst"; 			/* #-> */
+	    	var goUrlUpdt = "/code/codeUpdt";				/* #-> */
+	    	var goUrlUele = "/code/codeUele";				/* #-> */
+	    	var goUrlDele = "/code/codeDele";				/* #-> */
+	    	
+	    	var seq = $("input:hidden[name=ifcgSeq]");				/* #-> */
+	    	
+	    	var form = $("form[name=form]");
+	    	var formVo = $("form[name=formVo]");
+	    	
+	    	
+	    	$("#btnSave").on("click", function(){
+	    		if (seq.val() == "0" || seq.val() == ""){
+	    	   		// insert
+	    	   		/* if (validationInst() == false) return false; */
+	    	   		form.attr("action", goUrlInst).submit();
+	    	   	} else {
+	    	   		// update
+	    	   		/* keyName.val(atob(keyName.val())); */
+	    	   		/* if (validationUpdt() == false) return false; */
+	    	   		form.attr("action", goUrlUpdt).submit();
+	    	   	}
+	    	});
+	    	
+	    	$("#btnUelete").on("click", function(){
+	    		if (seq.val() == "0" || seq.val() == ""){
+	    	   		// insert
+	    	   		/* if (validationInst() == false) return false; */
+	    	   		alert("tset");
+	    	   		return false;
+	    	   	} else {
+	    	   		form.attr("action", goUrlUele).submit();
+	    	   	}
+	    	});
+        
+        </script>
     </body>
 </html>
 

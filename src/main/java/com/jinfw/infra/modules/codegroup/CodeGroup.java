@@ -6,6 +6,8 @@ public class CodeGroup {
 	private String ifcgSeq;
 	private String ifcgNameEng;
 	private String ifcgNameKor;
+	private String ifcgDelNY;
+	private String ifcgUseNY;
 	private String ifcgRegDatetime;
 	private String ifcgModDatetime;
 	private String codeCnt;
@@ -31,6 +33,18 @@ public class CodeGroup {
 	public void setIfcgNameKor(String ifcgNameKor) {
 		this.ifcgNameKor = ifcgNameKor;
 	}
+	public String getIfcgDelNY() {
+		return ifcgDelNY;
+	}
+	public void setIfcgDelNY(String ifcgDelNY) {
+		this.ifcgDelNY = ifcgDelNY;
+	}
+	public String getIfcgUseNY() {
+		return ifcgUseNY;
+	}
+	public void setIfcgUseNY(String ifcgUseNY) {
+		this.ifcgUseNY = ifcgUseNY;
+	}
 	public String getIfcgRegDatetime() {
 		return ifcgRegDatetime;
 	}
@@ -49,6 +63,5 @@ public class CodeGroup {
 	public void setCodeCnt(String codeCnt) {
 		this.codeCnt = codeCnt;
 	}
-	
 	
 }

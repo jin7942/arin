@@ -229,7 +229,7 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-4 text-gray-800">코드그룹 관리</h1>
+                        <h1 class="h3 mb-4 text-gray-800">코드 관리</h1>
 
                         <div class="row">
                             <div class="col-lg-12">
@@ -240,7 +240,7 @@
 	                                     <form 
 	                                     	class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
 	                                     	method="GET"
-	                                     	action="/codegroup/codeGroupList?
+	                                     	action="/code/codeList?
 	                                     								shOptionDelNY=${vo.shOptionDelNY}
 	                                     								&shOptionSort=${vo.shOptionSort}
 	                                     								&shOptionDate=${vo.shOptionDate}
@@ -343,7 +343,7 @@
                                         <h6 class="m-0 font-weight-bold text-primary">total : </h6>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-hover">
+                                        <table class="table table-hover" id="table">
                                             <!-- table-caption -->
                                             <caption style="caption-side: top; text-align: right">
                                             
@@ -353,16 +353,14 @@
 										
 										<thead class="table-dark">
 											<tr>
-												<td><input type="checkbox" name="" id="" /></td>
+												<td><input type="checkbox" id="chkAll" onclick="chkAll()" /></td>
 												<td>#</td>
 												<td>seq</td>
 												<td>이름(영문)</td>
 												<td>이름(한글)</td>
-												<td>코드개수</td>
 												<td>사용여부</td>
 												<td>삭제여부</td>
-												<td>등록일</td>
-												<td>수정일</td>
+												<td>그룹코드</td>
 											</tr>
 										</thead>
 
@@ -375,17 +373,15 @@
 											</c:when>
 											<c:otherwise>
 												<c:forEach items="${list}" var="list" varStatus="status">
-													<tr onclick="location.href='/codegroup/codeGroupView?ifcgSeq=${list.ifcgSeq}'">
-														<td><input type="checkbox" name="" id="" /></td>
+													<tr onclick="location.href='/code/codeView?ifccSeq=${list.ifccSeq}'">
+														<td><input type="checkbox" class="chkbox" onclick="event.cancelBubble=true"/></td>
 														<td><%-- <c:out value="${vo.totalRows +((vo.thispage) * vo.rowNumToShow + status.index) + 1 }"></c:out> --%></td>
-														<td><c:out value="${list.ifcgSeq}"></c:out></td>
-														<td><c:out value="${list.ifcgNameEng}"></c:out></td>
-														<td><c:out value="${list.ifcgNameKor}"></c:out></td>
-														<td><c:out value="${list.codeCnt}"></c:out></td>
-														<td><c:out value="${list.ifcgUseNY}"></c:out></td>
-														<td><c:out value="${list.ifcgDelNY}"></c:out></td>
-														<td><c:out value="${list.ifcgRegDatetime}"></c:out></td>
-														<td><c:out value="${list.ifcgModDatetime}"></c:out></td>
+														<td><c:out value="${list.ifccSeq}"></c:out></td>
+														<td><c:out value="${list.ifccNameEng}"></c:out></td>
+														<td><c:out value="${list.ifccNameKor}"></c:out></td>
+														<td><c:out value="${list.ifccUseNY}"></c:out></td>
+														<td><c:out value="${list.ifccDelNY}"></c:out></td>
+														<td><c:out value="${list.infrCodeGroup_ifcgSeq}"></c:out></td>
 													</tr>
 												</c:forEach>
 											</c:otherwise>
@@ -406,8 +402,7 @@
                                             type="button"
                                             class="btn btn-danger"
                                             style="float: left"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"
+                                            onclick="delRow()"
                                         >
                                             <i class="fa-solid fa-trash-can"></i>
                                         </button>
@@ -416,7 +411,7 @@
                                             type="button "
                                             class="btn btn-primary"
                                             style="float: right"
-                                            onclick="location.href='/codegroup/codeGroupForm'"
+                                            onclick="location.href='/code/codeForm'"
                                         >
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
@@ -490,8 +485,21 @@
         <!-- temp -->
         <script type="text/javascript">
         	function refresh() {
-        		location.href="/codeGroup/codeGroupList";
+        		location.href="/code/codeList";
 			}
+        	
+        	function delRow(val) {
+        	    
+        	}
+        	
+        	function chkAll() {
+        	    const list = document.querySelectorAll('.chkbox');
+
+        	    for (let i = 0; i < list.length; i++) {
+        	        list[i].checked = document.getElementById('chkAll').checked ? true : false;
+        	    }
+        	}
+
         </script>
     </body>
 </html>

@@ -35,6 +35,43 @@ public class CodeGroupServiceImpl implements CodeGroupService {
 		return dao.insert(dto);
 	}
 
-	
+	/**
+	 * 코드그룹 상세화면
+	 * @return 코드그룹 상세 조회 결과
+	 */
+	@Override
+	public CodeGroup selectOne(CodeGroup dto) throws Exception {
+		return dao.selectOne(dto);
+	}
+
+	/**
+	 * 코드그룹 수정 함수
+	 * @param CodeGroup dto
+	 * @return 공통코드 수정 결과
+	 */
+	@Override
+	public int update(CodeGroup dto) throws Exception {
+		return dao.update(dto);
+	}
+
+	/**
+	 * 코드그룹 삭제 함수(delNY)
+	 * @param CodeGroup dto
+	 * @return 공통코드 삭제 결과
+	 */
+	@Override
+	public int uelete(CodeGroup dto) throws Exception {
+		return dao.uelete(dto);
+	}
+
+	/**
+	 * 코드그룹 삭제 함수
+	 * @param CodeGroupVo vo
+	 * @return 공통코드 삭제 결과
+	 */
+	@Override
+	public int delete(CodeGroupVo vo) throws Exception {
+		return dao.delete(vo);
+	}
 
 }

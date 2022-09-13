@@ -1,4 +1,4 @@
-package com.jinfw.infra.modules.codegroup;
+package com.jinfw.infra.modules.code;
 
 import java.util.List;
 
@@ -9,38 +9,37 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CodeGroupDao {
+public class CodeDao {
 
 	@Inject
 	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
 	
-	private static String namespace = "com.jinfw.infra.modules.codegroup.CodeGroupMapper";
+	private static String namespace = "com.jinfw.infra.modules.code.CodeMapper";
 	
 	// 리스트 조회
-	public List<CodeGroup> selectList(CodeGroupVo vo) { 
+	public List<Code> selectList(CodeVo vo) { 
 		return sqlSession.selectList(namespace + ".selectList", vo); 
 	}
 	// 상세
-	public CodeGroup selectOne(CodeGroup dto) {
+	public Code selectOne(Code dto) {
 		return sqlSession.selectOne(namespace + ".selectOne", dto); 
 	}
 	// 삽입
-	public int insert(CodeGroup dto) {
-		int result = sqlSession.insert(namespace + ".insert", dto);
-		return result;
+	public int insert(Code dto) {
+		return sqlSession.insert(namespace + ".insert", dto);
 	}
 	// 수정
-	public int update(CodeGroup dto) {
+	public int update(Code dto) {
 		return sqlSession.update(namespace + ".update", dto);
 	}
 	// uelete
-	public int uelete(CodeGroup dto) {
+	public int uelete(Code dto) {
 		return sqlSession.update(namespace + ".uelete", dto);
 	}
 	// 삭제
-	public int delete(CodeGroupVo vo) {
-		return sqlSession.delete(namespace + ".delete", vo);
+	public int delete(CodeVo vo) {
+		return sqlSession.delete(namespace + ".update", vo);
 	}
 
 }

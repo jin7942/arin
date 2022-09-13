@@ -234,9 +234,10 @@
                                 <!-- Search-area -->
                                 <div class="card shadow mb-4">
                                     <div class="card-body">
-                                        <form method="post" action="/codegroup/codeGroupInst" id="form">
+                                        <form method="GET" id="form" name="form">
                                             <div style="display: flex">
                                                 <div class="col-6">
+                                                <input type="hidden" id="ifcgSeq" name="ifcgSeq" value="<c:out value="${dto.ifcgSeq}"/>" />
 <%--                                                 
 	                                                <label for="input33" class="form-label">코드그룹</label>
 	                                                <select class="form-control" id="input33">
@@ -250,18 +251,20 @@
                                                     <label for="input1" class="form-label">코드그룹 코드</label>
                                                     <input type="text" id="input1" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                    <label for="input2" class="form-label">코드그룹 이름(한글)test</label>
-                                                    <input type="text" id="input2" name="name" class="form-control" placeholder="한글, 숫자" value="<c:out value="${dto.ifcgNameKor}"/>" />
+                                                    <label for="ifcgNameKor" class="form-label">코드그룹 이름(한글) * </label>
+                                                    <input type="text" id="ifcgNameKor" name="ifcgNameKor" class="form-control" placeholder="한글, 숫자" 
+                                                    		value="<c:out value="${dto.ifcgNameKor}"/>" />
 
-                                                    <label for="input3" class="form-label">사용여부</label>
-                                                    <select class="form-control" id="input3">
-                                                        <option value="0">N</option>
-                                                        <option value="1">Y</option>
+                                                    <label for="ifcgUseNY" class="form-label">사용여부  * </label>
+                                                    <select class="form-control" id="ifcgUseNY" name="ifcgUseNY">
+                                                        <option value="0" <c:if test="${dto.ifcgUseNY eq 0}"  >selected</c:if>>N</option>
+                                                        <option value="1" <c:if test="${dto.ifcgUseNY eq 1}"  >selected</c:if>>Y</option>
                                                     </select>
-
-                                                    <label for="input4" class="form-label">설명</label>
-                                                    <textarea class="form-control" name="" id="input4" cols="30" rows="5"></textarea>
-
+<%-- 
+                                                    <label for="ifcgDescription" class="form-label">설명</label>
+                                                    <textarea class="form-control" name="ifcgDescription" id="ifcgDescription" cols="10" rows="2" style="text-align: left;"><c:out value="${dto.ifcgDescription}"/></textarea>
+                             
+ --%>
                                                     <label for="input5" class="form-label">예비1 (varchar type)</label>
                                                     <input type="text" id="input5" class="form-control" placeholder="영문(대소문자),숫자" />
 
@@ -279,32 +282,27 @@
                                                     <label for="input9" class="form-label">코드그룹 코드 (Another)</label>
                                                     <input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                    <label for="input10" class="form-label">코드그룹 이름 (영문)</label>
-                                                    <input type="text" id="input10" class="form-control" placeholder="영문(대소문자),숫자" />
+                                                    <label for="ifcgNameEng" class="form-label">코드그룹 이름 (영문) * </label>
+                                                    <input type="text" id="ifcgNameEng" name="ifcgNameEng" class="form-control" placeholder="영문(대소문자),숫자"
+                                                    		value="<c:out value="${dto.ifcgNameEng}"/>" />
 
                                                     <label for="input11" class="form-label">숫자</label>
                                                     <input type="text" id="input11" class="form-control" placeholder="숫자" />
 
-                                                    <label for="input12" class="form-label">삭제여부</label>
-                                                    <select class="form-control" id="input12"></select>
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
+                                                    <label for="ifcgDelNY" class="form-label">삭제여부 * </label>
+                                                    <select class="form-control" id="ifcgDelNY" name="ifcgDelNY">
+                                                        <option value="0" <c:if test="${dto.ifcgDelNY eq 0}"  >selected</c:if>>N</option>
+                                                        <option value="1" <c:if test="${dto.ifcgDelNY eq 1}"  >selected</c:if>>Y</option>
+                                                    </select>
 
                                                     <label for="input13" class="form-label">예비2 (varchar type)</label>
                                                     <input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" />
 
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
                                                     <label for="input14" class="form-label">예비1 (int type)</label>
                                                     <input type="text" id="input14" class="form-control" placeholder="숫자" />
                                                     <div>
-                                                   		<button type="submit" class="btn btn-primary">등록</button>
-                                                   		<button type="button" onclick="test()">test</button>
+                                                   		<button type="button" class="btn btn-primary" id="btnSave">등록</button>
+                                                   		<button type="button" class="btn btn-danger" id="btnUelete">삭제</button>
                                                    	</div>
                                                 </div>
                                             </div>
@@ -370,19 +368,41 @@
         <script src="https://kit.fontawesome.com/287e3e129e.js" crossorigin="anonymous"></script>
         
         <script type="text/javascript">
-        	function test() {
-				const test = document.getElementById("input2")
-				alert(document.getElementById("input3").value)
-				
-				if (test.value == '' || test.value == null) {
-					alert("입력해 주세요...")
-					test.value = "";
-					test.focus();
-					return false;
-				}
-				
-				document.getElementById("form").submit();
-        	}
+	    	var goUrlList = "/codegroup/codeGroupList"; 			/* #-> */
+	    	var goUrlInst = "/codegroup/codeGroupInst"; 			/* #-> */
+	    	var goUrlUpdt = "/codegroup/codeGroupUpdt";				/* #-> */
+	    	var goUrlUele = "/codegroup/codeGroupUele";				/* #-> */
+	    	var goUrlDele = "/codegroup/codeGroupDele";				/* #-> */
+	    	
+	    	var seq = $("input:hidden[name=ifcgSeq]");				/* #-> */
+	    	
+	    	var form = $("form[name=form]");
+	    	var formVo = $("form[name=formVo]");
+	    	
+	    	
+	    	$("#btnSave").on("click", function(){
+	    		if (seq.val() == "0" || seq.val() == ""){
+	    	   		// insert
+	    	   		/* if (validationInst() == false) return false; */
+	    	   		form.attr("action", goUrlInst).submit();
+	    	   	} else {
+	    	   		// update
+	    	   		/* keyName.val(atob(keyName.val())); */
+	    	   		/* if (validationUpdt() == false) return false; */
+	    	   		form.attr("action", goUrlUpdt).submit();
+	    	   	}
+	    	});
+	    	
+	    	$("#btnUelete").on("click", function(){
+	    		if (seq.val() == "0" || seq.val() == ""){
+	    	   		// insert
+	    	   		/* if (validationInst() == false) return false; */
+	    	   		alert("tset");
+	    	   		return false;
+	    	   	} else {
+	    	   		form.attr("action", goUrlUele).submit();
+	    	   	}
+	    	});
         </script>
     </body>
 </html>

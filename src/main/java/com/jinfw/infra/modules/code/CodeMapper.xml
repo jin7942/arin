@@ -4,44 +4,41 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jinfw.infra.modules.codegroup.CodeGroupMapper">
+<mapper namespace="com.jinfw.infra.modules.code.CodeMapper">
 
-    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.codegroup.CodeGroup"></resultMap>
+    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.code.Code"></resultMap>
 	
 	<!-- 리스트 조회 -->
 	<select id="selectList" resultMap="resultMapObj">
         SELECT DISTINCT
-			a.ifcgSeq
-		    ,a.ifcgNameEng
-		    ,a.ifcgNameKor
-		    ,a.ifcgRegDatetime
-		    ,a.ifcgModDatetime
-		    ,(select count(bb.ifccSeq) from infrCommonCode bb where bb.infrCodeGroup_ifcgSeq = a.ifcgSeq) as codeCnt
-		    ,a.ifcgUseNY
-			,a.ifcgDelNY
-		FROM infrCodeGroup a
-		INNER JOIN infrCommonCode b on a.ifcgSeq = b.infrCodeGroup_ifcgSeq
+			a.ifccSeq
+		    ,a.ifccNameEng
+		    ,a.ifccNameKor
+		    ,a.ifccUseNY
+		    ,a.ifccDelNY
+		    ,a.infrCodeGroup_ifcgSeq
+		FROM infrCommonCode a
 		WHERE 1=1
 		
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shOptionValue == 1">
-				AND a.icfgNameKor LIKE CONCAT('%',#{shValue},'%')
+				AND a.ifccNameKor LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>
 		
 		<!-- 삭제여부 -->
-<!-- 		<choose>
+		<choose>
 			<when test="shOptionDelNY == 0">
-				AND a.memberDelNY = 0
+				AND a.ifccDelNY = 0
 			</when>
 			<when test="shOptionDelNY == 1">
-				AND a.memberDelNY = 1
+				AND a.ifccDelNY = 1
 			</when>
-		</choose> -->
+		</choose>
 		
 		<!-- 날짜 검색 -->
-		<choose>
+<!-- 		<choose>
 			<when test="shOptionDate == 1">
 				AND a.ifcgRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
@@ -49,18 +46,19 @@
 				AND a.ifcgModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
 		</choose>
-
+ -->
 		<!-- 정렬 -->
 		<choose>
 			<when test="shOptionSort == 1">
-				ORDER BY a.ifcgSeq ASC
+				ORDER BY a.ifccSeq ASC
 			</when>
+<!-- 			
 			<when test="shOptionSort == 2">
 				ORDER BY a.ifcgRegDatetime ASC
 			</when>
 			<when test="shOptionSort == 3">
 				ORDER BY a.ifcgModDatetime ASC
-			</when>
+			</when> -->
 		</choose>
 		
 		<!-- 조회 개수 -->
@@ -77,57 +75,64 @@
 		</choose>
 	</select>
 	
-	<!-- 상세 -->
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
-			a.ifcgSeq
-			,a.ifcgNameEng
-			,a.ifcgNameKor
-			,a.ifcgUseNY
-			,a.ifcgDelNY
-			,a.ifcgRegDatetime
-			,a.ifcgModDatetime
-		FROM infrCodeGroup a
+			a.ifccSeq
+		    ,a.ifccNameEng
+		    ,a.ifccNameKor
+		    ,a.ifccUseNY
+		    ,a.ifccDelNY
+		    ,a.ifccDescription
+		    ,a.infrCodeGroup_ifcgSeq
+		FROM infrCommonCode a
 		WHERE 1=1
-		AND #{ifcgSeq} = a.ifcgSeq
+		AND #{ifccSeq} = a.ifccSeq
 	</select>
 	
 	<!-- 삽입 -->
 	<insert id="insert">
-		INSERT INTO infrCodeGroup (
-			ifcgNameKor
+		INSERT INTO infrCommonCode (
+			ifccNameKor
+			,infrCodeGroup_ifcgSeq
 		)
 		VALUES (
-			#{ifcgNameKor}
+			#{ifccNameKor}
+			,1
 		)
 		
-		<selectKey resultType="String" keyProperty="ifcgSeq" order="AFTER">
+		<selectKey resultType="String" keyProperty="ifccSeq" order="AFTER">
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
 	
 	<!-- 수정 -->
 	<update id="update">
-		UPDATE infrCodeGroup
+		UPDATE infrCommonCode
 		SET
-			ifcgNameEng = #{ifcgNameEng}
-			,ifcgNameKor = #{ifcgNameKor}
-			,ifcgUseNY = #{ifcgUseNY}
-			,ifcgDelNY = #{ifcgDelNY}
-			,ifcgModDatetime = now()
+			ifccNameEng = #{ifccNameEng}
+			,ifccNameKor = #{ifccNameKor}
+			,ifccUseNY = #{ifccUseNY}
+			,ifccDelNY = #{ifccDelNY}
+			,ifccDescription = #{ifccDescription}
 			<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
-			ifcgSeq = #{ifcgSeq}
+			ifccSeq = #{ifccSeq}
 	</update>
 	
 	<!-- uelete -->
 	<update id="uelete">
-		UPDATE infrCodeGroup
+		UPDATE infrCommonCode
 		SET
 			ifccDelNY = 1
 			<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
-			ifcgSeq = #{ifcgSeq}
+			ifccSeq = #{ifccSeq}
 	</update>
+	
+	<!-- 삭제 -->
+	<delete id="delete">
+		DELETE FROM infrCommonCode WHERE ifccSeq = #{ifccSeq}
+	</delete>
+	
 
 </mapper>
