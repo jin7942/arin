@@ -86,7 +86,16 @@
 		    ,a.infrCodeGroup_ifcgSeq
 		FROM infrCommonCode a
 		WHERE 1=1
-		AND #{ifccSeq} = a.ifccSeq
+			AND #{ifccSeq} = a.ifccSeq
+	</select>
+	
+	<!-- 코드그룹 조회 -->
+	<select id="selectCodeGroupName" resultMap="resultMapObj">
+		SELECT DISTINCT
+			a.ifcgSeq
+		    ,a.ifcgNameKor
+		FROM infrCodeGroup a
+		INNER JOIN infrCommonCode b on b.infrCodeGroup_ifcgSeq = a.ifcgSeq
 	</select>
 	
 	<!-- 삽입 -->
@@ -114,6 +123,7 @@
 			,ifccUseNY = #{ifccUseNY}
 			,ifccDelNY = #{ifccDelNY}
 			,ifccDescription = #{ifccDescription}
+			,infrCodeGroup_ifcgSeq = #{ifcgSeq}
 			<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
 			ifccSeq = #{ifccSeq}

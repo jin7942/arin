@@ -11,9 +11,25 @@ public class Code {
 	private String ifccDescription;
 	private String infrCodeGroup_ifcgSeq;
 	
+	/** CodeGruop DTO */
+	private String ifcgNameKor;
+	private String ifcgSeq;
+	
 	// ########################################
 	// Generate Getters and Setters
 
+	public String getIfcgSeq() {
+		return ifcgSeq;
+	}
+	public void setIfcgSeq(String ifcgSeq) {
+		this.ifcgSeq = ifcgSeq;
+	}
+	public String getIfcgNameKor() {
+		return ifcgNameKor;
+	}
+	public void setIfcgNameKor(String ifcgNameKor) {
+		this.ifcgNameKor = ifcgNameKor;
+	}
 	public String getIfccSeq() {
 		return ifccSeq;
 	}

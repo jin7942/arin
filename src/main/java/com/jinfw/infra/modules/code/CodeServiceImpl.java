@@ -71,6 +71,10 @@ public class CodeServiceImpl implements CodeService {
 		return dao.delete(vo);
 	}
 	
+	@Override
+	public List<Code> selectCodeGroupName() {
+		return dao.selectCodeGroupName();
+	}
 	
 
 }

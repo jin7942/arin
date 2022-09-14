@@ -240,16 +240,7 @@
 	                                     <form 
 	                                     	class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
 	                                     	method="GET"
-	                                     	action="/code/codeList?
-	                                     								shOptionDelNY=${vo.shOptionDelNY}
-	                                     								&shOptionSort=${vo.shOptionSort}
-	                                     								&shOptionDate=${vo.shOptionDate}
-	                                     								&shStartDate=${vo.shStartDate}
-	                                     								&shEndDate=${vo.shEndDate}
-	                                     								&shOptionRows=${vo.shOptionRows}
-	                                     								&shOptionValue=${vo.shOptionValue}
-	                                     								&shValue=${vo.shValue}
-	                                     								"
+	                                     	action="/code/codeList"
 	                                     >
                                             <select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
                                                 <option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
@@ -395,6 +386,8 @@
                                                 <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
                                                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#"><b>></b></a></li>
                                             </ul>
                                         </nav>
                                         <!-- End of pagination -->
@@ -408,7 +401,7 @@
                                         </button>
 
                                         <button
-                                            type="button "
+                                            type="button"
                                             class="btn btn-primary"
                                             style="float: right"
                                             onclick="location.href='/code/codeForm'"

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,12 +23,11 @@ public class CodeController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "codeList")
-	public String codeList(Model model, CodeVo vo) throws Exception {
+	public String codeList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 
 		List<Code> list = service.selectList(vo);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("vo", vo);
 		
 		return "infra/code/xdmin/codeList";
 	}
@@ -40,10 +40,10 @@ public class CodeController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "codeForm")
-	public String codeForm(Model model, CodeVo vo) throws Exception {
-		List<Code> list = service.selectList(vo);
+	public String codeForm(Code dto, Model model) throws Exception {
+		List<Code> list = service.selectCodeGroupName();
 		
-		model.addAttribute("list", list);		
+		model.addAttribute("list", list);
 		
 		return "infra/code/xdmin/codeForm";
 	}
@@ -72,8 +72,11 @@ public class CodeController {
 	 */
 	@RequestMapping(value = "codeView")
 	public String codeView(Model model, Code dto) throws Exception {
-		Code item = service.selectOne(dto); 
-		model.addAttribute("dto", item);
+		Code item = service.selectOne(dto);
+		List<Code> list = service.selectCodeGroupName();
+		
+		model.addAttribute("item", item);
+		model.addAttribute("list", list);
 		
 		return "infra/code/xdmin/codeForm";
 	}
@@ -87,6 +90,7 @@ public class CodeController {
 	@RequestMapping(value = "codeUpdt")
 	public String codeUpdt(Code dto) throws Exception {
 		int result = service.update(dto);
+		System.out.println("ifcgSeq : " + dto.getIfcgSeq());
 		System.out.println("ifccSeq : " + dto.getIfccSeq());
 		System.out.println("controller result : " + result);
 		return "redirect:codeList";

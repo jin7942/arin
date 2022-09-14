@@ -240,16 +240,7 @@
 	                                     <form 
 	                                     	class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" 
 	                                     	method="GET"
-	                                     	action="/codegroup/codeGroupList?
-	                                     								shOptionDelNY=${vo.shOptionDelNY}
-	                                     								&shOptionSort=${vo.shOptionSort}
-	                                     								&shOptionDate=${vo.shOptionDate}
-	                                     								&shStartDate=${vo.shStartDate}
-	                                     								&shEndDate=${vo.shEndDate}
-	                                     								&shOptionRows=${vo.shOptionRows}
-	                                     								&shOptionValue=${vo.shOptionValue}
-	                                     								&shValue=${vo.shValue}
-	                                     								"
+	                                     	action="/codegroup/codeGroupList"
 	                                     >
                                             <select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
                                                 <option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>

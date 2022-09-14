@@ -41,5 +41,9 @@ public class CodeDao {
 	public int delete(CodeVo vo) {
 		return sqlSession.delete(namespace + ".update", vo);
 	}
+	// 코드그룹 조회
+	public List<Code> selectCodeGroupName() { 
+		return sqlSession.selectList(namespace + ".selectCodeGroupName", ""); 
+	}
 
 }

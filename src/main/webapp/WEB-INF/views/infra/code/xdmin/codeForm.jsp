@@ -170,7 +170,7 @@
             </ul>
             <!-- End of Sidebar -->->
 
-<!-- Content Wrapper -->
+			<!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
@@ -237,32 +237,32 @@
                                         <form method="GET" action="" id="form" name="form">
                                             <div style="display: flex">
                                                 <div class="col-6">
-                                                	<input type="hidden" id="ifccSeq" name="ifccSeq" value="<c:out value="${dto.ifccSeq}"/>" />
+                                                	<input type="hidden" id="ifccSeq" name="ifccSeq" value="<c:out value="${item.ifccSeq}"/>" />
                                                 
-<%-- 	                                                <label for="input33" class="form-label">코드그룹</label>
-	                                                <select class="form-control" id="input33">
+	                                                <label for="input33" class="form-label">코드그룹</label>
+	                                                <select class="form-control" id="ifcgSeq" name="ifcgSeq">
 	                                                <c:forEach items="${list}" var="list" varStatus="status">
-	                                                	<option value="<c:out value="${list.ifccSeq }"/>">
-	                                                		<c:out value="${list.ifccNameKor}"/>
+	                                                	<option value="<c:out value="${list.ifcgSeq}"/>" >
+	                                                		<c:out value="${list.ifcgNameKor}"/>
 	                                                	</option>
 	                                                </c:forEach>
-	                                                </select> --%>
-                                                
+	                                                </select>
+<!--                                                 
                                                     <label for="input1" class="form-label">코드그룹 코드</label>
                                                     <input type="text" id="input1" class="form-control" placeholder="영문(대소문자),숫자" />
-
-                                                    <label for="ifccNameKor" class="form-label">코드그룹 이름(한글) * </label>
+ -->
+                                                    <label for="ifcgNameKor" class="form-label">코드그룹 이름(한글) * </label>
                                                     <input type="text" id="ifccNameKor" name="ifccNameKor" class="form-control" placeholder="한글, 숫자" 
-                                                    		value="<c:out value="${dto.ifccNameKor}"/>" />
+                                                    		value="<c:out value="${item.ifccNameKor}"/>" />
 
                                                     <label for="ifccUseNY" class="form-label">사용여부  * </label>
                                                     <select class="form-control" id="ifccUseNY" name="ifccUseNY">
-                                                        <option value="0" <c:if test="${dto.ifccUseNY eq 0}"  >selected</c:if>>N</option>
-                                                        <option value="1" <c:if test="${dto.ifccUseNY eq 1}"  >selected</c:if>>Y</option>
+                                                        <option value="0" <c:if test="${item.ifccUseNY eq 0}"  >selected</c:if>>N</option>
+                                                        <option value="1" <c:if test="${item.ifccUseNY eq 1}"  >selected</c:if>>Y</option>
                                                     </select>
 
                                                     <label for="ifccDescription" class="form-label">설명</label>
-                                                    <textarea class="form-control" name="ifccDescription" id="ifccDescription" cols="10" rows="2" style="text-align: left;"><c:out value="${dto.ifccDescription}"/></textarea>
+                                                    <textarea class="form-control" name="ifccDescription" id="ifccDescription" cols="10" rows="2" style="text-align: left;"><c:out value="${item.ifccDescription}"/></textarea>
                              
 
                                                     <label for="input5" class="form-label">예비1 (varchar type)</label>
@@ -284,15 +284,15 @@
 
                                                     <label for="ifccNameEng" class="form-label">코드그룹 이름 (영문) * </label>
                                                     <input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자"
-                                                    		value="<c:out value="${dto.ifccNameEng}"/>" />
+                                                    		value="<c:out value="${item.ifccNameEng}"/>" />
 
                                                     <label for="input11" class="form-label">숫자</label>
                                                     <input type="text" id="input11" class="form-control" placeholder="숫자" />
 
                                                     <label for="ifccDelNY" class="form-label">삭제여부 * </label>
                                                     <select class="form-control" id="ifccDelNY" name="ifccDelNY">
-                                                        <option value="0" <c:if test="${dto.ifccDelNY eq 0}"  >selected</c:if>>N</option>
-                                                        <option value="1" <c:if test="${dto.ifccDelNY eq 1}"  >selected</c:if>>Y</option>
+                                                        <option value="0" <c:if test="${item.ifccDelNY eq 0}"  >selected</c:if>>N</option>
+                                                        <option value="1" <c:if test="${item.ifccDelNY eq 1}"  >selected</c:if>>Y</option>
                                                     </select>
 
                                                     <label for="input13" class="form-label">예비2 (varchar type)</label>
