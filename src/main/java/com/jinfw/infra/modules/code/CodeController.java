@@ -25,9 +25,13 @@ public class CodeController {
 	@RequestMapping(value = "codeList")
 	public String codeList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 
+		int totalCnt = service.selectOneCount(vo);
+		vo.setParamsPaging(totalCnt);
+		
 		List<Code> list = service.selectList(vo);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("totalCnt", totalCnt);
 		
 		return "infra/code/xdmin/codeList";
 	}

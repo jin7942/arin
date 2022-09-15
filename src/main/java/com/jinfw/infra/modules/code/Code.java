@@ -9,6 +9,8 @@ public class Code {
 	private String ifccUseNY;
 	private String ifccDelNY;
 	private String ifccDescription;
+	private String ifccRegDatetime;
+	private String ifccModDatetime;
 	private String infrCodeGroup_ifcgSeq;
 	
 	/** CodeGruop DTO */
@@ -17,19 +19,7 @@ public class Code {
 	
 	// ########################################
 	// Generate Getters and Setters
-
-	public String getIfcgSeq() {
-		return ifcgSeq;
-	}
-	public void setIfcgSeq(String ifcgSeq) {
-		this.ifcgSeq = ifcgSeq;
-	}
-	public String getIfcgNameKor() {
-		return ifcgNameKor;
-	}
-	public void setIfcgNameKor(String ifcgNameKor) {
-		this.ifcgNameKor = ifcgNameKor;
-	}
+	
 	public String getIfccSeq() {
 		return ifccSeq;
 	}
@@ -66,11 +56,36 @@ public class Code {
 	public void setIfccDescription(String ifccDescription) {
 		this.ifccDescription = ifccDescription;
 	}
+	public String getIfccRegDatetime() {
+		return ifccRegDatetime;
+	}
+	public void setIfccRegDatetime(String ifccRegDatetime) {
+		this.ifccRegDatetime = ifccRegDatetime;
+	}
+	public String getIfccModDatetime() {
+		return ifccModDatetime;
+	}
+	public void setIfccModDatetime(String ifccModDatetime) {
+		this.ifccModDatetime = ifccModDatetime;
+	}
 	public String getInfrCodeGroup_ifcgSeq() {
 		return infrCodeGroup_ifcgSeq;
 	}
 	public void setInfrCodeGroup_ifcgSeq(String infrCodeGroup_ifcgSeq) {
 		this.infrCodeGroup_ifcgSeq = infrCodeGroup_ifcgSeq;
 	}
+	public String getIfcgNameKor() {
+		return ifcgNameKor;
+	}
+	public void setIfcgNameKor(String ifcgNameKor) {
+		this.ifcgNameKor = ifcgNameKor;
+	}
+	public String getIfcgSeq() {
+		return ifcgSeq;
+	}
+	public void setIfcgSeq(String ifcgSeq) {
+		this.ifcgSeq = ifcgSeq;
+	}
+
 	
 }

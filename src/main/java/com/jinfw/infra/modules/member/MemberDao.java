@@ -17,15 +17,14 @@ public class MemberDao {
 	
 	private static String namespace = "com.jinfw.infra.modules.member.MemberMapper";
 	
-	/**
-	 * 멤버 리스트 조회 함수
-	 * @param vo
-	 * @return 멤버목록 조회 결과
-	 * @see MemberVo
-	 * @see MemberMapper
-	 */
+	// 멤버 리스트 조회
 	public List<Member> selectList(MemberVo vo) { 
 		return sqlSession.selectList(namespace + ".selectList", vo); 
+	}
+	
+	// 검색결과 카운트
+	public int selectOneCount(MemberVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
 	}
 	
 }

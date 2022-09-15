@@ -8,15 +8,7 @@
 
     <resultMap id="resultMapObj" type="com.jinfw.infra.modules.code.Code"></resultMap>
 	
-	<!-- 리스트 조회 -->
-	<select id="selectList" resultMap="resultMapObj">
-        SELECT DISTINCT
-			a.ifccSeq
-		    ,a.ifccNameEng
-		    ,a.ifccNameKor
-		    ,a.ifccUseNY
-		    ,a.ifccDelNY
-		    ,a.infrCodeGroup_ifcgSeq
+	<sql id ="selectCommon">
 		FROM infrCommonCode a
 		WHERE 1=1
 		
@@ -60,19 +52,26 @@
 				ORDER BY a.ifcgModDatetime ASC
 			</when> -->
 		</choose>
-		
-		<!-- 조회 개수 -->
-		<choose>
-			<when test="shOptionRows == 2">
-				LIMIT 20
-			</when>
-			<when test="shOptionRows == 3">
-				LIMIT 30
-			</when>
-			<otherwise>
-				LIMIT 10
-			</otherwise>
-		</choose>
+	</sql>
+	
+	
+	<!-- 리스트 조회 -->
+	<select id="selectList" resultMap="resultMapObj">
+	<include refid="Base.selectListUpperForMysql" />
+	        SELECT DISTINCT
+				a.ifccSeq
+			    ,a.ifccNameEng
+			    ,a.ifccNameKor
+			    ,a.ifccUseNY
+			    ,a.ifccDelNY
+			    ,a.infrCodeGroup_ifcgSeq
+			<include refid="selectCommon" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon" />
 	</select>
 	
 	<select id="selectOne" resultMap="resultMapObj">
@@ -84,6 +83,8 @@
 		    ,a.ifccDelNY
 		    ,a.ifccDescription
 		    ,a.infrCodeGroup_ifcgSeq
+   			,ifccRegDatetime
+			,ifccModDatetime
 		FROM infrCommonCode a
 		WHERE 1=1
 			AND #{ifccSeq} = a.ifccSeq
@@ -102,11 +103,23 @@
 	<insert id="insert">
 		INSERT INTO infrCommonCode (
 			ifccNameKor
+			,ifccNameEng
+			,ifccUseNY
+			,ifccDelNY
+			,ifccDescription
 			,infrCodeGroup_ifcgSeq
+			,ifccRegDatetime
+			,ifccModDatetime
 		)
 		VALUES (
 			#{ifccNameKor}
-			,1
+			,#{ifccNameEng}
+			,#{ifccUseNY}
+			,#{ifccDelNY}
+			,#{ifccDescription}
+			,#{ifcgSeq}
+			,now()
+			,now()
 		)
 		
 		<selectKey resultType="String" keyProperty="ifccSeq" order="AFTER">
@@ -124,6 +137,7 @@
 			,ifccDelNY = #{ifccDelNY}
 			,ifccDescription = #{ifccDescription}
 			,infrCodeGroup_ifcgSeq = #{ifcgSeq}
+			,ifccModDatetime = now()
 			<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
 			ifccSeq = #{ifccSeq}

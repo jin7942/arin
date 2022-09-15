@@ -71,10 +71,23 @@ public class CodeServiceImpl implements CodeService {
 		return dao.delete(vo);
 	}
 	
+	/**
+	 * 코드그룹 조회 함수
+	 * @return object
+	 */
 	@Override
 	public List<Code> selectCodeGroupName() {
 		return dao.selectCodeGroupName();
 	}
 	
+	/**
+	 * 검색결과 카운트 함수
+	 * @param CodeGroupVo vo
+	 * @return {int} 검색결과 개수
+	 */
+	@Override
+	public int selectOneCount(CodeVo vo) throws Exception {
+		return dao.selectOneCount(vo);
+	}
 
 }

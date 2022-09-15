@@ -25,9 +25,13 @@ public class MemberController {
 	@RequestMapping (value = "memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
+		int totalCnt = service.selectOneCount(vo);
+		vo.setParamsPaging(totalCnt);
+		
 		List<Member> list = service.selectList(vo);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("totalCnt", totalCnt);
 		
 		return "infra/member/xdmin/memberList";
 	}

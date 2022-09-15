@@ -45,5 +45,8 @@ public class CodeDao {
 	public List<Code> selectCodeGroupName() { 
 		return sqlSession.selectList(namespace + ".selectCodeGroupName", ""); 
 	}
-
+	// 검색결과 카운트
+	public int selectOneCount(CodeVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
+	}
 }

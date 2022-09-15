@@ -8,21 +8,9 @@
 
     <resultMap id="resultMapObj" type="com.jinfw.infra.modules.member.Member"></resultMap>
 	
-	<select id="selectList" resultMap="resultMapObj">
-	SELECT 
-		a.seq
-		,a.memberID
-		,a.memberName
-		,a.memberMobile
-		,a.memberMailName
-		,a.memberPlace
-		,a.memberSignDatetime
-		,a.memberModDatetime
-		,a.memberDelNY
-	FROM member a
-	WHERE 1=1
-	
-		
+	<sql id = "selectCommon">
+		FROM member a
+		WHERE 1=1
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shOptionValue == 1">
@@ -62,19 +50,26 @@
 				ORDER BY a.memberModDatetime ASC
 			</when>
 		</choose>
-		
-		<!-- 조회 개수 -->
-		<choose>
-			<when test="shOptionRows == 2">
-				LIMIT 20
-			</when>
-			<when test="shOptionRows == 3">
-				LIMIT 30
-			</when>
-			<otherwise>
-				LIMIT 10
-			</otherwise>
-		</choose>
+	</sql>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT 
+				a.seq
+				,a.memberID
+				,a.memberName
+				,a.memberMobile
+				,a.memberMailName
+				,a.memberPlace
+				,a.memberSignDatetime
+				,a.memberModDatetime
+				,a.memberDelNY
+			<include refid="selectCommon"></include>
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
 
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon" />
 	</select>
 </mapper>

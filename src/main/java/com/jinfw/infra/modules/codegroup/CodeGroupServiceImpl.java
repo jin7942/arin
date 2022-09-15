@@ -73,5 +73,16 @@ public class CodeGroupServiceImpl implements CodeGroupService {
 	public int delete(CodeGroupVo vo) throws Exception {
 		return dao.delete(vo);
 	}
-
+	
+	/**
+	 * 검색결과 카운트 함수
+	 * @param CodeGroupVo vo
+	 * @return 검색결과 개수
+	 */
+	@Override
+	public int selectOneCount(CodeGroupVo vo) throws Exception {
+		return dao.selectOneCount(vo);
+	}
+	
+	
 }

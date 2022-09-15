@@ -8,37 +8,25 @@
 
     <resultMap id="resultMapObj" type="com.jinfw.infra.modules.codegroup.CodeGroup"></resultMap>
 	
-	<!-- 리스트 조회 -->
-	<select id="selectList" resultMap="resultMapObj">
-        SELECT DISTINCT
-			a.ifcgSeq
-		    ,a.ifcgNameEng
-		    ,a.ifcgNameKor
-		    ,a.ifcgRegDatetime
-		    ,a.ifcgModDatetime
-		    ,(select count(bb.ifccSeq) from infrCommonCode bb where bb.infrCodeGroup_ifcgSeq = a.ifcgSeq) as codeCnt
-		    ,a.ifcgUseNY
-			,a.ifcgDelNY
+	<sql id ="selectCommon">
 		FROM infrCodeGroup a
-		INNER JOIN infrCommonCode b on a.ifcgSeq = b.infrCodeGroup_ifcgSeq
 		WHERE 1=1
-		
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shOptionValue == 1">
-				AND a.icfgNameKor LIKE CONCAT('%',#{shValue},'%')
+				AND a.ifcgNameKor LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>
 		
 		<!-- 삭제여부 -->
-<!-- 		<choose>
+		<choose>
 			<when test="shOptionDelNY == 0">
-				AND a.memberDelNY = 0
+				AND a.ifcgDelNY = 0
 			</when>
 			<when test="shOptionDelNY == 1">
-				AND a.memberDelNY = 1
+				AND a.ifcgDelNY = 1
 			</when>
-		</choose> -->
+		</choose>
 		
 		<!-- 날짜 검색 -->
 		<choose>
@@ -62,19 +50,28 @@
 				ORDER BY a.ifcgModDatetime ASC
 			</when>
 		</choose>
-		
-		<!-- 조회 개수 -->
-		<choose>
-			<when test="shOptionRows == 2">
-				LIMIT 20
-			</when>
-			<when test="shOptionRows == 3">
-				LIMIT 30
-			</when>
-			<otherwise>
-				LIMIT 10
-			</otherwise>
-		</choose>
+	</sql>
+	
+	<!-- 리스트 조회 -->
+	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+		        SELECT DISTINCT
+					a.ifcgSeq
+				    ,a.ifcgNameEng
+				    ,a.ifcgNameKor
+				    ,a.ifcgRegDatetime
+				    ,a.ifcgModDatetime
+				    ,(select count(aa.ifccSeq) from infrCommonCode aa where aa.infrCodeGroup_ifcgSeq = a.ifcgSeq) as codeCnt
+				    ,a.ifcgUseNY
+					,a.ifcgDelNY
+				<include refid="selectCommon" />
+			<!-- <include refid="Base.orderByLimitForMysql" /> -->
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectCommon" />
 	</select>
 	
 	<!-- 상세 -->

@@ -42,5 +42,9 @@ public class CodeGroupDao {
 	public int delete(CodeGroupVo vo) {
 		return sqlSession.delete(namespace + ".delete", vo);
 	}
+	// 검색결과 카운트
+	public int selectOneCount(CodeGroupVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
+	}
 
 }

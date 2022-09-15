@@ -24,10 +24,14 @@ public class CodeGroupController {
 	 */
 	@RequestMapping(value = "codeGroupList")
 	public String codeGroupList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
-
+		
+		int totalCnt = service.selectOneCount(vo);
+		vo.setParamsPaging(totalCnt);
+		
 		List<CodeGroup> list = service.selectList(vo);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("totalCnt", totalCnt);
 		
 		return "infra/codegroup/xdmin/codeGroupList";
 	}
@@ -81,7 +85,7 @@ public class CodeGroupController {
 	/**
 	 * 코드그룹 수정 함수
 	 * @param dto
-	 * @return codeGroupList 리다이렉션
+	 * @return codeGroupList
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "codeGroupUpdt")
@@ -95,7 +99,7 @@ public class CodeGroupController {
 	/**
 	 * 코드그룹 삭제 함수(uelete)
 	 * @param dto
-	 * @return codeGroupList 리다이렉션
+	 * @return codeGroupList
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "codeGroupUele")

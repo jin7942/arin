@@ -14,13 +14,23 @@ public class MemberServiceImpl implements MemberService {
 	/**
 	 * 멤버 리스트 조회 함수
 	 * @param vo
-	 * @return 멤버목록 조회 결과
+	 * @return object
 	 * @see MemberVo
 	 * @see MemberDao
 	 */
 	@Override
 	public List<Member> selectList(MemberVo vo) throws Exception {
 		return dao.selectList(vo);
+	}
+	
+	/**
+	 * 검색결과 카운트 함수
+	 * @param MemberVo vo
+	 * @return int
+	 */
+	@Override
+	public int selectOneCount(MemberVo vo) throws Exception {
+		return dao.selectOneCount(vo);
 	}
 	
 }
