@@ -22,8 +22,8 @@ public class CodeDao {
 		return sqlSession.selectList(namespace + ".selectList", vo); 
 	}
 	// 상세
-	public Code selectOne(Code dto) {
-		return sqlSession.selectOne(namespace + ".selectOne", dto); 
+	public Code selectOne(CodeVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOne", vo); 
 	}
 	// 삽입
 	public int insert(Code dto) {

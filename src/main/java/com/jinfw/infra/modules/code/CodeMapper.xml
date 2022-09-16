@@ -87,7 +87,7 @@
 			,ifccModDatetime
 		FROM infrCommonCode a
 		WHERE 1=1
-			AND #{ifccSeq} = a.ifccSeq
+			AND #{mainKey} = a.ifccSeq
 	</select>
 	
 	<!-- 코드그룹 조회 -->

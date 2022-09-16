@@ -22,7 +22,11 @@
 					<form method="GET" action="" id="form" name="form">
 						<div style="display: flex">
 							<div class="col-6">
-								<input type="hidden" id="infrCodeGroup_ifcgSeq" name="infrCodeGroup_ifcgSeq" value="<c:out value="${item.infrCodeGroup_ifcgSeq}"/>" /> <label for="ifcgSeq" class="form-label">코드그룹 <b>*</b></label> <select class="form-control" id="ifcgSeq" name="ifcgSeq">
+								<input type="hidden" id="infrCodeGroup_ifcgSeq" name="infrCodeGroup_ifcgSeq" value="<c:out value="${item.infrCodeGroup_ifcgSeq}"/>" /> 
+								<input type="hidden" id="mainKey" name="mainKey" value="<c:out value="${vo.mainKey}"/>" /> 
+								
+								<label for="ifcgSeq" class="form-label">코드그룹 <b>*</b></label> 
+								<select class="form-control" id="ifcgSeq" name="ifcgSeq">
 									<option value="0">선택하세요</option>
 									<c:forEach items="${list}" var="list" varStatus="status">
 										<option value="<c:out value="${list.ifcgSeq}"/>">
@@ -67,10 +71,28 @@
 							</div>
 
 							<div class="col-6">
-								<label for="input9" class="form-label">코드그룹 코드 (Another)</label> <input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" /> <label for="ifccNameEng" class="form-label">코드그룹 이름 (영문) <b>*</b></label> <input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자" value="<c:out value="${item.ifccNameEng}"/>" /> <label for="input11" class="form-label">숫자</label> <input type="text" id="input11" class="form-control" placeholder="숫자" /> <label for="ifccDelNY" class="form-label">삭제여부 <b>*</b></label> <select class="form-control" id="ifccDelNY" name="ifccDelNY">
+								<label for="input9" class="form-label">코드그룹 코드 (Another)</label> 
+								<input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" /> 
+								
+								<label for="ifccNameEng" class="form-label">코드그룹 이름 (영문) <b>*</b></label> 
+								<input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자" value="<c:out value="${item.ifccNameEng}"/>" /> 
+								
+								<label for="input11" class="form-label">숫자</label> 
+								<input type="text" id="input11" class="form-control" placeholder="숫자" /> 
+								
+								<label for="ifccDelNY" class="form-label">삭제여부 <b>*</b></label> 
+								<select class="form-control" id="ifccDelNY" name="ifccDelNY">
 									<option value="0" <c:if test="${item.ifccDelNY eq 0}"  >selected</c:if>>N</option>
 									<option value="1" <c:if test="${item.ifccDelNY eq 1}"  >selected</c:if>>Y</option>
-								</select> <label for="input13" class="form-label">예비2 (varchar type)</label> <input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" /> <label for="input14" class="form-label">예비1 (int type)</label> <input type="text" id="input14" class="form-control" placeholder="숫자" /> <br />
+								</select> 
+								
+								<label for="input13" class="form-label">예비2 (varchar type)</label> 
+								<input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" /> 
+								
+								<label for="input14" class="form-label">예비1 (int type)</label> 
+								<input type="text" id="input14" class="form-control" placeholder="숫자" /> 
+								
+								<br />
 
 								<p class="form-control">
 									등록일 :
@@ -81,6 +103,7 @@
 									<c:out value="${item.ifccModDatetime }" />
 								</p>
 								<div>
+									<button type="button" class="btn btn-primary" id="btnList">목록</button>
 									<button type="button" class="btn btn-primary" id="btnSave">등록</button>
 									<button type="button" class="btn btn-danger" id="btnUelete">삭제</button>
 								</div>
@@ -93,8 +116,13 @@
 	</div>
 </div>
 <!-- /.container-fluid -->
-</div>
 <!-- End of Main Content -->
+
+<!-- vo.jsp -->
+<form action="" name="formVo" id="formVo">
+	<%@include file="codeVo.jsp"%>
+</form>
+<!-- vo.jsp -->
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
@@ -166,6 +194,9 @@
 	    	const useNY = $("select[name=useNY]");
 	    	const delNY = $("select[name=delNY]");
 	    	
+	    	$("#btnList").on("click", function() {
+				formVo.attr("action", goUrlList).submit();
+			})
 	    	
 	    	$("#btnSave").on("click", function(){
 	    		if (seq.val() == "0" || seq.val() == ""){

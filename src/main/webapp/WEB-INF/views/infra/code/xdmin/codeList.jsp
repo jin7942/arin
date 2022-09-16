@@ -22,7 +22,9 @@
 			<div class="card shadow mb-4">
 				<div class="card-body">
 					<!-- Search Form -->
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/code/codeList">
+					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET">
+					<input type="hidden" name="ifccSeq" value="" />
+					
 						<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
 							<option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
 							<option value="0" <c:if test="${vo.shOptionDelNY eq 0}"  >selected</c:if>>N</option>
@@ -33,10 +35,29 @@
 							<option value="2" <c:if test="${vo.shOptionSort eq 2}"  >selected</c:if>>등록일</option>
 							<option value="3" <c:if test="${vo.shOptionSort eq 3}"  >selected</c:if>>수정일</option>
 						</select> <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
-							<option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>>검색구분</option>
+							<option value="" disabled selected <c:if test="${vo.shOptionDate}"  >selected</c:if>>검색구분</option>
 							<option value="1" <c:if test="${vo.shOptionDate eq 1}"  >selected</c:if>>등록일</option>
 							<option value="2" <c:if test="${vo.shOptionDate eq 2}"  >selected</c:if>>수정일</option>
-						</select> <input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" /> <input id="shEndDate" name="shEndDate" type="date" value="<c:out value="${vo.shEndDate}"/>" class="form-control bg-light border-0 small" placeholder="종료일" aria-label="Search" aria-describedby="basic-addon2" />
+						</select> 
+						
+						<input 
+							id="shStartDate" 
+							name="shStartDate" 
+							type="date" 
+							value="<c:out value="${vo.shStartDate}"/>" 
+							class="form-control bg-light border-0 small" 
+							placeholder="시작일" 
+							aria-label="Search" 
+							aria-describedby="basic-addon2" /> 
+						<input 
+							id="shEndDate" 
+							name="shEndDate" 
+							type="date" 
+							value="<c:out value="${vo.shEndDate}"/>" 
+							class="form-control bg-light border-0 small" 
+							placeholder="종료일" 
+							aria-label="Search" 
+							aria-describedby="basic-addon2" />
 
 						<!-- rows -->
 						<select id="shOptionRows" name="shOptionRows" class="select btn btn-secondary dropdown-toggle">
@@ -93,7 +114,7 @@
 								<td>그룹코드</td>
 							</tr>
 						</thead>
-
+						
 						<!-- table-body -->
 						<c:choose>
 							<c:when test="${fn:length(list) eq 0 }">
@@ -103,10 +124,12 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${list}" var="list" varStatus="status">
-									<tr onclick="location.href='/code/codeView?ifccSeq=${list.ifccSeq}'">
+									<tr>
 										<td><input type="checkbox" class="chkbox" onclick="event.cancelBubble=true" /></td>
 										<td>
-											<%-- <c:out value="${vo.totalRows +((vo.thispage) * vo.rowNumToShow + status.index) + 1 }"></c:out> --%>
+											<a href="javascript:goForm(<c:out value="${list.ifccSeq }"/>)" class="text-decoration-none">
+												<c:out value="${list.ifccNameEng}" />
+											</a>
 										</td>
 										<td><c:out value="${list.ifccSeq}"></c:out></td>
 										<td><c:out value="${list.ifccNameEng}"></c:out></td>
@@ -128,7 +151,7 @@
 						<i class="fa-solid fa-trash-can"></i>
 					</button>
 
-					<button type="button" class="btn btn-primary" style="float: right" onclick="location.href='/code/codeForm'">
+					<button type="button" class="btn btn-primary" style="float: right" onClick="bntGoForm()">
 						<i class="fa-solid fa-plus"></i>
 					</button>
 					<button type="button" class="btn btn-success" style="float: right">
@@ -142,6 +165,12 @@
 <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+
+<!-- vo.jsp -->
+<form action="" name="formVo" id="formVo">
+	<%@include file="codeVo.jsp"%>
+</form>
+<!-- vo.jsp -->
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
@@ -199,10 +228,6 @@
         		location.href="/code/codeList";
 			}
         	
-        	function delRow(val) {
-        	    
-        	}
-        	
         	function chkAll() {
         	    const list = document.querySelectorAll('.chkbox');
 
@@ -211,6 +236,29 @@
         	    }
         	}
 
+        	var form = $("form[name=form]");
+        	var formVo = $("form[name=formVo]");
+        	var ifccSeq = $("input:hidden[name=ifccSeq]");
+        	
+           	var goUrlList = "/code/codeList";
+           	var goUrlView = "/code/codeView";
+        	
+           	goList = function (thisPage) {
+				$("input:hidden[name=thisPage]").val(thisPage);
+				form.attr("action", goUrlList).submit();
+				
+   			}
+           	
+        	goForm = function(keyValue) {
+        		/* if(keyValue != 0) seq.val(btoa(keyValue)); */
+            	ifccSeq.val(keyValue);
+        		form.attr("action", goUrlView).submit();
+        	}
+           	
+           	function bntGoForm() {
+           		formVo.attr("action", goUrlView).submit();
+			}
+           	
         </script>
 </body>
 </html>

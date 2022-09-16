@@ -37,8 +37,8 @@ public class CodeServiceImpl implements CodeService {
 	 * @return 코드그룹 상세 조회 결과
 	 */
 	@Override
-	public Code selectOne(Code dto) throws Exception {
-		return dao.selectOne(dto);
+	public Code selectOne(CodeVo vo) throws Exception {
+		return dao.selectOne(vo);
 	}
 
 	/**
