@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jinfw.infra.modules.user.UserMapper">
+
+    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.user.User"></resultMap>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT 
+			a.memberID
+			,a.memberName
+			,a.memberMobile
+			,a.memberMailName
+			,a.memberMailDomain
+			,a.memberPlace
+		FROM member a
+		WHERE 1=1
+			AND seq = 1
+	</select>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+			a.itemHeader
+			,a.itemPrice
+			,a.itemBuyDatetime
+		FROM item a
+		INNER join member b on a.member_seq1 = b.seq
+		WHERE 1 = 1
+	</select>
+
+</mapper>

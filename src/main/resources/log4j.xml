@@ -52,10 +52,10 @@
 		<appender-ref ref="console"/>
 	</logger>
 	
-	<logger name="jdbc.resultsettable" additivity="false">
+<!-- 	<logger name="jdbc.resultsettable" additivity="false">
 		<level value="info"/>
 		<appender-ref ref="console"/>
-	</logger>
+	</logger> -->
 	<!-- query log e 2022.02.26 -->
 
 	<!-- Root Logger -->

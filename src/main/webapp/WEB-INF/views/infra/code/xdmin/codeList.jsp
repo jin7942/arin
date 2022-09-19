@@ -13,6 +13,8 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+<form action="" name="form" method="get">
+<input type="hidden" name="mainKey" value="" />
 	<!-- Page Heading -->
 	<h1 class="h3 mb-4 text-gray-800">코드 관리</h1>
 
@@ -22,8 +24,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-body">
 					<!-- Search Form -->
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET">
-					<input type="hidden" name="ifccSeq" value="" />
+					<div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 					
 						<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
 							<option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
@@ -84,7 +85,7 @@
 
 
 						</div>
-					</form>
+					</div>
 					<!-- End Of Search Form -->
 				</div>
 			</div>
@@ -127,7 +128,7 @@
 									<tr>
 										<td><input type="checkbox" class="chkbox" onclick="event.cancelBubble=true" /></td>
 										<td>
-											<a href="javascript:goForm(<c:out value="${list.ifccSeq }"/>)" class="text-decoration-none">
+											<a href="javascript:goForm(<c:out value="${list.ifccSeq}"/>)" class="text-decoration-none">
 												<c:out value="${list.ifccNameEng}" />
 											</a>
 										</td>
@@ -161,9 +162,9 @@
 			</div>
 		</div>
 	</div>
+</form>
 </div>
 <!-- /.container-fluid -->
-</div>
 <!-- End of Main Content -->
 
 <!-- vo.jsp -->
@@ -238,7 +239,7 @@
 
         	var form = $("form[name=form]");
         	var formVo = $("form[name=formVo]");
-        	var ifccSeq = $("input:hidden[name=ifccSeq]");
+        	var mainKey = $("input:hidden[name=mainKey]");
         	
            	var goUrlList = "/code/codeList";
            	var goUrlView = "/code/codeView";
@@ -250,8 +251,9 @@
    			}
            	
         	goForm = function(keyValue) {
+        		alert(keyValue);
         		/* if(keyValue != 0) seq.val(btoa(keyValue)); */
-            	ifccSeq.val(keyValue);
+            	mainKey.val(keyValue);
         		form.attr("action", goUrlView).submit();
         	}
            	

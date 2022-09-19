@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jinfw.infra.modules.main.MainMapper">
+
+    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.main.Main"></resultMap>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+		    a.itemHeader,
+		    a.itemPrice,
+		    a.itemRegDatetime,
+		    a.itemPlace
+		FROM item a
+		WHERE 1 = 1;
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insert">
+		INSERT INTO member(
+			memberID
+			,memberPW
+			,memberName
+			,memberMobile
+			,memberCarrier
+			,memberMailName
+			,memberMailDomain
+			,memberPlace
+			,memberSignDatetime
+			,memberModDatetime
+			,memberDelNY
+		)
+		VALUES (
+			${memberID}
+			,${memberPW}	
+			,${memberName}	
+			,${memberMobile}	
+			,2	
+			,"test"
+			,"naver.com"	
+			,${memberPlace}	
+			,now()	
+			,now()
+			,0	
+		)
+	</insert>
+
+</mapper>
