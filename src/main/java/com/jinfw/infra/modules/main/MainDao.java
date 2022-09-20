@@ -19,12 +19,12 @@ public class MainDao {
 	
 	// 메인 리스트 조회
 	public List<Main> seleList() {
-		return sqlSession.selectList(namespace + ".selectList" + "");
+		return sqlSession.selectList(namespace + ".selectList", "");
 	}
 	
 	// 회원가입
 	public int insert(Main dto) {
-		return sqlSession.insert(namespace + ".insert" + dto);
+		return sqlSession.insert(namespace + ".insert", dto);
 	}
 	
 }

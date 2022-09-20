@@ -7,6 +7,7 @@ public class Member {
 	private String memberID;
 	private String memberName;
 	private String memberMobile;
+	private String memberCarrier;
 	private String memberMailName;
 	private String memberPlace;
 	private String memberSignDatetime;
@@ -15,6 +16,12 @@ public class Member {
 	
 	// ########################################
 	// Generate Getters and Setters
+	public String getMemberCarrier() {
+		return memberCarrier;
+	}
+	public void setMemberCarrier(String memberCarrier) {
+		this.memberCarrier = memberCarrier;
+	}
 	public String getSeq() {
 		return seq;
 	}

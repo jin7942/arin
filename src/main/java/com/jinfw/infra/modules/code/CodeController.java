@@ -16,12 +16,12 @@ public class CodeController {
 	@Autowired
 	CodeServiceImpl service;
 
-	public void setSearchAndPaging(CodeVo vo) throws Exception {
-		vo.setShOptionDate(vo.getShOptionDate() == null ? "2" : vo.getShOptionDate());
+	public void setSearchAndPaging(CodeVo vo, int totalCnt) throws Exception {
+//		vo.setShOptionDate(vo.getShOptionDate() == null ? "2" : vo.getShOptionDate());
 //		vo.setShStartDate(vo.getShStartDate() == null || vo.getShStartDate() == "" ? null : UtilDateTime.add00TimeString(vo.getShStartDate()));
 //		vo.setShEndDate(vo.getShEndDate() == null || vo.getShEndDate() == "" ? null : UtilDateTime.add59TimeString(vo.getShEndDate()));
 	
-		vo.setParamsPaging(service.selectOneCount(vo));
+		vo.setParamsPaging(totalCnt);
 	}
 	
 	/**
@@ -34,8 +34,8 @@ public class CodeController {
 	@RequestMapping(value = "codeList")
 	public String codeList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 		
-		setSearchAndPaging(vo);
 		int totalCnt = service.selectOneCount(vo);
+		setSearchAndPaging(vo, totalCnt);
 		
 		List<Code> list = service.selectList(vo);
 		

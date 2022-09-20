@@ -36,15 +36,15 @@
 	<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
-			<a href="index.html" class="logo mr-auto"><img src="./template_imperial/assets/img/logo.png" alt="" /></a>
+			<a href="/index/" class="logo mr-auto"><img src="/resources/template_imperial/assets/img/logo.png" alt="" /></a>
 			<!-- Uncomment below if you prefer to use a text logo -->
 			<!-- <h1 class="logo mr-auto"><a href="index.html">Imperial</a></h1> -->
 
 			<nav id="navbar" class="navbar">
 				<ul>
-					<li><a class="nav-link scrollto active" href="./index.html#hero">Home</a></li>
-					<li><a class="nav-link scrollto" href="./index.html#hero">Login</a></li>
-					<li><a class="nav-link scrollto" href="./signUpForm.html">SignUp</a></li>
+					<li><a class="nav-link scrollto active" href="/index/">Home</a></li>
+					<li><a class="nav-link scrollto" href="/index/#about">Login</a></li>
+					<li><a class="nav-link scrollto" href="/main/signUp">SignUp</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
@@ -72,47 +72,55 @@
 								<form action="/main/userInst" id="loginForm" method="get">
 									<!-- name -->
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name" placeholder="name@example.com" /> <label for="name">이름</label>
+										<input type="text" class="form-control" id="name" placeholder="name@example.com" name="memberName" />
+										<label for="name">이름</label>
 										<!-- name-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="nameFeedback">2 ~ 12자 한글, 숫자, 영어만 가능합니다.</div>
 									</div>
 
 									<!-- id -->
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="id" placeholder="name@example.com" /> <label for="id">ID</label>
+										<input type="text" class="form-control" id="id" placeholder="ID" name="memberID" />
+										<label for="id">ID</label>
 										<!-- name-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="idFeedback">4 ~ 12자 영문, 숫자만 가능합니다.</div>
 									</div>
 
 									<!-- pw -->
 									<div class="form-floating mb-3">
-										<input type="password" class="form-control" id="pw" placeholder="Password" /> <label for="pw">Password</label>
+										<input type="password" class="form-control" id="pw" placeholder="Password" name="memberPW" />
+										<label for="pw">Password</label>
 										<!-- name-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="pwFeedback">4 ~ 12자 영문, 숫자만 가능합니다.</div>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="password" class="form-control" id="chkPw" placeholder="name@example.com" /> <label for="chkPw">Confirm Password</label>
+										<input type="password" class="form-control" id="chkPw" placeholder="Confirm Password"/>
+										<label for="chkPw">Confirm Password</label>
 										<!-- confirmPW-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="chkPwFeedback">비밀번호가 일치 하지 않습니다.</div>
 									</div>
 
 									<!-- email -->
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="email" placeholder="name@example.com" /> <label for="email">EMAIL</label>
+										<input type="text" class="form-control" id="email" placeholder="name@example.com"  />
+										<label for="email">EMAIL</label>
 										<!-- name-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="emailFeedback">올바른 이메일 형식이 아닙니다.</div>
 									</div>
 
 									<!-- mobile -->
 									<div class="form-floating mb-3">
-										<input type="number" class="form-control" id="mobile" placeholder="name@example.com" oninput="handleOnInput(this, 11)" /> <label for="mobile" style="text-align: left">Mobile</label> <label for="mobile" style="text-align: right">'-' 제외 숫자만 입력</label>
+										<input type="number" class="form-control" id="mobile" placeholder="name@example.com" oninput="handleOnInput(this, 11)" name="memberMobile" />
+										<label for="mobile" style="text-align: left">Mobile</label>
+										<label for="mobile" style="text-align: right">'-' 제외 숫자만 입력</label>
 
 										<div style="text-align: left; display: none; color: red" id="mobileFeedback">필수 입력 항목입니다.</div>
 									</div>
 
 									<!-- dob -->
 									<div class="form-floating mb-3">
-										<input type="number" class="form-control" id="dob" placeholder="name@example.com" oninput="handleOnInput(this, 6)" /> <label for="dob">생년월일 6자리</label>
+										<input type="number" class="form-control" id="dob" placeholder="name@example.com" oninput="handleOnInput(this, 6)" />
+										<label for="dob">생년월일 6자리</label>
 									</div>
 
 									<!-- address -->
@@ -122,28 +130,33 @@
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="zonecode" placeholder="name@example.com" /> <label for="zonecode">우편번호</label>
+										<input type="text" class="form-control" id="zonecode" placeholder="name@example.com" />
+										<label for="zonecode">우편번호</label>
 
 										<div style="text-align: left; display: none; color: red" id="zonecodeFeedback">필수 입력 항목입니다.</div>
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="address" placeholder="name@example.com" /> <label for="address">주소</label>
+										<input type="text" class="form-control" id="address" placeholder="name@example.com" name="memberPlace" />
+										<label for="address">주소</label>
 
 										<div style="text-align: left; display: none; color: red" id="addressFeedback">필수 입력 항목입니다.</div>
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="detailAddress" placeholder="name@example.com" /> <label for="detailAddress">상세주소</label>
+										<input type="text" class="form-control" id="detailAddress" placeholder="name@example.com" />
+										<label for="detailAddress">상세주소</label>
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="bname" placeholder="name@example.com" /> <label for="banme">참고항목</label>
+										<input type="text" class="form-control" id="bname" placeholder="name@example.com" />
+										<label for="banme">참고항목</label>
 									</div>
 
 									<!-- checkbox -->
 									<div class="form-check d-flex justify-content-start mb-4">
-										<input class="form-check-input" type="checkbox" value="" id="chkbox" /> <label class="form-check-label" for="form1Example3"> 개인정보 이용 동의 </label>
+										<input class="form-check-input" type="checkbox" value="" id="chkbox" />
+										<label class="form-check-label" for="form1Example3"> 개인정보 이용 동의 </label>
 										<div style="text-align: left; display: none; color: red" id="chkBoxFeedback">필수 입력 항목입니다.</div>
 									</div>
 
@@ -170,7 +183,8 @@
 	<!-- End #main -->
 
 	<!-- My Js File -->
-	<script src="/resources/js/form/signUpForm.js" ></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/resources/js/form/signUpForm.js"></script>
 	<!-- My Js File -->
 
 	<!-- footer -->

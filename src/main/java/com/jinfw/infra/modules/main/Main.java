@@ -9,6 +9,7 @@ public class Main {
 	private String itemPlace;
 	
 	/*member DTO*/
+	private String seq;
 	private String memberID;
 	private String memberPW;
 	private String memberName;
@@ -18,7 +19,13 @@ public class Main {
 	private String memberPlace;
 	
 	/*################################*/
-	
+
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
 	public String getMemberID() {
 		return memberID;
 	}

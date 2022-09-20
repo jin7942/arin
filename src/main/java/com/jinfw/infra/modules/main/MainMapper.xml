@@ -34,18 +34,21 @@
 			,memberDelNY
 		)
 		VALUES (
-			${memberID}
-			,${memberPW}	
-			,${memberName}	
-			,${memberMobile}	
+			#{memberID}
+			,#{memberPW}	
+			,#{memberName}	
+			,#{memberMobile}	
 			,2	
 			,"test"
 			,"naver.com"	
-			,${memberPlace}	
+			,#{memberPlace}	
 			,now()	
 			,now()
 			,0	
 		)
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
 	</insert>
 
 </mapper>

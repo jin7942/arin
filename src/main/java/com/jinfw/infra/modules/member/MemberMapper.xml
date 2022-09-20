@@ -59,6 +59,7 @@
 				,a.memberID
 				,a.memberName
 				,a.memberMobile
+				,a.memberCarrier
 				,a.memberMailName
 				,a.memberPlace
 				,a.memberSignDatetime

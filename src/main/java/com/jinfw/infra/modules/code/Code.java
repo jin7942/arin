@@ -1,5 +1,8 @@
 package com.jinfw.infra.modules.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Code {
 	
 	/** Code DTO */
@@ -16,6 +19,9 @@ public class Code {
 	/** CodeGruop DTO */
 	private String ifcgNameKor;
 	private String ifcgSeq;
+	
+	/* for cache */
+	public static List<Code> cachedCodeArrayList = new ArrayList<Code>();
 	
 	// ########################################
 	// Generate Getters and Setters

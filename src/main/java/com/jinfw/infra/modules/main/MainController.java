@@ -42,7 +42,7 @@ public class MainController {
 		int result = service.insert(dto);
 		System.out.println("result : " + result);
 		
-		return "redirect:/";
+		return "infra/main/user/main";
 	}
 	@RequestMapping (value = "signUp")
 	public String signUpForm(Main dto, Model model) throws Exception {

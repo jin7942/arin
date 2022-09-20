@@ -19,13 +19,17 @@
 			<!-- Search-area -->
 			<div class="card shadow mb-4">
 				<div class="card-body">
+
+
 					<form method="GET" action="" id="form" name="form">
 						<div style="display: flex">
 							<div class="col-6">
-								<input type="hidden" id="infrCodeGroup_ifcgSeq" name="infrCodeGroup_ifcgSeq" value="<c:out value="${item.infrCodeGroup_ifcgSeq}"/>" /> 
-								<input type="hidden" id="mainKey" name="mainKey" value="<c:out value="${vo.mainKey}"/>" /> 
-								
-								<label for="ifcgSeq" class="form-label">코드그룹 <b>*</b></label> 
+								<input type="hidden" id="infrCodeGroup_ifcgSeq" name="infrCodeGroup_ifcgSeq" value="<c:out value="${item.infrCodeGroup_ifcgSeq}"/>" />
+								<input type="hidden" id="mainKey" name="mainKey" value="<c:out value="${vo.mainKey}"/>" />
+
+								<label for="ifcgSeq" class="form-label">
+									코드그룹 <b>*</b>
+								</label>
 								<select class="form-control" id="ifcgSeq" name="ifcgSeq">
 									<option value="0">선택하세요</option>
 									<c:forEach items="${list}" var="list" varStatus="status">
@@ -38,60 +42,62 @@
                                                     <label for="input1" class="form-label">코드그룹 코드</label>
                                                     <input type="text" id="input1" class="form-control" placeholder="영문(대소문자),숫자" />
  -->
-								<label for="ifcgNameKor" class="form-label">코드그룹 이름(한글) <b>*</b></label> 
-								<input type="text" id="ifccNameKor" name="ifccNameKor" class="form-control" placeholder="한글, 숫자" value="<c:out value="${item.ifccNameKor}"/>" /> 
-								
-								<label for="ifccUseNY" class="form-label">사용여부 <b>*</b></label> 
+								<label for="ifcgNameKor" class="form-label">
+									코드그룹 이름(한글) <b>*</b>
+								</label>
+								<input type="text" id="ifccNameKor" name="ifccNameKor" class="form-control" placeholder="한글, 숫자" value="<c:out value="${item.ifccNameKor}"/>" />
+
+								<label for="ifccUseNY" class="form-label">
+									사용여부 <b>*</b>
+								</label>
 								<select class="form-control" id="ifccUseNY" name="ifccUseNY">
 									<option value="0" <c:if test="${item.ifccUseNY eq 0}"  >selected</c:if>>N</option>
 									<option value="1" <c:if test="${item.ifccUseNY eq 1}"  >selected</c:if>>Y</option>
-								</select> 
-								
+								</select>
+
 								<label for="ifccDescription" class="form-label">설명</label>
-								<textarea 
-									class="form-control" 
-									name="ifccDescription" 
-									id="ifccDescription" 
-									cols="10" 
-									rows="2" 
-									style="text-align: left;"><c:out value="${item.ifccDescription}" /></textarea>
+								<textarea class="form-control" name="ifccDescription" id="ifccDescription" cols="10" rows="2" style="text-align: left;"><c:out value="${item.ifccDescription}" /></textarea>
 
 
-								<label for="input5" class="form-label">예비1 (varchar type)</label> 
-								<input type="text" id="input5" class="form-control" placeholder="영문(대소문자),숫자" /> 
-								
-								<label for="input6" class="form-label">예비3 (varchar type)</label> 
-								<input type="text" id="input6" class="form-control" placeholder="영문(대소문자),숫자" /> 
-								
-								<label for="input7" class="form-label">예비1 (int type)</label> 
-								<input type="text" id="input7" class="form-control" placeholder="숫자" /> 
-								
-								<label for="input8" class="form-label">예비3 (int type)</label> 
+								<label for="input5" class="form-label">예비1 (varchar type)</label>
+								<input type="text" id="input5" class="form-control" placeholder="영문(대소문자),숫자" />
+
+								<label for="input6" class="form-label">예비3 (varchar type)</label>
+								<input type="text" id="input6" class="form-control" placeholder="영문(대소문자),숫자" />
+
+								<label for="input7" class="form-label">예비1 (int type)</label>
+								<input type="text" id="input7" class="form-control" placeholder="숫자" />
+
+								<label for="input8" class="form-label">예비3 (int type)</label>
 								<input type="text" id="input8" class="form-control" placeholder="숫자" />
 							</div>
 
 							<div class="col-6">
-								<label for="input9" class="form-label">코드그룹 코드 (Another)</label> 
-								<input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" /> 
-								
-								<label for="ifccNameEng" class="form-label">코드그룹 이름 (영문) <b>*</b></label> 
-								<input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자" value="<c:out value="${item.ifccNameEng}"/>" /> 
-								
-								<label for="input11" class="form-label">숫자</label> 
-								<input type="text" id="input11" class="form-control" placeholder="숫자" /> 
-								
-								<label for="ifccDelNY" class="form-label">삭제여부 <b>*</b></label> 
+								<label for="input9" class="form-label">코드그룹 코드 (Another)</label>
+								<input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" />
+
+								<label for="ifccNameEng" class="form-label">
+									코드그룹 이름 (영문) <b>*</b>
+								</label>
+								<input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자" value="<c:out value="${item.ifccNameEng}"/>" />
+
+								<label for="input11" class="form-label">숫자</label>
+								<input type="text" id="input11" class="form-control" placeholder="숫자" />
+
+								<label for="ifccDelNY" class="form-label">
+									삭제여부 <b>*</b>
+								</label>
 								<select class="form-control" id="ifccDelNY" name="ifccDelNY">
 									<option value="0" <c:if test="${item.ifccDelNY eq 0}"  >selected</c:if>>N</option>
 									<option value="1" <c:if test="${item.ifccDelNY eq 1}"  >selected</c:if>>Y</option>
-								</select> 
-								
-								<label for="input13" class="form-label">예비2 (varchar type)</label> 
-								<input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" /> 
-								
-								<label for="input14" class="form-label">예비1 (int type)</label> 
-								<input type="text" id="input14" class="form-control" placeholder="숫자" /> 
-								
+								</select>
+
+								<label for="input13" class="form-label">예비2 (varchar type)</label>
+								<input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" />
+
+								<label for="input14" class="form-label">예비1 (int type)</label>
+								<input type="text" id="input14" class="form-control" placeholder="숫자" />
+
 								<br />
 
 								<p class="form-control">
@@ -178,51 +184,51 @@
 <script src="/resources/js/validation/validationInst.js"></script>
 
 <script type="text/javascript">
-	    	var goUrlList = "/code/codeList"; 			/* #-> */
-	    	var goUrlInst = "/code/codeInst"; 			/* #-> */
-	    	var goUrlUpdt = "/code/codeUpdt";				/* #-> */
-	    	var goUrlUele = "/code/codeUele";				/* #-> */
-	    	var goUrlDele = "/code/codeDele";				/* #-> */
-	    	
-	    	var seq = $("input:hidden[name=infrCodeGroup_ifcgSeq]");				/* #-> */
-	    	
-	    	var form = $("form[name=form]");
-	    	var formVo = $("form[name=formVo]");
-	    	
-	    	const nameEng = $("input[name=ifccNameEng]");
-	    	const nameKor = $("input[name=ifccNameKor]");
-	    	const useNY = $("select[name=useNY]");
-	    	const delNY = $("select[name=delNY]");
-	    	
-	    	$("#btnList").on("click", function() {
-				formVo.attr("action", goUrlList).submit();
-			})
-	    	
-	    	$("#btnSave").on("click", function(){
-	    		if (seq.val() == "0" || seq.val() == ""){
-	    	   		// insert
-	    	   		if (validationInst(nameEng, nameKor, useNY, delNY) == false) return false;
-	    	   		form.attr("action", goUrlInst).submit();
-	    	   	} else {
-	    	   		// update
-	    	   		/* keyName.val(atob(keyName.val())); */
-	    	   		/* if (validationUpdt() == false) return false; */
-	    	   		form.attr("action", goUrlUpdt).submit();
-	    	   	}
-	    	});
-	    	
-	    	$("#btnUelete").on("click", function(){
-	    		if (seq.val() == "0" || seq.val() == ""){
-	    	   		// insert
-	    	   		/* if (validationInst() == false) return false; */
-	    	   		alert("tset");
-	    	   		return false;
-	    	   	} else {
-	    	   		form.attr("action", goUrlUele).submit();
-	    	   	}
-	    	});
-        
-        </script>
+	var goUrlList = "/code/codeList"; /* #-> */
+	var goUrlInst = "/code/codeInst"; /* #-> */
+	var goUrlUpdt = "/code/codeUpdt"; /* #-> */
+	var goUrlUele = "/code/codeUele"; /* #-> */
+	var goUrlDele = "/code/codeDele"; /* #-> */
+
+	var seq = $("input:hidden[name=infrCodeGroup_ifcgSeq]"); /* #-> */
+
+	var form = $("form[name=form]");
+	var formVo = $("form[name=formVo]");
+
+	const nameEng = $("input[name=ifccNameEng]");
+	const nameKor = $("input[name=ifccNameKor]");
+	const useNY = $("select[name=useNY]");
+	const delNY = $("select[name=delNY]");
+
+	$("#btnList").on("click", function() {
+		formVo.attr("action", goUrlList).submit();
+	})
+
+	$("#btnSave").on("click", function() {
+		if (seq.val() == "0" || seq.val() == "") {
+			// insert
+			if (validationInst(nameEng, nameKor, useNY, delNY) == false)
+				return false;
+			form.attr("action", goUrlInst).submit();
+		} else {
+			// update
+			/* keyName.val(atob(keyName.val())); */
+			/* if (validationUpdt() == false) return false; */
+			form.attr("action", goUrlUpdt).submit();
+		}
+	});
+
+	$("#btnUelete").on("click", function() {
+		if (seq.val() == "0" || seq.val() == "") {
+			// insert
+			/* if (validationInst() == false) return false; */
+			alert("tset");
+			return false;
+		} else {
+			form.attr("action", goUrlUele).submit();
+		}
+	});
+</script>
 </body>
 </html>
 

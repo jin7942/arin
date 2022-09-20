@@ -46,7 +46,7 @@
 					We create <span class="typed" data-typed-items="beautiful graphics, functional websites, working mobile apps"></span>
 				</h2>
 				<div class="actions">
-					<a href="#about" class="btn-get-started">Login</a> <a href="./signUpForm.html" class="btn-services">Sign Up</a>
+					<a href="#about" class="btn-get-started">Login</a> <a href="/main/signUp" class="btn-services">Sign Up</a>
 				</div>
 			</div>
 		</div>
@@ -56,15 +56,15 @@
 	<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
-			<a href="index.html" class="logo mr-auto"><img src="./template_imperial/assets/img/logo.png" alt="" /></a>
+			<a href="/index/" class="logo mr-auto"><img src="/resources/template_imperial/assets/img/logo.png" alt="" /></a>
 			<!-- Uncomment below if you prefer to use a text logo -->
 			<!-- <h1 class="logo mr-auto"><a href="index.html">Imperial</a></h1> -->
 
 			<nav id="navbar" class="navbar">
 				<ul>
-					<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-					<li><a class="nav-link scrollto" href="#Login">Login</a></li>
-					<li><a class="nav-link scrollto" href="./signUpForm.html">SignUp</a></li>
+					<li><a class="nav-link scrollto active" href="/index/#hero">Home</a></li>
+					<li><a class="nav-link scrollto" href="/index/#about">Login</a></li>
+					<li><a class="nav-link scrollto" href="/main/signUp">SignUp</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
@@ -93,14 +93,17 @@
 								<!-- ========== Login Form ========== -->
 								<form action="./main.html">
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="" placeholder="temp@gmail.com" value="guest" /> <label for="floatingInput">ID</label>
+										<input type="text" class="form-control" id="" placeholder="temp@gmail.com" value="guest" />
+										<label for="floatingInput">ID</label>
 									</div>
 									<div class="form-floating">
-										<input type="password" class="form-control" id="" placeholder="temp@gmail.com" value="1234" /> <label for="floatingPassword">Password</label>
+										<input type="password" class="form-control" id="" placeholder="temp@gmail.com" value="1234" />
+										<label for="floatingPassword">Password</label>
 									</div>
 
 									<div class="form-check d-flex justify-content-start mb-4">
-										<input class="form-check-input" type="checkbox" value="" id="" checked /> <label class="form-check-label" for="form1Example3"> Remember password </label>
+										<input class="form-check-input" type="checkbox" value="" id="" checked />
+										<label class="form-check-label" for="form1Example3"> Remember password </label>
 									</div>
 
 									<div class="text-center">
@@ -118,7 +121,6 @@
 									</div>
 								</form>
 								<!-- ========== End Login Form ========== -->
-
 							</div>
 						</div>
 					</div>
