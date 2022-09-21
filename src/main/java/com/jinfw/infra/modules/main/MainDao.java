@@ -27,4 +27,9 @@ public class MainDao {
 		return sqlSession.insert(namespace + ".insert", dto);
 	}
 	
+	// 상품 상세 조회
+	public Main selectOne(MainVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOne", vo); 
+	}
+	
 }

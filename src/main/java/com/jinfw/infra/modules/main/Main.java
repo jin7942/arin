@@ -5,8 +5,10 @@ public class Main {
 	/*item DTO*/
 	private String itemHeader;
 	private String itemPrice;
+	private String itemDescription;
 	private String itemRegDatetime;
 	private String itemPlace;
+	private String member_seq;
 	
 	/*member DTO*/
 	private String seq;
@@ -20,6 +22,18 @@ public class Main {
 	
 	/*################################*/
 
+	public String getMember_seq() {
+		return member_seq;
+	}
+	public void setMember_seq(String member_seq) {
+		this.member_seq = member_seq;
+	}
+	public String getItemDescription() {
+		return itemDescription;
+	}
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
 	public String getSeq() {
 		return seq;
 	}

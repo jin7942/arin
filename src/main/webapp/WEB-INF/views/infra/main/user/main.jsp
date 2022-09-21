@@ -30,17 +30,24 @@
                     </div>
                 </div>
 
+				<form action="" name="form">
+					<input type="hidden" name="mainKey" value="<c:out value="${vo.mainKey}"/>"/>
+				</form>
+
                	<!-- form -->
-               	<form action="">
+               	<form action="" name="">
 	                <!-- main -->
 	                <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 3%">
                 
 	                    <!-- item -->
 	                    <c:forEach items="${list}" var="list" varStatus="status">
-		                    <div class="col" style="cursor: pointer">
+		                    <div class="col" style="cursor: pointer" >
 		                        <div class="card">
 		                            <img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
-		                            <div class="card-body">
+		                            <div class="card-body" onclick="goView(<c:out value="${list.seq}"/>)">
+		                            
+		                            	<input type="hidden" name="seq" value="<c:out value="${list.seq}" />" />
+		                            	
 		                                <h5 class="card-title"><b> <c:out value="${list.itemHeader}" /> </b></h5>
 		                                <p class="card-text"><c:out value="${list.itemPrice}" /></p>
 		                                <p class="card-text" style="float: left"><c:out value="${list.itemRegDatetime}" /></p>
@@ -56,6 +63,18 @@
             </div>
         </main>
         <!-- End #main -->
+        
+        <script type="text/javascript">
+        	const goUrlView = "/main/view"
+        	const mainKey = $("input[name=mainKey]");
+        	const form = $("form[name=form]");
+        	
+        	function goView(keyValue) {
+        		mainKey.val(keyValue);
+        		form.attr("action", goUrlView).submit();
+			}
+        	
+        </script>
         
         <!-- footer -->
 		<%@include file="../../common/user/includeV1/footer.jsp"%>

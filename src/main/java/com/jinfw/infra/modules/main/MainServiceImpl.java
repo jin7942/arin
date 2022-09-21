@@ -23,5 +23,13 @@ public class MainServiceImpl implements MainService {
 		return dao.insert(dto);
 	}
 	
+	// 상세조회
+	@Override
+	public Main selectOne(MainVo vo) throws Exception {
+		return dao.selectOne(vo);
+	}
+	
+	
+	
 	
 }

@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jinfw.infra.modules.member.MemberVo;
-
 @Controller
 @RequestMapping (value = "/main/")
 public class MainController {
@@ -25,7 +23,7 @@ public class MainController {
 	 * @throws Exception
 	 */
 	@RequestMapping (value = "")
-	public String main(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+	public String main(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
 		
 		List<Main> list = service.selectList();
 		model.addAttribute("list", list);
@@ -48,6 +46,16 @@ public class MainController {
 	public String signUpForm(Main dto, Model model) throws Exception {
 		
 		return "infra/main/user/signUpForm";
+	}
+	
+	// 상세조회
+	@RequestMapping(value = "view")
+	public String view(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
+		Main item = service.selectOne(vo);
+		
+		model.addAttribute("item", item);
+		
+		return "infra/main/user/mainView";
 	}
 		
 }

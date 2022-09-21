@@ -10,10 +10,12 @@
 	
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
-		    a.itemHeader,
-		    a.itemPrice,
-		    a.itemRegDatetime,
-		    a.itemPlace
+		    a.itemHeader
+		    ,a.itemPrice
+		    ,a.itemRegDatetime
+		    ,a.itemPlace
+		    ,a.seq
+		    ,a.member_seq
 		FROM item a
 		WHERE 1 = 1;
 	</select>
@@ -50,5 +52,17 @@
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+		    a.itemHeader
+		    ,a.itemPrice
+		    ,a.itemDescription
+		    ,a.itemPlace
+		    ,(select b.memberName from member b where a.member_seq = b.seq) as seller
+		from item a
+		WHERE 1 = 1
+		    AND a.seq = #{mainKey};
+	</select>
 
 </mapper>

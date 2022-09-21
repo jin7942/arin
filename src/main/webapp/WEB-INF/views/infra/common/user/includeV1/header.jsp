@@ -9,6 +9,9 @@
 
 <title>My</title>
 
+<!-- J Query -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet" />
 
