@@ -11,6 +11,9 @@
 
 <title>My</title>
 
+<!-- J Query -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet" />
 
@@ -82,15 +85,19 @@
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="id" placeholder="ID" name="memberID" />
 										<label for="id">ID</label>
-										<!-- name-validation-feedback -->
+										<!-- id-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="idFeedback">4 ~ 12자 영문, 숫자만 가능합니다.</div>
+										
+										<!-- id-duplicate-feedback -->
+										<div style="text-align: left; display: none; color: red" id="idDuplicateOk">이미 존재하는 아이디 입니다.</div>
+										<div style="text-align: left; display: none; color: green" id="idDuplicateFalse">사용가능한 아이디 입니다.</div>
 									</div>
 
 									<!-- pw -->
 									<div class="form-floating mb-3">
 										<input type="password" class="form-control" id="pw" placeholder="Password" name="memberPW" />
 										<label for="pw">Password</label>
-										<!-- name-validation-feedback -->
+										<!-- pw-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="pwFeedback">4 ~ 12자 영문, 숫자만 가능합니다.</div>
 									</div>
 									<div class="form-floating mb-3">
@@ -130,14 +137,14 @@
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="zonecode" placeholder="name@example.com" />
+										<input type="text" class="form-control" id="zonecode" placeholder="name@example.com" disabled="disabled" />
 										<label for="zonecode">우편번호</label>
 
 										<div style="text-align: left; display: none; color: red" id="zonecodeFeedback">필수 입력 항목입니다.</div>
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="address" placeholder="name@example.com" name="memberPlace" />
+										<input type="text" class="form-control" id="address" placeholder="name@example.com" name="memberPlace" disabled="disabled" />
 										<label for="address">주소</label>
 
 										<div style="text-align: left; display: none; color: red" id="addressFeedback">필수 입력 항목입니다.</div>
@@ -149,8 +156,18 @@
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="bname" placeholder="name@example.com" />
+										<input type="text" class="form-control" id="bname" placeholder="name@example.com" disabled="disabled" />
 										<label for="banme">참고항목</label>
+									</div>
+									
+									<!-- test -->
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="test1" placeholder="name@example.com" />
+										<label for="banme">위도</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="test2" placeholder="name@example.com" />
+										<label for="banme">경도</label>
 									</div>
 
 									<!-- checkbox -->
@@ -185,7 +202,9 @@
 	<!-- My Js File -->
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/resources/js/form/signUpForm.js"></script>
-	<!-- My Js File -->
+	
+	<!-- kakao API -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d83d77585dfcb78cea837606843f75b&libraries=services"></script>
 
 	<!-- footer -->
 	<%@include file="../../common/user/includeV1/footer.jsp"%>

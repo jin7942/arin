@@ -56,7 +56,7 @@
                             <tr>
                                 <td><i class="fa-solid fa-envelope-open fa-2x" style="cursor: pointer"></i></td>
                                 <td>
-                                	<i class="fa-brands fa-shopify fa-2x" style="cursor: pointer" onclick="location.href='./orderHistory.html'"></i>
+                                	<i class="fa-brands fa-shopify fa-2x" style="cursor: pointer" onclick="location.href='/user/history'"></i>
                                 </td>
                                 <td>
                                 	<i class="fa-solid fa-cart-plus fa-2x" style="cursor: pointer" onclick="location.href='./cart.html'"></i>

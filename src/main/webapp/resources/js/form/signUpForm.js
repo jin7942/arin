@@ -26,7 +26,7 @@ let isEmail = false;
 let isMobile = false;
 
 userName.addEventListener('keyup', () => {
-    if (userName.value == '' || !nameRegex.test(userName.value)) {
+    if (userName.value == '' || !nameRegex.test(userName.value)) { 
         document.getElementById('nameFeedback').style.display = 'block';
         isName = false;
     } else {
@@ -36,14 +36,36 @@ userName.addEventListener('keyup', () => {
     }
 });
 
-id.addEventListener('keyup', () => {
+id.addEventListener('oninput', () => {
     if (id.value == '' || !idRegex.test(id.value)) {
         document.getElementById('idFeedback').style.display = 'block';
         isId = false;
     } else {
         document.getElementById('idFeedback').style.display = 'none';
+        
+        var idVal = id.value;
+        
+		$.ajax({
+			url:'./idCheck',
+			type:'get',
+			data:{id: idVal},
+			success:(cnt) => {
+				if (cnt == 0) {
+					// 사용가능
+					isId = true;
+					document.getElementById('idDuplicateFalse').style.display = 'block';
+				} else {
+					// 사용불가
+					isId = false;
+					document.getElementById('idDuplicateOk').style.display = 'block';
+				}
+			},
+			error:() => {
+				alert("error")
+			}
+		});
+        
         id.removeEventListener;
-        isId = true;
     }
 });
 
@@ -113,7 +135,8 @@ function searchAddress() {
     //팝업 위치를 지정(화면의 가운데 정렬)
     var width = 500; //팝업의 너비
     var height = 600; //팝업의 높이
-
+    
+	
     new daum.Postcode({
         oncomplete: function (data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
@@ -121,11 +144,23 @@ function searchAddress() {
             document.getElementById('zonecode').value = data.zonecode;
             document.getElementById('address').value = data.address;
             document.getElementById('bname').value = data.bname;
+            
+            geocoder.addressSearch(data.address, callback);
+            
         },
     }).open({
         left: window.screen.width / 2 - width / 2,
         top: window.screen.height / 2 - height / 2,
     });
+
+	var geocoder = new kakao.maps.services.Geocoder();
+    
+    var callback = function(result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			document.getElementById('test1').value = (result[0].x);
+			document.getElementById('test2').value = (result[0].y);
+		}
+	}
 }
 
 // input 길이제한

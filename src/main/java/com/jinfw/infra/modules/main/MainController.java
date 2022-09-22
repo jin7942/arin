@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping (value = "/main/")
@@ -25,8 +28,10 @@ public class MainController {
 	@RequestMapping (value = "")
 	public String main(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
 		
-		List<Main> list = service.selectList();
+		List<Main> list = service.selectList(vo);
 		model.addAttribute("list", list);
+		
+		System.out.println(vo.getShValue());
 		
 		return "infra/main/user/main";
 	}
@@ -47,7 +52,15 @@ public class MainController {
 		
 		return "infra/main/user/signUpForm";
 	}
-	
+	// id 중복 체크
+	@GetMapping("/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("id") String id) throws Exception {
+		int cnt = service.idCheck(id);
+		
+		return cnt;
+	}
+
 	// 상세조회
 	@RequestMapping(value = "view")
 	public String view(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {

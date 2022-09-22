@@ -17,7 +17,13 @@
 		    ,a.seq
 		    ,a.member_seq
 		FROM item a
-		WHERE 1 = 1;
+		WHERE 1 = 1
+		<!-- 문자열 검색 -->
+		<choose>
+			<when test="shValue != null">
+				AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 회원가입 -->
@@ -63,6 +69,11 @@
 		from item a
 		WHERE 1 = 1
 		    AND a.seq = #{mainKey};
+	</select>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(memberID) FROM member WHERE memberID = #{id}
 	</select>
 
 </mapper>

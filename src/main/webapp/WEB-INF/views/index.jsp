@@ -91,7 +91,7 @@
 							<div class="card-body p-5">
 
 								<!-- ========== Login Form ========== -->
-								<form action="./main.html">
+								<form action="">
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="" placeholder="temp@gmail.com" value="guest" />
 										<label for="floatingInput">ID</label>
