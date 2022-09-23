@@ -72,8 +72,25 @@
 	</select>
 	
 	<!-- 아이디 중복 체크 -->
-	<select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(memberID) FROM member WHERE memberID = #{id}
+	<select id="idCheck" resultType="Integer">
+		SELECT COUNT(memberID) FROM member WHERE memberID = #{memberID}
 	</select>
+	
+	<!-- 상품등록 -->
+	<insert id="itemInst">
+		INSERT INTO item (
+			itemHeader
+			,itemPrice
+			,itemDescription
+			,itemRegDatetime
+			,itemModDatetime 
+		) VALUES (
+			#{item.itemHeader}
+			,#{item.itemPrice}
+			,#{item.itemDescription}
+			,now()
+			,now()
+		)
+	</insert>
 
 </mapper>

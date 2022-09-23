@@ -1,14 +1,14 @@
 package com.jinfw.infra.modules.main;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -53,12 +53,22 @@ public class MainController {
 		return "infra/main/user/signUpForm";
 	}
 	// id 중복 체크
-	@GetMapping("/idCheck")
+	@RequestMapping("/idCheck")
 	@ResponseBody
-	public int idCheck(@RequestParam("id") String id) throws Exception {
-		int cnt = service.idCheck(id);
+	public Map<String, Object> idCheck(Main dto) throws Exception {
 		
-		return cnt;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.idCheck(dto);
+		System.out.println(result);
+		
+		if (result > 0) {
+			returnMap.put("rt", "fail");
+		} else {
+			returnMap.put("rt", "success");
+		}
+		
+		return returnMap;
 	}
 
 	// 상세조회
@@ -69,6 +79,21 @@ public class MainController {
 		model.addAttribute("item", item);
 		
 		return "infra/main/user/mainView";
+	}
+	
+	// 상품등록
+	@RequestMapping(value = "mainForm")
+	public String mainForm(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
+		
+		return "infra/main/user/mainForm";
+	}
+	@RequestMapping(value = "itemInst")
+	public String itemInst(Main dto) throws Exception {
+		
+		int result = service.itemInst(dto);
+		System.out.println("insert result" + result);
+		
+		return "infra/main/user/main";
 	}
 		
 }

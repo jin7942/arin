@@ -24,10 +24,9 @@ public class MainServiceImpl implements MainService {
 	}
 	// id 중복 체크
 	@Override
-	public int idCheck(String id) throws Exception {
-		return dao.idCheck(id);
+	public int idCheck(Main dto) throws Exception {
+		return dao.idCheck(dto);
 	}
-	
 	
 	// 상세조회
 	@Override
@@ -35,8 +34,10 @@ public class MainServiceImpl implements MainService {
 		return dao.selectOne(vo);
 	}
 
-	
-	
-	
+	// 상품 등록
+	@Override
+	public int itemInst(Main dto) throws Exception {
+		return dao.itemInst(dto);
+	}
 	
 }

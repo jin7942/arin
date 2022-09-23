@@ -89,8 +89,8 @@
 										<div style="text-align: left; display: none; color: red" id="idFeedback">4 ~ 12자 영문, 숫자만 가능합니다.</div>
 										
 										<!-- id-duplicate-feedback -->
-										<div style="text-align: left; display: none; color: red" id="idDuplicateOk">이미 존재하는 아이디 입니다.</div>
-										<div style="text-align: left; display: none; color: green" id="idDuplicateFalse">사용가능한 아이디 입니다.</div>
+										<div style="text-align: left; display: none; color: red" id="idDuplicateFalse">이미 존재하는 아이디 입니다.</div>
+										<div style="text-align: left; display: none; color: green" id="idDuplicateOk">사용가능한 아이디 입니다.</div>
 									</div>
 
 									<!-- pw -->

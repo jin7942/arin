@@ -36,32 +36,36 @@ userName.addEventListener('keyup', () => {
     }
 });
 
-id.addEventListener('oninput', () => {
+id.addEventListener('focusout', () => {
     if (id.value == '' || !idRegex.test(id.value)) {
         document.getElementById('idFeedback').style.display = 'block';
         isId = false;
     } else {
         document.getElementById('idFeedback').style.display = 'none';
-        
+
         var idVal = id.value;
         
 		$.ajax({
 			url:'./idCheck',
-			type:'get',
-			data:{id: idVal},
-			success:(cnt) => {
-				if (cnt == 0) {
+			type:'post',
+			data:{"memberID": idVal},
+			success:(res) => {
+				if (res.rt == "success") {
 					// 사용가능
 					isId = true;
-					document.getElementById('idDuplicateFalse').style.display = 'block';
+					document.getElementById('idDuplicateFalse').style.display = 'none';
+					document.getElementById('idDuplicateOk').style.display = 'block';
 				} else {
 					// 사용불가
 					isId = false;
-					document.getElementById('idDuplicateOk').style.display = 'block';
+					document.getElementById('idDuplicateOk').style.display = 'none';
+					document.getElementById('idDuplicateFalse').style.display = 'block';
+					id.value = "";
+					id.focus();
 				}
 			},
-			error:() => {
-				alert("error")
+			error:(jqXHR) => {
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 			}
 		});
         
