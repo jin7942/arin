@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
 
 <!DOCTYPE html>
@@ -36,14 +37,14 @@
 				</div>
 			</div>
 
-			<input type="hidden" name="mainKey" value="<c:out value="${vo.mainKey}"/>"/>
+			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>"/>
 			<div class="col-4">
 				<h2>
 					<b> <c:out value="${item.itemHeader}" />
 					</b>
 				</h2>
 				<h3>
-					<c:out value="${item.itemPrice}" />
+					<fmt:formatNumber value="${item.itemPrice}" pattern="#,###,###"/>
 					원
 				</h3>
 				<p>
@@ -53,10 +54,10 @@
 
 			<div class="col-4">
 				<div>
-					<i class="fa-solid fa-user fa-xl"><b><c:out value="${item.member_seq}" /></b></i>
+					<i class="fa-solid fa-user fa-xl"><b><c:out value="${item.seller}" /></b></i>
 				</div>
 				<div style="margin-top: 20px">
-					<i class="fa-solid fa-location-dot fa-lg"><c:out value="${item.itemPlace}" /></i>
+					<i class="fa-solid fa-location-dot fa-lg"><c:out value="${item.itemPlace}"/></i>
 				</div>
 				
 				<div style="text-align: center; margin-top: 20%">
@@ -127,7 +128,7 @@
 				<div class="modal-body">구매하시겠습니까?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button>
-					<button type="button" class="btn btn-dark" data-bs-target="#exampleModal2" data-bs-toggle="modal">예</button>
+					<button type="button" class="btn btn-dark" data-bs-target="#exampleModal2" data-bs-toggle="modal" onclick="buyItem()">예</button>
 				</div>
 			</div>
 		</div>
@@ -138,15 +139,15 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">êµ¬ë§¤íì¸</h5>
+					<h5 class="modal-title" id="exampleModalLabel">구매확인</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<b>김진범님</b><br />구매가 완료되었습니다.
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="location.href='./main.html'">닫기</button>
-					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="location.href='./orderHistory.html'">주문내역보기</button>
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="location.href='/main/'">닫기</button>
+					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="location.href='/user/history'">주문내역보기</button>
 				</div>
 			</div>
 		</div>
@@ -157,5 +158,27 @@
 <!-- footer -->
 <%@include file="../../common/user/includeV1/footer.jsp"%>
 <!-- End of footer -->
+
+<script type="text/javascript">
+
+	function buyItem() {
+		$.ajax({
+			async:'false',
+			url:'./buyItem',
+			type:'post',
+			data:{"member_seq1": 1,"mainKey" : $("#mainKey").val() },
+			success:(res) => {
+				if (res.rt != "success") {
+					alert("구매 실패");
+					return;
+				};
+			},
+			error:(jqXHR) => {
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+
+</script>
 </body>
 </html>

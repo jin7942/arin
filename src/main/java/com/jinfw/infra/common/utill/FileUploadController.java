@@ -2,13 +2,16 @@ package com.jinfw.infra.common.utill;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -24,11 +27,19 @@ public class FileUploadController {
 
 	// 파일 등록 매핑
 	@RequestMapping(value = "upload")
-	public String upload(MultipartHttpServletRequest files) {
+	@ResponseBody
+	public Map<String, Object> upload(MultipartHttpServletRequest files) {
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
 		String filePath = "C:\\Users\\infom\\Documents\\work\\test";	// 저장 경로
 		File Folder = new File(filePath);
 		List<MultipartFile> list = files.getFiles("files");
+		
+		if (list.size() == 0) {
+			returnMap.put("rt", "false");
+			return returnMap;
+		}
 		
 		// 폴더가 존재하지 않으면
 		if (!Folder.exists()) {
@@ -67,8 +78,11 @@ public class FileUploadController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 		}
-
-		return "redirect:fileUploadForm";
+		
+		returnMap.put("rt", "success");
+		
+		return returnMap;
 	}
 }

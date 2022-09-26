@@ -9,5 +9,6 @@ public interface MainService {
 	public int insert(Main dto) throws Exception;
 	public int idCheck(Main dto) throws Exception;
 	public int itemInst(Main dto) throws Exception;
+	public int buyItem(MainVo vo) throws Exception;
 	
 }

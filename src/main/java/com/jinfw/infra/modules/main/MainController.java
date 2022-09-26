@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping (value = "/main/")
@@ -82,18 +83,40 @@ public class MainController {
 	}
 	
 	// 상품등록
-	@RequestMapping(value = "mainForm")
+	@RequestMapping(value = "form")
 	public String mainForm(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
 		
 		return "infra/main/user/mainForm";
 	}
 	@RequestMapping(value = "itemInst")
-	public String itemInst(Main dto) throws Exception {
+	public String itemInst(MainVo vo, Main dto, RedirectAttributes redirectAttributes) throws Exception {
 		
 		int result = service.itemInst(dto);
 		System.out.println("insert result" + result);
 		
-		return "infra/main/user/main";
+		vo.setMainKey(dto.getItemSeq());
+		redirectAttributes.addFlashAttribute("vo", vo);
+		
+		return "redirect:view";
+	}
+	
+	// 상품 구매
+	@RequestMapping("/buyItem")
+	@ResponseBody
+	public Map<String, Object> buyItem(MainVo vo) throws Exception {
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.buyItem(vo);
+		System.out.println("buyItem : " + result);
+		
+		if (result == 1) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		
+		return returnMap;
 	}
 		
 }

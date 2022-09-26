@@ -40,6 +40,9 @@ public class MainDao {
 	public int itemInst(Main dto) {
 		return sqlSession.insert(namespace + ".itemInst", dto); 
 	}
-	
+	// 상품 구매
+	public int buyItem(MainVo vo) {
+		return sqlSession.update(namespace + ".buyItem", vo);
+	}
 	
 }

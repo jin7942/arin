@@ -14,7 +14,7 @@
 	<div class="container" style="margin-top: 10%; margin-bottom: 20%; width: 85%">
 		<div class="row" data-aos="fade-up">
 			<div class="col-12" style="text-align: center">
-				<h2>구매내역</h2>
+				<h2>내가 등록한 상품</h2>
 			</div>
 		</div>
 
@@ -30,7 +30,7 @@
 							<td>#</td>
 							<td>날짜</td>
 							<td>내역</td>
-							<td>구매금액</td>
+							<td>판매금액</td>
 							<td>상태</td>
 						</tr>
 					</thead>
@@ -46,10 +46,10 @@
 							<c:forEach items="${list}" var="list" varStatus="status">
 								<tr>
 									<td>#</td>
-									<td><c:out value="${list.itemRegDatetime}" /></td>
+									<td><c:out value="${list.itemBuyDatetime}" /></td>
 									<td><c:out value="${list.itemHeader}" /></td>
 									<td><c:out value="${list.itemPrice}" /></td>
-									<td></td>
+									<td>구매</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

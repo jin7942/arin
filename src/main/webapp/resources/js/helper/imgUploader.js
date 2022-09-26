@@ -3,6 +3,7 @@
  */
 var uploadFiles = [];
 document.querySelector('.real-upload').addEventListener('change', getImageFiles);
+
 function getImageFiles(e) {
     const files = e.currentTarget.files;
     const imagePreview = document.querySelector('.image-preview');
@@ -49,6 +50,8 @@ function createElement(e, file) {
     return li;
 }
 
+
+// 삭제
 function deleteList() {
     const list = document.querySelectorAll('.imgList');
     const imgInput = document.getElementById('imgInput');

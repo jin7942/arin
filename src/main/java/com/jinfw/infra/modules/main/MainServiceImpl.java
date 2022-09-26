@@ -39,5 +39,11 @@ public class MainServiceImpl implements MainService {
 	public int itemInst(Main dto) throws Exception {
 		return dao.itemInst(dto);
 	}
+
+	// 상품 구매
+	@Override
+	public int buyItem(MainVo vo) throws Exception {
+		return dao.buyItem(vo);
+	}
 	
 }
