@@ -6,4 +6,7 @@ public class Constants {
 	public static final int ROW_NUM_TO_SHOW = 10;
 	public static final int PAGE_NUM_TO_SHOW = 5;
 	
+	/*for session*/
+	public static final int SESSION_MINUTE = 30;		// 세션 타임아웃
+	
 }

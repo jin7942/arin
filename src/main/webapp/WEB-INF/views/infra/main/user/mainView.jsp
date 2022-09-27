@@ -2,7 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,16 +54,17 @@
 
 			<div class="col-4">
 				<div>
-					<i class="fa-solid fa-user fa-xl"><b><c:out value="${item.seller}" /></b></i>
+					<i class="fa-solid fa-user fa-xl"></i><b><c:out value="${item.seller}"/></b>
 				</div>
 				<div style="margin-top: 20px">
-					<i class="fa-solid fa-location-dot fa-lg"><c:out value="${item.itemPlace}"/></i>
+					<i class="fa-sharp fa-solid fa-location-dot fa-xl"></i><b><c:out value="${item.itemPlace}"/></b>
 				</div>
 				
 				<div style="text-align: center; margin-top: 20%">
 					<button type="button" class="btn btn-dark btn-lg" style="width: 40%">
-						<i class="fa-solid fa-cart-shopping fa-xl"></i>
+						<i class="fa-solid fa-cart-shopping fa-xl" id="btn-like"></i>
 					</button>
+					
 					<button type="button" class="btn btn-dark btn-lg" style="width: 40%" data-bs-toggle="modal" data-bs-target="#exampleModal">구매하기</button>
 				</div>
 
@@ -80,7 +81,7 @@
 
 				<div class="col-4">
 					<div class="card" style="cursor: pointer">
-						<img src="./template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
+						<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
 						<div class="card-body">
 							<h5 class="card-title">Card title</h5>
 							<p class="card-text">
@@ -92,7 +93,7 @@
 
 				<div class="col-4">
 					<div class="card" style="cursor: pointer">
-						<img src="./template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
+						<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
 						<div class="card-body">
 							<h5 class="card-title">Card title</h5>
 							<p class="card-text">
@@ -104,7 +105,7 @@
 
 				<div class="col-4">
 					<div class="card" style="cursor: pointer">
-						<img src="./template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
+						<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
 						<div class="card-body">
 							<h5 class="card-title">Card title</h5>
 							<p class="card-text">

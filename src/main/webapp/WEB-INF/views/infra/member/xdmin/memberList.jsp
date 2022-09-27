@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <jsp:useBean id="CodeServiceImpl" class="com.jinfw.infra.modules.code.CodeServiceImpl"/>
 
 <!DOCTYPE html>
@@ -168,6 +168,10 @@
 					</table>
 					<!-- End of Table -->
 
+					sessSeq: <c:out value="${sessSeq }"/><br>
+					sessName: <c:out value="${sessName }"/><br>
+					sessId: <c:out value="${sessId }"/><br>
+
 					<!-- pagination s -->
 					<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
 					<!-- pagination e -->
@@ -187,7 +191,7 @@
 	</div>
 </div>
 <!-- /.container-fluid -->
-</div>
+
 <!-- End of Main Content -->
 
 <!-- Footer -->

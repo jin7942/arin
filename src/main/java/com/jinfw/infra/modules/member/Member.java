@@ -5,6 +5,7 @@ public class Member {
 	/** Member DTO */
 	private String seq;
 	private String memberID;
+	private String memberPW;
 	private String memberName;
 	private String memberMobile;
 	private String memberCarrier;
@@ -16,12 +17,7 @@ public class Member {
 	
 	// ########################################
 	// Generate Getters and Setters
-	public String getMemberCarrier() {
-		return memberCarrier;
-	}
-	public void setMemberCarrier(String memberCarrier) {
-		this.memberCarrier = memberCarrier;
-	}
+
 	public String getSeq() {
 		return seq;
 	}
@@ -34,6 +30,12 @@ public class Member {
 	public void setMemberID(String memberID) {
 		this.memberID = memberID;
 	}
+	public String getMemberPW() {
+		return memberPW;
+	}
+	public void setMemberPW(String memberPW) {
+		this.memberPW = memberPW;
+	}
 	public String getMemberName() {
 		return memberName;
 	}
@@ -45,6 +47,12 @@ public class Member {
 	}
 	public void setMemberMobile(String memberMobile) {
 		this.memberMobile = memberMobile;
+	}
+	public String getMemberCarrier() {
+		return memberCarrier;
+	}
+	public void setMemberCarrier(String memberCarrier) {
+		this.memberCarrier = memberCarrier;
 	}
 	public String getMemberMailName() {
 		return memberMailName;
@@ -76,6 +84,6 @@ public class Member {
 	public void setMemberDelNY(String memberDelNY) {
 		this.memberDelNY = memberDelNY;
 	}
-	
+
 	
 }

@@ -50,7 +50,7 @@
 			,2	
 			,"test"
 			,"naver.com"	
-			,#{memberPlace}	
+			,"수원시 팔달구 인계동"	
 			,now()	
 			,now()
 			,0	
