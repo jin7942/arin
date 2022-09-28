@@ -16,34 +16,10 @@ public class User {
 	private String itemHeader;
 	private String itemPrice;
 	private String itemBuyDatetime;
+	private String itemRegDatetime;
 	
 	// ########################################
 	// Generate Getters and Setters
-	
-	public String getMember_seq1() {
-		return member_seq1;
-	}
-	public void setMember_seq1(String member_seq1) {
-		this.member_seq1 = member_seq1;
-	}
-	public String getItemHeader() {
-		return itemHeader;
-	}
-	public void setItemHeader(String itemHeader) {
-		this.itemHeader = itemHeader;
-	}
-	public String getItemPrice() {
-		return itemPrice;
-	}
-	public void setItemPrice(String itemPrice) {
-		this.itemPrice = itemPrice;
-	}
-	public String getItemBuyDatetime() {
-		return itemBuyDatetime;
-	}
-	public void setItemBuyDatetime(String itemBuyDatetime) {
-		this.itemBuyDatetime = itemBuyDatetime;
-	}
 	public String getSeq() {
 		return seq;
 	}
@@ -86,7 +62,39 @@ public class User {
 	public void setMemberPlace(String memberPlace) {
 		this.memberPlace = memberPlace;
 	}
+	public String getMember_seq1() {
+		return member_seq1;
+	}
+	public void setMember_seq1(String member_seq1) {
+		this.member_seq1 = member_seq1;
+	}
+	public String getItemHeader() {
+		return itemHeader;
+	}
+	public void setItemHeader(String itemHeader) {
+		this.itemHeader = itemHeader;
+	}
+	public String getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(String itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	public String getItemBuyDatetime() {
+		return itemBuyDatetime;
+	}
+	public void setItemBuyDatetime(String itemBuyDatetime) {
+		this.itemBuyDatetime = itemBuyDatetime;
+	}
+	public String getItemRegDatetime() {
+		return itemRegDatetime;
+	}
+	public void setItemRegDatetime(String itemRegDatetime) {
+		this.itemRegDatetime = itemRegDatetime;
+	}
 	
+	// ########################################
+	// Generate Getters and Setters
 	
 	
 }

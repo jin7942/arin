@@ -11,6 +11,9 @@
 
 <title>My</title>
 
+<!-- J Query -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet" />
 
@@ -93,21 +96,21 @@
 								<!-- ========== Login Form ========== -->
 								<form action="">
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="" placeholder="temp@gmail.com" value="guest" />
+										<input type="text" class="form-control" id="memberID" placeholder="temp@gmail.com" name="memberID" />
 										<label for="floatingInput">ID</label>
 									</div>
 									<div class="form-floating">
-										<input type="password" class="form-control" id="" placeholder="temp@gmail.com" value="1234" />
+										<input type="password" class="form-control" id="memberPW" placeholder="temp@gmail.com" name="memberPW" />
 										<label for="floatingPassword">Password</label>
 									</div>
 
 									<div class="form-check d-flex justify-content-start mb-4">
-										<input class="form-check-input" type="checkbox" value="" id="" checked />
+										<input class="form-check-input" type="checkbox" value="" id="" />
 										<label class="form-check-label" for="form1Example3"> Remember password </label>
 									</div>
 
 									<div class="text-center">
-										<button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+										<button class="btn btn-dark btn-lg btn-block" type="button" onclick="login()">Login</button>
 									</div>
 									<a href="" style="color: black">ID 및 PW 찾기</a>
 
@@ -129,6 +132,30 @@
 		</section>
 	</main>
 	<!-- End #main -->
+
+	<script type="text/javascript">
+		function login() {
+			$.ajax({
+				async: true 
+				,cache: false
+				,type: "post"
+				/* ,dataType:"json" */
+				,url: "/loginProc"
+				/* ,data : $("#formLogin").serialize() */
+				,data : {"memberID" : $("#memberID").val(), "memberPW" : $("#memberPW").val()}
+				,success: (res) => {
+					if(res.rt == "success") {
+						location.href = "/main/"
+					} else {
+						alert("회원없음");
+					}
+				}
+				,error : function(jqXHR, textStatus, errorThrown){
+					alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+				}
+			});
+		}
+	</script>
 
 	<!-- footer -->
 	<%@include file="./infra/common/user/includeV1/footer.jsp"%>

@@ -9,4 +9,6 @@ public class Constants {
 	/*for session*/
 	public static final int SESSION_MINUTE = 30;		// 세션 타임아웃
 	
+	/*login check*/
+	public static final String URL_LOGINFORM = "/login";
 }

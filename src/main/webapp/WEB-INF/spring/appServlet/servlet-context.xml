@@ -21,6 +21,20 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+	<!-- session interceptor s 2022.03.13 for logincheck -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/resources/**" />
+			<exclude-mapping path="/login" />
+			<exclude-mapping path="/loginProc" />
+			<exclude-mapping path="/logoutProc" />
+			<exclude-mapping path="/index" />
+			<beans:bean id="checkLoginSessionInterception" class="com.jinfw.infra.common.interceptor.CheckLoginSessionInterception"/>
+		</interceptor>
+	</interceptors>	
+	<!-- session interceptor e 2022.03.13 for logincheck -->
+
 	<!-- File Upload -->	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
       <beans:property name="maxUploadSize" value="10485760" />

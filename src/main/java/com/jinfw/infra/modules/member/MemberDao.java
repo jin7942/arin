@@ -27,9 +27,5 @@ public class MemberDao {
 		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
 	}
 	
-	// 로그인
-	public Member selectOneId(Member dto) {
-		return sqlSession.selectOne(namespace + ".selectOneId", dto);
-	}
 	
 }

@@ -124,11 +124,10 @@
 				,cache: false
 				,type: "post"
 				/* ,dataType:"json" */
-				,url: "/member/loginProc"
+				,url: "loginProc"
 				/* ,data : $("#formLogin").serialize() */
 				,data : { "memberID" : $("#memberID").val(), "memberPW" : $("#memberPW").val()}
 				,success: (res) => {
-					alert(res.rt)
 					if(res.rt == "success") {
 						location.href = "/member/memberList"
 					} else {

@@ -28,18 +28,18 @@
 						<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}" />">
 
 						<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
-							<option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
-							<option value="0" <c:if test="${vo.shOptionDelNY eq 0}"  >selected</c:if>>N</option>
-							<option value="1" <c:if test="${vo.shOptionDelNY eq 1}"  >selected</c:if>>Y</option>
+							<option value="" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
+							<option value="0" <c:if test="${vo.shOptionDelNY eq '0'}"  >selected</c:if>>N</option>
+							<option value="1" <c:if test="${vo.shOptionDelNY eq '1'}"  >selected</c:if>>Y</option>
 						</select> <select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
-							<option value="1" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
-							<option value="1" <c:if test="${vo.shOptionSort eq 1}"  >selected</c:if>>시퀀스</option>
-							<option value="2" <c:if test="${vo.shOptionSort eq 2}"  >selected</c:if>>등록일</option>
-							<option value="3" <c:if test="${vo.shOptionSort eq 3}"  >selected</c:if>>수정일</option>
+							<option value="" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
+							<option value="1" <c:if test="${vo.shOptionSort eq '1'}"  >selected</c:if>>시퀀스</option>
+							<option value="2" <c:if test="${vo.shOptionSort eq '2'}"  >selected</c:if>>등록일</option>
+							<option value="3" <c:if test="${vo.shOptionSort eq '3'}"  >selected</c:if>>수정일</option>
 						</select> <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
 							<option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>>검색구분</option>
-							<option value="1" <c:if test="${vo.shOptionDate eq 1}"  >selected</c:if>>등록일</option>
-							<option value="2" <c:if test="${vo.shOptionDate eq 2}"  >selected</c:if>>수정일</option>
+							<option value="1" <c:if test="${vo.shOptionDate eq '1'}"  >selected</c:if>>등록일</option>
+							<option value="2" <c:if test="${vo.shOptionDate eq '2'}"  >selected</c:if>>수정일</option>
 						</select>
 						<input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" />
 						<input id="shEndDate" name="shEndDate" type="date" value="<c:out value="${vo.shEndDate}"/>" class="form-control bg-light border-0 small" placeholder="종료일" aria-label="Search" aria-describedby="basic-addon2" />
@@ -203,33 +203,16 @@
 	</div>
 </footer>
 <!-- End of Footer -->
-</div>
 <!-- End of Content Wrapper -->
-</div>
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-primary" href="login.html">Logout</a>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- logout modal -->
+<%@include file="../../common/xdmin/includeV1/logoutModal.jsp"%>
+<!-- End of logout modal -->
 
 <!-- Bootstrap core JavaScript-->
 <script src="/resources/template_admin/vendor/jquery/jquery.min.js"></script>
@@ -258,6 +241,8 @@
 		form.attr("action", goUrlList).submit();
 
 	}
+	
+
 </script>
 </body>
 </html>

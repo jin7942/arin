@@ -34,6 +34,29 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<script type="text/javascript">
+	function logout() {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/logoutProc"
+			/* ,data : $("#formLogin").serialize() */
+			,data : {}
+			,success: (res) => {
+				if(res.rt == "success") {
+					location.href = "/index"
+				} else {
+					alert("회원없음");
+				}
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+</script>
 </head>
 
 <body>
@@ -47,11 +70,12 @@
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="nav-link scrollto active" href="/main/">Home</a></li>
-					<li><a class="nav-link scrollto" href="/user/info"><b>김진범</b>님</a></li>
+					<li><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></li>
 					<li><a class="nav-link scrollto" href=""> 장바구니 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 0 <span class="visually-hidden">unread messages</span>
 						</span>
 					</a></li>
-					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i>수원시 팔달구 인계동</a></li>
+					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i><c:out value="${sessPlace}" /></a></li>
+					<li><a class="nav-link scrollto" onclick="logout()">로그아웃</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>

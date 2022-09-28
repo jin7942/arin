@@ -77,8 +77,11 @@
 	<!-- 로그인 -->
 	<select id="selectOneId" resultMap="resultMapObj">
 		SELECT
-			memberID
+			seq
+			,memberID
 			,memberPW
+			,memberName
+			,memberPlace
 		FROM member
 		WHERE 1=1
 			AND memberID = #{memberID}
