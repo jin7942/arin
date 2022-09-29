@@ -18,7 +18,13 @@ public class CheckLoginSessionInterception extends HandlerInterceptorAdapter {
 		if (request.getSession().getAttribute("sessSeq") != null) {
 			// by pass
 		} else {
-			response.sendRedirect(Constants.URL_LOGINFORM);
+			
+			if (request.getRequestURI().contains("main") || request.getRequestURI().contains("user")) {
+				response.sendRedirect(Constants.URL_LOGINFORM_FOR_USER);
+			} else {
+				response.sendRedirect(Constants.URL_LOGINFORM_FOR_ADMIN);
+			}
+			
             return false;
 		}
 		

@@ -14,7 +14,7 @@
 		    ,a.itemPrice
 		    ,a.itemRegDatetime
 		    ,a.itemPlace
-		    ,a.seq
+		    ,a.itemSeq
 		    ,a.member_seq
 		FROM item a
 		WHERE 1 = 1
@@ -63,14 +63,15 @@
 	<!-- 상품 상세화면 -->
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT
-		    a.itemHeader
+			a.itemSeq
+		    ,a.itemHeader
 		    ,a.itemPrice
 		    ,a.itemDescription
 		    ,a.itemPlace
 		    ,(select b.memberName from member b where a.member_seq = b.seq) as seller
 		from item a
 		WHERE 1 = 1
-		    AND a.seq = #{mainKey}
+		    AND a.itemSeq = #{mainKey}
 	</select>
 	
 	<!-- 아이디 중복 체크 -->
@@ -95,7 +96,7 @@
 			#{itemHeader}
 			,#{itemPrice}
 			,#{itemDescription}
-			,(select a.memberPlace from member a where a.seq = 1)
+			,(select a.memberPlace from member a where a.itemSeq = 1)
 			,now()
 			,now()
 			,0

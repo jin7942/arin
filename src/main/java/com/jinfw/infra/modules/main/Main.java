@@ -22,7 +22,6 @@ public class Main {
 	private String memberMailDomain;
 	private String memberPlace;
 	
-	/*################################*/
 	
 	public String getItemSeq() {
 		return itemSeq;
@@ -120,6 +119,10 @@ public class Main {
 	public void setMemberPlace(String memberPlace) {
 		this.memberPlace = memberPlace;
 	}
+	
+	/*################################*/
+	
+	
 	
 	/*################################*/
 

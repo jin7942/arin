@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,8 @@ public class MainController {
 	@Autowired
 	MainServiceImpl service;
 	
+	public static String sessSeq = ""; 
+	
 	/**
 	 * main/ 접속시 실행되는 함수
 	 * @param model
@@ -27,7 +32,12 @@ public class MainController {
 	 * @throws Exception
 	 */
 	@RequestMapping (value = "")
-	public String main(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
+	public String main(@ModelAttribute("vo") MainVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
+		
+		HttpSession httpSession =  httpServletRequest.getSession();
+		sessSeq = (String) httpSession.getAttribute("sessSeq");
+		
+		vo.setMainKey(sessSeq);
 		
 		List<Main> list = service.selectList(vo);
 		model.addAttribute("list", list);
@@ -75,8 +85,10 @@ public class MainController {
 	// 상세조회
 	@RequestMapping(value = "view")
 	public String view(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
-		Main item = service.selectOne(vo);
 		
+		/*vo.setMainKey(sessSeq);*/
+		
+		Main item = service.selectOne(vo);
 		model.addAttribute("item", item);
 		
 		return "infra/main/user/mainView";

@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,8 @@ import com.jinfw.infra.common.constans.Constants;
 @Controller
 @RequestMapping(value = "/")
 public class LoginController {
-
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@Autowired
 	LoginServiceImpl service;
 	
@@ -30,23 +33,27 @@ public class LoginController {
 	 * 로그인 프로세스
 	 * @param dto
 	 * @param httpSession
+	 * @param request
 	 * @return Object
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "loginProc")
 	@ResponseBody
-	public Map<String, Object> loginProc(Login dto, HttpSession httpSession) throws Exception {
+	public Map<String, Object> loginProc(Login dto, HttpSession httpSession, HttpServletRequest request) throws Exception {
 		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		Login rtMember = service.selectOneId(dto);
-		System.out.println(rtMember);
-
+		
 		if (rtMember != null) {
-			System.out.println(rtMember.getMemberID());
-			System.out.println(rtMember.getMemberPW());
-			System.out.println(rtMember.getMemberPlace());
-
+			logger.info("===== client login =====");
+			logger.info("client name : " + rtMember.getMemberID());
+			logger.info("method : " + request.getMethod());
+			logger.info("protocol : " + request.getProtocol());
+			logger.info("request uri : " + request.getRequestURI());
+			logger.info("request url: " + request.getRequestURL());
+			logger.info("port : " + request.getLocalPort());
+			
 			httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
 			httpSession.setAttribute("sessSeq", rtMember.getSeq());
 			httpSession.setAttribute("sessId", rtMember.getMemberID());

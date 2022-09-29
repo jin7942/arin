@@ -8,6 +8,7 @@
 
     <resultMap id="resultMapObj" type="com.jinfw.infra.modules.user.User"></resultMap>
 	
+	<!-- 유저 마이페이지 -->
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
 			a.memberID
@@ -18,9 +19,10 @@
 			,a.memberPlace
 		FROM member a
 		WHERE 1=1
-			AND seq = 1
+			AND seq = #{mainKey}
 	</select>
 	
+	<!-- 구매내역 조회 -->
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
 			a.itemHeader
@@ -28,8 +30,20 @@
 			,a.itemBuyDatetime
 		FROM item a
 		WHERE 1 = 1
-			AND a.member_seq1 = 1
+			AND a.member_seq1 = #{mainKey}
 			AND a.itemSaleNY = 1
+	</select>
+	
+	<!-- 등록내역 조회 -->
+	<select id="selectListRegHistory" resultMap="resultMapObj">
+		SELECT
+			a.itemHeader
+			,a.itemPrice
+			,a.itemRegDatetime
+			,a.itemSaleNY
+		FROM item a
+		WHERE 1 = 1
+			AND a.member_seq = #{mainKey}
 	</select>
 
 </mapper>

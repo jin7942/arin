@@ -121,7 +121,7 @@
 	<update id="uelete">
 		UPDATE infrCodeGroup
 		SET
-			ifccDelNY = 1
+			ifcgDelNY = 1
 			<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
 			ifcgSeq = #{ifcgSeq}

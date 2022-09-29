@@ -13,14 +13,21 @@ public class UserServiceImpl implements UserService {
 
 	/*회원 상세 페이지*/
 	@Override
-	public User selectOne() throws Exception {
-		return dao.selectOne();
+	public User selectOne(UserVo vo) throws Exception {
+		
+		return dao.selectOne(vo);
 	}
 
 	/*주문내역*/
 	@Override
-	public List<User> selectList() throws Exception {
-		return dao.selectList();
+	public List<User> selectList(UserVo vo) throws Exception {
+		return dao.selectList(vo);
+	}
+	
+	/*등록상품*/
+	@Override
+	public List<User> selectListRegHistory(UserVo vo) throws Exception {
+		return dao.selectListRegHistory(vo);
 	}
 	
 	

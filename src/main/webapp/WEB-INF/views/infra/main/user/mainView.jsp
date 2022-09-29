@@ -38,6 +38,7 @@
 			</div>
 
 			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>"/>
+			<input type="hidden" name="itemSeq" id="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
 			<div class="col-4">
 				<h2>
 					<b> <c:out value="${item.itemHeader}" />
