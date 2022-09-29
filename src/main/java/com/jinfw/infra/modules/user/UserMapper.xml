@@ -28,6 +28,7 @@
 			a.itemHeader
 			,a.itemPrice
 			,a.itemBuyDatetime
+			,a.itemSaleNY
 		FROM item a
 		WHERE 1 = 1
 			AND a.member_seq1 = #{mainKey}

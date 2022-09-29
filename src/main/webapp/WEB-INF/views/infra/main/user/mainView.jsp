@@ -39,6 +39,8 @@
 
 			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>"/>
 			<input type="hidden" name="itemSeq" id="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
+			<input type="hidden" name="sessSeq" id="sessSeq" value="<c:out value="${sessSeq}"/>" />
+			
 			<div class="col-4">
 				<h2>
 					<b> <c:out value="${item.itemHeader}" />
@@ -168,12 +170,15 @@
 			async:'false',
 			url:'./buyItem',
 			type:'post',
-			data:{"member_seq1": 1,"mainKey" : $("#mainKey").val() },
+			data:{"mainKey": $("#sessSeq").val() ,"itemSeq" : $("#itemSeq").val() },
 			success:(res) => {
-				if (res.rt != "success") {
+				if (res.rt == "success") {
+					// by pass
+				} else {
 					alert("구매 실패");
-					return;
-				};
+					location.href = "/main/view";
+					return false;
+				}
 			},
 			error:(jqXHR) => {
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);

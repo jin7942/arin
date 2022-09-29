@@ -38,6 +38,7 @@ public class MainController {
 		sessSeq = (String) httpSession.getAttribute("sessSeq");
 		
 		vo.setMainKey(sessSeq);
+		System.out.println("mainKey : " + vo.getMainKey());
 		
 		List<Main> list = service.selectList(vo);
 		model.addAttribute("list", list);
@@ -86,7 +87,7 @@ public class MainController {
 	@RequestMapping(value = "view")
 	public String view(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
 		
-		/*vo.setMainKey(sessSeq);*/
+		System.out.println("mainKey : " + vo.getMainKey());
 		
 		Main item = service.selectOne(vo);
 		model.addAttribute("item", item);

@@ -112,6 +112,8 @@ img {
 				<div class="col-7">
 					<!-- item reg form -->
 					<form action="/main/itemInst" name="itemForm">
+						<input type="hidden" name="seq" id="seq" value="<c:out value="${vo.mainKey}"/>"/>
+						
 						<div class="mb-3">
 							<label for="itemHeader" class="form-label">상품 제목</label>
 							<input type="text" class="form-control" id="itemHeader" name="itemHeader" value="" />
@@ -156,12 +158,14 @@ img {
 			const goUrlItemInst = "/main/itemInst";
 			const goUrlimgInst = "/sample/upload/"
 			
-			const imgFormData = new FormData();
+			itemForm.attr("action", goUrlItemInst).submit();
+			
+/* 			const imgFormData = new FormData();
 			
 			imgFormData.append("image", imgInput.files[0]);
-			console.log("imgFormData : " + imgFormData);
+			console.log("imgFormData : " + imgFormData); */
 			
-/* 			$.ajax({
+/*  			$.ajax({
 			   async:false,
 			   type:"POST",
 			   url: "/sample/upload",
@@ -179,7 +183,9 @@ img {
 			   err: function(err){
 			     console.log("err:", err)
 			   }
-			 }); */
+			 });  */
+			 
+
 			
 		}
 	

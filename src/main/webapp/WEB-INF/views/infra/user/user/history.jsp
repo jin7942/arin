@@ -46,10 +46,10 @@
 							<c:forEach items="${list}" var="list" varStatus="status">
 								<tr>
 									<td>#</td>
-									<td><c:out value="${list.itemRegDatetime}" /></td>
+									<td><c:out value="${list.itemBuyDatetime}" /></td>
 									<td><c:out value="${list.itemHeader}" /></td>
 									<td><c:out value="${list.itemPrice}" /></td>
-									<td></td>
+									<td><c:out value="${list.itemSaleNY	}" /></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

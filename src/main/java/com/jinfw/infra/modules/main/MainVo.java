@@ -6,6 +6,15 @@ public class MainVo extends BaseVo {
 
 	/* MainVO vo */ 
 	private String mainKey;
+	private String itemSeq;
+
+	public String getItemSeq() {
+		return itemSeq;
+	}
+
+	public void setItemSeq(String itemSeq) {
+		this.itemSeq = itemSeq;
+	}
 
 	public String getMainKey() {
 		return mainKey;

@@ -46,10 +46,19 @@
 							<c:forEach items="${list}" var="list" varStatus="status">
 								<tr>
 									<td>#</td>
-									<td><c:out value="${list.itemBuyDatetime}" /></td>
+									<td><c:out value="${list.itemRegDatetime}" /></td>
 									<td><c:out value="${list.itemHeader}" /></td>
 									<td><c:out value="${list.itemPrice}" /></td>
-									<td>구매</td>
+									
+									<c:choose>
+										<c:when test="${list.itemSaleNY} eq 1">
+											<td>판매중</td>
+										</c:when>
+										<c:otherwise>
+											<td>판매완료</td>
+										</c:otherwise>
+									</c:choose>
+														
 								</tr>
 							</c:forEach>
 						</c:otherwise>

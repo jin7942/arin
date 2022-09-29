@@ -35,9 +35,7 @@
                     	</div>
                     	
                         <div style="float: right">
-	                        <a href="/main/form">
-	                            <button type="button" class="btn btn-dark">상품등록</button>
-							</a>
+	                            <button type="button" class="btn btn-dark" onclick="javascript:goItemForm(<c:out value="${vo.mainKey}"/>)">상품등록</button>
                         </div>
                     </div>
                 </div>
@@ -56,7 +54,7 @@
 		                    <div class="col" style="cursor: pointer" >
 		                        <div class="card">
 		                            <img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
-		                            <div class="card-body" onclick="goView(<c:out value="${list.seq}"/>)">
+		                            <div class="card-body" onclick="goView(<c:out value="${list.itemSeq}"/>)">
 		                            
 		                            	<input type="hidden" name="seq" value="<c:out value="${list.seq}" />" />
 		                            	
@@ -78,12 +76,19 @@
         
         <script type="text/javascript">
         	const goUrlView = "/main/view"
+        	const goUrlForm = "/main/form"
+        	
         	const mainKey = $("input[name=mainKey]");
         	const form = $("form[name=form]");
         	
         	function goView(keyValue) {
         		mainKey.val(keyValue);
         		form.attr("action", goUrlView).submit();
+			}
+        	
+        	function goItemForm(keyValue) {
+        		mainKey.val(keyValue);
+        		form.attr("action", goUrlForm).submit();
 			}
         	
         </script>

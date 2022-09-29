@@ -17,9 +17,16 @@ public class User {
 	private String itemPrice;
 	private String itemBuyDatetime;
 	private String itemRegDatetime;
+	private String itemSaleNY;
 	
 	// ########################################
 	// Generate Getters and Setters
+	public String getItemSaleNY() {
+		return itemSaleNY;
+	}
+	public void setItemSaleNY(String itemSaleNY) {
+		this.itemSaleNY = itemSaleNY;
+	}
 	public String getSeq() {
 		return seq;
 	}

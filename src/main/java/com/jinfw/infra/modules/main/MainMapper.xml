@@ -96,13 +96,13 @@
 			#{itemHeader}
 			,#{itemPrice}
 			,#{itemDescription}
-			,(select a.memberPlace from member a where a.itemSeq = 1)
+			,(select a.memberPlace from member a where a.Seq = #{seq})
 			,now()
 			,now()
 			,0
 			,0
 			,0
-			,1
+			,#{seq}
 		)
 		<selectKey resultType="String" keyProperty="itemSeq" order="AFTER">
 			SELECT last_insert_id()
@@ -115,9 +115,9 @@
 		SET
 			itemSaleNY = 1
 			,itemBuyDatetime = now()
-			,member_seq1 = 1
+			,member_seq1 = #{mainKey}
 		WHERE
-			seq = #{mainKey}
+			itemSeq = #{itemSeq}
 	</update>
 
 </mapper>
