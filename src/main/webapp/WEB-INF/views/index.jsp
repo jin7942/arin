@@ -59,7 +59,7 @@
 	<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
-			<a href="/index/" class="logo mr-auto"><img src="/resources/template_imperial/assets/img/logo.png" alt="" /></a>
+			<a href="/index" class="logo mr-auto"><img src="/resources/template_imperial/assets/img/logo.png" alt="" /></a>
 			<!-- Uncomment below if you prefer to use a text logo -->
 			<!-- <h1 class="logo mr-auto"><a href="index.html">Imperial</a></h1> -->
 

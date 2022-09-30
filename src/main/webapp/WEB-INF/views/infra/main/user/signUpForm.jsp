@@ -39,7 +39,7 @@
 	<!-- ======= Header ======= -->
 	<header id="header" class="d-flex align-items-center">
 		<div class="container d-flex align-items-center justify-content-between">
-			<a href="/index/" class="logo mr-auto"><img src="/resources/template_imperial/assets/img/logo.png" alt="" /></a>
+			<a href="/index" class="logo mr-auto"><img src="/resources/template_imperial/assets/img/logo.png" alt="" /></a>
 			<!-- Uncomment below if you prefer to use a text logo -->
 			<!-- <h1 class="logo mr-auto"><a href="index.html">Imperial</a></h1> -->
 
@@ -71,8 +71,9 @@
 					<div class="col-12 col-md-8 col-lg-6 col-xl-5" style="margin-bottom: 5%">
 						<div class="card shadow-2-strong" style="border-radius: 1rem">
 							<div class="card-body p-5">
+							
 								<!-- signUpForm -->
-								<form action="/main/userInst" id="loginForm" method="get">
+								<form name="form" method="post">
 									<!-- name -->
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="name" placeholder="name@example.com" name="memberName" />
@@ -178,9 +179,10 @@
 									</div>
 
 									<div class="text-center">
-										<a class="btn btn-dark btn-lg btn-block" id="signUpBtn" onclick="onSubmit()"> Sign Up </a>
+										<button type="button" class="btn btn-dark btn-lg btn-block" id="signUpBtn" onclick="onSubmit()"> Sign Up </button>
 									</div>
 								</form>
+								
 								<hr class="my-4" />
 
 								<div class="col-md-12">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="true"%>
 
 <!DOCTYPE html>
@@ -48,8 +49,14 @@
 									<td>#</td>
 									<td><c:out value="${list.itemBuyDatetime}" /></td>
 									<td><c:out value="${list.itemHeader}" /></td>
-									<td><c:out value="${list.itemPrice}" /></td>
-									<td><c:out value="${list.itemSaleNY	}" /></td>
+									<td>
+										<fmt:formatNumber value="${list.itemPrice}" pattern="#,###,###"/> 원
+									</td>
+									<td>
+										<c:if test="${list.itemSaleNY eq 1}">
+											구매
+										</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

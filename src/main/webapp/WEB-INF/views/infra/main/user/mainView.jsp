@@ -147,7 +147,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<b>김진범님</b><br />구매가 완료되었습니다.
+					<b><c:out value="${sessName }"/>님</b><br />구매가 완료되었습니다.
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="location.href='/main/'">닫기</button>

@@ -42,6 +42,7 @@
 			,a.itemPrice
 			,a.itemRegDatetime
 			,a.itemSaleNY
+			,a.itemSeq
 		FROM item a
 		WHERE 1 = 1
 			AND a.member_seq = #{mainKey}

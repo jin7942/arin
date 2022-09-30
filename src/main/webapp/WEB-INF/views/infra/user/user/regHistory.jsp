@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="true"%>
 
 <!DOCTYPE html>
@@ -17,7 +18,11 @@
 				<h2>내가 등록한 상품</h2>
 			</div>
 		</div>
-
+		
+		<form action="" name="form">
+			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>" />
+		</form>
+		
 		<div class="row" data-aos="fade-up" data-aos-delay="200">
 			<div class="col">
 				<table class="table table-hover">
@@ -44,20 +49,27 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list" varStatus="status">
-								<tr>
-									<td>#</td>
+								<tr onclick="goView(<c:out value="${list.itemSeq}"/>)">
+									<td>
+										#
+									</td>
 									<td><c:out value="${list.itemRegDatetime}" /></td>
 									<td><c:out value="${list.itemHeader}" /></td>
-									<td><c:out value="${list.itemPrice}" /></td>
+									<td>
+										<fmt:formatNumber value="${list.itemPrice}" pattern="#,###,###"/> 원
+									</td>
 									
+									<c:set var="itemSaleNY" value="${list.itemSaleNY}" />
 									<c:choose>
-										<c:when test="${list.itemSaleNY} eq 1">
+										<c:when test="${itemSaleNY eq '0'}">
 											<td>판매중</td>
 										</c:when>
 										<c:otherwise>
 											<td>판매완료</td>
 										</c:otherwise>
 									</c:choose>
+									
+									<%-- <td><c:out value="${list.itemSaleNY}" /></td> --%>
 														
 								</tr>
 							</c:forEach>
@@ -71,6 +83,18 @@
 	</div>
 </main>
 <!-- End #main -->
+
+<script type="text/javascript">
+	const goUrlView = "/main/view";
+	const form = $("form[name=form]");
+	const mainKey = $("input:hidden[name=mainKey]");
+	
+	function goView(keyValue) {
+		mainKey.val(keyValue);
+		form.attr("action", goUrlView).submit();
+		
+	}
+</script>
 
 <br /><br /><br /><br /><br /><br /><br /><br />
 <!-- footer -->

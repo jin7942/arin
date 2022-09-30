@@ -130,7 +130,11 @@ function onSubmit() {
 
     if (isName && isId && isPw && isChkPw  && isMobile) {
         alert('제출');
-        document.getElementById('loginForm').submit();
+        const goUrlForm = "/main/userInst";
+        const form = $("form[name=form]");
+        
+        form.attr("action", goUrlForm).submit();
+        
     } else alert('다시확인');
 }
 

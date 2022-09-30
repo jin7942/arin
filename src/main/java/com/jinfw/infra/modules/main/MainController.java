@@ -24,13 +24,7 @@ public class MainController {
 	
 	public static String sessSeq = ""; 
 	
-	/**
-	 * main/ 접속시 실행되는 함수
-	 * @param model
-	 * @param vo
-	 * @return main.jsp
-	 * @throws Exception
-	 */
+	// 메인 리스트
 	@RequestMapping (value = "")
 	public String main(@ModelAttribute("vo") MainVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
@@ -53,11 +47,12 @@ public class MainController {
 	 */
 	@RequestMapping (value = "userInst")
 	public String signUp(Main dto, Model model) throws Exception {
-
+		
+		System.out.println("userInst!!!!!");
 		int result = service.insert(dto);
 		System.out.println("result : " + result);
 		
-		return "infra/main/user/main";
+		return "redirect:/index#about";
 	}
 	@RequestMapping (value = "signUp")
 	public String signUpForm(Main dto, Model model) throws Exception {

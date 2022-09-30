@@ -13,6 +13,7 @@ public class User {
 
 	/*Item DTO*/
 	private String member_seq1;
+	private String itemSeq;
 	private String itemHeader;
 	private String itemPrice;
 	private String itemBuyDatetime;
@@ -21,6 +22,12 @@ public class User {
 	
 	// ########################################
 	// Generate Getters and Setters
+	public String getItemSeq() {
+		return itemSeq;
+	}
+	public void setItemSeq(String itemSeq) {
+		this.itemSeq = itemSeq;
+	}
 	public String getItemSaleNY() {
 		return itemSaleNY;
 	}

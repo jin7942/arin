@@ -26,8 +26,6 @@ public class MainServiceImpl implements MainService {
 		// 비밀번호 암호화
     	dto.setMemberPW(UtilSecurity.encryptSha256(dto.getMemberPW()));
     	
-    	dao.insert(dto);
-    	
 		return dao.insert(dto);
 	}
 	// id 중복 체크
