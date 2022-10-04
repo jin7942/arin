@@ -97,12 +97,12 @@ img {
 				<!-- img form -->
 				<div class="col-7">
 					<h2>상품 등록</h2>
-					<!-- <form action="" name="imgForm"> -->
+					<form action="" name="imgForm" id="imgForm">
 						<ul class="list-inline image-preview"></ul>
 						<ul class="list-inline image-preview2"></ul>
 						<input type="file" id="imgInput" class="real-upload" accept="image/*" name="imgInput" required multiple />
 						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="deleteList()">삭제</button>
-					<!-- </form> -->
+					</form>
 				</div>
 				<!-- End of img form -->
 				<div class="col"></div>
@@ -151,25 +151,24 @@ img {
 	<script type="text/javascript">
 		
 		function onSubmit() {
-			const itemForm = $("form[name=itemForm]");
-			const imgForm = $("form[name=imgForm]");
-			const imgInput = $("input[name=imgInput]")[0];
-			
 			const goUrlItemInst = "/main/itemInst";
-			const goUrlimgInst = "/sample/upload/"
 			
-			itemForm.attr("action", goUrlItemInst).submit();
+			/* itemForm.attr("action", goUrlItemInst).submit(); */
 			
-/* 			const imgFormData = new FormData();
+			const imgData = $('#imgInput');
+			const img = imgData[0].files;
+			const formData = new FormData();
 			
-			imgFormData.append("image", imgInput.files[0]);
-			console.log("imgFormData : " + imgFormData); */
+			for (let i = 0; i < img.length; i++) {
+				formData.append("files", img[i]);
+			}
 			
-/*  			$.ajax({
+  			$.ajax({
 			   async:false,
 			   type:"POST",
+			   enctype: "multipart/form-data",
 			   url: "/sample/upload",
-			   data: imgFormData,
+			   data: formData,
 			   contentType: false,
 		       processData: false,
 			   success: function(res){
@@ -177,13 +176,13 @@ img {
 					   alert("업로드 성공 !");
 					   itemForm.attr("action", goUrlItemInst).submit();
 				   } else {
-					   throw new Error("업로드 실패...");
+						alert(res.rt);
 				   }
 			   },
 			   err: function(err){
 			     console.log("err:", err)
 			   }
-			 });  */
+			 });
 			 
 
 			

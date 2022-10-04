@@ -30,12 +30,15 @@ public class FileUploadController {
 	@ResponseBody
 	public Map<String, Object> upload(MultipartHttpServletRequest files) {
 		
+		System.out.println("req in here! : /sample/upload");
+		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		
-		String filePath = "C:\\Users\\infom\\Documents\\work\\test";	// 저장 경로
+		String filePath = "D:/factory/ws_sts_4151/arin/src/main/webapp/resources/img";	// 저장 경로
 		File Folder = new File(filePath);
 		List<MultipartFile> list = files.getFiles("files");
 		
+		System.out.println("list size : " + list.size());
 		if (list.size() == 0) {
 			returnMap.put("rt", "false");
 			return returnMap;
