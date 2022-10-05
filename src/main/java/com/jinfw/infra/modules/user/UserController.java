@@ -18,7 +18,7 @@ public class UserController {
 	@Autowired
 	UserServiceImpl service;
 	
-	public static String sessSeq = ""; 
+	public String sessSeq = ""; 
 	
 	@RequestMapping (value = "info")
 	public String userInfo(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
@@ -54,6 +54,12 @@ public class UserController {
 		model.addAttribute("list", list);
 		
 		return "infra/user/user/regHistory";
+	}
+
+	@RequestMapping (value = "form")
+	public String userform(@ModelAttribute("vo") UserVo vo, Model model) throws Exception {
+		
+		return "infra/user/user/userForm";
 	}
 	
 }

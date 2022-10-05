@@ -22,7 +22,7 @@ public class MainController {
 	@Autowired
 	MainServiceImpl service;
 	
-	public static String sessSeq = ""; 
+	public String sessSeq = ""; 
 	
 	// 메인 리스트
 	@RequestMapping (value = "")

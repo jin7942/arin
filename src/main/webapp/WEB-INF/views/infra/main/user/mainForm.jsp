@@ -152,6 +152,7 @@ img {
 		
 		function onSubmit() {
 			const goUrlItemInst = "/main/itemInst";
+			const itemForm = $("form[name=itemForm]");
 			
 			/* itemForm.attr("action", goUrlItemInst).submit(); */
 			
