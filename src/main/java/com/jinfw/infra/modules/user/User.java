@@ -20,8 +20,26 @@ public class User {
 	private String itemRegDatetime;
 	private String itemSaleNY;
 	
+	/* itemCart DTO */
+	private String member_seq;
+	private String item_seq;
+	
+	
+
 	// ########################################
 	// Generate Getters and Setters
+	public String getMember_seq() {
+		return member_seq;
+	}
+	public void setMember_seq(String member_seq) {
+		this.member_seq = member_seq;
+	}
+	public String getItem_seq() {
+		return item_seq;
+	}
+	public void setItem_seq(String item_seq) {
+		this.item_seq = item_seq;
+	}
 	public String getItemSeq() {
 		return itemSeq;
 	}

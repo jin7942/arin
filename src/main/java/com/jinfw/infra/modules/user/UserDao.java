@@ -32,4 +32,14 @@ public class UserDao {
 		return sqlSession.selectList(namespace + ".selectListRegHistory", vo);
 	}
 	
+	// 회원정보 수정
+	public int userUpdt(User dto) {
+		return sqlSession.update(namespace + ".userUpdt", dto);
+	}
+	
+	// 장바구니
+	public List<User> selectListItemCart(UserVo vo) {
+		return sqlSession.selectList(namespace + ".selectListItemCart", vo);
+	}
+	
 }

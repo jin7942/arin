@@ -59,6 +59,7 @@ public class LoginController {
 			httpSession.setAttribute("sessId", rtMember.getMemberID());
 			httpSession.setAttribute("sessName", rtMember.getMemberName());
 			httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
+			httpSession.setAttribute("sessitemCartCount", rtMember.getItemCartCount());
 
 			returnMap.put("rt", "success");
 		} else {

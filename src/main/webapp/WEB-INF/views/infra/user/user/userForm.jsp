@@ -13,13 +13,10 @@
 	<div class="container" style="margin-top: 10%; margin-bottom: 20%; width: 85%" data-aos="fade-up">
 		<div class="row" style="text-align: center">
 			<div class="col">
-				<form action="" class="form">
+				<form action="/user/updt" class="form" id="form">
 					<table class="table table-borderless">
 						<!-- table-caption -->
 						<caption class="h2" style="caption-side: top; text-align: center">나의 정보</caption>
-						<caption style="caption-side: top; text-align: right">
-							<i class="fa-solid fa-pen fa-xl" style="cursor: pointer"></i>
-						</caption>
 
 						<tr>
 							<td rowspan="4">
@@ -31,29 +28,19 @@
 							</td>
 						</tr>
 						<tr>
-							<td>ID</td>
-							<td>
-								<c:out value="${item.memberID}" />
-							</td>
-						</tr>
-						<tr>
 							<td>EMAIL</td>
 							<td>
 								<input type="text" class="form-control" name="memberMailName" value="<c:out value="${item.memberMailName}" />" />
-								@
-								<input type="text" class="form-control" name="memberMailDomain" value="<c:out value="${item.memberMailDomain}" />" />
+								<input type="hidden" class="form-control" name="memberMailDomain" value="<c:out value="${item.memberMailDomain}" />" />
 							</td>
 						</tr>
 						<tr>
 							<td>MOBILE</td>
-							<c:set var="numberPhone" value="${item.memberMobile}" />
 							<td>
-								<c:out value="${fn:substring(numberPhone,0,3)}" />
-								-
-								<c:out value="${fn:substring(numberPhone,3,7)}" />
-								-
-								<c:out value="${fn:substring(numberPhone,7,11)}" />
+								<input type="text" class="form-control" name="memberMobile" value="<c:out value="${item.memberMobile}" />" />
 							</td>
+						</tr>
+						<tr>
 						</tr>
 						<tr>
 							<td>
@@ -61,11 +48,13 @@
 							</td>
 							<td>주소</td>
 							<td>
-								<c:out value="${item.memberPlace}" />
+								<input type="text" class="form-control" name="memberPlace" value="<c:out value="${item.memberPlace}" />" />
 							</td>
 						</tr>
 					</table>
 				</form>
+				
+				<button class="btn btn-dark" onClick="onSubmit()">수정</button>
 				
 			</div>
 		</div>
@@ -76,5 +65,11 @@
 <!-- footer -->
 <%@include file="../../common/user/includeV1/footer.jsp"%>
 <!-- End of footer -->
+
+<script>
+	function onSubmit() {
+		document.getElementById("form").submit();
+	}
+</script>
 </body>
 </html>

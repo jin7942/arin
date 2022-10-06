@@ -8,8 +8,17 @@ public class Login {
 	private String memberPW;
 	private String memberName;
 	
+	/* cart */
+	private String itemCartCount;
+	
 	/*####################*/
 	
+	public String getItemCartCount() {
+		return itemCartCount;
+	}
+	public void setItemCartCount(String itemCartCount) {
+		this.itemCartCount = itemCartCount;
+	}
 	public String getMemberName() {
 		return memberName;
 	}

@@ -146,7 +146,7 @@ img {
 	<!-- End of footer -->
 
 	<!-- My Js File -->
-	<script type="text/javascript" src="/resources/js/helper/imgUploader.js"></script>
+	<script type="text/javascript" src="/resources/js/hzelper/imgUploader.js"></script>
 	
 	<script type="text/javascript">
 		

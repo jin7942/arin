@@ -29,8 +29,17 @@ public class UserServiceImpl implements UserService {
 	public List<User> selectListRegHistory(UserVo vo) throws Exception {
 		return dao.selectListRegHistory(vo);
 	}
+
+	/* 회원정보 수정 */
+	@Override
+	public int userUpdt(User dto) throws Exception {
+		return dao.userUpdt(dto);
+	}
 	
-	
-	
+	/* 장바구니 */
+	@Override
+	public List<User> selectListItemCart(UserVo vo) throws Exception {
+		return dao.selectListItemCart(vo);
+	}
 	
 }

@@ -19,7 +19,9 @@
                                 나의 정보
                             </caption>
                             <caption style="caption-side: top; text-align: right">
-                                <i class="fa-solid fa-pen fa-xl" style="cursor: pointer"></i>
+                                <a href="/user/form">
+                                	<i class="fa-solid fa-pen fa-xl" style="cursor: pointer"></i>
+                            	</a> 
                             </caption>
 
                             <tr>
@@ -66,7 +68,7 @@
                                 	<i class="fa-brands fa-shopify fa-2x" style="cursor: pointer" onclick="location.href='/user/history'"></i>
                                 </td>
                                 <td>
-                                	<i class="fa-solid fa-cart-plus fa-2x" style="cursor: pointer" onclick="location.href='./cart.html'"></i>
+                                	<i class="fa-solid fa-cart-plus fa-2x" style="cursor: pointer" onclick="location.href='/user/cart'"></i>
                                 </td>
                                 <td><i class="fa-solid fa-circle-check fa-2x" style="cursor: pointer" onclick="location.href='/user/regHistory'"></i></td>
                             </tr>

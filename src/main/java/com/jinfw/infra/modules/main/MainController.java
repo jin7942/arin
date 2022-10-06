@@ -22,9 +22,16 @@ public class MainController {
 	@Autowired
 	MainServiceImpl service;
 	
-	public String sessSeq = ""; 
+	public String sessSeq; 
 	
-	// 메인 리스트
+	/**
+	 * 메인 상품 리스트
+	 * @param vo
+	 * @param model
+	 * @param httpServletRequest
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping (value = "")
 	public String main(@ModelAttribute("vo") MainVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
@@ -44,6 +51,10 @@ public class MainController {
 	
 	/**
 	 * 회원가입
+	 * @param dto
+	 * @param model
+	 * @return String
+	 * @throws Exception
 	 */
 	@RequestMapping (value = "userInst")
 	public String signUp(Main dto, Model model) throws Exception {
@@ -54,12 +65,26 @@ public class MainController {
 		
 		return "redirect:/index#about";
 	}
+	
+	/**
+	 * 회원가입폼
+	 * @param dto
+	 * @param model
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping (value = "signUp")
 	public String signUpForm(Main dto, Model model) throws Exception {
 		
 		return "infra/main/user/signUpForm";
 	}
-	// id 중복 체크
+	
+	/**
+	 * ID 중복체크
+	 * @param dto
+	 * @return Map Object
+	 * @throws Exception
+	 */
 	@RequestMapping("/idCheck")
 	@ResponseBody
 	public Map<String, Object> idCheck(Main dto) throws Exception {
@@ -78,7 +103,13 @@ public class MainController {
 		return returnMap;
 	}
 
-	// 상세조회
+	/**
+	 * 상품 상세페이지
+	 * @param vo
+	 * @param model
+	 * @return String
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "view")
 	public String view(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
 		
@@ -90,12 +121,21 @@ public class MainController {
 		return "infra/main/user/mainView";
 	}
 	
-	// 상품등록
+	// 상품등록 폼
 	@RequestMapping(value = "form")
 	public String mainForm(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
 		
 		return "infra/main/user/mainForm";
 	}
+	
+	/**
+	 * 상품등록 프로세스
+	 * @param vo
+	 * @param dto
+	 * @param redirectAttributes
+	 * @return view result
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "itemInst")
 	public String itemInst(MainVo vo, Main dto, RedirectAttributes redirectAttributes) throws Exception {
 		
@@ -108,7 +148,12 @@ public class MainController {
 		return "redirect:view";
 	}
 	
-	// 상품 구매
+	/**
+	 * 상품구매
+	 * @param vo
+	 * @return Map Object
+	 * @throws Exception
+	 */
 	@RequestMapping("/buyItem")
 	@ResponseBody
 	public Map<String, Object> buyItem(MainVo vo) throws Exception {

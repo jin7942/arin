@@ -47,5 +47,32 @@
 		WHERE 1 = 1
 			AND a.member_seq = #{mainKey}
 	</select>
-
+	
+	<!-- 수정 -->
+	<insert id="userUpdt">
+		UPDATE member 
+		SET 
+			memberMailName = #{memberMailName}
+			,memberMailDomain= #{memberMailDomain}
+			,memberMobile = #{memberMobile}
+			,memberPlace = #{memberPlace}
+			,memberModDatetime = now()
+		WHERE 1=1
+			AND seq = #{seq}
+	</insert>
+	
+	<!-- 장바구니 -->
+	<select id="selectListItemCart" resultMap="resultMapObj">
+		SELECT
+		    a.itemHeader
+		    ,a.itemPrice
+		    ,a.itemSeq
+		    ,b.member_seq
+		    ,b.item_seq
+		from itemCart b
+		join item a on b.item_seq = a.itemseq
+		WHERE 1=1
+		    AND b.member_seq = #{mainKey};
+	</select>
+	
 </mapper>

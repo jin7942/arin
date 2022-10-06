@@ -71,7 +71,8 @@
 				<ul>
 					<li><a class="nav-link scrollto active" href="/main/">Home</a></li>
 					<li><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></li>
-					<li><a class="nav-link scrollto" href=""> 장바구니 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 0 <span class="visually-hidden">unread messages</span>
+					<li><a class="nav-link scrollto" href="/user/cart"> 장바구니 
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><c:out value="${sessitemCartCount}" /><span class="visually-hidden">unread messages</span>
 						</span>
 					</a></li>
 					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i><c:out value="${sessPlace}" /></a></li>
