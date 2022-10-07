@@ -102,6 +102,7 @@ img {
 						<ul class="list-inline image-preview2"></ul>
 						<input type="file" id="imgInput" class="real-upload" accept="image/*" name="imgInput" required multiple />
 						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="deleteList()">삭제</button>
+						<button type="button" class="btn btn-danger" onclick="test()">테스트</button>
 					</form>
 				</div>
 				<!-- End of img form -->
@@ -112,8 +113,8 @@ img {
 				<div class="col-7">
 					<!-- item reg form -->
 					<form action="/main/itemInst" name="itemForm">
-						<input type="hidden" name="seq" id="seq" value="<c:out value="${vo.mainKey}"/>"/>
-						
+						<input type="hidden" name="seq" id="seq" value="<c:out value="${vo.mainKey}"/>" />
+
 						<div class="mb-3">
 							<label for="itemHeader" class="form-label">상품 제목</label>
 							<input type="text" class="form-control" id="itemHeader" name="itemHeader" value="" />
@@ -146,49 +147,81 @@ img {
 	<!-- End of footer -->
 
 	<!-- My Js File -->
-	<script type="text/javascript" src="/resources/js/hzelper/imgUploader.js"></script>
-	
+	<script type="text/javascript" src="/resources/js/helper/imgUploader.js"></script>
+
 	<script type="text/javascript">
-		
+		function test() {
+			const obj = document.getElementById('imgInput').files;
+
+			const maxFileSize = 10000;
+			const maxFileTotalSize = 100000;
+			const maxFileCount = 6;
+
+			console.group('===T E S T===');
+			console.log(obj);
+			console.log(obj.length);
+
+			if (obj.length > maxFileCount) {
+				alert('최대 6개까지만');
+				return false;
+			}
+			let sum = 0;
+			for (let i = 0; i < obj.length; i++) {
+
+				if (obj[i].size >= maxFileSize) {
+					alert('10MB 이하의 파일만 업로드 가능');
+					return false;
+				}
+
+				sum += obj[i].size;
+
+				console.log(obj[i].name + ' : ' + obj[i].size);
+			}
+			console.log('total files size : ' + sum);
+			console.groupEnd();
+
+			if (sum >= maxFileTotalSize) {
+				alert('총 100MB 이하의 파일만 업로드 가능');
+				return false;
+			}
+		}
+
 		function onSubmit() {
 			const goUrlItemInst = "/main/itemInst";
 			const itemForm = $("form[name=itemForm]");
-			
+
 			/* itemForm.attr("action", goUrlItemInst).submit(); */
-			
+
 			const imgData = $('#imgInput');
 			const img = imgData[0].files;
 			const formData = new FormData();
-			
+
 			for (let i = 0; i < img.length; i++) {
 				formData.append("files", img[i]);
 			}
-			
-  			$.ajax({
-			   async:false,
-			   type:"POST",
-			   enctype: "multipart/form-data",
-			   url: "/sample/upload",
-			   data: formData,
-			   contentType: false,
-		       processData: false,
-			   success: function(res){
-				   if (res.rt == "success") {
-					   alert("업로드 성공 !");
-					   itemForm.attr("action", goUrlItemInst).submit();
-				   } else {
-						alert(res.rt);
-				   }
-			   },
-			   err: function(err){
-			     console.log("err:", err)
-			   }
-			 });
-			 
 
-			
+			$.ajax({
+				async : false,
+				type : "POST",
+				enctype : "multipart/form-data",
+				url : "/sample/upload",
+				data : formData,
+				contentType : false,
+				processData : false,
+				success : function(res) {
+					if (res.rt == "success") {
+						alert("업로드 성공 !");
+						itemForm.attr("action", goUrlItemInst).submit();
+					} else {
+						alert(res.rt);
+					}
+				},
+				err : function(err) {
+					console.log("err:", err)
+				}
+			});
+
 		}
-	
 	</script>
 </body>
 </html>

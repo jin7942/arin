@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jinfw.infra.modules.login.LoginController;
+
 @Controller
 @RequestMapping (value = "/user/")
 public class UserController {
@@ -18,7 +20,7 @@ public class UserController {
 	@Autowired
 	UserServiceImpl service;
 	
-	public String sessSeq;
+	String sessSeq = "";
 	
 	/**
 	 * 사용자 마이페이지
@@ -31,9 +33,7 @@ public class UserController {
 	@RequestMapping (value = "info")
 	public String userInfo(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
-		HttpSession httpSession =  httpServletRequest.getSession();
-		sessSeq = (String) httpSession.getAttribute("sessSeq");
-		
+		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
 		vo.setMainKey(sessSeq);
 		
 		User item = service.selectOne(vo);
@@ -43,7 +43,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 굼매내역
+	 * 구매내역
 	 * @param vo
 	 * @param model
 	 * @return String
@@ -122,8 +122,9 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping (value = "cart")
-	public String selectListItemCart(@ModelAttribute("vo") UserVo vo, Model model) throws Exception {
+	public String selectListItemCart(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
+		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
 		vo.setMainKey(sessSeq);
 		
 		List<User> list = service.selectListItemCart(vo);
