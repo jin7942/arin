@@ -1,7 +1,6 @@
-# arin
+# arin 프로젝트 풀더 구조
 
-조만간 업데이트 할게요.. H1
-
+```bash
 arin
 ├─.settings
 ├─src
@@ -139,3 +138,4 @@ arin
     ├─generated-test-sources
     │  └─test-annotations
     └─test-classes
+```
