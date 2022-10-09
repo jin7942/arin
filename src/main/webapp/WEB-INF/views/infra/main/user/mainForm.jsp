@@ -77,11 +77,12 @@ img {
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="nav-link scrollto active" href="/main/">Home</a></li>
-					<li><a class="nav-link scrollto" href="/user/info"><b>김진범</b>님</a></li>
-					<li><a class="nav-link scrollto" href=""> 장바구니 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 0 <span class="visually-hidden">unread messages</span>
-						</span>
+					<li><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }" /></b>님</a></li>
+					<li><a class="nav-link scrollto" href="/user/cart"> 장바구니 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><c:out value="${sessitemCartCount}" /><span class="visually-hidden">unread messages</span> </span>
 					</a></li>
-					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i>수원시 팔달구 인계동</a></li>
+					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i> <c:out value="${sessPlace}" /></a></li>
+					<li><a class="nav-link scrollto" onclick="logout()">로그아웃</a></li>
+					<li><a class="nav-link scrollto" href="/code/codeList">관리자페이지</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
@@ -91,28 +92,26 @@ img {
 	<!-- End Header -->
 
 	<main id="main">
-		<div class="container" style="margin-top: 10%; margin-bottom: 10%; width: 85%" data-aos="fade-up">
-			<div class="row">
-				<div class="col"></div>
-				<!-- img form -->
-				<div class="col-7">
-					<h2>상품 등록</h2>
-					<form action="" name="imgForm" id="imgForm">
+		<form action="/main/itemInst" name="form" id="form" method="post" enctype="multipart/form-data">
+			<div class="container" style="margin-top: 10%; margin-bottom: 10%; width: 85%" data-aos="fade-up">
+				<div class="row">
+					<div class="col"></div>
+					<!-- img form -->
+					<div class="col-7">
+						<h2>상품 등록</h2>
 						<ul class="list-inline image-preview"></ul>
 						<ul class="list-inline image-preview2"></ul>
-						<input type="file" id="imgInput" class="real-upload" accept="image/*" name="imgInput" required multiple />
+						<input type="file" id="uploadedImage" class="real-upload" accept="image/*" name="uploadedImage" required multiple />
 						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="deleteList()">삭제</button>
 						<button type="button" class="btn btn-danger" onclick="test()">테스트</button>
-					</form>
+					</div>
+					<!-- End of img form -->
+					<div class="col"></div>
 				</div>
-				<!-- End of img form -->
-				<div class="col"></div>
-			</div>
-			<div class="row" style="margin-top: 20px" margin="0 auto">
-				<div class="col"></div>
-				<div class="col-7">
-					<!-- item reg form -->
-					<form action="/main/itemInst" name="itemForm">
+				<div class="row" style="margin-top: 20px" margin="0 auto">
+					<div class="col"></div>
+					<div class="col-7">
+						<!-- item reg form -->
 						<input type="hidden" name="seq" id="seq" value="<c:out value="${vo.mainKey}"/>" />
 
 						<div class="mb-3">
@@ -132,12 +131,12 @@ img {
 							<button type="button" class="btn btn-dark" onclick="onSubmit()">Submit</button>
 							<button type="button" class="btn btn-dark">임시저장</button>
 						</div>
-					</form>
-					<!-- End of item reg form -->
+					</div>
+					<div class="col"></div>
 				</div>
-				<div class="col"></div>
 			</div>
-		</div>
+		</form>
+		<!-- End of item reg form -->
 
 	</main>
 	<!-- End #main -->
@@ -187,40 +186,7 @@ img {
 		}
 
 		function onSubmit() {
-			const goUrlItemInst = "/main/itemInst";
-			const itemForm = $("form[name=itemForm]");
-
-			/* itemForm.attr("action", goUrlItemInst).submit(); */
-
-			const imgData = $('#imgInput');
-			const img = imgData[0].files;
-			const formData = new FormData();
-
-			for (let i = 0; i < img.length; i++) {
-				formData.append("files", img[i]);
-			}
-
-			$.ajax({
-				async : false,
-				type : "POST",
-				enctype : "multipart/form-data",
-				url : "/sample/upload",
-				data : formData,
-				contentType : false,
-				processData : false,
-				success : function(res) {
-					if (res.rt == "success") {
-						alert("업로드 성공 !");
-						itemForm.attr("action", goUrlItemInst).submit();
-					} else {
-						alert(res.rt);
-					}
-				},
-				err : function(err) {
-					console.log("err:", err)
-				}
-			});
-
+			$("form[name=form]").submit();
 		}
 	</script>
 </body>

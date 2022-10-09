@@ -108,6 +108,31 @@
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
+	<insert id="itemImgUpload">
+		INSERT INTO itemImgUpload (
+			type
+			,defaultNy
+			,sort
+			,path
+			,originalName
+			,uuidName
+			,ext
+			,size
+			,delNy
+			,pseq
+		) values (
+			#{type}
+			,#{defaultNy}
+			,#{sort}
+			,#{path}
+			,#{originalName}
+			,#{uuidName}
+			,#{ext}
+			,#{size}
+			,0
+			,#{pseq}
+		)
+	</insert>
 	
 	<!-- 상품 구매 -->
 	<update id="buyItem">

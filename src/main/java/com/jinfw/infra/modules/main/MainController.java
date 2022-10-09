@@ -138,8 +138,7 @@ public class MainController {
 	@RequestMapping(value = "itemInst")
 	public String itemInst(MainVo vo, Main dto, RedirectAttributes redirectAttributes) throws Exception {
 		
-		int result = service.itemInst(dto);
-		System.out.println("insert result" + result);
+		service.itemInst(dto);
 		
 		vo.setMainKey(dto.getItemSeq());
 		redirectAttributes.addFlashAttribute("vo", vo);
