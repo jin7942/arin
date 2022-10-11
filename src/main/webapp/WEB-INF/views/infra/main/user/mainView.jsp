@@ -18,7 +18,7 @@
 					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
 						<div class="carousel-inner">
-						
+
 							<div class="carousel-item active">
 								<img src="<c:out value="${item.path}" /><c:out value="${item.uuidName}" />" class="d-block w-100" alt="..." />
 							</div>
@@ -67,7 +67,7 @@
 				</div>
 
 				<div style="text-align: center; margin-top: 20%">
-					<button type="button" class="btn btn-dark btn-lg" style="width: 40%">
+					<button type="button" class="btn btn-dark btn-lg" style="width: 40%" onClick="insertItemCart()">
 						<i class="fa-solid fa-cart-shopping fa-xl" id="btn-like"></i>
 					</button>
 
@@ -80,48 +80,34 @@
 			</div>
 		</div>
 
-		<div class="card-group">
-			<div class="row gx-5" style="margin-top: 10%; width: 100%">
-				<hr />
-				<h3>추천상품</h3>
 
-				<div class="col-4">
-					<div class="card" style="cursor: pointer">
-						<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">
-								<small class="text-muted">360,000원</small>
-							</p>
-						</div>
-					</div>
-				</div>
+		<!-- 추천상품 -->
+		<form action="" method="post" name="form">
+			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>" />
+			<div class="card-group">
+				<div class="row gx-5" style="margin-top: 10%; width: 100%">
+					<hr />
+					<h3>추천상품</h3>
 
-				<div class="col-4">
-					<div class="card" style="cursor: pointer">
-						<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">
-								<small class="text-muted">360,000원</small>
-							</p>
+					<c:forEach items="${listRecommend}" var="listRecommend" varStatus="status">
+						<div class="col-4">
+							<div class="card" style="cursor: pointer" onclick="goView(<c:out value="${listRecommend.itemSeq}"/>)">
+								<img src="<c:out value="${listRecommend.path}" /><c:out value="${listRecommend.uuidName}" />" class="card-img-top" alt="..." />
+								<div class="card-body">
+									<h5 class="card-title">
+										<c:out value="${listRecommend.itemHeader}" />
+									</h5>
+									<p class="card-text">
+										<small class="text-muted"><fmt:formatNumber value="${listRecommend.itemPrice}" pattern="#,###,###" /> 원</small>
+									</p>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+					</c:forEach>
 
-				<div class="col-4">
-					<div class="card" style="cursor: pointer">
-						<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
-						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">
-								<small class="text-muted">360,000원</small>
-							</p>
-						</div>
-					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 
 	<!-- Modal -->
@@ -167,6 +153,14 @@
 <!-- End of footer -->
 
 <script type="text/javascript">
+	function goView(keyValue) {
+		const goUrlView = "/main/view"
+		const form = $("form[name=form]");
+		const mainKey = $("input[name=mainKey]");
+		
+		mainKey.val(keyValue);
+		form.attr("action", goUrlView).submit();
+	}
 
 	function buyItem() {
 		$.ajax({
@@ -177,6 +171,27 @@
 			success:(res) => {
 				if (res.rt == "success") {
 					// by pass
+				} else {
+					alert("구매 실패");
+					location.href = "/main/view";
+					return false;
+				}
+			},
+			error:(jqXHR) => {
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+
+	function insertItemCart() {
+		$.ajax({
+			async:'false',
+			url:'./insertItemCart',
+			type:'post',
+			data:{"mainKey": $("#sessSeq").val() ,"itemSeq" : $("#itemSeq").val() },
+			success:(res) => {
+				if (res.rt == "success") {
+					alert("장바구니 등록")
 				} else {
 					alert("구매 실패");
 					location.href = "/main/view";

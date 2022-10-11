@@ -21,5 +21,4 @@ public class LoginServiceImpl implements LoginService {
 		return dao.selectOneId(dto);
 	}
 	
-	
 }

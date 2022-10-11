@@ -200,7 +200,7 @@ public class Main {
 	public void setPseq(String pseq) {
 		this.pseq = pseq;
 	}
-	public MultipartFile[] getUploadedImage() {
+	public MultipartFile[] getUploadedImage() {  
 		return uploadedImage;
 	}
 	public void setUploadedImage(MultipartFile[] uploadedImage) {

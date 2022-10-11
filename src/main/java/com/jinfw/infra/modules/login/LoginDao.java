@@ -20,4 +20,5 @@ public class LoginDao {
 		return sqlSession.selectOne(namespace + ".selectOneId", dto);
 	}
 	
+	
 }

@@ -45,6 +45,10 @@ public class MainServiceImpl implements MainService {
 	public List<Main> selectListItemImg(MainVo vo) throws Exception {
 		return dao.selectListItemImg(vo);
 	}
+	@Override
+	public List<Main> selectListRecommend() throws Exception {
+		return dao.selectListRecommend();
+	}
 
 	// 상품 등록
 	@Override
@@ -77,5 +81,13 @@ public class MainServiceImpl implements MainService {
 	public int buyItem(MainVo vo) throws Exception {
 		return dao.buyItem(vo);
 	}
+
+	// 장바구니 등록
+	@Override
+	public int insertItemCart(MainVo vo) throws Exception {
+		return dao.insertItemCart(vo);
+	}
+	
+	
 	
 }

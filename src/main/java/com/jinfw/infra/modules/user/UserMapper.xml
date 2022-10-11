@@ -69,10 +69,15 @@
 		    ,a.itemSeq
 		    ,b.member_seq
 		    ,b.item_seq
-		from itemCart b
-		join item a on b.item_seq = a.itemseq
+			,aa.path
+			,aa.uuidName
+			,aa.itemSeq
+		FROM itemCart b
+			JOIN item a on b.item_seq = a.itemseq
+			JOIN itemImgUpload aa on aa.itemSeq = a.itemSeq
 		WHERE 1=1
-		    AND b.member_seq = #{mainKey};
+		    AND b.member_seq = #{mainKey}
+		    AND aa.sort = 1
 	</select>
 	
 </mapper>

@@ -32,7 +32,7 @@
 						<div class="card mb-3" style="max-width: 80%; margin: 0 auto" data-aos="fade-up" data-aos-delay="200">
 							<div class="row g-0">
 								<div class="col-md-4">
-									<img src="/resources/template_imperial/assets/img/sample.jpg" class="img-fluid rounded-start" alt="..." />
+									<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="img-fluid rounded-start" alt="..." />
 								</div>
 								<div class="col-md-8">
 									<div class="card-body">

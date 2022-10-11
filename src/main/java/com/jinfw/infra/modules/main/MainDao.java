@@ -38,6 +38,9 @@ public class MainDao {
 	public List<Main> selectListItemImg(MainVo vo) {
 		return sqlSession.selectList(namespace + ".selectListItemImg", vo);
 	}
+	public List<Main> selectListRecommend() {
+		return sqlSession.selectList(namespace + ".selectListRecommend", "");
+	}
 	
 	// 상품등록
 	public int itemInst(Main dto) {
@@ -52,4 +55,8 @@ public class MainDao {
 		return sqlSession.update(namespace + ".buyItem", vo);
 	}
 	
+	// 장바구니 등록
+	public int insertItemCart(MainVo vo) {
+		return sqlSession.insert(namespace + ".insertItemCart", vo);
+	}
 }

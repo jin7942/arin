@@ -27,5 +27,13 @@
 			AND memberID = #{memberID}
 			AND memberPW = #{memberPW}
 	</select>
+	<select id="selectCount">
+		SELECT
+			COUNT(*)
+		FROM itemCart a
+			JOIN member b on a.member_seq = b.seq
+		WHERE 1=1
+			AND b.seq = #{seq}
+	</select>
 	
 </mapper>

@@ -116,9 +116,11 @@ public class MainController {
 		
 		Main item = service.selectOne(vo);
 		List<Main> list = service.selectListItemImg(vo);
+		List<Main> listRecommend = service.selectListRecommend();
 		
 		model.addAttribute("item", item);
 		model.addAttribute("list", list);
+		model.addAttribute("listRecommend", listRecommend);
 		
 		return "infra/main/user/mainView";
 	}
@@ -163,6 +165,24 @@ public class MainController {
 		
 		int result = service.buyItem(vo);
 		System.out.println("buyItem : " + result);
+		
+		if (result == 1) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		
+		return returnMap;
+	}
+	
+	@RequestMapping("/insertItemCart")
+	@ResponseBody
+	public Map<String, Object> insertItemCart(MainVo vo) throws Exception {
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
+		int result = service.insertItemCart(vo);
+		System.out.println("insertItemCart : " + result);
 		
 		if (result == 1) {
 			returnMap.put("rt", "success");

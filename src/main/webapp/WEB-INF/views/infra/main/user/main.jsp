@@ -31,7 +31,7 @@
 			</div>
 		</div>
 
-		<form action="" name="form">
+		<form action="" name="form" method="post">
 			<input type="hidden" name="mainKey" value="<c:out value="${vo.mainKey}"/>" />
 		</form>
 

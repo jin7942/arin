@@ -23,11 +23,23 @@ public class User {
 	/* itemCart DTO */
 	private String member_seq;
 	private String item_seq;
-	
-	
+	private String path;
+	private String uuidName;
 
 	// ########################################
 	// Generate Getters and Setters
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public String getUuidName() {
+		return uuidName;
+	}
+	public void setUuidName(String uuidName) {
+		this.uuidName = uuidName;
+	}
 	public String getMember_seq() {
 		return member_seq;
 	}
