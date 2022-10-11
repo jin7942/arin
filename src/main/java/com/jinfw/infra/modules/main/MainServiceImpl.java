@@ -41,11 +41,17 @@ public class MainServiceImpl implements MainService {
 	public Main selectOne(MainVo vo) throws Exception {
 		return dao.selectOne(vo);
 	}
+	@Override
+	public List<Main> selectListItemImg(MainVo vo) throws Exception {
+		return dao.selectListItemImg(vo);
+	}
 
 	// 상품 등록
 	@Override
 	public int itemInst(Main dto) throws Exception {
-		
+		int result = dao.itemInst(dto);
+	
+		int j = 0;
     	for(MultipartFile multipartFile : dto.getUploadedImage() ) {
     			
     		if(!multipartFile.isEmpty()) {
@@ -55,14 +61,15 @@ public class MainServiceImpl implements MainService {
     			
 	    		dto.setType(2);
 	    		dto.setDefaultNy(1);
-	    		dto.setSort(1);
+	    		dto.setSort(j + 1);
 	    		dto.setPseq(dto.getSeq());
 
 	    		dao.itemImgUpload(dto);
     		}
+    		j++;
     	}
 		
-		return dao.itemInst(dto);
+		return result;
 	}
 
 	// 상품 구매

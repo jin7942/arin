@@ -35,6 +35,9 @@ public class MainDao {
 	public Main selectOne(MainVo vo) {
 		return sqlSession.selectOne(namespace + ".selectOne", vo); 
 	}
+	public List<Main> selectListItemImg(MainVo vo) {
+		return sqlSession.selectList(namespace + ".selectListItemImg", vo);
+	}
 	
 	// 상품등록
 	public int itemInst(Main dto) {

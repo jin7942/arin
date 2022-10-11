@@ -110,12 +110,15 @@ public class MainController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "view")
-	public String view(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
+	public String view(@ModelAttribute("vo") MainVo vo, Main dto, Model model) throws Exception {
 		
 		System.out.println("mainKey : " + vo.getMainKey());
 		
 		Main item = service.selectOne(vo);
+		List<Main> list = service.selectListItemImg(vo);
+		
 		model.addAttribute("item", item);
+		model.addAttribute("list", list);
 		
 		return "infra/main/user/mainView";
 	}

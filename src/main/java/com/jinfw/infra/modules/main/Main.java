@@ -36,7 +36,14 @@ public class Main {
 	private Integer delNy;
 	private String pseq;
 	private MultipartFile[] uploadedImage;
+	private String itemImgThumbNail;
 	
+	public String getItemImgThumbNail() {
+		return itemImgThumbNail;
+	}
+	public void setItemImgThumbNail(String itemImgThumbNail) {
+		this.itemImgThumbNail = itemImgThumbNail;
+	}
 	public String getItemSeq() {
 		return itemSeq;
 	}

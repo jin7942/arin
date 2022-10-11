@@ -44,14 +44,13 @@
 				<c:forEach items="${list}" var="list" varStatus="status">
 					<div class="col" style="cursor: pointer">
 						<div class="card">
-							<img src="/resources/template_imperial/assets/img/sample.jpg" class="card-img-top" alt="..." />
+							<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="card-img-top" alt="..." />
 							<div class="card-body" onclick="goView(<c:out value="${list.itemSeq}"/>)">
 
 								<input type="hidden" name="seq" value="<c:out value="${list.seq}" />" />
 
 								<h5 class="card-title">
-									<b> <c:out value="${list.itemHeader}" />
-									</b>
+									<b><c:out value="${list.itemHeader}" /></b>
 								</h5>
 								<p class="card-text">
 									<fmt:formatNumber value="${list.itemPrice}" pattern="#,###,###" />

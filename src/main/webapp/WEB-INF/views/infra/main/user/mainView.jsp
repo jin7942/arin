@@ -16,17 +16,20 @@
 			<div class="col-4">
 				<div class="card mb-3" style="max-width: 540px">
 					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
 						<div class="carousel-inner">
+						
 							<div class="carousel-item active">
-								<img src="/resources/template_imperial/assets/img/sample.jpg" class="d-block w-100" alt="..." />
+								<img src="<c:out value="${item.path}" /><c:out value="${item.uuidName}" />" class="d-block w-100" alt="..." />
 							</div>
-							<div class="carousel-item">
-								<img src="/resources/template_imperial/assets/img/bgimg.jpg" class="d-block w-100" alt="..." />
-							</div>
-							<div class="carousel-item">
-								<img src="/resources/template_imperial/assets/img/sample.jpg" class="d-block w-100" alt="..." />
-							</div>
+
+							<c:forEach items="${list}" var="list" varStatus="status">
+								<div class="carousel-item">
+									<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="d-block w-100" alt="..." />
+								</div>
+							</c:forEach>
 						</div>
+
 						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
 						</button>
@@ -37,17 +40,17 @@
 				</div>
 			</div>
 
-			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>"/>
+			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>" />
 			<input type="hidden" name="itemSeq" id="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
 			<input type="hidden" name="sessSeq" id="sessSeq" value="<c:out value="${sessSeq}"/>" />
-			
+
 			<div class="col-4">
 				<h2>
 					<b> <c:out value="${item.itemHeader}" />
 					</b>
 				</h2>
 				<h3>
-					<fmt:formatNumber value="${item.itemPrice}" pattern="#,###,###"/>
+					<fmt:formatNumber value="${item.itemPrice}" pattern="#,###,###" />
 					원
 				</h3>
 				<p>
@@ -57,17 +60,17 @@
 
 			<div class="col-4">
 				<div>
-					<i class="fa-solid fa-user fa-xl"></i><b><c:out value="${item.seller}"/></b>
+					<i class="fa-solid fa-user fa-xl"></i><b><c:out value="${item.seller}" /></b>
 				</div>
 				<div style="margin-top: 20px">
-					<i class="fa-sharp fa-solid fa-location-dot fa-xl"></i><b><c:out value="${item.itemPlace}"/></b>
+					<i class="fa-sharp fa-solid fa-location-dot fa-xl"></i><b><c:out value="${item.itemPlace}" /></b>
 				</div>
-				
+
 				<div style="text-align: center; margin-top: 20%">
 					<button type="button" class="btn btn-dark btn-lg" style="width: 40%">
 						<i class="fa-solid fa-cart-shopping fa-xl" id="btn-like"></i>
 					</button>
-					
+
 					<button type="button" class="btn btn-dark btn-lg" style="width: 40%" data-bs-toggle="modal" data-bs-target="#exampleModal">구매하기</button>
 				</div>
 
@@ -147,7 +150,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<b><c:out value="${sessName }"/>님</b><br />구매가 완료되었습니다.
+					<b><c:out value="${sessName }" />님</b><br />구매가 완료되었습니다.
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-dark" data-bs-dismiss="modal" onclick="location.href='/main/'">닫기</button>

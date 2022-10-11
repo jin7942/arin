@@ -16,9 +16,13 @@
 		    ,a.itemPlace
 		    ,a.itemSeq
 		    ,a.member_seq
+		    ,b.uuidName
+		    ,b.path
 		FROM item a
+		JOIN itemImgUpload b on a.itemSeq = b.itemSeq
 		WHERE 1 = 1
 			AND a.itemSaleNY = 0
+			AND b.sort = 1
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shValue != null">
@@ -68,10 +72,23 @@
 		    ,a.itemPrice
 		    ,a.itemDescription
 		    ,a.itemPlace
+		    ,b.path
+		    ,b.uuidName
 		    ,(select b.memberName from member b where a.member_seq = b.seq) as seller
 		from item a
+		JOIN itemImgUpload b on a.itemSeq = b.itemSeq
 		WHERE 1 = 1
 		    AND a.itemSeq = #{mainKey}
+		    AND b.sort = 1
+	</select>
+	<select id="selectListItemImg" resultMap="resultMapObj">
+		SELECT
+			a.uuidName
+			,a.path
+		FROM itemImgUpload a
+		WHERE 1=1
+			AND a.itemSeq = #{mainKey}
+			AND a.sort != 1
 	</select>
 	
 	<!-- 아이디 중복 체크 -->
@@ -120,6 +137,7 @@
 			,size
 			,delNy
 			,pseq
+			,itemSeq
 		) values (
 			#{type}
 			,#{defaultNy}
@@ -130,7 +148,8 @@
 			,#{ext}
 			,#{size}
 			,0
-			,#{pseq}
+			,#{seq}
+			,#{itemSeq}
 		)
 	</insert>
 	
