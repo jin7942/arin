@@ -16,12 +16,6 @@
 			,a.memberPW
 			,a.memberName
 			,a.memberPlace
-			,(select 
-				count(*)
-        		from itemCart aa
-           		join member bb on aa.member_seq = bb.seq
-           		where bb.memberID = #{memberID}
-           	) as itemCartCount
 		FROM member a
 		WHERE 1=1
 			AND memberID = #{memberID}

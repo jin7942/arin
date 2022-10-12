@@ -41,5 +41,14 @@ public class UserServiceImpl implements UserService {
 	public List<User> selectListItemCart(UserVo vo) throws Exception {
 		return dao.selectListItemCart(vo);
 	}
+	@Override
+	public int selectOneCount(UserVo vo) throws Exception {
+		return dao.selectOneCount(vo);
+	}
+	@Override
+	public int deleteCartItem(UserVo vo) throws Exception {
+		return dao.deleteCartItem(vo);
+	}
+	
 	
 }

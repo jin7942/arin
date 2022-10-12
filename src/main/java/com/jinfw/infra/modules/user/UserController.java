@@ -1,15 +1,17 @@
 package com.jinfw.infra.modules.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinfw.infra.modules.login.LoginController;
 
@@ -22,6 +24,11 @@ public class UserController {
 	
 	String sessSeq = "";
 	
+	public void setMainKey(UserVo vo, HttpServletRequest httpServletRequest) {
+		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
+		vo.setMainKey(sessSeq);
+	}
+	
 	/**
 	 * 사용자 마이페이지
 	 * @param vo
@@ -33,8 +40,7 @@ public class UserController {
 	@RequestMapping (value = "info")
 	public String userInfo(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
-		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
-		vo.setMainKey(sessSeq);
+		setMainKey(vo, httpServletRequest);
 		
 		User item = service.selectOne(vo);
 		model.addAttribute("item", item);
@@ -50,9 +56,9 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping (value = "history")
-	public String orderHistory(@ModelAttribute("vo") UserVo vo, Model model) throws Exception {
+	public String orderHistory(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
-		vo.setMainKey(sessSeq);
+		setMainKey(vo, httpServletRequest);
 		
 		List<User> list = service.selectList(vo);
 		model.addAttribute("list", list);
@@ -68,9 +74,9 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping (value = "regHistory")
-	public String regHistory(@ModelAttribute("vo") UserVo vo, Model model) throws Exception {
+	public String regHistory(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
-		vo.setMainKey(sessSeq);
+		setMainKey(vo, httpServletRequest);
 		
 		List<User> list = service.selectListRegHistory(vo);
 		model.addAttribute("list", list);
@@ -86,9 +92,9 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping (value = "form")
-	public String userform(@ModelAttribute("vo") UserVo vo, Model model) throws Exception {
+	public String userform(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
-		vo.setMainKey(sessSeq);
+		setMainKey(vo, httpServletRequest);
 		
 		User item = service.selectOne(vo);
 		model.addAttribute("item", item);
@@ -124,13 +130,44 @@ public class UserController {
 	@RequestMapping (value = "cart")
 	public String selectListItemCart(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
 		
-		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
-		vo.setMainKey(sessSeq);
+		setMainKey(vo, httpServletRequest);
 		
 		List<User> list = service.selectListItemCart(vo);
 		model.addAttribute("list", list);
 		
 		return "infra/user/user/cart";
+	}
+	
+	@RequestMapping (value = "itemCartCount")
+	@ResponseBody
+	public Map<String, Object> selectOneCount(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
+
+		setMainKey(vo, httpServletRequest);
+
+		Map<String, Object> returnMap = new HashMap<>();
+		int result = service.selectOneCount(vo);
+		returnMap.put("cnt", result);
+		
+		return returnMap;
+	}
+	
+	@RequestMapping (value = "deleteCartItem")
+	@ResponseBody
+	public Map<String, Object> deleteCartItem(@ModelAttribute("vo") UserVo vo, Model model, HttpServletRequest httpServletRequest) throws Exception {
+		
+		setMainKey(vo, httpServletRequest);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		int result = service.deleteCartItem(vo);
+		System.out.println("delete result : " + result);
+		
+		if (result > 0) {
+			returnMap.put("rt", "success");
+		} else {
+			returnMap.put("rt", "fail");
+		}
+		
+		return returnMap;
 	}
 	
 }

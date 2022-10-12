@@ -41,5 +41,12 @@ public class UserDao {
 	public List<User> selectListItemCart(UserVo vo) {
 		return sqlSession.selectList(namespace + ".selectListItemCart", vo);
 	}
-	
+	// 장바구니 카운트
+	public int selectOneCount(UserVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
+	}
+	// 장바구니 삭제
+	public int deleteCartItem(UserVo vo) {
+		return sqlSession.delete(namespace + ".deleteCartItem", vo);
+	}
 }

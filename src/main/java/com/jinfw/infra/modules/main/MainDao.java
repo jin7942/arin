@@ -59,4 +59,7 @@ public class MainDao {
 	public int insertItemCart(MainVo vo) {
 		return sqlSession.insert(namespace + ".insertItemCart", vo);
 	}
+	public int selectOneCartCount(MainVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneCartCount", vo);
+	}
 }

@@ -13,5 +13,6 @@ public interface MainService {
 	public int itemInst(Main dto) throws Exception;
 	public int buyItem(MainVo vo) throws Exception;
 	public int insertItemCart(MainVo vo) throws Exception;
+	public int selectOneCartCount(MainVo vo) throws Exception;
 	
 }

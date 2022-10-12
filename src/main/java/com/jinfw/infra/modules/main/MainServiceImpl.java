@@ -87,7 +87,10 @@ public class MainServiceImpl implements MainService {
 	public int insertItemCart(MainVo vo) throws Exception {
 		return dao.insertItemCart(vo);
 	}
-	
-	
+
+	@Override
+	public int selectOneCartCount(MainVo vo) throws Exception {
+		return dao.selectOneCartCount(vo);
+	}
 	
 }

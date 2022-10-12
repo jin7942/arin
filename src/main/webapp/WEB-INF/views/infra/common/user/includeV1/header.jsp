@@ -56,6 +56,22 @@
 			}
 		});
 	}
+	
+	window.onload = function() {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			,url: "/user/itemCartCount"
+			,data : {}
+			,success: (res) => {
+				document.getElementById("cartCount").innerHTML = res.cnt;
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
 </script>
 </head>
 
@@ -72,7 +88,9 @@
 					<li><a class="nav-link scrollto active" href="/main/">Home</a></li>
 					<li><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></li>
 					<li><a class="nav-link scrollto" href="/user/cart"> 장바구니 
-					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><c:out value="${sessitemCartCount}" /><span class="visually-hidden">unread messages</span>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">
+						<!-- count -->
+					<span class="visually-hidden">unread messages</span>
 						</span>
 					</a></li>
 					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i><c:out value="${sessPlace}" /></a></li>

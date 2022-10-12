@@ -193,8 +193,7 @@
 				if (res.rt == "success") {
 					alert("장바구니 등록")
 				} else {
-					alert("구매 실패");
-					location.href = "/main/view";
+					alert("이미 장바구니에 담은 상품입니다.");
 					return false;
 				}
 			},

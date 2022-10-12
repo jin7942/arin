@@ -79,5 +79,19 @@
 		    AND b.member_seq = #{mainKey}
 		    AND aa.sort = 1
 	</select>
+	<select id="selectOneCount" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM itemCart a
+		    JOIN member b on a.member_seq = b.seq
+		WHERE 1 = 1 AND b.seq = #{mainKey}
+	</select>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCartItem">
+		DELETE FROM itemCart WHERE 1=1
+			AND item_seq = #{itemSeq}
+			AND member_seq = #{mainKey}
+	</delete>
 	
 </mapper>

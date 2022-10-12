@@ -186,5 +186,13 @@
 			,#{itemSeq}		
 		)
 	</insert>
+	<select id="selectOneCartCount" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM itemCart
+		WHERE 1=1
+			AND member_seq = #{mainKey}
+			AND item_seq = #{itemSeq}
+	</select>
 
 </mapper>

@@ -9,5 +9,7 @@ public interface UserService {
 	public List<User> selectListRegHistory(UserVo vo) throws Exception;
 	public List<User> selectListItemCart(UserVo vo) throws Exception;
 	public int userUpdt(User dto) throws Exception;
+	public int selectOneCount(UserVo vo) throws Exception;
+	public int deleteCartItem(UserVo vo) throws Exception;
 	
 }
