@@ -235,6 +235,7 @@
 
 	goList = function(thisPage) {
 		$("input:hidden[name=thisPage]").val(thisPage);
+		console.log("TEST" + $("input:hidden[name=thisPage]").val())
 		form.attr("action", goUrlList).submit();
 
 	}

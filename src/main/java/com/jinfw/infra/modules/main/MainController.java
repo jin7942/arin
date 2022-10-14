@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jinfw.infra.modules.code.CodeVo;
 import com.jinfw.infra.modules.login.LoginController;
 
 @Controller
@@ -24,6 +25,10 @@ public class MainController {
 	MainServiceImpl service;
 
 	public String sessSeq;
+
+	public void setSearchAndPaging(MainVo vo, int totalCnt) throws Exception {
+		vo.setParamsPaging(totalCnt);
+	}
 
 	/**
 	 * 메인 상품 리스트
@@ -43,11 +48,32 @@ public class MainController {
 		System.out.println("mainKey : " + vo.getMainKey());
 
 		List<Main> list = service.selectList(vo);
+
 		model.addAttribute("list", list);
 
-		System.out.println(vo.getShValue());
-
 		return "infra/main/user/main";
+	}
+
+	@RequestMapping(value = "getList")
+	@ResponseBody
+	public Map<String, Object> getList(@ModelAttribute("vo") MainVo vo) throws Exception {
+
+		Map<String, Object> returnMap = new HashMap<>();
+		int totalCnt = service.selectOneCount(vo);
+		setSearchAndPaging(vo, totalCnt);
+
+		if (!(vo.getThisPage() >= vo.getTotalPages() + 1)) {
+			List<Main> list = service.selectList(vo);
+
+			if (list != null && totalCnt != 0) {
+				returnMap.put("data", list);
+				returnMap.put("rt", "success");
+			} else {
+				returnMap.put("rt", "fail");
+			}
+		}
+		
+		return returnMap;
 	}
 
 	/**

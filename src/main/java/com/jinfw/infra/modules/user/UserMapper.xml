@@ -78,6 +78,7 @@
 		WHERE 1=1
 		    AND b.member_seq = #{mainKey}
 		    AND aa.sort = 1
+		    AND a.itemSaleNY = 0
 	</select>
 	<select id="selectOneCount" resultType="Integer">
 		SELECT 

@@ -21,6 +21,9 @@ public class MainDao {
 	public List<Main> seleList(MainVo vo) {
 		return sqlSession.selectList(namespace + ".selectList", vo);
 	}
+	public int selectOneCount(MainVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
+	}
 	
 	// 회원가입
 	public int insert(Main dto) {

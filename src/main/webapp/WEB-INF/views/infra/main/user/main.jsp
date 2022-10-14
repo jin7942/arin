@@ -38,16 +38,16 @@
 		<!-- form -->
 		<form action="" name="" method="post">
 			<!-- main -->
-			<div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 3%">
+			<div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 3%" id="itemList">
 
 				<!-- item -->
 				<c:forEach items="${list}" var="list" varStatus="status">
 					<div class="col" style="cursor: pointer">
-						<div class="card">
+						<div class="card" data-aos="fade-up" data-aos-delay="200">
 							<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="card-img-top" alt="..." />
 							<div class="card-body" onclick="goView(<c:out value="${list.itemSeq}"/>)">
 
-								<input type="hidden" name="seq" value="<c:out value="${list.seq}" />" />
+								<%-- <input type="hidden" name="seq" value="<c:out value="${list.seq}" />" /> --%>
 
 								<h5 class="card-title">
 									<b><c:out value="${list.itemHeader}" /></b>
@@ -75,23 +75,76 @@
 <!-- End #main -->
 
 <script type="text/javascript">
-        	const goUrlView = "/main/view"
-        	const goUrlForm = "/main/form"
+       	const goUrlView = "/main/view"
+       	const goUrlForm = "/main/form"
+       	
+       	const mainKey = $("input[name=mainKey]");
+       	const form = $("form[name=form]");
+       	
+       	function goView(keyValue) {
+       		mainKey.val(keyValue);
+       		form.attr("action", goUrlView).submit();
+		}
+       	
+       	function goItemForm(keyValue) {
+       		mainKey.val(keyValue);
+       		form.attr("action", goUrlForm).submit();
+		}
+       	
+
+        function addComma(Obj) {
+            const regexp = /\B(?=(\d{3})+(?!\d))/g;
+            return Obj.toString().replace(regexp, ',');
+        }
+
+        let thisPage = 1
+       	
+        window.addEventListener('scroll', (e) => {
+        	const { clientHeight, scrollTop, scrollHeight } = e.target.scrollingElement
         	
-        	const mainKey = $("input[name=mainKey]");
-        	const form = $("form[name=form]");
-        	
-        	function goView(keyValue) {
-        		mainKey.val(keyValue);
-        		form.attr("action", goUrlView).submit();
-			}
-        	
-        	function goItemForm(keyValue) {
-        		mainKey.val(keyValue);
-        		form.attr("action", goUrlForm).submit();
-			}
-        	
-        </script>
+            if (clientHeight + scrollTop >= scrollHeight) {
+            	thisPage++;
+            	console.log("thisPage" + thisPage)
+            	
+            	$.ajax({
+        			async:'false',
+        			url:'./getList',
+        			type:'post',
+        			data:{"thisPage" : thisPage},
+        			success:(res) => {
+        				if (res.rt == "success") {
+	        				console.log(res);
+	        				
+	        				for (let i = 0; i < res.data.length; i++) {
+	        					let listHTML = "";
+	        					
+	        					listHTML += '<div class="col" style="cursor: pointer">';
+	        					listHTML += '	<div class="card" data-aos="fade-up" data-aos-delay="200">';
+	                            listHTML += '		<div class="card-body" onclick="goView(' + res.data[i].itemSeq + ')">';
+	                            listHTML += '			<img src="' + res.data[i].path + res.data[i].uuidName + '" class="card-img-top" alt="..." />';
+	                            listHTML += '			<div class=' + 'card-body' + '>';
+	                            listHTML += '				<h5 class="card-title"><b>' + res.data[i].itemHeader + '</b></h5>';
+	                            listHTML += '				<p class="card-text">' + addComma(res.data[i].itemPrice) +'원</p>';
+	                            listHTML += '				<p class="card-text" style="float: left">' + res.data[i].itemRegDatetime + '</p>';
+	                            listHTML += '				<p class="card-text" style="float: right">' + res.data[i].itemPlace + '</p>';
+	                            listHTML += '			</div>';
+	                            listHTML += '		</div>';
+	                            listHTML += '	</div>';
+	                            listHTML += '</div>';
+	                         	
+	                            console.log(res.data[i])
+	                            document.getElementById('itemList').innerHTML += listHTML;
+	        				}
+        				} else return false;
+        			},
+        			error:(jqXHR) => {
+        				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+        			}
+        		});
+            }    
+        });
+       	
+</script>
 
 <!-- footer -->
 <%@include file="../../common/user/includeV1/footer.jsp"%>

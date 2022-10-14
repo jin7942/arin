@@ -4,240 +4,241 @@ import com.jinfw.infra.common.constans.Constants;
 
 public class BaseVo {
 
-		// 날짜 검색
-		private String shStartDate;
-		private String shEndDate;
-		private String shOptionDate;
-		
-		// 문자열 검색
-		private String shValue;
-		private String shOptionValue;
+	// 날짜 검색
+	private String shStartDate;
+	private String shEndDate;
+	private String shOptionDate;
 
-		// 삭제 여부
-		private String shOptionDelNY;
-		
-		// 정렬 기준
-		private String shOptionRows;
-		private String shOptionSort;
-		
-		// paging
-		private int thisPage = 1;									// 현재 페이지
-		private int rowNumToShow = Constants.ROW_NUM_TO_SHOW;		// 화면에 보여줄 데이터 줄 갯수
-		private int pageNumToShow = Constants.PAGE_NUM_TO_SHOW;		// 화면에 보여줄 페이징 번호 갯수
+	// 문자열 검색
+	private String shValue;
+	private String shOptionValue;
 
-		private int totalRows;										// 전체 데이터 갯수
-		private int totalPages;										// 전체 페이지 번호
-		private int startPage;										// 시작 페이지 번호
-		private int endPage;										// 마지막 페이지 번호
-		
-		private int startRnumForOracle = 1;							// 쿼리 시작 row
-		private int endRnumForOracle;								// 쿼리 끝 row
-		private Integer RNUM;
+	// 삭제 여부
+	private String shOptionDelNY;
 
-		private int startRnumForMysql = 0;							// 쿼리 시작 row
-		
-		public void setParamsPaging(int totalRows) {
-			
-			/*setThisPage(3);*/
+	// 정렬 기준
+	private String shOptionRows;
+	private String shOptionSort;
 
-			setTotalRows(totalRows);
+	// paging
+	private int thisPage = 1; // 현재 페이지
+	private int rowNumToShow = Constants.ROW_NUM_TO_SHOW; // 화면에 보여줄 데이터 줄 갯수
+	private int pageNumToShow = Constants.PAGE_NUM_TO_SHOW; // 화면에 보여줄 페이징 번호 갯수
 
-			if (getTotalRows() == 0) {
-				setTotalPages(1);
-			} else {
-				setTotalPages(getTotalRows() / getRowNumToShow());
-			}
+	private int totalRows; // 전체 데이터 갯수
+	private int totalPages; // 전체 페이지 번호
+	private int startPage; // 시작 페이지 번호
+	private int endPage; // 마지막 페이지 번호
 
-			if (getTotalRows() % getRowNumToShow() > 0) {
-				setTotalPages(getTotalPages() + 1);
-			}
+	private int startRnumForOracle = 1; // 쿼리 시작 row
+	private int endRnumForOracle; // 쿼리 끝 row
+	private Integer RNUM;
 
-			if (getTotalPages() < getThisPage()) {
-				setThisPage(getTotalPages());
-			}
-			
-			setStartPage(((getThisPage() - 1) / getPageNumToShow()) * getPageNumToShow() + 1);
+	private int startRnumForMysql = 0; // 쿼리 시작 row
 
-			setEndPage(getStartPage() + getPageNumToShow() - 1);
+	public void setParamsPaging(int totalRows) {
 
-			if (getEndPage() > getTotalPages()) {
-				setEndPage(getTotalPages());
-			}
-			
-			setEndRnumForOracle((getRowNumToShow() * getThisPage()));
-			setStartRnumForOracle((getEndRnumForOracle() - getRowNumToShow()) + 1);
-			if (getStartRnumForOracle() < 1) setStartRnumForOracle(1);
-			
-			if (thisPage == 1) {
-				setStartRnumForMysql(0);
-			} else {
-				setStartRnumForMysql((getRowNumToShow() * (getThisPage()-1)));
-			}
-			
-			/*			System.out.println("getThisPage():" + getThisPage());
-						System.out.println("getTotalRows():" + getTotalRows());
-						System.out.println("getRowNumToShow():" + getRowNumToShow());
-						System.out.println("getTotalPages():" + getTotalPages());
-						System.out.println("getStartPage():" + getStartPage());
-						System.out.println("getEndPage():" + getEndPage());		
-						System.out.println("getStartRnumForOracle():" + getStartRnumForOracle());
-						System.out.println("getEndRnumForOracle():" + getEndRnumForOracle());
-						System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());*/
-					
-		}
-		
-		/*##############################*/
-		
-		public String getShStartDate() {
-			return shStartDate;
+		setTotalRows(totalRows);
+
+		if (getTotalRows() == 0) {
+			setTotalPages(1);
+		} else {
+			setTotalPages(getTotalRows() / getRowNumToShow());
 		}
 
-		public void setShStartDate(String shStartDate) {
-			this.shStartDate = shStartDate;
+		if (getTotalRows() % getRowNumToShow() > 0) {
+			setTotalPages(getTotalPages() + 1);
 		}
 
-		public String getShEndDate() {
-			return shEndDate;
+		if (getTotalPages() < getThisPage()) {
+			setThisPage(getTotalPages());
 		}
 
-		public void setShEndDate(String shEndDate) {
-			this.shEndDate = shEndDate;
+		setStartPage(((getThisPage() - 1) / getPageNumToShow()) * getPageNumToShow() + 1);
+
+		setEndPage(getStartPage() + getPageNumToShow() - 1);
+
+		if (getEndPage() > getTotalPages()) {
+			setEndPage(getTotalPages());
 		}
 
-		public String getShOptionDate() {
-			return shOptionDate;
+		setEndRnumForOracle((getRowNumToShow() * getThisPage()));
+		setStartRnumForOracle((getEndRnumForOracle() - getRowNumToShow()) + 1);
+		if (getStartRnumForOracle() < 1)
+			setStartRnumForOracle(1);
+
+		if (getThisPage() == 1) {
+			setStartRnumForMysql(0);
+		} else {
+			setStartRnumForMysql((getRowNumToShow() * (getThisPage() - 1)));
 		}
 
-		public void setShOptionDate(String shOptionDate) {
-			this.shOptionDate = shOptionDate;
-		}
+		/*
+		 * System.out.println("getThisPage():" + getThisPage());
+		 * System.out.println("getTotalRows():" + getTotalRows());
+		 * System.out.println("getRowNumToShow():" + getRowNumToShow());
+		 * System.out.println("getTotalPages():" + getTotalPages());
+		 * System.out.println("getStartPage():" + getStartPage());
+		 * System.out.println("getEndPage():" + getEndPage());
+		 * System.out.println("getStartRnumForOracle():" + getStartRnumForOracle());
+		 * System.out.println("getEndRnumForOracle():" + getEndRnumForOracle());
+		 * System.out.println("getStartRnumForMysql(): " + getStartRnumForMysql());
+		 */
 
-		public String getShValue() {
-			return shValue;
-		}
+	}
 
-		public void setShValue(String shValue) {
-			this.shValue = shValue;
-		}
+	/* ############################## */
 
-		public String getShOptionValue() {
-			return shOptionValue;
-		}
+	public String getShStartDate() {
+		return shStartDate;
+	}
 
-		public void setShOptionValue(String shOptionValue) {
-			this.shOptionValue = shOptionValue;
-		}
+	public void setShStartDate(String shStartDate) {
+		this.shStartDate = shStartDate;
+	}
 
-		public String getShOptionDelNY() {
-			return shOptionDelNY;
-		}
+	public String getShEndDate() {
+		return shEndDate;
+	}
 
-		public void setShOptionDelNY(String shOptionDelNY) {
-			this.shOptionDelNY = shOptionDelNY;
-		}
+	public void setShEndDate(String shEndDate) {
+		this.shEndDate = shEndDate;
+	}
 
-		public String getShOptionRows() {
-			return shOptionRows;
-		}
+	public String getShOptionDate() {
+		return shOptionDate;
+	}
 
-		public void setShOptionRows(String shOptionRows) {
-			this.shOptionRows = shOptionRows;
-		}
+	public void setShOptionDate(String shOptionDate) {
+		this.shOptionDate = shOptionDate;
+	}
 
-		public String getShOptionSort() {
-			return shOptionSort;
-		}
+	public String getShValue() {
+		return shValue;
+	}
 
-		public void setShOptionSort(String shOptionSort) {
-			this.shOptionSort = shOptionSort;
-		}
+	public void setShValue(String shValue) {
+		this.shValue = shValue;
+	}
 
-		public int getThisPage() {
-			return thisPage;
-		}
+	public String getShOptionValue() {
+		return shOptionValue;
+	}
 
-		public void setThisPage(int thisPage) {
-			this.thisPage = thisPage;
-		}
+	public void setShOptionValue(String shOptionValue) {
+		this.shOptionValue = shOptionValue;
+	}
 
-		public int getRowNumToShow() {
-			return rowNumToShow;
-		}
+	public String getShOptionDelNY() {
+		return shOptionDelNY;
+	}
 
-		public void setRowNumToShow(int rowNumToShow) {
-			this.rowNumToShow = rowNumToShow;
-		}
+	public void setShOptionDelNY(String shOptionDelNY) {
+		this.shOptionDelNY = shOptionDelNY;
+	}
 
-		public int getPageNumToShow() {
-			return pageNumToShow;
-		}
+	public String getShOptionRows() {
+		return shOptionRows;
+	}
 
-		public void setPageNumToShow(int pageNumToShow) {
-			this.pageNumToShow = pageNumToShow;
-		}
+	public void setShOptionRows(String shOptionRows) {
+		this.shOptionRows = shOptionRows;
+	}
 
-		public int getTotalRows() {
-			return totalRows;
-		}
+	public String getShOptionSort() {
+		return shOptionSort;
+	}
 
-		public void setTotalRows(int totalRows) {
-			this.totalRows = totalRows;
-		}
+	public void setShOptionSort(String shOptionSort) {
+		this.shOptionSort = shOptionSort;
+	}
 
-		public int getTotalPages() {
-			return totalPages;
-		}
+	public int getThisPage() {
+		return thisPage;
+	}
 
-		public void setTotalPages(int totalPages) {
-			this.totalPages = totalPages;
-		}
+	public void setThisPage(int thisPage) {
+		this.thisPage = thisPage;
+	}
 
-		public int getStartPage() {
-			return startPage;
-		}
+	public int getRowNumToShow() {
+		return rowNumToShow;
+	}
 
-		public void setStartPage(int startPage) {
-			this.startPage = startPage;
-		}
+	public void setRowNumToShow(int rowNumToShow) {
+		this.rowNumToShow = rowNumToShow;
+	}
 
-		public int getEndPage() {
-			return endPage;
-		}
+	public int getPageNumToShow() {
+		return pageNumToShow;
+	}
 
-		public void setEndPage(int endPage) {
-			this.endPage = endPage;
-		}
+	public void setPageNumToShow(int pageNumToShow) {
+		this.pageNumToShow = pageNumToShow;
+	}
 
-		public int getStartRnumForOracle() {
-			return startRnumForOracle;
-		}
+	public int getTotalRows() {
+		return totalRows;
+	}
 
-		public void setStartRnumForOracle(int startRnumForOracle) {
-			this.startRnumForOracle = startRnumForOracle;
-		}
+	public void setTotalRows(int totalRows) {
+		this.totalRows = totalRows;
+	}
 
-		public int getEndRnumForOracle() {
-			return endRnumForOracle;
-		}
+	public int getTotalPages() {
+		return totalPages;
+	}
 
-		public void setEndRnumForOracle(int endRnumForOracle) {
-			this.endRnumForOracle = endRnumForOracle;
-		}
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
 
-		public Integer getRNUM() {
-			return RNUM;
-		}
+	public int getStartPage() {
+		return startPage;
+	}
 
-		public void setRNUM(Integer rNUM) {
-			RNUM = rNUM;
-		}
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
 
-		public int getStartRnumForMysql() {
-			return startRnumForMysql;
-		}
+	public int getEndPage() {
+		return endPage;
+	}
 
-		public void setStartRnumForMysql(int startRnumForMysql) {
-			this.startRnumForMysql = startRnumForMysql;
-		}
-	
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public int getStartRnumForOracle() {
+		return startRnumForOracle;
+	}
+
+	public void setStartRnumForOracle(int startRnumForOracle) {
+		this.startRnumForOracle = startRnumForOracle;
+	}
+
+	public int getEndRnumForOracle() {
+		return endRnumForOracle;
+	}
+
+	public void setEndRnumForOracle(int endRnumForOracle) {
+		this.endRnumForOracle = endRnumForOracle;
+	}
+
+	public Integer getRNUM() {
+		return RNUM;
+	}
+
+	public void setRNUM(Integer rNUM) {
+		RNUM = rNUM;
+	}
+
+	public int getStartRnumForMysql() {
+		return startRnumForMysql;
+	}
+
+	public void setStartRnumForMysql(int startRnumForMysql) {
+		this.startRnumForMysql = startRnumForMysql;
+	}
+
 }

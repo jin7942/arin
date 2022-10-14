@@ -20,7 +20,12 @@ public class MainServiceImpl implements MainService {
 	public List<Main> selectList(MainVo vo) throws Exception {
 		return dao.seleList(vo);
 	}
-	
+	@Override
+	public int selectOneCount(MainVo vo) throws Exception {
+		return dao.selectOneCount(vo);
+	}
+
+
 	/*회원가입*/
 	@Override
 	public int insert(Main dto) throws Exception {
