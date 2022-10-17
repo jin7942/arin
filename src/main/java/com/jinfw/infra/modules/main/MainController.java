@@ -174,7 +174,6 @@ public class MainController {
 	 */
 	@RequestMapping(value = "itemInst")
 	public String itemInst(MainVo vo, Main dto, RedirectAttributes redirectAttributes) throws Exception {
-
 		service.itemInst(dto);
 
 		vo.setMainKey(dto.getItemSeq());

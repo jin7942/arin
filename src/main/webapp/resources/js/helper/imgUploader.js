@@ -4,10 +4,11 @@
 var uploadFiles = [];
 document.querySelector('.real-upload').addEventListener('change', getImageFiles);
 
+const imagePreview = document.querySelector('.image-preview');
+const imagePreview2 = document.querySelector('.image-preview2');
+
 function getImageFiles(e) {
 	const files = e.currentTarget.files;
-	const imagePreview = document.querySelector('.image-preview');
-	const imagePreview2 = document.querySelector('.image-preview2');
 
 	if ([...files].length >= 7 || uploadFiles.length >= 6) {
 		alert('이미지는 최대 6개 까지 업로드가 가능합니다.');
@@ -54,7 +55,7 @@ function createElement(e, file) {
 // 삭제
 function deleteList() {
 	const list = document.querySelectorAll('.imgList');
-	const imgInput = document.getElementById('imgInput');
+	const imgInput = document.getElementById('uploadedImage');
 
 	if (list.length > 0) {
 		list.forEach((li) => {
@@ -69,5 +70,7 @@ function deleteList() {
 	console.log('========== 삭제 프로세스 ==========');
 	console.log(uploadFiles);
 	console.log(document.querySelectorAll('.imgList'));
+	console.log(imagePreview.childElementCount)
+	console.log(imagePreview2.childElementCount)
 	console.groupEnd();
 }
