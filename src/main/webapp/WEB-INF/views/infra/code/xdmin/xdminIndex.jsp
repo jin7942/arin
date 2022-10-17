@@ -9,22 +9,6 @@
 <%@include file="../../common/xdmin/includeV1/topbar.jsp"%>
 <!-- topbar e -->
 
-<!-- vo.jsp -->
-<form action="" name="formVo" id="formVo">
-	<%@include file="codeVo.jsp"%>
-</form>
-<!-- vo.jsp -->
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-	<div class="container my-auto">
-		<div class="copyright text-center my-auto">
-			<span>Copyright &copy; Your Website 2020</span>
-		</div>
-	</div>
-</footer>
-<!-- End of Footer -->
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	<!-- Page Heading -->
@@ -328,6 +312,22 @@
 <%@include file="../../common/xdmin/includeV1/logoutModal.jsp"%>
 <!-- End of logout modal -->
 
+<!-- vo.jsp -->
+<form action="" name="formVo" id="formVo">
+	<%@include file="codeVo.jsp"%>
+</form>
+<!-- vo.jsp -->
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+	<div class="container my-auto">
+		<div class="copyright text-center my-auto">
+			<span>Copyright &copy; Your Website 2020</span>
+		</div>
+	</div>
+</footer>
+<!-- End of Footer -->
+
 <!-- Bootstrap core JavaScript-->
 <script src="/resources/template_admin/vendor/jquery/jquery.min.js"></script>
 <script src="/resources/template_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -340,6 +340,13 @@
 
 <!-- fontawesome-icon -->
 <script src="https://kit.fontawesome.com/287e3e129e.js" crossorigin="anonymous"></script>
+
+<!-- Page level plugins -->
+<script src="/resources/template_admin/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/resources/template_admin/js/demo/chart-area-demo.js"></script>
+<script src="/resources/template_admin/js/demo/chart-pie-demo.js"></script>
 
 <!-- My Js File -->
 <script src="/resources/js/validation/validationInst.js"></script>

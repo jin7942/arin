@@ -24,6 +24,12 @@ public class CodeController {
 		vo.setParamsPaging(totalCnt);
 	}
 	
+	@RequestMapping(value = "index")
+	public String index(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+		
+		return "infra/code/xdmin/xdminIndex";
+	}
+	
 	/**
 	 * 공통코드 리스트 조회 함수
 	 * @param model
