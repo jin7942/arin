@@ -34,34 +34,65 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<script type="text/javascript">
+	function logout() {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/logoutProc"
+			/* ,data : $("#formLogin").serialize() */
+			,data : {}
+			,success: (res) => {
+				if(res.rt == "success") {
+					location.href = "/index"
+				} else {
+					alert("회원없음");
+				}
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+	
+	window.onload = function() {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			,url: "/user/itemCartCount"
+			,data : {}
+			,success: (res) => {
+				document.getElementById("cartCount").innerHTML = res.cnt;
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
+	}
+</script>
 
 <style>
-li {
-	list-style: none;
+.image-preview > li {
+	display: inline;
+}
+
+.image-preview > li:nth-child(3):after {
+	content: '\A';
+	white-space: pre;
+}
+
+span {
+	cursor: pointer;
 }
 
 img {
 	width: 200px;
 	height: 200px;
-}
+	margin-left: 20px;
 
-.upload {
-	width: 200px;
-	height: 200px;
-}
-
-.image-preview {
-	width: 1300px;
-	height: 200px;
-	display: flex;
-	gap: 20px;
-}
-
-.image-preview2 {
-	width: 1300px;
-	height: 200px;
-	display: flex;
-	gap: 20px;
 }
 </style>
 </head>
@@ -78,8 +109,12 @@ img {
 				<ul>
 					<li><a class="nav-link scrollto active" href="/main/">Home</a></li>
 					<li><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }" /></b>님</a></li>
-					<li><a class="nav-link scrollto" href="/user/cart"> 장바구니 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><c:out value="${sessitemCartCount}" /><span class="visually-hidden">unread messages</span> </span>
-					</a></li>
+					<li>
+						<a class="nav-link scrollto" href="/user/cart"> 장바구니 
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">
+						</span>
+						</a>
+					</li>
 					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i> <c:out value="${sessPlace}" /></a></li>
 					<li><a class="nav-link scrollto" onclick="logout()">로그아웃</a></li>
 					<li><a class="nav-link scrollto" href="/code/codeList">관리자페이지</a></li>
@@ -94,13 +129,16 @@ img {
 	<main id="main">
 		<form action="/main/itemInst" name="form" id="form" method="post" enctype="multipart/form-data">
 			<div class="container" style="margin-top: 10%; margin-bottom: 10%; width: 85%" data-aos="fade-up">
-				<div class="row">
+				<div class="row ">
 					<div class="col"></div>
 					<!-- img form -->
 					<div class="col-7">
 						<h2>상품 등록</h2>
-						<ul class="list-inline image-preview"></ul>
-						<ul class="list-inline image-preview2"></ul>
+
+						<!-- img preview area -->
+						<ul class="image-preview"></ul>
+						<!-- End of img preview area -->
+
 						<input type="file" id="uploadedImage" class="real-upload" accept="image/*" name="uploadedImage" required multiple />
 						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="deleteList()">삭제</button>
 						<button type="button" class="btn btn-danger" onclick="test()">테스트</button>
@@ -146,7 +184,8 @@ img {
 	<!-- End of footer -->
 
 	<!-- My Js File -->
-	<script type="text/javascript" src="/resources/js/helper/imgUploader.js"></script>
+	<script type="text/javascript" src="/resources/js/helper/imgUploader.js"></script> 
+	
 
 	<script type="text/javascript">
 		function test() {

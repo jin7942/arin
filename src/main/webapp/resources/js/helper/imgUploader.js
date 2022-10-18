@@ -1,11 +1,12 @@
 /**
  * @ 이미지업로더
  */
-var uploadFiles = [];
+let uploadFiles = [];
 document.querySelector('.real-upload').addEventListener('change', getImageFiles);
 
 const imagePreview = document.querySelector('.image-preview');
-const imagePreview2 = document.querySelector('.image-preview2');
+const fileInput = document.querySelector('#uploadedImage');
+const arrFile = Array.from(fileInput.files);
 
 function getImageFiles(e) {
 	const files = e.currentTarget.files;
@@ -22,35 +23,30 @@ function getImageFiles(e) {
 			return;
 		}
 
-		// 파일 갯수 검사
 		if ([...files].length < 7) {
 			uploadFiles.push(file);
 			const reader = new FileReader();
-			reader.onload = (e) => {
-				const preview = createElement(e, file);
 
-				imagePreview.childElementCount >= 3 ? imagePreview2.appendChild(preview) : imagePreview.appendChild(preview);
+			reader.onload = (e) => {
+
+				imagePreview.innerHTML += `
+				<li id="${file.name}" class="imgList position-relative preview">
+					<img src="${e.target.result}" alt="" class="imgList">
+					<span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+					X
+					</span>
+				</li>`;
+				
 			};
 
 			reader.readAsDataURL(file);
 		}
 	});
-	console.log(uploadFiles);
 }
 
-function createElement(e, file) {
-	const li = document.createElement('li');
-	const img = document.createElement('img');
-	img.setAttribute('class', 'imgList');
-	img.setAttribute('src', e.target.result);
-	img.setAttribute('data-file', file.name);
-	li.appendChild(img);
-
-	console.log(li);
-
-	return li;
+function removeFile(key) {
+	console.log(key)
 }
-
 
 // 삭제
 function deleteList() {
@@ -61,16 +57,21 @@ function deleteList() {
 		list.forEach((li) => {
 			li.remove();
 		});
+
 		imgInput.value = '';
 		uploadFiles = [];
 	} else {
 		alert('삭제할 사진이 없습니다.');
 	}
+
 	console.group();
 	console.log('========== 삭제 프로세스 ==========');
 	console.log(uploadFiles);
 	console.log(document.querySelectorAll('.imgList'));
-	console.log(imagePreview.childElementCount)
-	console.log(imagePreview2.childElementCount)
+	console.log(imagePreview.childElementCount);
 	console.groupEnd();
+}
+
+function test2() {
+	console.log("HELlo");
 }

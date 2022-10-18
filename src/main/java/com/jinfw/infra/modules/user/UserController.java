@@ -144,7 +144,7 @@ public class UserController {
 
 		setMainKey(vo, httpServletRequest);
 
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 		int result = service.selectOneCount(vo);
 		returnMap.put("cnt", result);
 		
@@ -157,7 +157,7 @@ public class UserController {
 		
 		setMainKey(vo, httpServletRequest);
 		
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 		int result = service.deleteCartItem(vo);
 		System.out.println("delete result : " + result);
 		
