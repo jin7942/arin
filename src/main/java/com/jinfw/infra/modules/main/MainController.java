@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jinfw.infra.modules.code.CodeVo;
 import com.jinfw.infra.modules.login.LoginController;
 
 @Controller
@@ -58,7 +57,7 @@ public class MainController {
 	@ResponseBody
 	public Map<String, Object> getList(@ModelAttribute("vo") MainVo vo) throws Exception {
 
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 		int totalCnt = service.selectOneCount(vo);
 		setSearchAndPaging(vo, totalCnt);
 
@@ -118,7 +117,7 @@ public class MainController {
 	@ResponseBody
 	public Map<String, Object> idCheck(Main dto) throws Exception {
 
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		int result = service.idCheck(dto);
 		System.out.println(result);
@@ -211,7 +210,7 @@ public class MainController {
 	@ResponseBody
 	public Map<String, Object> insertItemCart(MainVo vo) throws Exception {
 
-		Map<String, Object> returnMap = new HashMap<>();
+		Map<String, Object> returnMap = new HashMap<String, Object>();
 
 		int cnt = service.selectOneCartCount(vo);
 

@@ -140,7 +140,7 @@ img {
 						<!-- End of img preview area -->
 
 						<input type="file" id="uploadedImage" class="real-upload" accept="image/*" name="uploadedImage" required multiple />
-						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="deleteList()">삭제</button>
+						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="removeAll()">삭제</button>
 						<button type="button" class="btn btn-danger" onclick="test()">테스트</button>
 					</div>
 					<!-- End of img form -->

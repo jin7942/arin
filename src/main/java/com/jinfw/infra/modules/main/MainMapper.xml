@@ -16,7 +16,7 @@
 			AND b.sort = 1
 		<!-- 문자열 검색 -->
 		<choose>
-			<when test="shValue != null">
+			<when test="shValue != null and shValue != '' ">
 				AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>

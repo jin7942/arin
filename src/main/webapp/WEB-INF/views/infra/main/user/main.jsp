@@ -20,7 +20,7 @@
 
 					<!-- search form -->
 					<form class="d-flex" role="search" action="/main/">
-						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="shValue" value="<c:out value="${vo.shValue}" />" />
+						<input class="form-control me-2" id="shValue" type="search" placeholder="Search" aria-label="Search" name="shValue" value="<c:out value="${vo.shValue}" />" />
 						<button class="btn btn-outline-dark" type="submit" style="display: inline-block; width: 200px; white-space: nowrap;">검색</button>
 					</form>
 				</div>
