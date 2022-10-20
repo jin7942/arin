@@ -7,6 +7,7 @@ document.getElementById('uploadedImage').addEventListener('change', (e) => {
 		return;
 	}
 	
+	let i = 0;
 	[...files].forEach((file) => {
 		if (!file.type.match('image/.*')) {
 			alert('이미지 파일만 업로드가 가능합니다.');
@@ -15,29 +16,35 @@ document.getElementById('uploadedImage').addEventListener('change', (e) => {
 		}
 		
 		const reader = new FileReader();
-
+		
+		file.index = i++;
+		console.log("file.index : " + file.index)
+				
 		reader.onload = (e) => {
-			console.log("file.lastModified : " + file.lastModified)
 			
 			document.querySelector('.image-preview').innerHTML += `
-            <li id="${file.lastModified}" class="imgList position-relative preview">
+            <li id="${file.index}" class="imgList position-relative preview">
                 <img src="${e.target.result}" alt="" class="imgList">
-                <span onclick="removeFile(${file.lastModified})" class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+                <span onclick="removeFile(${file.index})" class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
                 X
                 </span>
             </li>`;
+            
 		};
 		reader.readAsDataURL(file);
 	});
 });
 
+
 function removeFile(target) {
 	const removeTarget = document.getElementById(target);
 	const files = document.getElementById('uploadedImage').files;
 	const dataTranster = new DataTransfer();
-
+		
+	console.log("target : " + target)
+	
 	Array.from(files)
-		.filter((file) => file.lastModified != target)
+		.filter((file) => file.index != target)
 		.forEach((file) => {
 			dataTranster.items.add(file);
 		});
@@ -45,6 +52,8 @@ function removeFile(target) {
 	document.getElementById('uploadedImage').files = dataTranster.files;
 	removeTarget.remove();
 }
+
+
 
 function removeAll() {
 	const list = document.querySelectorAll('.imgList');
