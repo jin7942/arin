@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinfw.infra.common.constans.Constants;
+import com.jinfw.infra.common.utill.KakaoOauth;
 
 @Controller
 @RequestMapping(value = "/")
@@ -93,11 +94,17 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login/kakao/oauth")
-    public String loginWithKakao(String code) throws Exception {
+    @ResponseBody
+    public Map<String, Object> loginWithKakao(String code, Login dto) throws Exception {
 
-        service.kakaoLogin(code);
-
-        return "infra/main/user/main";
+        Map<String, Object> returnMap = KakaoOauth.getUserInfoByToken(KakaoOauth.getAccessToken(code));
+        
+        dto.setId(returnMap.get("id").toString());
+        System.out.println("dto: " + returnMap.get("id").toString());
+        
+        // TODO: db id 조회 결과따라 리턴 분기
+        
+        return returnMap;
     }
 
 }

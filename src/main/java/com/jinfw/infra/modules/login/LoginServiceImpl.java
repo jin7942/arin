@@ -25,9 +25,6 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String kakaoLogin(String code) throws Exception {
 
-        String token = KakaoOauth.getAccessToken(code);
-        System.out.println("token : " + token);
-
         return "good";
     }
 
