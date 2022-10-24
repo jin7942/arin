@@ -19,6 +19,9 @@ public class LoginDao {
 	public Login selectOneId(Login dto) {
 		return sqlSession.selectOne(namespace + ".selectOneId", dto);
 	}
+	public String kakaoLogin(String code) {
+	    return sqlSession.selectOne(namespace + ".kakaoLogin", code);
+	}
 	
 	
 }

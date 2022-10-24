@@ -31,7 +31,6 @@ userName.addEventListener('keyup', () => {
         isName = false;
     } else {
         document.getElementById('nameFeedback').style.display = 'none';
-        userName.removeEventListener;
         isName = true;
     }
 });
@@ -69,7 +68,6 @@ id.addEventListener('focusout', () => {
 			}
 		});
         
-        id.removeEventListener;
     }
 });
 
@@ -79,7 +77,6 @@ pw.addEventListener('keyup', () => {
         isPw = false;
     } else {
         document.getElementById('pwFeedback').style.display = 'none';
-        pw.removeEventListener;
         isPw = true;
     }
 });
@@ -90,8 +87,17 @@ chkPw.addEventListener('keyup', () => {
         isChkPw = false;
     } else {
         document.getElementById('chkPwFeedback').style.display = 'none';
-        chkPw.removeEventListener;
         isChkPw = true;
+    }
+});
+
+email.addEventListener('keyup', () => {
+    if (email.value == '' || !emailRegex.test(email.value)) {
+        document.getElementById('emailFeedback').style.display = 'block';
+        isEmail = false;
+    } else {
+        document.getElementById('emailFeedback').style.display = 'none';
+        isEmail= true;
     }
 });
 
@@ -101,7 +107,6 @@ mobile.addEventListener('keyup', () => {
         isMobile = false;
     } else {
         document.getElementById('mobileFeedback').style.display = 'none';
-        mobile.removeEventListener;
         isMobile = true;
     }
 });
@@ -128,10 +133,16 @@ function onSubmit() {
         document.getElementById('chkBoxFeedback').style.display = 'none';
     }
 
-    if (isName && isId && isPw && isChkPw  && isMobile) {
+    if (isName && isId && isPw && isChkPw  && isMobile && isEmail) {
         alert('제출');
         const goUrlForm = "/main/userInst";
         const form = $("form[name=form]");
+        const str = email.value;
+        
+        let words = str.split('@');
+        
+        document.getElementById('memberMailName').value = words[0]
+        document.getElementById('memberMailDomain').value = words[1]
         
         form.attr("action", goUrlForm).submit();
         
@@ -152,8 +163,10 @@ function searchAddress() {
             document.getElementById('zonecode').value = data.zonecode;
             document.getElementById('address').value = data.address;
             document.getElementById('bname').value = data.bname;
+        	document.getElementById('memberPlace').value = data.sigungu + " " + data.bname;
             
             geocoder.addressSearch(data.address, callback);
+            console.log(data)
             
         },
     }).open({

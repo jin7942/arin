@@ -114,6 +114,10 @@
 										<label for="email">EMAIL</label>
 										<!-- name-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="emailFeedback">올바른 이메일 형식이 아닙니다.</div>
+										
+										<input type="hidden" name="memberMailName" id="memberMailName" />
+										<input type="hidden" name="memberMailDomain" id="memberMailDomain" />
+										
 									</div>
 
 									<!-- mobile -->
@@ -145,10 +149,12 @@
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="address" placeholder="name@example.com" name="memberPlace" disabled="disabled" />
+										<input type="text" class="form-control" id="address" placeholder="name@example.com" disabled="disabled" />
 										<label for="address">주소</label>
 
 										<div style="text-align: left; display: none; color: red" id="addressFeedback">필수 입력 항목입니다.</div>
+										
+										<input type="hidden" name="memberPlace" id="memberPlace" /> 
 									</div>
 
 									<div class="form-floating mb-3">
@@ -186,7 +192,9 @@
 								<hr class="my-4" />
 
 								<div class="col-md-12">
-									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px">Kakao</button>
+									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px" onclick="loginWithKakao()">
+										Kakao
+									</button>
 									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #eb4435; margin-top: 10px">Google</button>
 									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white">Naver</button>
 									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #3b5998; margin-top: 10px; color: white">Facebook</button>
@@ -207,7 +215,19 @@
 	
 	<!-- kakao API -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d83d77585dfcb78cea837606843f75b&libraries=services"></script>
-
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        Kakao.init('1d83d77585dfcb78cea837606843f75b');
+	        Kakao.isInitialized();
+	    });
+	
+	    function loginWithKakao() {
+	        Kakao.Auth.authorize({ 
+	        	redirectUri: 'http://localhost:8080/login/kakao/oauth' 
+	        }); // 등록한 리다이렉트uri 입력
+	    }
+	</script>
 	<!-- footer -->
 	<%@include file="../../common/user/includeV1/footer.jsp"%>
 	<!-- End of footer -->

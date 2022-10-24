@@ -65,9 +65,9 @@
 			,#{memberName}	
 			,#{memberMobile}	
 			,2	
-			,"test"
-			,"naver.com"	
-			,"수원시 팔달구 인계동"	
+			,#{memberMailName}
+			,#{memberMailDomain}	
+			,#{memberPlace}	
 			,now()	
 			,now()
 			,0	
