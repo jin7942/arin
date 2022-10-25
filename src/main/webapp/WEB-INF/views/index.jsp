@@ -117,7 +117,7 @@
 									<hr class="my-4" />
 
 									<div class="col-md-12">
-										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px">Kakao</button>
+										<button type="button" class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px" onclick="loginWithKakao()">Kakao</button>
 										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #eb4435; margin-top: 10px">Google</button>
 										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white">Naver</button>
 										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #3b5998; margin-top: 10px; color: white">Facebook</button>
@@ -132,7 +132,10 @@
 		</section>
 	</main>
 	<!-- End #main -->
-
+	
+	<!-- kakao API -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d83d77585dfcb78cea837606843f75b&libraries=services"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
 		function login() {
 			$.ajax({
@@ -155,6 +158,18 @@
 				}
 			});
 		}
+	</script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	        Kakao.init('1d83d77585dfcb78cea837606843f75b');
+	        Kakao.isInitialized();
+	    });
+	
+	    function loginWithKakao() {
+	        Kakao.Auth.authorize({ 
+	        	redirectUri: 'http://localhost:8080/login/kakao/oauth' 
+	        }); // 등록한 리다이렉트uri 입력
+	    }
 	</script>
 
 	<!-- footer -->

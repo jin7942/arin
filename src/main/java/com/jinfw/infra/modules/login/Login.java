@@ -8,11 +8,25 @@ public class Login {
 	private String memberPW;
 	private String memberName;
 	private String memberPlace;
+	private String memberMailName;
+	private String memberMailDomain;
 	
     //	Login with Kakao
 	private String id;
 	private String email;
 	
+	public String getMemberMailName() {
+	    return memberMailName;
+	}
+	public void setMemberMailName(String memberMailName) {
+	    this.memberMailName = memberMailName;
+	}
+	public String getMemberMailDomain() {
+	    return memberMailDomain;
+	}
+	public void setMemberMailDomain(String memberMailDomain) {
+	    this.memberMailDomain = memberMailDomain;
+	}
 	public String getMemberPlace() {
 	    return memberPlace;
 	}

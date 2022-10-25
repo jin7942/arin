@@ -68,8 +68,6 @@ public class KakaoOauth {
         conn.setRequestProperty("Authorization", "Bearer " + token); // 전송할 header 작성, access_token전송
 
         // 결과 코드가 200이라면 성공
-        int responseCode = conn.getResponseCode();
-        System.out.println("responseCode : " + responseCode);
 
         // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -86,6 +84,12 @@ public class KakaoOauth {
         JsonElement element = parser.parse(result);
 
         long id = element.getAsJsonObject().get("id").getAsLong();
+        String name = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("profile").getAsJsonObject().get("nickname").getAsString();
+        String mailName = "";
+        String mailDomain = "";
+        
+        System.out.println("test : " + name);
+        
         boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("has_email")
                 .getAsBoolean();
         String email = "";
@@ -93,14 +97,17 @@ public class KakaoOauth {
             email = element.getAsJsonObject().get("kakao_account").getAsJsonObject().get("email").getAsString();
         }
 
-        System.out.println("id : " + id);
-        System.out.println("email : " + email);
-
         br.close();
 
         Map<String, Object> returnMap = new HashMap<String, Object>();
+        
+        mailName = email.substring(0, email.indexOf("@"));
+        mailDomain = email.substring(email.indexOf("@") + 1);;
+        
         returnMap.put("id", id);
-        returnMap.put("email", email);
+        returnMap.put("name", name);
+        returnMap.put("mailName", mailName);
+        returnMap.put("mailDomain", mailDomain);
 
         return returnMap;
     }

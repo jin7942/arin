@@ -30,4 +30,40 @@
 			AND b.seq = #{seq}
 	</select>
 	
+	
+	<!-- 카카오 로그인 -->
+	<select id="kakaoLogin" resultMap="resultMapObj">
+		SELECT
+			a.seq
+			,a.memberID
+			,a.memberPW
+			,a.memberName
+			,a.memberPlace
+		FROM member a
+		WHERE 1=1
+			AND memberID = #{id}
+	</select>
+	<!-- 카카오 회원가입 -->
+	<insert id="kakaoInsert">
+		INSERT INTO member(
+			memberID
+			,memberName
+			,memberMailName
+			,memberMailDomain
+			,memberSignDatetime
+			,memberModDatetime
+			,memberDelNY
+			,type
+		)
+		VALUES (
+			#{memberID}
+			,#{memberName}	
+			,#{memberMailName}
+			,#{memberMailDomain}	
+			,now()	
+			,now()
+			,0
+			,1	
+		)
+	</insert>
 </mapper>

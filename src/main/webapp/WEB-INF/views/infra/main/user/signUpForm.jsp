@@ -81,10 +81,9 @@
 										<!-- name-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="nameFeedback">2 ~ 12자 한글, 숫자, 영어만 가능합니다.</div>
 									</div>
-
 									<!-- id -->
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="id" placeholder="ID" name="memberID" />
+										<input type="text" class="form-control" id="id" placeholder="ID" name="memberID" value="<c:out value="${item.id}" />" />
 										<label for="id">ID</label>
 										<!-- id-validation-feedback -->
 										<div style="text-align: left; display: none; color: red" id="idFeedback">4 ~ 12자 영문, 숫자만 가능합니다.</div>

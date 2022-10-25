@@ -10,11 +10,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jinfw.infra.common.constans.Constants;
 import com.jinfw.infra.common.utill.KakaoOauth;
+import com.jinfw.infra.modules.main.Main;
+import com.jinfw.infra.modules.main.MainServiceImpl;
 
 @Controller
 @RequestMapping(value = "/")
@@ -94,17 +98,41 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login/kakao/oauth")
-    @ResponseBody
-    public Map<String, Object> loginWithKakao(String code, Login dto) throws Exception {
+    public String loginWithKakao(String code, Login dto, HttpSession httpSession, Model model,
+            RedirectAttributes redirectAttributes) throws Exception {
 
         Map<String, Object> returnMap = KakaoOauth.getUserInfoByToken(KakaoOauth.getAccessToken(code));
-        
+
         dto.setId(returnMap.get("id").toString());
-        System.out.println("dto: " + returnMap.get("id").toString());
+        String memberName = returnMap.get("name").toString();
+        String memberMailName = returnMap.get("mailName").toString();
+        String memberMailDomain = returnMap.get("mailDomain").toString();
+
+        Login rtMember = service.kakaoLogin(dto);
+
+        if (rtMember == null) {
+            // 회원가입
+            dto.setMemberID(dto.getId());
+            dto.setMemberName(memberName);
+            dto.setMemberMailName(memberMailName);
+            dto.setMemberMailDomain(memberMailDomain);
+
+            service.kakaoInsert(dto);
+            
+            return "redirect:/index#about";
+        } else {
+            
+            httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+            httpSession.setAttribute("sessSeq", rtMember.getSeq());
+            httpSession.setAttribute("sessId", rtMember.getMemberID());
+            httpSession.setAttribute("sessName", rtMember.getMemberName());
+            httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
+            
+            return "redirect:/main/";
+        }
+
         
-        // TODO: db id 조회 결과따라 리턴 분기
-        
-        return returnMap;
+
     }
 
 }

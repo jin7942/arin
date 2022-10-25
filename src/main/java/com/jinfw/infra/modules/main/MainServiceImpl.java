@@ -28,7 +28,7 @@ public class MainServiceImpl implements MainService {
 
 	/*회원가입*/
 	@Override
-	public int insert(Main dto) throws Exception {
+	public  int insert(Main dto) throws Exception {
 		
 		// 비밀번호 암호화
     	dto.setMemberPW(UtilSecurity.encryptSha256(dto.getMemberPW()));
