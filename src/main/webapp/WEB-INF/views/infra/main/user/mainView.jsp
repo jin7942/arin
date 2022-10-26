@@ -43,6 +43,7 @@
 			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>" />
 			<input type="hidden" name="itemSeq" id="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
 			<input type="hidden" name="sessSeq" id="sessSeq" value="<c:out value="${sessSeq}"/>" />
+			<input type="hidden" name="sessName" id="sessName" value="<c:out value="${sessName}"/>" />
 
 			<div class="col-4">
 				<h2>
@@ -186,6 +187,7 @@
 	const commentReject = () => {
 		const comment = document.getElementById("review");
 		let commentHTML = "";
+		let today = new Date();  
 		
 		$.ajax({
 			async:'false',
@@ -196,8 +198,8 @@
 				if (res.rt == "success") {
 
 					commentHTML += '<div id="review">'
-					commentHTML += '<h5>김진범님<span style="float: right">2021-04-01 15.32.42</span></h5>'
-					commentHTML += '<p>항상 꿀매만 올리십니다.</p>'
+					commentHTML += '<h5>' + $("#sessName").val() + '<span style="float: right">' + today.toLocaleString() + '</span></h5>'
+					commentHTML += '<p>'+ $("#memberReviewComment").val() +'</p>'
 					commentHTML += '<hr />'
 					commentHTML += '</div>'
 					comment.innerHTML += commentHTML;
