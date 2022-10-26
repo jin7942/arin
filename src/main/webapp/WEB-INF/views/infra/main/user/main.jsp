@@ -44,7 +44,7 @@
 				<c:forEach items="${list}" var="list" varStatus="status">
 					<div class="col" style="cursor: pointer">
 						<div class="card" data-aos="fade-up" data-aos-delay="200">
-							<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="card-img-top" alt="..." />
+							<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="img-thumbnail card-img-top" />
 							<div class="card-body" onclick="goView(<c:out value="${list.itemSeq}"/>)">
 
 								<%-- <input type="hidden" name="seq" value="<c:out value="${list.seq}" />" /> --%>

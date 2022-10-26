@@ -26,7 +26,6 @@
 
                             <tr>
                                 <td rowspan="4">
-                                    <img src="/resources/template_imperial/assets/img/sample.jpg" class="img-thumbnail" alt="..." />
                                 </td>
                                 <td>이름</td>
                                 <td><c:out value="${item.memberName}" /></td>
@@ -51,7 +50,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="" style="color: black">프로필 사진 변경</a></td>
+                                <td></td>
                                 <td>주소</td>
                                 <td><c:out value="${item.memberPlace}" /></td>
                             </tr>

@@ -79,7 +79,37 @@
 				</div>
 			</div>
 		</div>
-
+		
+		
+		<!-- 리뷰 -->
+		<form action="" name="commentForm">
+			<div class="row gx-5" style="margin-top: 20%; width: 100%">
+			
+				<h3>리뷰</h3>
+				<hr />
+			
+				<div class="col-6">
+					
+					<div class="comment">
+						<div id="review">
+							<h5>김진범님<span style="float: right">2021-04-01 15.32.42</span></h5>
+							<p>항상 꿀매만 올리십니다.</p>
+							<hr />
+						</div>
+					</div>
+					
+					<h4><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></h4>
+					<input type="text" class="form-control" style="height: 150px"/>
+					<br />
+					<button type="button" class="btn btn-dark" onclick="commentReject()">등록</button>
+				
+				</div>
+				<div class="col-3"></div>
+				
+				
+				<div class="col-3"></div>
+			</div>
+		</form>
 
 		<!-- 추천상품 -->
 		<form action="" method="post" name="form">
@@ -153,6 +183,20 @@
 <!-- End of footer -->
 
 <script type="text/javascript">
+	const commentReject = () => {
+		const comment = document.getElementById("review");
+		let commentHTML = "";
+		
+		commentHTML += '<div id="review">'
+		commentHTML += '<h5>김진범님<span style="float: right">2021-04-01 15.32.42</span></h5>'
+		commentHTML += '<p>항상 꿀매만 올리십니다.</p>'
+		commentHTML += '<hr />'
+		commentHTML += '</div>'
+		
+		comment.innerHTML += commentHTML;
+		
+	}
+
 	function goView(keyValue) {
 		const goUrlView = "/main/view"
 		const form = $("form[name=form]");
