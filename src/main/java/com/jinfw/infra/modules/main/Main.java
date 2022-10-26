@@ -24,6 +24,9 @@ public class Main {
 	private String memberMailDomain;
 	private String memberPlace;
 	
+    /* memberReview DTO */
+	private String memberReviewComment;
+
 	/* upload DTO */
 	private Integer defaultNy;
 	private Integer sort;
@@ -38,6 +41,12 @@ public class Main {
 	private MultipartFile[] uploadedImage;
 	private String itemImgThumbNail;
 	
+	public String getMemberReviewComment() {
+	    return memberReviewComment;
+	}
+	public void setMemberReviewComment(String memberReviewComment) {
+	    this.memberReviewComment = memberReviewComment;
+	}
 	public String getItemImgThumbNail() {
 		return itemImgThumbNail;
 	}

@@ -99,7 +99,7 @@
 					</div>
 					
 					<h4><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></h4>
-					<input type="text" class="form-control" style="height: 150px"/>
+					<input type="text" class="form-control" style="height: 150px" id="memberReviewComment" name="memberReviewComment"/>
 					<br />
 					<button type="button" class="btn btn-dark" onclick="commentReject()">등록</button>
 				
@@ -187,13 +187,29 @@
 		const comment = document.getElementById("review");
 		let commentHTML = "";
 		
-		commentHTML += '<div id="review">'
-		commentHTML += '<h5>김진범님<span style="float: right">2021-04-01 15.32.42</span></h5>'
-		commentHTML += '<p>항상 꿀매만 올리십니다.</p>'
-		commentHTML += '<hr />'
-		commentHTML += '</div>'
-		
-		comment.innerHTML += commentHTML;
+		$.ajax({
+			async:'false',
+			url:'./regComment',
+			type:'post',
+			data:{"seq": $("#sessSeq").val() ,"memberReviewComment" : $("#memberReviewComment").val() },
+			success:(res) => {
+				if (res.rt == "success") {
+
+					commentHTML += '<div id="review">'
+					commentHTML += '<h5>김진범님<span style="float: right">2021-04-01 15.32.42</span></h5>'
+					commentHTML += '<p>항상 꿀매만 올리십니다.</p>'
+					commentHTML += '<hr />'
+					commentHTML += '</div>'
+					comment.innerHTML += commentHTML;
+			
+				} else {
+					alert("등록 실패");
+				}
+			},
+			error:(jqXHR) => {
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
 		
 	}
 
