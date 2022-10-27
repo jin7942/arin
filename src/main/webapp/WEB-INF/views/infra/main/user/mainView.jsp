@@ -46,7 +46,7 @@
 			<input type="hidden" name="sessName" id="sessName" value="<c:out value="${sessName}"/>" />
 
 			<div class="col-4">
-				<h2>
+				<h2> 
 					<b> <c:out value="${item.itemHeader}" />
 					</b>
 				</h2>
