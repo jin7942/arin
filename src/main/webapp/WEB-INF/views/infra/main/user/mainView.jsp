@@ -92,11 +92,13 @@
 				<div class="col-6">
 					
 					<div class="comment">
-						<div id="review">
-							<h5>김진범님<span style="float: right">2021-04-01 15.32.42</span></h5>
-							<p>항상 꿀매만 올리십니다.</p>
-							<hr />
-						</div>
+						<c:forEach items="${listComment}" var="listComment" varStatus="status">
+							<div id="review">
+								<h5><span style="float: right"><c:out value="${listComment.memberReviewModDatetime}" /></span></h5>
+								<p><c:out value="${listComment.memberReviewComment}" /></p>
+								<hr />
+							</div>
+						</c:forEach>
 					</div>
 					
 					<h4><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></h4>

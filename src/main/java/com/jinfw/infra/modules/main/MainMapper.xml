@@ -210,19 +210,5 @@
 			AND item_seq = #{itemSeq}
 	</select>
 	
-	<!-- 댓글등록 -->
-	<insert id="regComment">
-		INSERT INTO memberReview (
-			memberReviewRegDatetime
-			,memberReviewModDatetime
-			,memberReviewComment
-			,member_seq
-		) VALUES (
-			now()
-			,now()
-			,#{memberReviewComment}
-			,#{seq}		
-		)
-	</insert>
 
 </mapper>

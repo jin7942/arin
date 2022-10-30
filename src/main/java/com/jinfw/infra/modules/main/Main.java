@@ -26,8 +26,9 @@ public class Main {
 	
     /* memberReview DTO */
 	private String memberReviewComment;
+	private String memberReviewModDatetime;
 
-	/* upload DTO */
+    /* upload DTO */
 	private Integer defaultNy;
 	private Integer sort;
 	private String path;
@@ -38,9 +39,15 @@ public class Main {
 	private long size;
 	private Integer delNy;
 	private String pseq;
-	private MultipartFile[] uploadedImage;
+    private MultipartFile[] uploadedImage;
 	private String itemImgThumbNail;
 	
+	public String getMemberReviewModDatetime() {
+	    return memberReviewModDatetime;
+	}
+	public void setMemberReviewModDatetime(String memberReviewModDatetime) {
+	    this.memberReviewModDatetime = memberReviewModDatetime;
+	}
 	public String getMemberReviewComment() {
 	    return memberReviewComment;
 	}

@@ -223,22 +223,5 @@ public class MainController {
 
 		return returnMap;
 	}
-	
-	@RequestMapping("/regComment")
-    @ResponseBody
-    public Map<String, Object> regComment(Main dto) throws Exception {
-
-        Map<String, Object> returnMap = new HashMap<String, Object>();
-
-        int cnt = service.regComment(dto);
-
-        if (cnt == 1) {
-            returnMap.put("rt", "success");
-        } else {
-            returnMap.put("rt", "fail");
-        }
-
-        return returnMap;
-    }
 
 }
