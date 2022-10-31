@@ -62,7 +62,7 @@
                     <div class="col">
                         <table class="table table-borderless">
                             <tr>
-                                <td><i class="fa-solid fa-envelope-open fa-2x" style="cursor: pointer"></i></td>
+                                <td><i class="fa-solid fa-envelope-open fa-2x" style="cursor: pointer" onclick="location.href='/user/commentHistory'"></i></td>
                                 <td>
                                 	<i class="fa-brands fa-shopify fa-2x" style="cursor: pointer" onclick="location.href='/user/history'"></i>
                                 </td>
@@ -72,7 +72,7 @@
                                 <td><i class="fa-solid fa-circle-check fa-2x" style="cursor: pointer" onclick="location.href='/user/regHistory'"></i></td>
                             </tr>
                             <tr>
-                                <td>나의 거래 후기</td>
+                                <td>내가 등록한 댓글</td>
                                 <td>구매내역</td>
                                 <td>장바구니</td>
                                 <td>내가 등록한 상품</td>

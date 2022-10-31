@@ -66,4 +66,12 @@ public class MainDao {
 		return sqlSession.selectOne(namespace + ".selectOneCartCount", vo);
 	}
 	
+	// 댓글 조회
+	public List<Main> selectComment(MainVo vo) {
+	    return sqlSession.selectList(namespace + ".selectComment", vo);
+	}
+	// 댓글등록
+	public int regComment(Main dto) {
+	    return sqlSession.insert(namespace + ".regComment", dto);
+	}
 }

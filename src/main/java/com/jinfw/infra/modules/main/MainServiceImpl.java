@@ -98,4 +98,15 @@ public class MainServiceImpl implements MainService {
         return dao.selectOneCartCount(vo);
     }
     
+    // 댓글 조회
+    @Override
+    public List<Main> selectComment(MainVo vo) throws Exception {
+        return dao.selectComment(vo);
+    }
+    // 댓글 등록
+    @Override
+    public int regComment(Main dto) throws Exception {
+        return dao.regComment(dto);
+    }
+    
 }

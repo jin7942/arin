@@ -209,6 +209,35 @@
 			AND member_seq = #{mainKey}
 			AND item_seq = #{itemSeq}
 	</select>
+	 
+	<!-- 댓글 조회 -->
+	<select id="selectComment" resultMap="resultMapObj">
+		SELECT
+			a.itemReviewModDatetime
+			,a.itemReviewComment
+			,b.memberName
+		FROM itemReview a
+		JOIN member b on seq = a.itemReviewMemberSeq
+		WHERE 1=1
+			AND a.itemReviewItemSeq = #{mainKey}
+	</select>
 	
+	<!-- 댓글등록 -->
+	<insert id="regComment">
+		INSERT INTO itemReview(
+			itemReviewRegDatetime
+			,itemReviewModDatetime
+			,itemReviewComment
+			,itemReviewItemSeq
+			,itemReviewMemberSeq		
+		)
+		VALUES (
+			now()
+			,now()
+			,#{itemReviewComment}
+			,#{itemSeq}
+			,#{seq}
+		)
+	</insert>
 
 </mapper>

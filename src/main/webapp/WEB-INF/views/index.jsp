@@ -49,7 +49,9 @@
 					We create <span class="typed" data-typed-items="beautiful graphics, functional websites, working mobile apps"></span>
 				</h2>
 				<div class="actions">
-					<a href="#about" class="btn-get-started">Login</a> <a href="/main/signUp" class="btn-services">Sign Up</a>
+					<a href="#about" class="btn-services">Login</a> 
+					<a href="/main/signUp" class="btn-services">Sign Up</a>
+					<a href="/login" class="btn-services">관리자페이지</a>
 				</div>
 			</div>
 		</div>
@@ -96,11 +98,11 @@
 								<!-- ========== Login Form ========== -->
 								<form action="">
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="memberID" placeholder="temp@gmail.com" name="memberID" />
+										<input type="text" class="form-control" id="memberID" placeholder="temp@gmail.com" name="memberID" value="test" />
 										<label for="floatingInput">ID</label>
 									</div>
 									<div class="form-floating">
-										<input type="password" class="form-control" id="memberPW" placeholder="temp@gmail.com" name="memberPW" />
+										<input type="password" class="form-control" id="memberPW" placeholder="temp@gmail.com" name="memberPW" value="1234" />
 										<label for="floatingPassword">Password</label>
 									</div>
 

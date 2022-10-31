@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jinfw.infra.modules.code.Code;
+import com.jinfw.infra.modules.code.CodeVo;
+
 @Controller
 @RequestMapping(value = "/member/")
 public class MemberController {
@@ -42,4 +45,9 @@ public class MemberController {
 		return "infra/member/xdmin/memberList";
 	}
 
+    @RequestMapping(value = "memberForm")
+    public String codeForm(@ModelAttribute("vo") CodeVo vo, Code dto, Model model) throws Exception {
+
+        return "infra/member/xdmin/memberForm";
+    }	
 }

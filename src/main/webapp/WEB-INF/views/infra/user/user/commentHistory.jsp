@@ -15,16 +15,9 @@
 	<div class="container" style="margin-top: 10%; margin-bottom: 20%; width: 85%">
 		<div class="row" data-aos="fade-up">
 			<div class="col-12" style="text-align: center">
-				<h2>내가 등록한 상품</h2>
-				
-				<%@include file="../../common/user/includeV1/searchbar.jsp"%>
-				
+				<h2>구매내역</h2>
 			</div>
 		</div>
-
-		<form action="" name="form">
-			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>" />
-		</form>
 
 		<div class="row" data-aos="fade-up" data-aos-delay="200">
 			<div class="col">
@@ -37,8 +30,8 @@
 						<tr>
 							<td>#</td>
 							<td>날짜</td>
-							<td>내역</td>
-							<td>판매금액</td>
+							<td>내용</td>
+							<td>구매금액</td>
 							<td>상태</td>
 						</tr>
 					</thead>
@@ -52,31 +45,18 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list" varStatus="status">
-								<tr onclick="goView(<c:out value="${list.itemSeq}"/>)">
+								<tr>
 									<td>#</td>
+									<td><c:out value="${list.itemBuyDatetime}" /></td>
+									<td><c:out value="${list.itemHeader}" /></td>
 									<td>
-										<c:out value="${list.itemRegDatetime}" />
+										<fmt:formatNumber value="${list.itemPrice}" pattern="#,###,###"/> 원
 									</td>
 									<td>
-										<c:out value="${list.itemHeader}" />
+										<c:if test="${list.itemSaleNY eq 1}">
+											구매
+										</c:if>
 									</td>
-									<td>
-										<fmt:formatNumber value="${list.itemPrice}" pattern="#,###,###" />
-										원
-									</td>
-
-									<c:set var="itemSaleNY" value="${list.itemSaleNY}" />
-									<c:choose>
-										<c:when test="${itemSaleNY eq '0'}">
-											<td>판매중</td>
-										</c:when>
-										<c:otherwise>
-											<td>판매완료</td>
-										</c:otherwise>
-									</c:choose>
-
-									<%-- <td><c:out value="${list.itemSaleNY}" /></td> --%>
-
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -84,41 +64,13 @@
 				</table>
 				<!-- End of Table -->
 
-				<!-- pagination s -->
-				<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
-				<!-- pagination e -->
-
 			</div>
 		</div>
 	</div>
 </main>
 <!-- End #main -->
 
-<script>
-	const goUrlView = "/main/view";
-	const form = $("form[name=form]");
-	const mainKey = $("input:hidden[name=mainKey]");
-	
-	function goView(keyValue) {
-		mainKey.val(keyValue);
-		form.attr("action", goUrlView).submit();
-		
-	}
-	
-	function refresh() {
-		location.href = '/user/regHistory'
-	}
-	
-	var searchForm = $("form[name=searchForm]");
-	var goUrlList = "/user/regHistory";
-	
-	goList = function(thisPage) {
-		$("input:hidden[name=thisPage]").val(thisPage);
-		searchForm.attr("action", goUrlList).submit();
-	
-	}
-</script>
-
+<br /><br /><br /><br /><br /><br /><br /><br />
 <!-- footer -->
 <%@include file="../../common/user/includeV1/footer.jsp"%>
 <!-- End of footer -->

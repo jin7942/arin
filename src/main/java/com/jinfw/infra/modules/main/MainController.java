@@ -114,7 +114,7 @@ public class MainController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/idCheck")
-	@ResponseBody
+	@ResponseBody 
 	public Map<String, Object> idCheck(Main dto) throws Exception {
 
 		Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -146,9 +146,11 @@ public class MainController {
 
 		Main item = service.selectOne(vo);
 		List<Main> list = service.selectListItemImg(vo);
+		List<Main> listComment = service.selectComment(vo);
 		List<Main> listRecommend = service.selectListRecommend();
 
 		model.addAttribute("item", item);
+		model.addAttribute("listComment", listComment);
 		model.addAttribute("list", list);
 		model.addAttribute("listRecommend", listRecommend);
 
@@ -223,5 +225,22 @@ public class MainController {
 
 		return returnMap;
 	}
+	
+	@RequestMapping("/regComment")
+	@ResponseBody
+    public Map<String, Object> regComment(Main dto) throws Exception {
+
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+
+        int cnt = service.regComment(dto);
+
+        if (cnt == 1) {
+            returnMap.put("rt", "success");
+        } else {
+            returnMap.put("rt", "fail");
+        }
+
+        return returnMap;
+    }
 
 }

@@ -31,17 +31,17 @@
 
 							<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
 								<option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
-								<option value="0" <c:if test="${vo.shOptionDelNY eq 0}"  >selected</c:if>>N</option>
-								<option value="1" <c:if test="${vo.shOptionDelNY eq 1}"  >selected</c:if>>Y</option>
+								<option value="0" <c:if test="${vo.shOptionDelNY eq '0'}"  >selected</c:if>>N</option>
+								<option value="1" <c:if test="${vo.shOptionDelNY eq '1'}"  >selected</c:if>>Y</option>
 							</select> <select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
 								<option value="1" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
-								<option value="1" <c:if test="${vo.shOptionSort eq 1}"  >selected</c:if>>시퀀스</option>
-								<option value="2" <c:if test="${vo.shOptionSort eq 2}"  >selected</c:if>>등록일</option>
-								<option value="3" <c:if test="${vo.shOptionSort eq 3}"  >selected</c:if>>수정일</option>
+								<option value="1" <c:if test="${vo.shOptionSort eq '1'}"  >selected</c:if>>시퀀스</option>
+								<option value="2" <c:if test="${vo.shOptionSort eq '2'}"  >selected</c:if>>등록일</option>
+								<option value="3" <c:if test="${vo.shOptionSort eq '3'}"  >selected</c:if>>수정일</option>
 							</select> <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
 								<option value="" disabled selected <c:if test="${vo.shOptionDate}"  >selected</c:if>>검색구분</option>
-								<option value="1" <c:if test="${vo.shOptionDate eq 1}"  >selected</c:if>>등록일</option>
-								<option value="2" <c:if test="${vo.shOptionDate eq 2}"  >selected</c:if>>수정일</option>
+								<option value="1" <c:if test="${vo.shOptionDate eq '1'}"  >selected</c:if>>등록일</option>
+								<option value="2" <c:if test="${vo.shOptionDate eq '2'}"  >selected</c:if>>수정일</option>
 							</select>
 
 							<input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" />
@@ -50,15 +50,15 @@
 							<!-- rows -->
 							<select id="shOptionRows" name="shOptionRows" class="select btn btn-secondary dropdown-toggle">
 								<option value="">10</option>
-								<option value="2" <c:if test="${vo.shOptionRows eq 2}"  >selected</c:if>>20</option>
-								<option value="3" <c:if test="${vo.shOptionRows eq 3}"  >selected</c:if>>30</option>
+								<option value="2" <c:if test="${vo.shOptionRows eq '2'}"  >selected</c:if>>20</option>
+								<option value="3" <c:if test="${vo.shOptionRows eq '3'}"  >selected</c:if>>30</option>
 							</select> <br /> <br />
 
 							<div class="input-group">
 								<!-- TODO : 검색 조건 추가 -->
 								<select id="shOptionValue" name="shOptionValue" class="select btn btn-secondary dropdown-toggle">
 									<option value="" <c:if test="${empty vo.shOptionValue}"  >selected</c:if>>검색구분</option>
-									<option value="1" <c:if test="${vo.shOptionValue eq 1}"  >selected</c:if>>이름</option>
+									<option value="1" <c:if test="${vo.shOptionValue eq '1'}"  >selected</c:if>>이름</option>
 								</select>
 								<input id="shValue" name="shValue" value="<c:out value="${vo.shValue}"/>" type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
 								<!-- icons -->

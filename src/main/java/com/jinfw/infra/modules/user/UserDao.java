@@ -26,10 +26,19 @@ public class UserDao {
 	public List<User> selectList(UserVo vo) {
 		return sqlSession.selectList(namespace + ".selectList", vo);
 	}
+	// 주문내역 조회
+    public int selectHistoryCount(UserVo vo) {
+        return sqlSession.selectOne(namespace + ".selectHistoryCount", vo);
+    }
+    
 	
 	// 등록상품 조회
 	public List<User> selectListRegHistory(UserVo vo) {
 		return sqlSession.selectList(namespace + ".selectListRegHistory", vo);
+	}
+	// 등록상품 카운트
+	public int selectRegHistoryCount(UserVo vo) {
+	    return sqlSession.selectOne(namespace + ".selectRegHistoryCount", vo);
 	}
 	
 	// 회원정보 수정

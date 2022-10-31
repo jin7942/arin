@@ -22,6 +22,7 @@
 			<!-- Search-area -->
 			<div class="card shadow mb-4">
 				<div class="card-body">
+		
 					<!-- Search Form -->
 					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/codegroup/codeGroupList">
 						<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
@@ -38,7 +39,7 @@
 							<option value="1" <c:if test="${vo.shOptionDate eq '1'}"  >selected</c:if>>등록일</option>
 							<option value="2" <c:if test="${vo.shOptionDate eq '2'}"  >selected</c:if>>수정일</option>
 						</select> <input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" /> <input id="shEndDate" name="shEndDate" type="date" value="<c:out value="${vo.shEndDate}"/>" class="form-control bg-light border-0 small" placeholder="종료일" aria-label="Search" aria-describedby="basic-addon2" />
-
+						<br /><br />
 						<div class="input-group">
 							<!-- TODO : 검색 조건 추가 -->
 							<select id="shOptionValue" name="shOptionValue" class="select btn btn-secondary dropdown-toggle">
@@ -64,78 +65,94 @@
 			<!-- End of Search area -->
 
 			<!-- Table area -->
-			<div class="card shadow mb-4">
-				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">total : <c:out value="${totalCnt}"></c:out> </h6>
-				</div>
-				<div class="card-body">
-					<table class="table table-hover">
-						<!-- table-caption -->
-						<caption style="caption-side: top; text-align: right"></caption>
-						<!-- table-header -->
 
-						<thead class="table-dark">
-							<tr>
-								<td><input type="checkbox" name="" id="" /></td>
-								<td>#</td>
-								<td>seq</td>
-								<td>이름(영문)</td>
-								<td>이름(한글)</td>
-								<td>코드개수</td>
-								<td>사용여부</td>
-								<td>삭제여부</td>
-								<td>등록일</td>
-								<td>수정일</td>
-							</tr>
-						</thead>
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">
+							total :
+							<c:out value="${totalCnt}"></c:out>
+						</h6>
+					</div>
+					<div class="card-body">
+						<table class="table table-hover" id="table">
+							<!-- table-caption -->
+							<caption style="caption-side: top; text-align: right"></caption>
+							<!-- table-header -->
 
-						<!-- table-body -->
-						<c:choose>
-							<c:when test="${fn:length(list) eq 0 }">
+							<thead class="table-dark">
 								<tr>
-									<td colspan="10">No Data..</td>
+									<td>
+										<input type="checkbox" id="chkAll" onclick="chkAll()" />
+									</td>
+									<td>#</td>
+									<td>seq</td>
+									<td>제목</td>
+									<td>가격</td>
+									<td>판매여부</td>
+									<td>판매자</td>
+									<td>구매자</td>
 								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${list}" var="list" varStatus="status">
-									<tr onclick="location.href='/codegroup/codeGroupView?ifcgSeq=${list.ifcgSeq}'">
-										<td><input type="checkbox" name="" id="" /></td>
-										<td>
-											<%-- <c:out value="${vo.totalRows +((vo.thispage) * vo.rowNumToShow + status.index) + 1 }"></c:out> --%>
-										</td>
-										<td><c:out value="${list.ifcgSeq}"></c:out></td>
-										<td><c:out value="${list.ifcgNameEng}"></c:out></td>
-										<td><c:out value="${list.ifcgNameKor}"></c:out></td>
-										<td><c:out value="${list.codeCnt}"></c:out></td>
-										<td><c:out value="${list.ifcgUseNY}"></c:out></td>
-										<td><c:out value="${list.ifcgDelNY}"></c:out></td>
-										<td><c:out value="${list.ifcgRegDatetime}"></c:out></td>
-										<td><c:out value="${list.ifcgModDatetime}"></c:out></td>
+							</thead>
+
+							<!-- table-body -->
+							<c:choose>
+								<c:when test="${fn:length(list) eq 0 }">
+									<tr>
+										<td colspan="10">No Data..</td>
 									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</table>
-					<!-- End of Table -->
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list" varStatus="status">
+										<tr>
+											<td>
+												<input type="checkbox" class="chkbox" onclick="event.cancelBubble=true" />
+											</td>
+											<td></td>
+											<td>
+												<c:out value="${list.ifccSeq}"></c:out>
+											</td>
+											<td>
+												<a href="javascript:goForm(<c:out value="${list.ifccSeq}"/>)" class="text-decoration-none"> 
+													<c:out value="${list.ifccNameEng}"></c:out>
+												</a>
+											</td>
+											<td>
+												<c:out value="${list.ifccNameKor}"></c:out>
+											</td>
+											<td>
+												<c:out value="${list.ifccUseNY}"></c:out>
+											</td>
+											<td>
+												<c:out value="${list.ifccDelNY}"></c:out>
+											</td>
+											<td>
+												<c:out value="${list.infrCodeGroup_ifcgSeq}"></c:out>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</table>
+						<!-- End of Table -->
 
-					<!-- pagination s -->
-					<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
-					<!-- pagination e -->
+						<!-- pagination s -->
+						<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
+						<!-- pagination e -->
+						<button type="button" class="btn btn-danger" style="float: left" onclick="delRow()">
+							<i class="fa-solid fa-trash-can"></i>
+						</button>
 
-					<button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal" data-bs-target="#exampleModal">
-						<i class="fa-solid fa-trash-can"></i>
-					</button>
-
-					<button type="button " class="btn btn-primary" style="float: right" onclick="location.href='/codegroup/codeGroupForm'">
-						<i class="fa-solid fa-plus"></i>
-					</button>
-					<button type="button" class="btn btn-success" style="float: right">
-						<i class="fa-solid fa-file-excel"></i>
-					</button>
+						<button type="button" class="btn btn-primary" style="float: right" onClick="bntGoForm()">
+							<i class="fa-solid fa-plus"></i>
+						</button>
+						<button type="button" class="btn btn-success" style="float: right">
+							<i class="fa-solid fa-file-excel"></i>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->

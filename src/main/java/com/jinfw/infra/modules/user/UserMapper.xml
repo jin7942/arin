@@ -8,6 +8,33 @@
 
     <resultMap id="resultMapObj" type="com.jinfw.infra.modules.user.User"></resultMap>
 	
+	<sql id = "selectRegHistoryCommon">
+		<!-- 판매여부 -->
+		<choose>
+			<when test="shOptionDelNY == '0'">
+				AND a.itemSaleNY = 0
+			</when>
+			<when test="shOptionDelNY == '1'">
+				AND a.itemSaleNY = 1
+			</when>
+			<otherwise>
+				AND 1=1
+			</otherwise>
+		</choose>
+		<!-- 문자열 검색 -->
+		<choose>
+			<when test="shValue != null and shValue != ''">
+				AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
+			</when>
+		</choose>
+		<!-- 날짜 검색 -->
+		<choose>
+			<when test="shStartDate != null and shStartDate != ''">
+				AND a.itemRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+		</choose>
+	</sql>
+	
 	<!-- 유저 마이페이지 -->
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
@@ -24,28 +51,73 @@
 	
 	<!-- 구매내역 조회 -->
 	<select id="selectList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.itemHeader
+				,a.itemPrice
+				,a.itemBuyDatetime
+				,a.itemSaleNY
+			FROM item a
+			WHERE 1 = 1
+				AND a.member_seq1 = #{mainKey}
+				AND a.itemSaleNY = 1
+				<!-- 문자열 검색 -->
+				<choose>
+					<when test="shValue != null and shValue != ''">
+						AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
+					</when>
+				</choose>
+				<!-- 날짜 검색 -->
+				<choose>
+					<when test="shStartDate != null and shStartDate != ''">
+						AND a.itemRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+					</when>
+				</choose>
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	<select id="selectHistoryCount" resultType="Integer">
 		SELECT
-			a.itemHeader
-			,a.itemPrice
-			,a.itemBuyDatetime
-			,a.itemSaleNY
+			COUNT(*)
 		FROM item a
-		WHERE 1 = 1
+		WHERE 1=1
 			AND a.member_seq1 = #{mainKey}
 			AND a.itemSaleNY = 1
+			<!-- 문자열 검색 -->
+			<choose>
+				<when test="shValue != null and shValue != ''">
+					AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
+				</when>
+			</choose>
+			<!-- 날짜 검색 -->
+			<choose>
+				<when test="shStartDate != null and shStartDate != ''">
+					AND a.itemRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+				</when>
+			</choose>
 	</select>
 	
 	<!-- 등록내역 조회 -->
 	<select id="selectListRegHistory" resultMap="resultMapObj">
-		SELECT
-			a.itemHeader
-			,a.itemPrice
-			,a.itemRegDatetime
-			,a.itemSaleNY
-			,a.itemSeq
-		FROM item a
-		WHERE 1 = 1
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.itemHeader
+				,a.itemPrice
+				,a.itemRegDatetime
+				,a.itemSaleNY
+				,a.itemSeq
+			FROM item a
+			WHERE 1 = 1
 			AND a.member_seq = #{mainKey}
+			<include refid="selectRegHistoryCommon" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	<select id="selectRegHistoryCount" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM item a
+		WHERE 1=1
+			AND a.member_seq = #{mainKey}
+		<include refid="selectRegHistoryCommon" />
 	</select>
 	
 	<!-- 수정 -->
@@ -85,7 +157,10 @@
 			COUNT(*)
 		FROM itemCart a
 		    JOIN member b on a.member_seq = b.seq
-		WHERE 1 = 1 AND b.seq = #{mainKey}
+		    JOIN item aa on a.item_seq = aa.itemseq
+		WHERE 1 = 1 
+		AND b.seq = #{mainKey}
+		AND aa.itemSaleNY = 0
 	</select>
 	
 	<!-- 장바구니 삭제 -->
@@ -94,5 +169,15 @@
 			AND item_seq = #{itemSeq}
 			AND member_seq = #{mainKey}
 	</delete>
+	
+	<!-- 댓글내역 -->
+	<select id="selectComment" resultMap="resultMapObj">
+		SELECT
+			a.itemReviewModDatetime
+		    ,a.itemReviewComment
+		FROM itemReview a
+		WHERE 1=1
+			AND a.itemReviewMemberSeq = #{mainKey}
+	</select>
 	
 </mapper>

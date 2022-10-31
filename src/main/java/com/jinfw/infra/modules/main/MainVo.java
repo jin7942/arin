@@ -52,8 +52,17 @@ public class MainVo extends BaseVo {
 	/* MainVO vo */ 
 	private String mainKey;
 	private String itemSeq;
+	private String itemReviewMemberSeq;
 
-	public int getRowNumToShowForScroll() {
+	public String getItemReviewMemberSeq() {
+        return itemReviewMemberSeq;
+    }
+
+    public void setItemReviewMemberSeq(String itemReviewMemberSeq) {
+        this.itemReviewMemberSeq = itemReviewMemberSeq;
+    }
+
+    public int getRowNumToShowForScroll() {
 		return rowNumToShowForScroll;
 	}
 	

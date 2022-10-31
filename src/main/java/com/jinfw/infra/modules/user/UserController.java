@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jinfw.infra.modules.code.CodeVo;
 import com.jinfw.infra.modules.login.LoginController;
 
 @Controller
@@ -23,6 +24,11 @@ public class UserController {
 	UserServiceImpl service;
 	
 	String sessSeq = "";
+	
+   public void setSearchAndPaging(UserVo vo, int totalCnt) throws Exception {
+    
+        vo.setParamsPaging(totalCnt);
+    }
 	
 	public void setMainKey(UserVo vo, HttpServletRequest httpServletRequest) {
 		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
@@ -60,7 +66,11 @@ public class UserController {
 		
 		setMainKey(vo, httpServletRequest);
 		
+		int cnt = service.selectHistoryCount(vo);
 		List<User> list = service.selectList(vo);
+		setSearchAndPaging(vo, cnt);
+		
+		model.addAttribute("cnt", cnt);
 		model.addAttribute("list", list);
 		
 		return "infra/user/user/history";
@@ -78,8 +88,11 @@ public class UserController {
 		
 		setMainKey(vo, httpServletRequest);
 		
+		int cnt = service.selectRegHistoryCount(vo);
 		List<User> list = service.selectListRegHistory(vo);
+		setSearchAndPaging(vo, cnt);
 		model.addAttribute("list", list);
+		model.addAttribute("cnt", cnt);
 		
 		return "infra/user/user/regHistory";
 	}
@@ -146,8 +159,12 @@ public class UserController {
 
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		int result = service.selectOneCount(vo);
-		returnMap.put("cnt", result);
 		
+		if (result != 0) {
+		    returnMap.put("cnt", result);
+		} else {
+		    returnMap.put("cnt", 0);
+		}
 		return returnMap;
 	}
 	

@@ -91,18 +91,23 @@
 			
 				<div class="col-6">
 					
-					<div class="comment">
+					<div class="comment" id="comment">
+
 						<c:forEach items="${listComment}" var="listComment" varStatus="status">
 							<div id="review">
-								<h5><span style="float: right"><c:out value="${listComment.memberReviewModDatetime}" /></span></h5>
-								<p><c:out value="${listComment.memberReviewComment}" /></p>
+								<h5>
+									<b><c:out value="${listComment.memberName}" /></b>
+								</h5>
+								<span style="float: right"><c:out value="${listComment.itemReviewModDatetime}" /></span>
+								<p><c:out value="${listComment.itemReviewComment}" /></p>
 								<hr />
 							</div>
 						</c:forEach>
+
 					</div>
 					
 					<h4><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></h4>
-					<input type="text" class="form-control" style="height: 150px" id="memberReviewComment" name="memberReviewComment"/>
+					<input type="text" class="form-control" style="height: 150px" id="itemReviewComment" name="itemReviewComment"/>
 					<br />
 					<button type="button" class="btn btn-dark" onclick="commentReject()">등록</button>
 				
@@ -187,25 +192,23 @@
 
 <script type="text/javascript">
 	const commentReject = () => {
-		const comment = document.getElementById("review");
+		const comment = document.getElementById("comment");
 		let commentHTML = "";
-		let today = new Date();  
 		
 		$.ajax({
 			async:'false',
 			url:'./regComment',
 			type:'post',
-			data:{"seq": $("#sessSeq").val() ,"memberReviewComment" : $("#memberReviewComment").val() },
+			data:{"seq": $("#sessSeq").val() ,"itemReviewComment" : $("#itemReviewComment").val(), "itemSeq" : $("#itemSeq").val()  },
 			success:(res) => {
 				if (res.rt == "success") {
 
 					commentHTML += '<div id="review">'
-					commentHTML += '<h5>' + $("#sessName").val() + '<span style="float: right">' + today.toLocaleString() + '</span></h5>'
-					commentHTML += '<p>'+ $("#memberReviewComment").val() +'</p>'
+					commentHTML += '<h5><b>' + $("#sessName").val() + '</b><span style="float: right">' + 'now' + '</span></h5>'
+					commentHTML += '<p>'+ $("#itemReviewComment").val() +'</p>'
 					commentHTML += '<hr />'
 					commentHTML += '</div>'
 					comment.innerHTML += commentHTML;
-			
 				} else {
 					alert("등록 실패");
 				}
