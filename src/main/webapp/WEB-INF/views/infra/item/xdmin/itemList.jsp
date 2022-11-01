@@ -15,37 +15,41 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">코드그룹 관리</h1>
+	<h1 class="h3 mb-4 text-gray-800">상품 관리</h1>
 
 	<div class="row">
 		<div class="col-lg-12">
 			<!-- Search-area -->
 			<div class="card shadow mb-4">
 				<div class="card-body">
-		
+
 					<!-- Search Form -->
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/codegroup/codeGroupList">
+					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/code/itemList">
+						<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
+						<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}" />">
+
 						<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
-							<option value="0" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
-							<option value="0" <c:if test="${vo.shOptionDelNY eq '0'}"  >selected</c:if>>N</option>
-							<option value="1" <c:if test="${vo.shOptionDelNY eq '1'}"  >selected</c:if>>Y</option>
-						</select> <select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
-							<option value="1" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
+							<option value=""  <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>판매여부</option>
+							<option value="0" <c:if test="${vo.shOptionDelNY eq '0'}"  >selected</c:if>>판매중</option>
+							<option value="1" <c:if test="${vo.shOptionDelNY eq '1'}"  >selected</c:if>>판매완료</option>
+						</select>
+						<select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
+							<option value="" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
 							<option value="1" <c:if test="${vo.shOptionSort eq '1'}"  >selected</c:if>>시퀀스</option>
 							<option value="2" <c:if test="${vo.shOptionSort eq '2'}"  >selected</c:if>>등록일</option>
 							<option value="3" <c:if test="${vo.shOptionSort eq '3'}"  >selected</c:if>>수정일</option>
-						</select> <select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
+						</select>
+						<select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
 							<option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>>검색구분</option>
 							<option value="1" <c:if test="${vo.shOptionDate eq '1'}"  >selected</c:if>>등록일</option>
 							<option value="2" <c:if test="${vo.shOptionDate eq '2'}"  >selected</c:if>>수정일</option>
-						</select> <input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" /> <input id="shEndDate" name="shEndDate" type="date" value="<c:out value="${vo.shEndDate}"/>" class="form-control bg-light border-0 small" placeholder="종료일" aria-label="Search" aria-describedby="basic-addon2" />
-						<br /><br />
+						</select>
+						<input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" />
+						<input id="shEndDate" name="shEndDate" type="date" value="<c:out value="${vo.shEndDate}"/>" class="form-control bg-light border-0 small" placeholder="종료일" aria-label="Search" aria-describedby="basic-addon2" />
+						<br /> <br />
 						<div class="input-group">
 							<!-- TODO : 검색 조건 추가 -->
-							<select id="shOptionValue" name="shOptionValue" class="select btn btn-secondary dropdown-toggle">
-								<option value="" <c:if test="${empty vo.shOptionValue}"  >selected</c:if>>검색구분</option>
-								<option value="1" <c:if test="${vo.shOptionValue eq '1'}"  >selected</c:if>>이름</option>
-							</select> <input id="shValue" name="shValue" value="<c:out value="${vo.shValue}"/>" type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+							<input id="shValue" name="shValue" value="<c:out value="${vo.shValue}"/>" type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
 							<!-- icons -->
 							<div class="input-group-append">
 								<button class="btn btn-primary" type="submit">
@@ -56,7 +60,7 @@
 								</button>
 							</div>
 						</div>
-						
+
 					</form>
 					<!-- End Of Search Form -->
 				</div>
@@ -66,96 +70,109 @@
 
 			<!-- Table area -->
 
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">
-							total :
-							<c:out value="${totalCnt}"></c:out>
-						</h6>
-					</div>
-					<div class="card-body">
-						<table class="table table-hover" id="table">
-							<!-- table-caption -->
-							<caption style="caption-side: top; text-align: right"></caption>
-							<!-- table-header -->
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">
+						total :
+						<c:out value="${totalCnt}"></c:out>
+					</h6>
+				</div>
+				<div class="card-body">
+					<table class="table table-hover" id="table">
+						<!-- table-caption -->
+						<caption style="caption-side: top; text-align: right"></caption>
+						<!-- table-header -->
 
-							<thead class="table-dark">
+						<thead class="table-dark">
+							<tr>
+								<td>
+									<input type="checkbox" id="chkAll" onclick="chkAll()" />
+								</td>
+								<td></td>
+								<td>seq</td>
+								<td>상품이름</td>
+								<td>가격</td>
+								<td>등록일</td>
+								<td>수정일</td>
+								<td>장소</td>
+								<td>삭제여부</td>
+								<td>판매여부</td>
+								<td>판매자</td>
+							</tr>
+						</thead>
+
+						<!-- table-body -->
+						<c:choose>
+							<c:when test="${fn:length(list) eq 0 }">
 								<tr>
-									<td>
-										<input type="checkbox" id="chkAll" onclick="chkAll()" />
-									</td>
-									<td>#</td>
-									<td>seq</td>
-									<td>제목</td>
-									<td>가격</td>
-									<td>판매여부</td>
-									<td>판매자</td>
-									<td>구매자</td>
+									<td colspan="10">No Data..</td>
 								</tr>
-							</thead>
-
-							<!-- table-body -->
-							<c:choose>
-								<c:when test="${fn:length(list) eq 0 }">
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="list" varStatus="status">
 									<tr>
-										<td colspan="10">No Data..</td>
+										<td>
+											<input type="checkbox" class="chkbox" onclick="event.cancelBubble=true" />
+										</td>
+										<td></td>
+										<td>
+											<c:out value="${list.itemSeq}"></c:out>
+										</td>
+										<td>
+											<a href="javascript:goForm(<c:out value="${list.itemSeq}"/>)" class="text-decoration-none"> <c:out value="${list.itemHeader}"></c:out>
+											</a>
+										</td>
+										<td>
+											<c:out value="${list.itemPrice}"></c:out>
+										</td>
+										<td>
+											<c:out value="${list.itemRegDatetime}"></c:out>
+										</td>
+										<td>
+											<c:out value="${list.itemModDatetime}"></c:out>
+										</td>
+										<td>
+											<c:out value="${list.itemPlace}"></c:out>
+										</td>
+										<td>
+											<c:out value="${list.itemDelNY}"></c:out>
+										</td>
+										<td>
+											<c:out value="${list.itemSaleNY}"></c:out>
+										</td>
+										<td>
+											<c:out value="${list.seller}"></c:out>
+										</td>
 									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${list}" var="list" varStatus="status">
-										<tr>
-											<td>
-												<input type="checkbox" class="chkbox" onclick="event.cancelBubble=true" />
-											</td>
-											<td></td>
-											<td>
-												<c:out value="${list.ifccSeq}"></c:out>
-											</td>
-											<td>
-												<a href="javascript:goForm(<c:out value="${list.ifccSeq}"/>)" class="text-decoration-none"> 
-													<c:out value="${list.ifccNameEng}"></c:out>
-												</a>
-											</td>
-											<td>
-												<c:out value="${list.ifccNameKor}"></c:out>
-											</td>
-											<td>
-												<c:out value="${list.ifccUseNY}"></c:out>
-											</td>
-											<td>
-												<c:out value="${list.ifccDelNY}"></c:out>
-											</td>
-											<td>
-												<c:out value="${list.infrCodeGroup_ifcgSeq}"></c:out>
-											</td>
-										</tr>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</table>
-						<!-- End of Table -->
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+					<!-- End of Table -->
 
-						<!-- pagination s -->
-						<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
-						<!-- pagination e -->
-						<button type="button" class="btn btn-danger" style="float: left" onclick="delRow()">
-							<i class="fa-solid fa-trash-can"></i>
-						</button>
+					<!-- pagination s -->
+					<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
+					<!-- pagination e -->
+					<button type="button" class="btn btn-danger" style="float: left" onclick="delRow()">
+						<i class="fa-solid fa-trash-can"></i>
+					</button>
 
-						<button type="button" class="btn btn-primary" style="float: right" onClick="bntGoForm()">
-							<i class="fa-solid fa-plus"></i>
-						</button>
-						<button type="button" class="btn btn-success" style="float: right">
-							<i class="fa-solid fa-file-excel"></i>
-						</button>
-					</div>
+					<button type="button" class="btn btn-primary" style="float: right" onClick="bntGoForm()">
+						<i class="fa-solid fa-plus"></i>
+					</button>
+					<button type="button" class="btn btn-success" style="float: right">
+						<i class="fa-solid fa-file-excel"></i>
+					</button>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
+<form action="" name="form">
+	<input type="hidden" name="thisPage" />
+</form>
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
@@ -195,7 +212,19 @@
 <!-- temp -->
 <script type="text/javascript">
 	function refresh() {
-		location.href="/codegroup/codeGroupList";
+		location.href = "/code/itemList";
+	}
+
+	var form = $("form[name=form]");
+	var formVo = $("form[name=formVo]");
+
+	var goUrlList = "/code/itemList";
+	var goUrlView = "/code/itemView";
+
+	goList = function(thisPage) {
+		$("input:hidden[name=thisPage]").val(thisPage);
+		form.attr("action", goUrlList).submit();
+
 	}
 </script>
 

@@ -53,4 +53,11 @@ public class CodeDao {
 	public List<Code> selectListCachedCodeArrayList(){
 		return sqlSession.selectList(namespace + ".selectListCachedCodeArrayList", null); 
 	}
+	// 아이템 리스트
+	public List<Code> selectItemList(CodeVo vo) {
+	    return sqlSession.selectList(namespace + ".selectItemList", vo);
+	}
+	public int selectOneItemCount(CodeVo vo) {
+	    return sqlSession.selectOne(namespace + ".selectOneItemCount", vo);
+	}
 }

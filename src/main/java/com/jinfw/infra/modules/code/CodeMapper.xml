@@ -8,49 +8,92 @@
 
     <resultMap id="resultMapObj" type="com.jinfw.infra.modules.code.Code"></resultMap>
 	
+	<sql id ="selectItemCommon">
+		FROM item a
+		WHERE 1=1
+		
+		<!-- 문자열 검색 -->
+		<choose>
+			<when test="shValue != null and shValue != ''">
+				AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
+			</when>
+		</choose>
+		<!-- 판매여부 -->
+		<choose>
+			<when test="shOptionDelNY == '0'">
+				AND a.itemSaleNY = 0
+			</when>
+			<when test="shOptionDelNY == '1'">
+				AND a.itemSaleNY = 1
+			</when>
+		</choose>
+		
+		<!-- 날짜 검색 -->
+		<choose>
+			<when test="shOptionDate == '1'">
+				AND a.itemRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+			<when test="shOptionDate == '2'">
+				AND a.itemModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+			</when>
+		</choose>
+
+		<!-- 정렬 -->
+		<choose>
+			<when test="shOptionSort == 1">
+				ORDER BY a.itemSeq ASC
+			</when>
+			<when test="shOptionSort == '2'">
+				ORDER BY a.itemRegDatetime ASC
+			</when>
+			<when test="shOptionSort == '3'">
+				ORDER BY a.itemModDatetime ASC
+			</when>
+		</choose>
+	</sql>
+	
 	<sql id ="selectCommon">
 		FROM infrCommonCode a
 		WHERE 1=1
 		
 		<!-- 문자열 검색 -->
 		<choose>
-			<when test="shOptionValue == 1">
+			<when test="shOptionValue == '1'">
 				AND a.ifccNameKor LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>
 		
 		<!-- 삭제여부 -->
 		<choose>
-			<when test="shOptionDelNY == 0">
+			<when test="shOptionDelNY == '0'">
 				AND a.ifccDelNY = 0
 			</when>
-			<when test="shOptionDelNY == 1">
+			<when test="shOptionDelNY == '1'">
 				AND a.ifccDelNY = 1
 			</when>
 		</choose>
 		
 		<!-- 날짜 검색 -->
-<!-- 		<choose>
-			<when test="shOptionDate == 1">
+		<choose>
+			<when test="shOptionDate == '1'">
 				AND a.ifcgRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
-			<when test="shOptionDate == 2">
+			<when test="shOptionDate == '2'">
 				AND a.ifcgModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
 		</choose>
- -->
+
 		<!-- 정렬 -->
 		<choose>
-			<when test="shOptionSort == 1">
+			<when test="shOptionSort == '1'">
 				ORDER BY a.ifccSeq ASC
 			</when>
-<!-- 			
-			<when test="shOptionSort == 2">
+			<when test="shOptionSort == '2'">
 				ORDER BY a.ifcgRegDatetime ASC
 			</when>
-			<when test="shOptionSort == 3">
+			<when test="shOptionSort == '3'">
 				ORDER BY a.ifcgModDatetime ASC
-			</when> -->
+			</when>
 		</choose>
 	</sql>
 	
@@ -170,5 +213,25 @@
 			AND ifccDelNy = 0
 		    AND ifccUseNy = 1
     </select>
+	
+	<select id="selectItemList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.itemSeq
+			    ,a.itemHeader
+			    ,a.itemPrice
+			    ,a.itemRegDatetime
+			    ,a.itemModDatetime
+			    ,a.itemPlace
+			    ,a.itemDelNY
+			    ,a.itemSaleNY
+			    ,(select memberName from member b where a.member_seq = b.seq) as seller
+			<include refid="selectItemCommon" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	<select id="selectOneItemCount" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectItemCommon" />
+	</select>
 
 </mapper>

@@ -30,12 +30,14 @@
 			<exclude-mapping path="/loginProc" />
 			<exclude-mapping path="/logoutProc" />
 			<exclude-mapping path="/index" />
+			<exclude-mapping path="/" />
 			<exclude-mapping path="/main/signUp" />
 			<exclude-mapping path="/main/idCheck" />
 			<exclude-mapping path="/index/#hero" />
 			<exclude-mapping path="/index/#about" />
 			<exclude-mapping path="/main/userInst" />
 			<exclude-mapping path="/login/kakao/oauth" />
+			<exclude-mapping path="/rest/**" />
 			<beans:bean id="checkLoginSessionInterception" class="com.jinfw.infra.common.interceptor.CheckLoginSessionInterception"/>
 		</interceptor>
 	</interceptors>	

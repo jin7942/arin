@@ -114,5 +114,12 @@ public class CodeServiceImpl implements CodeService {
 	public int selectOneCount(CodeVo vo) throws Exception {
 		return dao.selectOneCount(vo);
 	}
+	
+	public List<Code> selectItemList(CodeVo vo) throws Exception {
+	    return dao.selectItemList(vo);
+	}
+	public int selectOneItemCount(CodeVo vo) throws Exception {
+	    return dao.selectOneItemCount(vo);
+	}
 
 }

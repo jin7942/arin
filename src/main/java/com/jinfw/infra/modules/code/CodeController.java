@@ -142,7 +142,7 @@ public class CodeController {
         int totalCnt = service.selectOneCount(vo);
         setSearchAndPaging(vo, totalCnt);
 
-        List<Code> list = service.selectList(vo);
+        List<Code> list = service.selectItemList(vo);
 
         model.addAttribute("list", list);
         model.addAttribute("totalCnt", totalCnt);
