@@ -171,14 +171,6 @@
 					</table>
 					<!-- End of Table -->
 
-					sessSeq:
-					<c:out value="${sessSeq }" />
-					<br> sessName:
-					<c:out value="${sessName }" />
-					<br> sessId:
-					<c:out value="${sessId }" />
-					<br>
-
 					<!-- pagination s -->
 					<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
 					<!-- pagination e -->
@@ -189,7 +181,7 @@
 					<button type="button " class="btn btn-primary" style="float: right" onclick="location.href='./memberForm'">
 						<i class="fa-solid fa-plus"></i>
 					</button>
-					<button type="button" class="btn btn-success" style="float: right" onclick="location.href='./memberForm'">
+					<button type="button" class="btn btn-success" style="float: right" id="btnExcel">
 						<i class="fa-solid fa-file-excel"></i>
 					</button>
 				</div>
@@ -236,12 +228,18 @@
 
 <!-- temp -->
 <script type="text/javascript">
+
 	function refresh() {
 		location.href = "/member/memberList";
 	}
 
-	var form = $("form[name=form]");
-	var goUrlList = "/member/memberList";
+	const form = $("form[name=form]");
+	const goUrlList = "/member/memberList";
+	const excelUri = "/member/excelDownload"
+	
+	$("#btnExcel").click(() => {
+		form.attr("action", excelUri).submit();
+	});
 
 	goList = function(thisPage) {
 		$("input:hidden[name=thisPage]").val(thisPage);

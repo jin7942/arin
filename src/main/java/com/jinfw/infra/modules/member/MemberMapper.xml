@@ -61,6 +61,7 @@
 				,a.memberMobile
 				,a.memberCarrier
 				,a.memberMailName
+				,a.memberMailDomain
 				,a.memberPlace
 				,a.memberSignDatetime
 				,a.memberModDatetime

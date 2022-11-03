@@ -10,13 +10,20 @@ public class Member {
 	private String memberMobile;
 	private String memberCarrier;
 	private String memberMailName;
+	private String memberMailDomain;
 	private String memberPlace;
-	private String memberSignDatetime;
+    private String memberSignDatetime;
 	private String memberModDatetime;
 	private String memberDelNY;
 	
 	// ########################################
 	// Generate Getters and Setters
+	public String getMemberMailDomain() {
+	    return memberMailDomain;
+	}
+	public void setMemberMailDomain(String memberMailDomain) {
+	    this.memberMailDomain = memberMailDomain;
+	}
 
 	public String getSeq() {
 		return seq;
