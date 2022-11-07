@@ -21,5 +21,8 @@ public class Constants {
 	/* for upload */
 	public static final String UPLOAD_PATH_PREFIX = "D:/factory/ws_sts_4160/arin/src/main/webapp/resources/uploaded";
 	public static final String UPLOAD_PATH_PREFIX_FOR_VIEW = "/resources/uploaded";
+	
+    /* image upload server path */
+	public static final String UPLOAD_SERVER_PATH = "http://localhost:4000/api/uploadImg/";
 			
 }

@@ -75,11 +75,11 @@
 </script>
 
 <style>
-.image-preview > li {
+.image-preview>li {
 	display: inline;
 }
 
-.image-preview > li:nth-child(3):after {
+.image-preview>li:nth-child(3):after {
 	content: '\A';
 	white-space: pre;
 }
@@ -92,7 +92,6 @@ img {
 	width: 200px;
 	height: 200px;
 	margin-left: 20px;
-
 }
 </style>
 </head>
@@ -109,12 +108,8 @@ img {
 				<ul>
 					<li><a class="nav-link scrollto active" href="/main/">Home</a></li>
 					<li><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }" /></b>님</a></li>
-					<li>
-						<a class="nav-link scrollto" href="/user/cart"> 장바구니 
-						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">
-						</span>
-						</a>
-					</li>
+					<li><a class="nav-link scrollto" href="/user/cart"> 장바구니 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount"> </span>
+					</a></li>
 					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i> <c:out value="${sessPlace}" /></a></li>
 					<li><a class="nav-link scrollto" onclick="logout()">로그아웃</a></li>
 					<li><a class="nav-link scrollto" href="/code/codeList">관리자페이지</a></li>
@@ -184,8 +179,8 @@ img {
 	<!-- End of footer -->
 
 	<!-- My Js File -->
-	<script type="text/javascript" src="/resources/js/helper/imgUploader.js"></script> 
-	
+	<script type="text/javascript" src="/resources/js/helper/imgUploader.js"></script>
+
 
 	<script type="text/javascript">
 		function test() {
@@ -224,9 +219,31 @@ img {
 			}
 		}
 
-		function onSubmit() {
+/* 		function onSubmit() {
 			$("form[name=form]").submit();
+		} */
+		
+		function onSubmit() {
+			const form = $("form[name=form]")
+			const data= new FormData(form[0])
+			 $.ajax({
+			   url: "http://localhost:4000/api/uploadImg",
+			   type: "POST",
+			   data: data,
+			   enctype: 'multipart/form-data',
+			   processData: false,
+			   contentType: false,
+			   cache: false,
+			   success: (res) => {
+					console.log(res);
+			   },
+			   error: function () {
+			     // Handle upload error
+			     // ...
+			   }
+			 });
 		}
+		
 	</script>
 </body>
 </html>

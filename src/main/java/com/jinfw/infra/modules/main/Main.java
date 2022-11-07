@@ -31,7 +31,21 @@ public class Main {
 	private String itemReviewComment;
 	private String itemReviewItemSeq;
 
-    public String getItemSeq() {
+	/* upload DTO */
+	private Integer defaultNy;
+	private Integer sort;
+	private String path;
+	private String originalName;
+	private String uuidName;
+	private String ext;
+	private Integer type;
+	private long size;
+	private Integer delNy;
+	private String pseq;
+	private MultipartFile[] uploadedImage;
+	private String itemImgThumbNail;
+
+	public String getItemSeq() {
         return itemSeq;
     }
     public void setItemSeq(String itemSeq) {
@@ -229,19 +243,6 @@ public class Main {
     public void setItemImgThumbNail(String itemImgThumbNail) {
         this.itemImgThumbNail = itemImgThumbNail;
     }
-    /* upload DTO */
-	private Integer defaultNy;
-	private Integer sort;
-	private String path;
-	private String originalName;
-	private String uuidName;
-	private String ext;
-	private Integer type;
-	private long size;
-	private Integer delNy;
-	private String pseq;
-    private MultipartFile[] uploadedImage;
-	private String itemImgThumbNail;
 
 	
 }

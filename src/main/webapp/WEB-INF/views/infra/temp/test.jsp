@@ -10,12 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach items="${list}" var="list" varStatus="status">
-	<c:out value="${list.ctime}"/>
-	<c:out value="${list.location}"/>
-	<c:out value="${list.charge}"/>
-	<c:out value="${list.target}"/>
-	<hr />
-</c:forEach>
+	<img src="http://localhost:4000/upload\2022\10\7\1719dec8-8150-4d89-b255-361508f6b782.png" alt="" />
 </body>
 </html>
