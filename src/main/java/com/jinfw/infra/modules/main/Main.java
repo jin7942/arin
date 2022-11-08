@@ -1,5 +1,7 @@
 package com.jinfw.infra.modules.main;
 
+import java.util.Map;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Main {
@@ -37,15 +39,15 @@ public class Main {
 	private String path;
 	private String originalName;
 	private String uuidName;
-	private String ext;
+    private String ext;
 	private Integer type;
-	private long size;
+	private String size;
 	private Integer delNy;
 	private String pseq;
 	private MultipartFile[] uploadedImage;
 	private String itemImgThumbNail;
-
-	public String getItemSeq() {
+	private Map<String, Object>[] uploadData;
+    public String getItemSeq() {
         return itemSeq;
     }
     public void setItemSeq(String itemSeq) {
@@ -213,10 +215,10 @@ public class Main {
     public void setType(Integer type) {
         this.type = type;
     }
-    public long getSize() {
+    public String getSize() {
         return size;
     }
-    public void setSize(long size) {
+    public void setSize(String size) {
         this.size = size;
     }
     public Integer getDelNy() {
@@ -242,6 +244,12 @@ public class Main {
     }
     public void setItemImgThumbNail(String itemImgThumbNail) {
         this.itemImgThumbNail = itemImgThumbNail;
+    }
+    public Map<String, Object>[] getUploadData() {
+        return uploadData;
+    }
+    public void setUploadData(Map<String, Object>[] uploadData) {
+        this.uploadData = uploadData;
     }
 
 	

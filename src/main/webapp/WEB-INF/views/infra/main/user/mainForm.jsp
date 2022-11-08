@@ -226,6 +226,8 @@ img {
 		function onSubmit() {
 			const form = $("form[name=form]")
 			const data= new FormData(form[0])
+			const uploadedImage = $("input[name=uploadedImage]")
+			
 			 $.ajax({
 			   url: "http://localhost:4000/api/uploadImg",
 			   type: "POST",
@@ -235,8 +237,10 @@ img {
 			   contentType: false,
 			   cache: false,
 			   success: (res) => {
-					console.log(res);
-			   },
+					console.log(JSON.stringify(res));
+					uploadedImage.val('');
+					
+		   		},
 			   error: function () {
 			     // Handle upload error
 			     // ...
