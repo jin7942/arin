@@ -28,20 +28,20 @@
 						<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}" />">
 
 						<select id="shOptionDelNY" name="shOptionDelNY" class="select btn btn-secondary dropdown-toggle">
-							<option value="" selected <c:if test="${empty vo.shOptionDelNY}"  >selected</c:if>>삭제여부</option>
-							<option value="0" <c:if test="${vo.shOptionDelNY eq '0'}"  >selected</c:if>>N</option>
-							<option value="1" <c:if test="${vo.shOptionDelNY eq '1'}"  >selected</c:if>>Y</option>
+							<option value="" selected <c:if test="${empty vo.shOptionDelNY}"  >checked="checked"</c:if>>삭제여부</option>
+							<option value="0" <c:if test="${vo.shOptionDelNY eq '0'}"  >checked="checked"</c:if>>N</option>
+							<option value="1" <c:if test="${vo.shOptionDelNY eq '1'}"  >checked="checked"</c:if>>Y</option>
 						</select>
 						<select id="shOptionSort" name="shOptionSort" class="select btn btn-secondary dropdown-toggle">
-							<option value="" selected <c:if test="${empty vo.shOptionSort}"  >selected</c:if>>정렬구분</option>
-							<option value="1" <c:if test="${vo.shOptionSort eq '1'}"  >selected</c:if>>시퀀스</option>
-							<option value="2" <c:if test="${vo.shOptionSort eq '2'}"  >selected</c:if>>등록일</option>
-							<option value="3" <c:if test="${vo.shOptionSort eq '3'}"  >selected</c:if>>수정일</option>
+							<option value="" selected <c:if test="${empty vo.shOptionSort}"  >checked="checked"</c:if>>정렬구분</option>
+							<option value="1" <c:if test="${vo.shOptionSort eq '1'}"  >checked="checked"</c:if>>시퀀스</option>
+							<option value="2" <c:if test="${vo.shOptionSort eq '2'}"  >checked="checked"</c:if>>등록일</option>
+							<option value="3" <c:if test="${vo.shOptionSort eq '3'}"  >checked="checked"</c:if>>수정일</option>
 						</select>
 						<select id="shOptionDate" name="shOptionDate" class="select btn btn-secondary dropdown-toggle">
-							<option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >selected</c:if>>검색구분</option>
-							<option value="1" <c:if test="${vo.shOptionDate eq '1'}"  >selected</c:if>>등록일</option>
-							<option value="2" <c:if test="${vo.shOptionDate eq '2'}"  >selected</c:if>>수정일</option>
+							<option value="" disabled selected <c:if test="${vo.shOptionDate eq null}"  >checked="checked"</c:if>>검색구분</option>
+							<option value="1" <c:if test="${vo.shOptionDate eq '1'}"  >checked="checked"</c:if>>등록일</option>
+							<option value="2" <c:if test="${vo.shOptionDate eq '2'}"  >checked="checked"</c:if>>수정일</option>
 						</select>
 						<input id="shStartDate" name="shStartDate" type="date" value="<c:out value="${vo.shStartDate}"/>" class="form-control bg-light border-0 small" placeholder="시작일" aria-label="Search" aria-describedby="basic-addon2" />
 						<input id="shEndDate" name="shEndDate" type="date" value="<c:out value="${vo.shEndDate}"/>" class="form-control bg-light border-0 small" placeholder="종료일" aria-label="Search" aria-describedby="basic-addon2" />

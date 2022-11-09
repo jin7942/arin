@@ -20,20 +20,20 @@
 		</choose>
 		<!-- 판매여부 -->
 		<choose>
-			<when test="shOptionDelNY == '0'">
+			<when test="shOptionDelNY == 0">
 				AND a.itemSaleNY = 0
 			</when>
-			<when test="shOptionDelNY == '1'">
+			<when test="shOptionDelNY == 1">
 				AND a.itemSaleNY = 1
 			</when>
 		</choose>
 		
 		<!-- 날짜 검색 -->
 		<choose>
-			<when test="shOptionDate == '1'">
+			<when test="shOptionDate == 1">
 				AND a.itemRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
-			<when test="shOptionDate == '2'">
+			<when test="shOptionDate == 2">
 				AND a.itemModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
 		</choose>
@@ -43,10 +43,10 @@
 			<when test="shOptionSort == 1">
 				ORDER BY a.itemSeq ASC
 			</when>
-			<when test="shOptionSort == '2'">
+			<when test="shOptionSort == 2">
 				ORDER BY a.itemRegDatetime ASC
 			</when>
-			<when test="shOptionSort == '3'">
+			<when test="shOptionSort == 3">
 				ORDER BY a.itemModDatetime ASC
 			</when>
 		</choose>
@@ -58,40 +58,40 @@
 		
 		<!-- 문자열 검색 -->
 		<choose>
-			<when test="shOptionValue == '1'">
+			<when test="shOptionValue == 1">
 				AND a.ifccNameKor LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>
 		
 		<!-- 삭제여부 -->
 		<choose>
-			<when test="shOptionDelNY == '0'">
+			<when test="shOptionDelNY == 0">
 				AND a.ifccDelNY = 0
 			</when>
-			<when test="shOptionDelNY == '1'">
+			<when test="shOptionDelNY == 1">
 				AND a.ifccDelNY = 1
 			</when>
 		</choose>
 		
 		<!-- 날짜 검색 -->
 		<choose>
-			<when test="shOptionDate == '1'">
+			<when test="shOptionDate == 1">
 				AND a.ifcgRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
-			<when test="shOptionDate == '2'">
+			<when test="shOptionDate == 2">
 				AND a.ifcgModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
 			</when>
 		</choose>
 
 		<!-- 정렬 -->
 		<choose>
-			<when test="shOptionSort == '1'">
+			<when test="shOptionSort == 1">
 				ORDER BY a.ifccSeq ASC
 			</when>
-			<when test="shOptionSort == '2'">
+			<when test="shOptionSort == 2">
 				ORDER BY a.ifcgRegDatetime ASC
 			</when>
-			<when test="shOptionSort == '3'">
+			<when test="shOptionSort == 3">
 				ORDER BY a.ifcgModDatetime ASC
 			</when>
 		</choose>

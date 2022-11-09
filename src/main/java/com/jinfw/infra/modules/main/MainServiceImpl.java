@@ -1,11 +1,13 @@
 package com.jinfw.infra.modules.main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jinfw.infra.common.utill.UtilSecurity;
 
 @Service
@@ -62,23 +64,24 @@ public class MainServiceImpl implements MainService {
     public int itemInst(Main dto) throws Exception {
         int result = dao.itemInst(dto);
 
-        int j = 0;
-        for (Map<String, Object> map : dto.getUploadData()) {
-            if (!map.isEmpty()) {
-                
-                dto.setPath(map.get("path").toString());
-                dto.setOriginalName(map.get("originalName").toString());
-                dto.setUuidName(map.get("uuidName").toString());
-                dto.setExt(map.get("path").toString());
-                dto.setSize(map.get("fileSize").toString());
-                dto.setType(2);
-                dto.setDefaultNy(1);
-                dto.setSort(j + 1);
-                dto.setPseq(dto.getSeq());
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map = objectMapper.readValue(dto.getUploadData(), Map.class);
 
-                dao.itemImgUpload(dto);
-            }
-            j++;
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        list = (List<Map<String, Object>>) map.get("data");
+
+        for (int i = 0; i < list.size(); i++) {
+            dto.setPath(list.get(i).get("path").toString());
+            dto.setOriginalName(list.get(i).get("originalname").toString());
+            dto.setUuidName(list.get(i).get("uuidName").toString());
+            dto.setExt(list.get(i).get("ext").toString());
+            dto.setSize(list.get(i).get("fileSize").toString());
+            dto.setType(2);
+            dto.setDefaultNy(1);
+            dto.setSort(i + 1);
+            dto.setPseq(dto.getSeq());
+
+            dao.itemImgUpload(dto);
         }
         return result;
     }

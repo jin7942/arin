@@ -11,10 +11,10 @@
 	<sql id = "selectRegHistoryCommon">
 		<!-- 판매여부 -->
 		<choose>
-			<when test="shOptionDelNY == '0'">
+			<when test="shOptionDelNY == 0">
 				AND a.itemSaleNY = 0
 			</when>
-			<when test="shOptionDelNY == '1'">
+			<when test="shOptionDelNY == 1">
 				AND a.itemSaleNY = 1
 			</when>
 			<otherwise>

@@ -123,6 +123,7 @@ img {
 
 	<main id="main">
 		<form action="/main/itemInst" name="form" id="form" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="uploadData" id="uploadData" value="" />
 			<div class="container" style="margin-top: 10%; margin-bottom: 10%; width: 85%" data-aos="fade-up">
 				<div class="row ">
 					<div class="col"></div>
@@ -227,6 +228,7 @@ img {
 			const form = $("form[name=form]")
 			const data= new FormData(form[0])
 			const uploadedImage = $("input[name=uploadedImage]")
+			const uploadData = $("input[name=uploadData]")
 			
 			 $.ajax({
 			   url: "http://localhost:4000/api/uploadImg",
@@ -239,7 +241,8 @@ img {
 			   success: (res) => {
 					console.log(JSON.stringify(res));
 					uploadedImage.val('');
-					
+					uploadData.val(JSON.stringify(res));
+					form.submit();
 		   		},
 			   error: function () {
 			     // Handle upload error

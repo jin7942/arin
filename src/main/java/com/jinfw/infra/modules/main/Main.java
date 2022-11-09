@@ -1,5 +1,6 @@
 package com.jinfw.infra.modules.main;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +47,15 @@ public class Main {
 	private String pseq;
 	private MultipartFile[] uploadedImage;
 	private String itemImgThumbNail;
-	private Map<String, Object>[] uploadData;
+	private String uploadData;
+	
+	
+    public String getUploadData() {
+        return uploadData;
+    }
+    public void setUploadData(String uploadData) {
+        this.uploadData = uploadData;
+    }
     public String getItemSeq() {
         return itemSeq;
     }
@@ -245,12 +254,7 @@ public class Main {
     public void setItemImgThumbNail(String itemImgThumbNail) {
         this.itemImgThumbNail = itemImgThumbNail;
     }
-    public Map<String, Object>[] getUploadData() {
-        return uploadData;
-    }
-    public void setUploadData(Map<String, Object>[] uploadData) {
-        this.uploadData = uploadData;
-    }
-
+	
+	
 	
 }

@@ -29,6 +29,10 @@ public class MemberController {
 	@Autowired
 	MemberServiceImpl service;
 	
+    public void setSearchAndPaging(MemberVo vo, int totalCnt) throws Exception {
+        vo.setParamsPaging(totalCnt);
+    }
+	
 	@RequestMapping(value = "login")
 	public String login() throws Exception {
 
@@ -46,7 +50,7 @@ public class MemberController {
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
 		int totalCnt = service.selectOneCount(vo);
-		vo.setParamsPaging(totalCnt);
+		setSearchAndPaging(vo, totalCnt);
 
 		List<Member> list = service.selectList(vo);
 

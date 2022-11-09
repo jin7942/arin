@@ -8,12 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jinfw.infra.modules.code.CodeVo;
+
 @Controller
 @RequestMapping(value = "/codegroup/")
 public class CodeGroupController {
 
 	@Autowired
 	CodeGroupServiceImpl service;
+	
+    public void setSearchAndPaging(CodeGroupVo vo, int totalCnt) throws Exception {
+
+        vo.setParamsPaging(totalCnt);
+    }
 
 	/**
 	 * 코드그룹 리스트 조회 함수
@@ -26,7 +33,7 @@ public class CodeGroupController {
 	public String codeGroupList(@ModelAttribute("vo") CodeGroupVo vo, Model model) throws Exception {
 		
 		int totalCnt = service.selectOneCount(vo);
-		vo.setParamsPaging(totalCnt);
+		setSearchAndPaging(vo, totalCnt);
 		
 		List<CodeGroup> list = service.selectList(vo);
 		

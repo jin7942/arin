@@ -1,5 +1,6 @@
 package com.jinfw.infra.modules.main;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jinfw.infra.modules.login.LoginController;
 
 @Controller
@@ -174,16 +175,27 @@ public class MainController {
 	 * @return view result
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "itemInst")
-	@ResponseBody
-	public String itemInst(MainVo vo, Main dto, RedirectAttributes redirectAttributes, @RequestBody Map<String, Object>[] data) throws Exception {
-	    dto.setUploadData(data);
-	    service.itemInst(dto);
+    @RequestMapping(value = "itemInst")
+	public String itemInst(MainVo vo, Main dto, Model model, RedirectAttributes redirectAttributes) throws Exception {
+
+        service.itemInst(dto);
 
 		vo.setMainKey(dto.getItemSeq());
 		redirectAttributes.addFlashAttribute("vo", vo);
 
 		return "redirect:view";
+	}
+	
+	@RequestMapping(value = "test")
+	public String test(MainVo vo, Main dto, RedirectAttributes redirectAttributes) throws Exception {
+	    
+	    String apiUrl = "http://localhost:4000/api/uploadImg";
+	    System.out.println(apiUrl);
+	    
+	    vo.setMainKey(dto.getItemSeq());
+	    redirectAttributes.addFlashAttribute("vo", vo);
+	    
+	    return "redirect:view";
 	}
 
 	/**
