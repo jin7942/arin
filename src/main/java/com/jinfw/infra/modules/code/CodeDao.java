@@ -60,4 +60,18 @@ public class CodeDao {
 	public int selectOneItemCount(CodeVo vo) {
 	    return sqlSession.selectOne(namespace + ".selectOneItemCount", vo);
 	}
+	
+	// 대쉬보드
+	public Code selectItem() {
+	    return sqlSession.selectOne(namespace + ".selectItem", "");
+	}
+	public List<Code> selectIndexItem() {
+	    return sqlSession.selectList(namespace + ".selectIndexItem", "");
+	}
+	public List<Code> selectVisitList(CodeVo vo) {
+	    return sqlSession.selectList(namespace + ".selectVisitList", vo);
+	}
+	public int selectVisitListCnt(CodeVo vo) {
+	    return sqlSession.selectOne(namespace + ".selectVisitListCnt", vo);
+	}
 }

@@ -24,12 +24,6 @@ public class CodeController {
         vo.setParamsPaging(totalCnt);
     }
 
-    @RequestMapping(value = "index")
-    public String index(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
-
-        return "infra/code/xdmin/xdminIndex";
-    }
-
     /**
      * 공통코드 리스트 조회 함수
      * 
@@ -150,4 +144,33 @@ public class CodeController {
         return "infra/item/xdmin/itemList";
     }
 
+    @RequestMapping(value = "index")
+    public String indexList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+        
+        int totalCnt = service.selectVisitListCnt(vo);
+        setSearchAndPaging(vo, totalCnt);
+        
+        Code item = service.selectItem();
+        List<Code> itemList = service.selectIndexItem();
+        List<Code> visitList = service.selectVisitList(vo);
+        
+        model.addAttribute("item", item);
+        model.addAttribute("itemList", itemList);
+        model.addAttribute("visitList", visitList);
+        
+        return "infra/code/xdmin/xdminIndex";
+    }
+    
+    @RequestMapping(value = "indexAjaxLita")
+    public String indexAjaxLita(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
+        
+        int totalCnt = service.selectVisitListCnt(vo);
+        setSearchAndPaging(vo, totalCnt);
+        
+        List<Code> visitList = service.selectVisitList(vo);
+        model.addAttribute("visitList", visitList);
+        
+        return "infra/code/xdmin/xdminIndexLita";
+    }
+    
 }

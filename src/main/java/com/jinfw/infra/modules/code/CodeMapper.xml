@@ -6,12 +6,13 @@
 
 <mapper namespace="com.jinfw.infra.modules.code.CodeMapper">
 
-    <resultMap id="resultMapObj" type="com.jinfw.infra.modules.code.Code"></resultMap>
-	
-	<sql id ="selectItemCommon">
+	<resultMap id="resultMapObj"
+		type="com.jinfw.infra.modules.code.Code"></resultMap>
+
+	<sql id="selectItemCommon">
 		FROM item a
 		WHERE 1=1
-		
+
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shValue != null and shValue != ''">
@@ -27,14 +28,16 @@
 				AND a.itemSaleNY = 1
 			</when>
 		</choose>
-		
+
 		<!-- 날짜 검색 -->
 		<choose>
 			<when test="shOptionDate == 1">
-				AND a.itemRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+				AND a.itemRegDatetime BETWEEN date(#{shStartDate})
+				AND date(#{shEndDate})
 			</when>
 			<when test="shOptionDate == 2">
-				AND a.itemModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+				AND a.itemModDatetime BETWEEN date(#{shStartDate})
+				AND date(#{shEndDate})
 			</when>
 		</choose>
 
@@ -51,18 +54,18 @@
 			</when>
 		</choose>
 	</sql>
-	
-	<sql id ="selectCommon">
+
+	<sql id="selectCommon">
 		FROM infrCommonCode a
 		WHERE 1=1
-		
+
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shOptionValue == 1">
 				AND a.ifccNameKor LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>
-		
+
 		<!-- 삭제여부 -->
 		<choose>
 			<when test="shOptionDelNY == 0">
@@ -72,14 +75,16 @@
 				AND a.ifccDelNY = 1
 			</when>
 		</choose>
-		
+
 		<!-- 날짜 검색 -->
 		<choose>
 			<when test="shOptionDate == 1">
-				AND a.ifcgRegDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+				AND a.ifcgRegDatetime BETWEEN date(#{shStartDate})
+				AND date(#{shEndDate})
 			</when>
 			<when test="shOptionDate == 2">
-				AND a.ifcgModDatetime BETWEEN date(#{shStartDate}) AND date(#{shEndDate})
+				AND a.ifcgModDatetime BETWEEN date(#{shStartDate})
+				AND date(#{shEndDate})
 			</when>
 		</choose>
 
@@ -96,19 +101,24 @@
 			</when>
 		</choose>
 	</sql>
-	
-	
+
+	<sql id="selectVisitCommon">
+		FROM member a
+		join loginLog b on a.seq = b.loginLogMemberSeq
+		ORDER BY loginLogDatetime DESC
+	</sql>
+
 	<!-- 리스트 조회 -->
 	<select id="selectList" resultMap="resultMapObj">
 		<include refid="Base.selectListUpperForMysql" />
-	        SELECT DISTINCT
-				a.ifccSeq
-			    ,a.ifccNameEng
-			    ,a.ifccNameKor
-			    ,a.ifccUseNY
-			    ,a.ifccDelNY
-			    ,a.infrCodeGroup_ifcgSeq
-			<include refid="selectCommon" />
+		SELECT DISTINCT
+		a.ifccSeq
+		,a.ifccNameEng
+		,a.ifccNameKor
+		,a.ifccUseNY
+		,a.ifccDelNY
+		,a.infrCodeGroup_ifcgSeq
+		<include refid="selectCommon" />
 		<include refid="Base.selectListLowerForMysql" />
 	</select>
 
@@ -116,122 +126,164 @@
 		SELECT COUNT(*)
 		<include refid="selectCommon" />
 	</select>
-	
+
 	<select id="selectOne" resultMap="resultMapObj">
-		SELECT 
-			a.ifccSeq
-		    ,a.ifccNameEng
-		    ,a.ifccNameKor
-		    ,a.ifccUseNY
-		    ,a.ifccDelNY
-		    ,a.ifccDescription
-		    ,a.infrCodeGroup_ifcgSeq
-   			,ifccRegDatetime
-			,ifccModDatetime
-		FROM infrCommonCode a
+		SELECT
+		a.ifccSeq
+		,a.ifccNameEng
+		,a.ifccNameKor
+		,a.ifccUseNY
+		,a.ifccDelNY
+		,a.ifccDescription
+		,a.infrCodeGroup_ifcgSeq
+		,ifccRegDatetime
+		,ifccModDatetime
+		FROM
+		infrCommonCode a
 		WHERE 1=1
-			AND #{mainKey} = a.ifccSeq
+		AND #{mainKey} = a.ifccSeq
 	</select>
-	
+
 	<!-- 코드그룹 조회 -->
 	<select id="selectCodeGroupName" resultMap="resultMapObj">
 		SELECT DISTINCT
-			a.ifcgSeq
-		    ,a.ifcgNameKor
+		a.ifcgSeq
+		,a.ifcgNameKor
 		FROM infrCodeGroup a
-		INNER JOIN infrCommonCode b on b.infrCodeGroup_ifcgSeq = a.ifcgSeq
+		INNER JOIN infrCommonCode b
+		on
+		b.infrCodeGroup_ifcgSeq = a.ifcgSeq
 	</select>
-	
+
 	<!-- 삽입 -->
 	<insert id="insert">
 		INSERT INTO infrCommonCode (
-			ifccNameKor
-			,ifccNameEng
-			,ifccUseNY
-			,ifccDelNY
-			,ifccDescription
-			,infrCodeGroup_ifcgSeq
-			,ifccRegDatetime
-			,ifccModDatetime
+		ifccNameKor
+		,ifccNameEng
+		,ifccUseNY
+		,ifccDelNY
+		,ifccDescription
+		,infrCodeGroup_ifcgSeq
+		,ifccRegDatetime
+		,ifccModDatetime
 		)
 		VALUES (
-			#{ifccNameKor}
-			,#{ifccNameEng}
-			,#{ifccUseNY}
-			,#{ifccDelNY}
-			,#{ifccDescription}
-			,#{ifcgSeq}
-			,now()
-			,now()
+		#{ifccNameKor}
+		,#{ifccNameEng}
+		,#{ifccUseNY}
+		,#{ifccDelNY}
+		,#{ifccDescription}
+		,#{ifcgSeq}
+		,now()
+		,now()
 		)
-		
-		<selectKey resultType="String" keyProperty="ifccSeq" order="AFTER">
+
+		<selectKey resultType="String" keyProperty="ifccSeq"
+			order="AFTER">
 			SELECT last_insert_id()
 		</selectKey>
 	</insert>
-	
+
 	<!-- 수정 -->
 	<update id="update">
 		UPDATE infrCommonCode
 		SET
-			ifccNameEng = #{ifccNameEng}
-			,ifccNameKor = #{ifccNameKor}
-			,ifccUseNY = #{ifccUseNY}
-			,ifccDelNY = #{ifccDelNY}
-			,ifccDescription = #{ifccDescription}
-			,infrCodeGroup_ifcgSeq = #{ifcgSeq}
-			,ifccModDatetime = now()
-			<!-- <include refid="Base.updateModColumnValue" /> -->
+		ifccNameEng = #{ifccNameEng}
+		,ifccNameKor =
+		#{ifccNameKor}
+		,ifccUseNY = #{ifccUseNY}
+		,ifccDelNY = #{ifccDelNY}
+		,ifccDescription = #{ifccDescription}
+		,infrCodeGroup_ifcgSeq =
+		#{ifcgSeq}
+		,ifccModDatetime = now()
+		<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
-			ifccSeq = #{ifccSeq}
+		ifccSeq = #{ifccSeq}
 	</update>
-	
+
 	<!-- uelete -->
 	<update id="uelete">
 		UPDATE infrCommonCode
 		SET
-			ifccDelNY = 1
-			<!-- <include refid="Base.updateModColumnValue" /> -->
+		ifccDelNY = 1
+		<!-- <include refid="Base.updateModColumnValue" /> -->
 		WHERE
-			ifccSeq = #{ifccSeq}
+		ifccSeq = #{ifccSeq}
 	</update>
-	
+
 	<!-- 삭제 -->
 	<delete id="delete">
 		DELETE FROM infrCommonCode WHERE ifccSeq = #{ifccSeq}
 	</delete>
-	
+
 	<!-- for cache -->
-	<select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
-		SELECT 
-			ifccSeq
-			, ifccNameKor
-			, infrCodeGroup_ifcgSeq
+	<select id="selectListCachedCodeArrayList"
+		resultMap="resultMapObj">
+		SELECT
+		ifccSeq
+		, ifccNameKor
+		, infrCodeGroup_ifcgSeq
 		FROM
-			infrCommonCode
+		infrCommonCode
 		WHERE 1=1
-			AND ifccDelNy = 0
-		    AND ifccUseNy = 1
-    </select>
-	
+		AND ifccDelNy = 0
+		AND ifccUseNy = 1
+	</select>
+
 	<select id="selectItemList" resultMap="resultMapObj">
 		<include refid="Base.selectListUpperForMysql" />
 			SELECT
 				a.itemSeq
-			    ,a.itemHeader
-			    ,a.itemPrice
-			    ,a.itemRegDatetime
-			    ,a.itemModDatetime
-			    ,a.itemPlace
-			    ,a.itemDelNY
-			    ,a.itemSaleNY
-			    ,(select memberName from member b where a.member_seq = b.seq) as seller
-			<include refid="selectItemCommon" />
+				,a.itemHeader
+				,a.itemPrice
+				,a.itemRegDatetime
+				,a.itemModDatetime
+				,a.itemPlace
+				,a.itemDelNY
+				,a.itemSaleNY
+				,(select
+			memberName from member b where a.member_seq = b.seq) as seller
+		<include refid="selectItemCommon" />
 		<include refid="Base.selectListLowerForMysql" />
 	</select>
 	<select id="selectOneItemCount" resultType="Integer">
 		SELECT COUNT(*)
 		<include refid="selectItemCommon" />
+	</select>
+	
+	<!-- for Dashvboard -->
+	<select id="selectVisitList" resultMap="resultMapObj">
+		<include refid="Base.selectListUpperForMysql" />
+			SELECT
+				a.memberName,
+				a.memberID,
+				b.loginLogIp,
+				b.loginLogDatetime
+			<include refid="selectVisitCommon" />
+		<include refid="Base.selectListLowerForMysql" />
+	</select>
+	<select id="selectVisitListCnt" resultType="Integer">
+		SELECT COUNT(*)
+		<include refid="selectVisitCommon" />
+	</select>
+
+	<select id="selectIndexItem" resultMap="resultMapObj">
+		SELECT
+		    a.itemHeader,
+		    a.itemRegDatetime
+		from item a
+		ORDER BY
+		    a.itemRegDatetime DESC
+		LiMIT 10;
+	</select>
+
+	<select id="selectItem" resultMap="resultMapObj">
+		SELECT
+		    (SELECT COUNT(*) FROM member) AS memberCnt
+		    ,(SELECT COUNT(*) FROM item WHERE itemSaleNY = 1 AND itemDelNY = 0) AS itemCnt
+		    ,(SELECT COUNT(*) FROM item WHERE itemSaleNY = 0 AND itemDelNY = 0) AS itemCntSaleTrue
+		    ,(SELECT COUNT(*) FROM loginLog WHERE date_format(loginLogDatetime, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')) AS visitCnt
 	</select>
 
 </mapper>

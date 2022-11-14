@@ -122,4 +122,28 @@ public class CodeServiceImpl implements CodeService {
 	    return dao.selectOneItemCount(vo);
 	}
 
+
+	/* for DashBoard */
+    @Override
+    public Code selectItem() throws Exception {
+        return dao.selectItem();
+    }
+
+    @Override
+    public List<Code> selectIndexItem() throws Exception {
+        return dao.selectIndexItem();
+    }
+
+    @Override
+    public List<Code> selectVisitList(CodeVo vo) throws Exception {
+        return dao.selectVisitList(vo);
+    }
+
+    @Override
+    public int selectVisitListCnt(CodeVo vo) throws Exception {
+        return dao.selectVisitListCnt(vo);
+    }
+
+	
+	
 }

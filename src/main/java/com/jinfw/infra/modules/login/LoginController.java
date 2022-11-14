@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jinfw.infra.common.base.BaseController;
 import com.jinfw.infra.common.constans.Constants;
 import com.jinfw.infra.common.utill.KakaoOauth;
 import com.jinfw.infra.modules.main.Main;
@@ -22,7 +23,7 @@ import com.jinfw.infra.modules.main.MainServiceImpl;
 
 @Controller
 @RequestMapping(value = "/")
-public class LoginController {
+public class LoginController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
@@ -60,6 +61,12 @@ public class LoginController {
             logger.info("request uri : " + request.getRequestURI());
             logger.info("request url: " + request.getRequestURL());
             logger.info("port : " + request.getLocalPort());
+            logger.info("ip : " + getClientIp(request));
+            
+            // 로그인 로그 기록
+            dto.setLoginLogMemberSeq(rtMember.getSeq());
+            dto.setLoginLogIp(getClientIp(request));
+            service.loginLogInsert(dto);
 
             httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
             httpSession.setAttribute("sessSeq", rtMember.getSeq());
@@ -99,7 +106,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login/kakao/oauth")
     public String loginWithKakao(String code, Login dto, HttpSession httpSession, Model model,
-            RedirectAttributes redirectAttributes) throws Exception {
+            RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 
         Map<String, Object> returnMap = KakaoOauth.getUserInfoByToken(KakaoOauth.getAccessToken(code));
 
@@ -118,20 +125,23 @@ public class LoginController {
             dto.setMemberMailDomain(memberMailDomain);
 
             service.kakaoInsert(dto);
-            
+
             return "redirect:/index#about";
         } else {
+            
+            // 로그인 로그 기록
+            dto.setSeq(rtMember.getSeq());
+            dto.setLoginLogIp(getClientIp(request));
+            service.loginLogInsert(dto);
             
             httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
             httpSession.setAttribute("sessSeq", rtMember.getSeq());
             httpSession.setAttribute("sessId", rtMember.getMemberID());
             httpSession.setAttribute("sessName", rtMember.getMemberName());
             httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
-            
+
             return "redirect:/main/";
         }
-
-        
 
     }
 

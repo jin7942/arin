@@ -25,6 +25,9 @@ public class LoginDao {
 	public int kakaoInsert(Login dto) {
 	    return sqlSession.insert(namespace + ".kakaoInsert", dto);
 	}
+	public int loginLogInsert(Login dto) {
+	    return sqlSession.insert(namespace + ".loginLogInsert", dto);
+	}
 	
 	
 }

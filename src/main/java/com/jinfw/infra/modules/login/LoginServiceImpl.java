@@ -32,4 +32,8 @@ public class LoginServiceImpl implements LoginService {
         return dao.kakaoInsert(dto);
     }
     
+    public int loginLogInsert(Login dto) throws Exception {
+        return dao.loginLogInsert(dto);
+    }
+    
 }

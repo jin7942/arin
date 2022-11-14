@@ -89,91 +89,9 @@
 					</h6>
 				</div>
 				<div class="card-body">
-					<c:set var="listCodeCarrier" value="${CodeServiceImpl.selectListCachedCode('1')}" />
-					<table class="table table-hover">
-						<!-- table-caption -->
-						<caption style="caption-side: top; text-align: right"></caption>
-						<!-- table-header -->
+					
+					<div id="lita"></div>
 
-						<thead class="table-dark">
-							<tr>
-								<td>
-									<input type="checkbox" name="" id="" />
-								</td>
-								<td>#</td>
-								<td>seq</td>
-								<td>ID</td>
-								<td>이름</td>
-								<td>연락처</td>
-								<td>통신사</td>
-								<td>이메일</td>
-								<td>등록장소</td>
-								<td>등록일</td>
-								<td>수정일</td>
-								<td>삭제여부</td>
-							</tr>
-						</thead>
-
-						<!-- table-body -->
-						<c:choose>
-							<c:when test="${fn:length(list) eq 0 }">
-								<tr>
-									<td colspan="10">No Data..</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${list}" var="list" varStatus="status">
-									<tr>
-										<td>
-											<input type="checkbox" name="" id="" />
-										</td>
-										<td>
-											<%-- <c:out value="${vo.totalRows +((vo.thispage) * vo.rowNumToShow + status.index) + 1 }"></c:out> --%>
-										</td>
-										<td>
-											<a><c:out value="${list.seq}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberID}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberName}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberMobile}"></c:out></a>
-										</td>
-										<td>
-											<c:forEach items="${listCodeCarrier}" var="listCarrier" varStatus="statusCarrier">
-												<c:if test="${list.memberCarrier eq listCarrier.ifccSeq}">
-													<c:out value="${listCarrier.ifccNameKor }" />
-												</c:if>
-											</c:forEach>
-										</td>
-										<td>
-											<a><c:out value="${list.memberMailName}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberPlace}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberSignDatetime}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberModDatetime}"></c:out></a>
-										</td>
-										<td>
-											<a><c:out value="${list.memberDelNY}"></c:out></a>
-										</td>
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</table>
-					<!-- End of Table -->
-
-					<!-- pagination s -->
-					<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
-					<!-- pagination e -->
 					<button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal" data-bs-target="#exampleModal">
 						<i class="fa-solid fa-trash-can"></i>
 					</button>
@@ -229,6 +147,10 @@
 <!-- temp -->
 <script type="text/javascript">
 
+	$(document).ready(function(){
+		setLita();
+	})
+
 	function refresh() {
 		location.href = "/member/memberList";
 	}
@@ -236,7 +158,6 @@
 	const form = $("form[name=form]");
 	const goUrlList = "/member/memberList";
 	const excelUri = "/member/excelDownload"
-	const goUrlLita ="/member/memberAjaxLita";
 	
 	$("#btnExcel").click(() => {
 		form.attr("action", excelUri).submit();
@@ -245,8 +166,26 @@
 	goList = function(thisPage) {
 		$("input:hidden[name=thisPage]").val(thisPage);
 		//form.attr("action", goUrlList).submit();
-		form.attr("action", goUrlLita).submit();
-		//setLita();
+		setLita();
+	}
+	
+	function setLita() {
+		$.ajax({
+			async: true 
+			,cache: false
+			,type: "post"
+			/* ,dataType:"json" */
+			,url: "/member/memberAjaxLita"
+			,data : $("#form").serialize()
+			/* ,data : {  } */
+			,success: function(response) {
+				$("#lita").empty();
+				$("#lita").append(response);
+			}
+			,error : function(jqXHR, textStatus, errorThrown){
+				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
+			}
+		});
 	}
 </script>
 </body>

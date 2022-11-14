@@ -66,4 +66,17 @@
 			,1	
 		)
 	</insert>
+	
+	<!-- 로그인 로그 -->
+	<insert id="loginLogInsert">
+		INSERT INTO loginLog (
+			loginLogMemberSeq
+			,loginLogIp
+			,loginLogDatetime
+		) VALUES (
+			#{loginLogMemberSeq}
+			,#{loginLogIp}
+			,now()
+		)
+	</insert>
 </mapper>

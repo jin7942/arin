@@ -11,10 +11,25 @@ public class Login {
 	private String memberMailName;
 	private String memberMailDomain;
 	
+	private String loginLogIp;
+	private String loginLogMemberSeq;
+	
     //	Login with Kakao
 	private String id;
 	private String email;
 	
+    public String getLoginLogIp() {
+        return loginLogIp;
+    }
+    public void setLoginLogIp(String loginLogIp) {
+        this.loginLogIp = loginLogIp;
+    }
+    public String getLoginLogMemberSeq() {
+        return loginLogMemberSeq;
+    }
+    public void setLoginLogMemberSeq(String loginLogMemberSeq) {
+        this.loginLogMemberSeq = loginLogMemberSeq;
+    }
 	public String getMemberMailName() {
 	    return memberMailName;
 	}

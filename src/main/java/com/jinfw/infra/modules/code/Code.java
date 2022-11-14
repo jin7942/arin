@@ -32,8 +32,110 @@ public class Code {
     private String seller;
     private String itemDelNY;
     private String itemSaleNY;
+    
+    /* loginLog DTo */
+    private String memberCnt;
+    private String itemCnt;
+    private String itemCntSaleTrue;
+    private String visitCnt;
+    
+    private String seq;
+    private String memberName;
+    private String memberID;
+    private String memberSignDatetime;
+    private String loginLogIp;
+    private String loginLogDatetime;
+    private String loginLogMemberSeq;
+    
+    
 
+    public String getMemberCnt() {
+        return memberCnt;
+    }
 
+    public void setMemberCnt(String memberCnt) {
+        this.memberCnt = memberCnt;
+    }
+
+    public String getItemCnt() {
+        return itemCnt;
+    }
+
+    public void setItemCnt(String itemCnt) {
+        this.itemCnt = itemCnt;
+    }
+
+    public String getItemCntSaleTrue() {
+        return itemCntSaleTrue;
+    }
+
+    public void setItemCntSaleTrue(String itemCntSaleTrue) {
+        this.itemCntSaleTrue = itemCntSaleTrue;
+    }
+
+    public String getVisitCnt() {
+        return visitCnt;
+    }
+
+    public void setVisitCnt(String visitCnt) {
+        this.visitCnt = visitCnt;
+    }
+
+    public String getSeq() {
+        return seq;
+    }
+
+    public void setSeq(String seq) {
+        this.seq = seq;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public String getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(String memberID) {
+        this.memberID = memberID;
+    }
+
+    public String getMemberSignDatetime() {
+        return memberSignDatetime;
+    }
+
+    public void setMemberSignDatetime(String memberSignDatetime) {
+        this.memberSignDatetime = memberSignDatetime;
+    }
+
+    public String getLoginLogIp() {
+        return loginLogIp;
+    }
+
+    public void setLoginLogIp(String loginLogIp) {
+        this.loginLogIp = loginLogIp;
+    }
+
+    public String getLoginLogDatetime() {
+        return loginLogDatetime;
+    }
+
+    public void setLoginLogDatetime(String loginLogDate) {
+        this.loginLogDatetime = loginLogDate;
+    }
+
+    public String getLoginLogMemberSeq() {
+        return loginLogMemberSeq;
+    }
+
+    public void setLoginLogMemberSeq(String loginLogMemberSeq) {
+        this.loginLogMemberSeq = loginLogMemberSeq;
+    }
 
     public static void setCachedCodeArrayList(List<Code> cachedCodeArrayList) {
         Code.cachedCodeArrayList = cachedCodeArrayList;

@@ -55,7 +55,8 @@
                                             <input type="email" class="form-control form-control-user"
                                                 id="memberID" aria-describedby="emailHelp"
                                                 placeholder="ID"
-												name="memberID"                                                
+												name="memberID"
+												value="test"                                         
                                                 >
                                         </div>
                                         <div class="form-group">
@@ -63,6 +64,7 @@
                                                 id="memberPW" 
                                                 placeholder="Password"
                                                 name="memberPW"
+                                                value="1234"
                                                 >
                                         </div>
                                         <div class="form-group">
@@ -129,7 +131,7 @@
 				,data : { "memberID" : $("#memberID").val(), "memberPW" : $("#memberPW").val()}
 				,success: (res) => {
 					if(res.rt == "success") {
-						location.href = "/member/memberList"
+						location.href = "/code/index"
 					} else {
 						alert("회원없음");
 					}
