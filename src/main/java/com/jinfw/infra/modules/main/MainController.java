@@ -27,10 +27,6 @@ public class MainController {
 
 	public String sessSeq;
 
-	public void setSearchAndPaging(MainVo vo, int totalCnt) throws Exception {
-		vo.setParamsPaging(totalCnt);
-	}
-
 	/**
 	 * 메인 상품 리스트
 	 * 
@@ -61,7 +57,7 @@ public class MainController {
 
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		int totalCnt = service.selectOneCount(vo);
-		setSearchAndPaging(vo, totalCnt);
+		vo.setParamsPaging(totalCnt);
 
 		if (!(vo.getThisPage() >= vo.getTotalPages() + 1)) {
 			List<Main> list = service.selectList(vo);

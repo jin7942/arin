@@ -104,7 +104,8 @@
 
 	<sql id="selectVisitCommon">
 		FROM member a
-		join loginLog b on a.seq = b.loginLogMemberSeq
+		JOIN loginLog b on a.seq = b.loginLogMemberSeq
+		WHERE date_format(loginLogDatetime, '%Y-%m-%d')= date_format(now(), '%Y-%m-%d')
 		ORDER BY loginLogDatetime DESC
 	</sql>
 

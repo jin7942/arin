@@ -1,4 +1,7 @@
 package com.jinfw.infra.modules.login;
+/**
+ * 로그인 모듈
+ */
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +31,43 @@ public class LoginController extends BaseController {
 
     @Autowired
     LoginServiceImpl service;
-
+    
+    public static String getSessionSeqCore(HttpServletRequest httpServletRequest) {
+        HttpSession httpSession = httpServletRequest.getSession();
+        String rtSeq = (String) httpSession.getAttribute("sessSeq");
+        return rtSeq;
+    }
+    /**
+     * 로그인 로그 기록 함수
+     * @param Login dto
+     * @param HttpServletRequest request
+     * @param String seq
+     * @throws Exception
+     */
+    public void loginLoger(Login dto, HttpServletRequest request, String seq) throws Exception {
+        String ip = getClientIp(request);
+        
+        logger.info("=== Client Login ===");
+        logger.info("=== Ip : " + ip);
+        
+        dto.setLoginLogMemberSeq(seq);
+        dto.setLoginLogIp(ip);
+        service.loginLogInsert(dto);
+    }
+    /**
+     * 세션 부여 함수
+     * @param Login rtMember
+     * @param httpSession
+     * @throws Exception
+     */
+    public void setSession(Login rtMember, HttpSession httpSession) throws Exception {
+        httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
+        httpSession.setAttribute("sessSeq", rtMember.getSeq());
+        httpSession.setAttribute("sessId", rtMember.getMemberID());
+        httpSession.setAttribute("sessName", rtMember.getMemberName());
+        httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
+    }
+    
     @RequestMapping(value = "login")
     public String login() throws Exception {
 
@@ -50,29 +89,13 @@ public class LoginController extends BaseController {
             throws Exception {
 
         Map<String, Object> returnMap = new HashMap<String, Object>();
-
         Login rtMember = service.selectOneId(dto);
 
         if (rtMember != null) {
-            logger.info("===== client login =====");
-            logger.info("client name : " + rtMember.getMemberID());
-            logger.info("method : " + request.getMethod());
-            logger.info("protocol : " + request.getProtocol());
-            logger.info("request uri : " + request.getRequestURI());
-            logger.info("request url: " + request.getRequestURL());
-            logger.info("port : " + request.getLocalPort());
-            logger.info("ip : " + getClientIp(request));
-            
             // 로그인 로그 기록
-            dto.setLoginLogMemberSeq(rtMember.getSeq());
-            dto.setLoginLogIp(getClientIp(request));
-            service.loginLogInsert(dto);
-
-            httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-            httpSession.setAttribute("sessSeq", rtMember.getSeq());
-            httpSession.setAttribute("sessId", rtMember.getMemberID());
-            httpSession.setAttribute("sessName", rtMember.getMemberName());
-            httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
+            loginLoger(dto, request, rtMember.getSeq());
+            // 세션부여
+            setSession(rtMember, httpSession);
 
             returnMap.put("rt", "success");
         } else {
@@ -92,17 +115,11 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "logoutProc")
     public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
         Map<String, Object> returnMap = new HashMap<String, Object>();
-        /* UtilCookie.deleteCookie(); */
         httpSession.invalidate();
         returnMap.put("rt", "success");
         return returnMap;
     }
 
-    public static String getSessionSeqCore(HttpServletRequest httpServletRequest) {
-        HttpSession httpSession = httpServletRequest.getSession();
-        String rtSeq = (String) httpSession.getAttribute("sessSeq");
-        return rtSeq;
-    }
 
     @RequestMapping(value = "/login/kakao/oauth")
     public String loginWithKakao(String code, Login dto, HttpSession httpSession, Model model,
@@ -130,15 +147,9 @@ public class LoginController extends BaseController {
         } else {
             
             // 로그인 로그 기록
-            dto.setSeq(rtMember.getSeq());
-            dto.setLoginLogIp(getClientIp(request));
-            service.loginLogInsert(dto);
-            
-            httpSession.setMaxInactiveInterval(60 * Constants.SESSION_MINUTE); // 60second * 30 = 30minute
-            httpSession.setAttribute("sessSeq", rtMember.getSeq());
-            httpSession.setAttribute("sessId", rtMember.getMemberID());
-            httpSession.setAttribute("sessName", rtMember.getMemberName());
-            httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
+            loginLoger(dto, request, rtMember.getSeq());
+            // 세션부여
+            setSession(rtMember, httpSession);
 
             return "redirect:/main/";
         }

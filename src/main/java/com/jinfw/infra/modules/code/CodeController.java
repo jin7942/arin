@@ -16,14 +16,6 @@ public class CodeController {
     @Autowired
     CodeServiceImpl service;
 
-    public void setSearchAndPaging(CodeVo vo, int totalCnt) throws Exception {
-//		vo.setShOptionDate(vo.getShOptionDate() == null ? "2" : vo.getShOptionDate());
-//		vo.setShStartDate(vo.getShStartDate() == null || vo.getShStartDate() == "" ? null : UtilDateTime.add00TimeString(vo.getShStartDate()));
-//		vo.setShEndDate(vo.getShEndDate() == null || vo.getShEndDate() == "" ? null : UtilDateTime.add59TimeString(vo.getShEndDate()));
-
-        vo.setParamsPaging(totalCnt);
-    }
-
     /**
      * 공통코드 리스트 조회 함수
      * 
@@ -36,7 +28,7 @@ public class CodeController {
     public String codeList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 
         int totalCnt = service.selectOneCount(vo);
-        setSearchAndPaging(vo, totalCnt);
+        vo.setParamsPaging(totalCnt);
 
         List<Code> list = service.selectList(vo);
 
@@ -134,7 +126,7 @@ public class CodeController {
     public String itemList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
 
         int totalCnt = service.selectOneCount(vo);
-        setSearchAndPaging(vo, totalCnt);
+        vo.setParamsPaging(totalCnt);
 
         List<Code> list = service.selectItemList(vo);
 
@@ -148,7 +140,7 @@ public class CodeController {
     public String indexList(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
         
         int totalCnt = service.selectVisitListCnt(vo);
-        setSearchAndPaging(vo, totalCnt);
+        vo.setParamsPaging(totalCnt);
         
         Code item = service.selectItem();
         List<Code> itemList = service.selectIndexItem();
@@ -165,7 +157,7 @@ public class CodeController {
     public String indexAjaxLita(@ModelAttribute("vo") CodeVo vo, Model model) throws Exception {
         
         int totalCnt = service.selectVisitListCnt(vo);
-        setSearchAndPaging(vo, totalCnt);
+        vo.setParamsPaging(totalCnt);
         
         List<Code> visitList = service.selectVisitList(vo);
         model.addAttribute("visitList", visitList);

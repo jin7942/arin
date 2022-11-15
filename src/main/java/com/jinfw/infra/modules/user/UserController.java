@@ -25,11 +25,6 @@ public class UserController {
 	
 	String sessSeq = "";
 	
-   public void setSearchAndPaging(UserVo vo, int totalCnt) throws Exception {
-    
-        vo.setParamsPaging(totalCnt);
-    }
-	
 	public void setMainKey(UserVo vo, HttpServletRequest httpServletRequest) {
 		sessSeq = LoginController.getSessionSeqCore(httpServletRequest);
 		vo.setMainKey(sessSeq);
@@ -66,11 +61,11 @@ public class UserController {
 		
 		setMainKey(vo, httpServletRequest);
 		
-		int cnt = service.selectHistoryCount(vo);
+		int totalCnt = service.selectHistoryCount(vo);
 		List<User> list = service.selectList(vo);
-		setSearchAndPaging(vo, cnt);
+		vo.setParamsPaging(totalCnt);
 		
-		model.addAttribute("cnt", cnt);
+		model.addAttribute("cnt", totalCnt);
 		model.addAttribute("list", list);
 		
 		return "infra/user/user/history";
@@ -88,11 +83,11 @@ public class UserController {
 		
 		setMainKey(vo, httpServletRequest);
 		
-		int cnt = service.selectRegHistoryCount(vo);
+		int totalCnt = service.selectRegHistoryCount(vo);
 		List<User> list = service.selectListRegHistory(vo);
-		setSearchAndPaging(vo, cnt);
+		vo.setParamsPaging(totalCnt);
 		model.addAttribute("list", list);
-		model.addAttribute("cnt", cnt);
+		model.addAttribute("cnt", totalCnt);
 		
 		return "infra/user/user/regHistory";
 	}

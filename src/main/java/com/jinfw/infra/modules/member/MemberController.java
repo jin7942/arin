@@ -28,10 +28,6 @@ public class MemberController {
     @Autowired
     MemberServiceImpl service;
 
-    public void setSearchAndPaging(MemberVo vo, int totalCnt) throws Exception {
-        vo.setParamsPaging(totalCnt);
-    }
-
     @RequestMapping(value = "login")
     public String login() throws Exception {
 
@@ -50,14 +46,14 @@ public class MemberController {
     public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
         int totalCnt = service.selectOneCount(vo);
-        setSearchAndPaging(vo, totalCnt);
+        vo.setParamsPaging(totalCnt);
 
         List<Member> list = service.selectList(vo);
 
         model.addAttribute("list", list);
         model.addAttribute("totalCnt", totalCnt);
 
-        return "infra/member/xdmin/memberList";
+        return "infra/member/xdmin/memberAjaxList";
     }
     
     @RequestMapping(value = "memberAjaxList")
@@ -69,7 +65,7 @@ public class MemberController {
     @RequestMapping(value = "memberAjaxLita")
     public String memberAjaxLita(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
         int totalCnt = service.selectOneCount(vo);
-        setSearchAndPaging(vo, totalCnt);
+        vo.setParamsPaging(totalCnt);
 
         List<Member> list = service.selectList(vo);
 
