@@ -13,7 +13,7 @@
 		JOIN itemImgUpload b on a.itemSeq = b.itemSeq
 		WHERE 1 = 1
 			AND a.itemSaleNY = 0
-			AND b.sort = 1
+			AND b.defaultNy = 1
 		<!-- 문자열 검색 -->
 		<choose>
 			<when test="shValue != null and shValue != '' ">

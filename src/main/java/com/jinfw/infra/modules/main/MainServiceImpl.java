@@ -77,7 +77,7 @@ public class MainServiceImpl implements MainService {
             dto.setExt(list.get(i).get("ext").toString());
             dto.setSize(list.get(i).get("fileSize").toString());
             dto.setType(2);
-            dto.setDefaultNy(1);
+            dto.setDefaultNy(list.get(i).get("defaultNy").toString());
             dto.setSort(i + 1);
             dto.setPseq(dto.getSeq());
 

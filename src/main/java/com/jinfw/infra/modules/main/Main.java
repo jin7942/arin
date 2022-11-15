@@ -1,8 +1,5 @@
 package com.jinfw.infra.modules.main;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class Main {
@@ -35,7 +32,7 @@ public class Main {
 	private String itemReviewItemSeq;
 
 	/* upload DTO */
-	private Integer defaultNy;
+	private String defaultNy;
 	private Integer sort;
 	private String path;
 	private String originalName;
@@ -48,14 +45,6 @@ public class Main {
 	private MultipartFile[] uploadedImage;
 	private String itemImgThumbNail;
 	private String uploadData;
-	
-	
-    public String getUploadData() {
-        return uploadData;
-    }
-    public void setUploadData(String uploadData) {
-        this.uploadData = uploadData;
-    }
     public String getItemSeq() {
         return itemSeq;
     }
@@ -182,10 +171,10 @@ public class Main {
     public void setItemReviewItemSeq(String itemReviewItemSeq) {
         this.itemReviewItemSeq = itemReviewItemSeq;
     }
-    public Integer getDefaultNy() {
+    public String getDefaultNy() {
         return defaultNy;
     }
-    public void setDefaultNy(Integer defaultNy) {
+    public void setDefaultNy(String defaultNy) {
         this.defaultNy = defaultNy;
     }
     public Integer getSort() {
@@ -254,7 +243,12 @@ public class Main {
     public void setItemImgThumbNail(String itemImgThumbNail) {
         this.itemImgThumbNail = itemImgThumbNail;
     }
-	
+    public String getUploadData() {
+        return uploadData;
+    }
+    public void setUploadData(String uploadData) {
+        this.uploadData = uploadData;
+    }
 	
 	
 }

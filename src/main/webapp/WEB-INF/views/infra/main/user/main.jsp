@@ -44,7 +44,7 @@
 				<c:forEach items="${list}" var="list" varStatus="status">
 					<div class="col" style="cursor: pointer">
 						<div class="card" data-aos="fade-up" data-aos-delay="200">
-							<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="img-thumbnail card-img-top" />
+							<img src="<c:out value="${list.path}" /><c:out value="${list.uuidName}" />" class="img-responsive card-img-top" style="width: 100%; height: 100%;" />
 							<div class="card-body" onclick="goView(<c:out value="${list.itemSeq}"/>)">
 
 								<%-- <input type="hidden" name="seq" value="<c:out value="${list.seq}" />" /> --%>
@@ -121,7 +121,7 @@
 	        					listHTML += '<div class="col" style="cursor: pointer">';
 	        					listHTML += '	<div class="card" data-aos="fade-up" data-aos-delay="200">';
 	                            listHTML += '		<div class="card-body" onclick="goView(' + res.data[i].itemSeq + ')">';
-	                            listHTML += '			<img src="' + res.data[i].path + res.data[i].uuidName + '" class="card-img-top" alt="..." />';
+	                            listHTML += '			<img src="' + res.data[i].path + res.data[i].uuidName + '" class="img-responsive card-img-top" alt="..." />';
 	                            listHTML += '			<div class=' + 'card-body' + '>';
 	                            listHTML += '				<h5 class="card-title"><b>' + res.data[i].itemHeader + '</b></h5>';
 	                            listHTML += '				<p class="card-text">' + addComma(res.data[i].itemPrice) +'원</p>';
