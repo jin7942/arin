@@ -19,11 +19,11 @@ public class LoginDao {
 	public Login selectOneId(Login dto) {
 		return sqlSession.selectOne(namespace + ".selectOneId", dto);
 	}
-	public Login kakaoLogin(Login dto) {
-	    return sqlSession.selectOne(namespace + ".kakaoLogin", dto);
+	public Login snsLogin(Login dto) {
+	    return sqlSession.selectOne(namespace + ".snsLogin", dto);
 	}
-	public int kakaoInsert(Login dto) {
-	    return sqlSession.insert(namespace + ".kakaoInsert", dto);
+	public int snsInsert(Login dto) {
+	    return sqlSession.insert(namespace + ".snsInsert", dto);
 	}
 	public int loginLogInsert(Login dto) {
 	    return sqlSession.insert(namespace + ".loginLogInsert", dto);

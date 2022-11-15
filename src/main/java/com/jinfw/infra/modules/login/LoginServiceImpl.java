@@ -23,13 +23,13 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Login kakaoLogin(Login dto) throws Exception {
-        return dao.kakaoLogin(dto);
+    public Login snsLogin(Login dto) throws Exception {
+        return dao.snsLogin(dto);
     }
 
     @Override
-    public int kakaoInsert(Login dto) throws Exception {
-        return dao.kakaoInsert(dto);
+    public int snsInsert(Login dto) throws Exception {
+        return dao.snsInsert(dto);
     }
     
     public int loginLogInsert(Login dto) throws Exception {

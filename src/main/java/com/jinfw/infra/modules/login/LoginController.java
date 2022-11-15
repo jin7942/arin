@@ -120,19 +120,30 @@ public class LoginController extends BaseController {
         return returnMap;
     }
 
-
+    
+    /**
+     * 카카오 로그인
+     * @param code
+     * @param dto
+     * @param httpSession
+     * @param model
+     * @param redirectAttributes
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/login/kakao/oauth")
     public String loginWithKakao(String code, Login dto, HttpSession httpSession, Model model,
             RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 
         Map<String, Object> returnMap = KakaoOauth.getUserInfoByToken(KakaoOauth.getAccessToken(code));
 
-        dto.setId(returnMap.get("id").toString());
+        dto.setMemberID(returnMap.get("id").toString());
         String memberName = returnMap.get("name").toString();
         String memberMailName = returnMap.get("mailName").toString();
         String memberMailDomain = returnMap.get("mailDomain").toString();
 
-        Login rtMember = service.kakaoLogin(dto);
+        Login rtMember = service.snsLogin(dto);
 
         if (rtMember == null) {
             // 회원가입
@@ -140,8 +151,9 @@ public class LoginController extends BaseController {
             dto.setMemberName(memberName);
             dto.setMemberMailName(memberMailName);
             dto.setMemberMailDomain(memberMailDomain);
+            dto.setType("1");
 
-            service.kakaoInsert(dto);
+            service.snsInsert(dto);
 
             return "redirect:/index#about";
         } else {
@@ -154,6 +166,27 @@ public class LoginController extends BaseController {
             return "redirect:/main/";
         }
 
+    }
+    
+    @RequestMapping(value = "/login/naver/oauth")
+    @ResponseBody
+    public Map<String, Object> naverLogin(Login dto, HttpSession httpSession, HttpServletRequest request) throws Exception{
+        
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        Login rtMember = service.snsLogin(dto);
+        
+        if (rtMember != null) {
+            // 로그인 로그 기록
+            loginLoger(dto, request, rtMember.getSeq());
+            // 세션부여
+            setSession(rtMember, httpSession);
+            returnMap.put("rt", "success");
+        } else {
+            // 회원가입
+            service.snsInsert(dto);
+            returnMap.put("rt", "fail");
+        }
+        return returnMap;
     }
 
 }

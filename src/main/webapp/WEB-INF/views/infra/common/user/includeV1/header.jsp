@@ -95,7 +95,7 @@
 					</a></li>
 					<li><a class="nav-link scrollto" href="#"><i class="fa-solid fa-location-dot fa-lg"></i><c:out value="${sessPlace}" /></a></li>
 					<li><a class="nav-link scrollto" onclick="logout()">로그아웃</a></li>
-					<li><a class="nav-link scrollto" href="/code/codeList">관리자페이지</a></li>
+					<li><a class="nav-link scrollto" href="/code/index">관리자페이지</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>

@@ -49,9 +49,7 @@
 					We create <span class="typed" data-typed-items="beautiful graphics, functional websites, working mobile apps"></span>
 				</h2>
 				<div class="actions">
-					<a href="#about" class="btn-services">Login</a> 
-					<a href="/main/signUp" class="btn-services">Sign Up</a>
-					<a href="/login" class="btn-services">관리자페이지</a>
+					<a href="#about" class="btn-services">Login</a> <a href="/main/signUp" class="btn-services">Sign Up</a> <a href="/login" class="btn-services">관리자페이지</a>
 				</div>
 			</div>
 		</div>
@@ -119,9 +117,15 @@
 									<hr class="my-4" />
 
 									<div class="col-md-12">
+										<!-- Kakao Login -->
 										<button type="button" class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px" onclick="loginWithKakao()">Kakao</button>
 										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #eb4435; margin-top: 10px">Google</button>
-										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white">Naver</button>
+										
+										<!-- Naver Login -->
+<!-- 										<div class="btn_login_wrap">
+											<div id="naverIdLogin"></div>
+										</div> -->
+										<button type="button" class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white" id="naverIdLogin" >Naver</button>
 										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #3b5998; margin-top: 10px; color: white">Facebook</button>
 									</div>
 								</form>
@@ -134,7 +138,10 @@
 		</section>
 	</main>
 	<!-- End #main -->
-	
+
+	<!-- Naver API -->
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
 	<!-- kakao API -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d83d77585dfcb78cea837606843f75b&libraries=services"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -172,6 +179,61 @@
 	        	redirectUri: 'http://localhost:8080/login/kakao/oauth' 
 	        }); // 등록한 리다이렉트uri 입력
 	    }
+	</script>
+	<script>
+		var naverLogin = new naver.LoginWithNaverId({
+		    clientId: 'jE8UWZl0kEyD2QiHZhoH',
+		    callbackUrl: 'http://localhost:8080/index#about',
+		    isPopup: false,
+		});
+	
+		naverLogin.init();
+		
+		document.getElementById('naverIdLogin').addEventListener('click', function(){
+			
+		    naverLogin.getLoginStatus(function (status) {
+		        if (status) {
+		            setLoginStatus();
+		        } else {
+		        	naverLogin.authorize();
+		        }
+			});
+		})
+	
+		function setLoginStatus() {
+		    const words = naverLogin.user.email.split('@');
+
+		    const memberMailName = words[0];
+		    const memberMailDoamin = words[1];
+		    const memberMobile = naverLogin.user.mobile.replaceAll('-', '');
+		    
+		    $.ajax({
+		        async: true,
+		        cache: false,
+		        type: 'POST',
+		        url: '/login/naver/oauth',
+		        data: {
+		            memberID: naverLogin.user.id,
+		            memberName: naverLogin.user.name,
+		            memberMailName: memberMailName,
+		            memberMailDomain: memberMailDoamin,
+		            memberMobile: memberMobile,
+		            type: 2,
+		        },
+		        success: function (response) {
+		            if (response.rt == 'fail') {
+		                alert('아이디와 비밀번호를 다시 확인 후 시도해 주세요.');
+		                return false;
+		            } else {
+		                window.location.href = '/main/';
+		            }
+		        },
+		        error: function (jqXHR, status, error) {
+		            alert('알 수 없는 에러 [ ' + error + ' ]');
+		        },
+		    });
+		}
+
 	</script>
 
 	<!-- footer -->

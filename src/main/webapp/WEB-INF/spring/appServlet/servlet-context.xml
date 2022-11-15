@@ -37,6 +37,7 @@
 			<exclude-mapping path="/index/#about" />
 			<exclude-mapping path="/main/userInst" />
 			<exclude-mapping path="/login/kakao/oauth" />
+			<exclude-mapping path="/login/naver/oauth" />
 			<exclude-mapping path="/rest/**" />
 			<beans:bean id="checkLoginSessionInterception" class="com.jinfw.infra.common.interceptor.CheckLoginSessionInterception"/>
 		</interceptor>
