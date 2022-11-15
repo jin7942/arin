@@ -45,13 +45,9 @@ public class MemberController {
     @RequestMapping(value = "memberList")
     public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
-        int totalCnt = service.selectOneCount(vo);
-        vo.setParamsPaging(totalCnt);
-
+        vo.setParamsPaging(service.selectOneCount(vo));
         List<Member> list = service.selectList(vo);
-
         model.addAttribute("list", list);
-        model.addAttribute("totalCnt", totalCnt);
 
         return "infra/member/xdmin/memberAjaxList";
     }
@@ -64,13 +60,10 @@ public class MemberController {
     
     @RequestMapping(value = "memberAjaxLita")
     public String memberAjaxLita(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
-        int totalCnt = service.selectOneCount(vo);
-        vo.setParamsPaging(totalCnt);
 
+        vo.setParamsPaging(service.selectOneCount(vo));
         List<Member> list = service.selectList(vo);
-
         model.addAttribute("list", list);
-        model.addAttribute("totalCnt", totalCnt);
 
         return "infra/member/xdmin/memberAjaxLita";
     }
