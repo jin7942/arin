@@ -1,141 +1,33 @@
-# arin 프로젝트 풀더 구조
+# 중고거래 플랫폼
 
-```bash
-arin
-├─.settings
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─com
-│  │  │      └─jinfw
-│  │  │          └─infra
-│  │  │              ├─common
-│  │  │              │  ├─base
-│  │  │              │  ├─constans
-│  │  │              │  ├─interceptor
-│  │  │              │  └─utill
-│  │  │              └─modules
-│  │  │                  ├─code
-│  │  │                  ├─codegroup
-│  │  │                  ├─login
-│  │  │                  ├─main
-│  │  │                  ├─member
-│  │  │                  └─user
-│  │  ├─resources
-│  │  └─webapp
-│  │      ├─META-INF
-│  │      ├─resources
-│  │      │  ├─images
-│  │      │  ├─img
-│  │      │  ├─js
-│  │      │  │  ├─form
-│  │      │  │  ├─helper
-│  │      │  │  └─validation
-│  │      │  ├─template_admin
-│  │      │  │  ├─css
-│  │      │  │  ├─img
-│  │      │  │  ├─js
-│  │      │  │  │  └─demo
-│  │      │  │  ├─scss
-│  │      │  │  │  ├─navs
-│  │      │  │  │  └─utilities
-│  │      │  │  └─vendor
-│  │      │  │      ├─bootstrap
-│  │      │  │      │  ├─js
-│  │      │  │      │  └─scss
-│  │      │  │      │      ├─mixins
-│  │      │  │      │      ├─utilities
-│  │      │  │      │      └─vendor
-│  │      │  │      ├─chart.js
-│  │      │  │      ├─datatables
-│  │      │  │      ├─fontawesome-free
-│  │      │  │      │  ├─css
-│  │      │  │      │  ├─js
-│  │      │  │      │  ├─less
-│  │      │  │      │  ├─metadata
-│  │      │  │      │  ├─scss
-│  │      │  │      │  ├─sprites
-│  │      │  │      │  ├─svgs
-│  │      │  │      │  │  ├─brands
-│  │      │  │      │  │  ├─regular
-│  │      │  │      │  │  └─solid
-│  │      │  │      │  └─webfonts
-│  │      │  │      ├─jquery
-│  │      │  │      └─jquery-easing
-│  │      │  ├─template_imperial
-│  │      │  │  └─assets
-│  │      │  │      ├─css
-│  │      │  │      ├─img
-│  │      │  │      ├─js
-│  │      │  │      └─vendor
-│  │      │  │          ├─aos
-│  │      │  │          ├─bootstrap
-│  │      │  │          │  ├─css
-│  │      │  │          │  └─js
-│  │      │  │          ├─bootstrap-icons
-│  │      │  │          │  └─fonts
-│  │      │  │          ├─glightbox
-│  │      │  │          │  ├─css
-│  │      │  │          │  └─js
-│  │      │  │          ├─isotope-layout
-│  │      │  │          ├─php-email-form
-│  │      │  │          ├─swiper
-│  │      │  │          └─typed.js
-│  │      │  └─uploaded
-│  │      │      └─main
-│  │      │          └─2022
-│  │      │              └─10
-│  │      │                  └─10
-│  │      └─WEB-INF
-│  │          ├─lib
-│  │          ├─spring
-│  │          │  └─appServlet
-│  │          └─views
-│  │              └─infra
-│  │                  ├─code
-│  │                  │  └─xdmin
-│  │                  ├─codegroup
-│  │                  │  └─xdmin
-│  │                  ├─common
-│  │                  │  ├─user
-│  │                  │  │  └─includeV1
-│  │                  │  └─xdmin
-│  │                  │      └─includeV1
-│  │                  ├─login
-│  │                  │  └─xdmin
-│  │                  ├─main
-│  │                  │  └─user
-│  │                  ├─member
-│  │                  │  └─xdmin
-│  │                  ├─temp
-│  │                  └─user
-│  │                      └─user
-│  └─test
-│      └─java
-└─target
-    ├─classes
-    │  ├─com
-    │  │  └─jinfw
-    │  │      └─infra
-    │  │          ├─common
-    │  │          │  ├─base
-    │  │          │  ├─constans
-    │  │          │  ├─interceptor
-    │  │          │  └─utill
-    │  │          └─modules
-    │  │              ├─code
-    │  │              ├─codegroup
-    │  │              ├─login
-    │  │              ├─main
-    │  │              ├─member
-    │  │              └─user
-    │  └─META-INF
-    │      └─maven
-    │          └─mycompany3
-    │              └─arin
-    ├─generated-sources
-    │  └─annotations
-    ├─generated-test-sources
-    │  └─test-annotations
-    └─test-classes
-```
+사용자가 자유롭게 물건을 등록하고 구매할 수 있는 서비스 입니다.
+
+-   서비스 링크 : http://arin.jin7942.co.kr
+
+<br/>
+
+# 프로젝트 내용
+
+-   작업기간 : 2022.08 ~ 2022.11 (3개월)
+-   인력구성 1명
+
+## 주요 구현 기술
+
+-   kakao, naver 로그인, 회원가입 구현
+-   MultiPart 활용 파일 첨부 구현
+-   httpSession 통한 로그인 유지 및 Interceptor 활용
+-   encryptSha256 암호화 적용
+-   정규식 활용 validation 설정
+-   POI 활용 엑셀 다운로드
+-   Ajax 활용 비동기 처리
+-   REST API 구현
+-   업로드 서버 분리 [바로가기](https://github.com/jin7942/uploadServer)
+
+## 개발 환경
+
+| 구분      | 내용                            |
+| --------- | ------------------------------- |
+| System    | AWS EC2(CentOs 7)               |
+| DataBase  | AWS RDS MySQL                   |
+| Language  | JAVA, jsp, jstl/el, JavaScript, |
+| Framework | Spring legacy, mybatis, maven   |
