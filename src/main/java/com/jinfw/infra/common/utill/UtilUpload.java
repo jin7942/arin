@@ -31,7 +31,7 @@ public class UtilUpload {
 		dto.setOriginalName(fileName);
 		dto.setUuidName(uuidFileName);
 		dto.setExt(ext);
-		dto.setSize(multipartFile.getSize());
+		//dto.setSize(multipartFile.getSize());
 
 	}
 
