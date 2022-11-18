@@ -93,6 +93,19 @@ img {
 	height: 200px;
 	margin-left: 20px;
 }
+
+input[type=file]::file-selector-button {
+  width: 150px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid rgb(77,77,77);
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background: rgb(77,77,77);
+    color: #fff;
+  }
+}
 </style>
 </head>
 
@@ -137,7 +150,7 @@ img {
 
 						<input type="file" id="uploadedImage" class="real-upload" accept="image/*" name="uploadedImage" required multiple />
 						<button type="button" id="deleteBtn" class="btn btn-danger" onclick="removeAll()">삭제</button>
-						<button type="button" class="btn btn-danger" onclick="test()">테스트</button>
+						<!-- <button type="button" class="btn btn-danger" onclick="test()">테스트</button> -->
 					</div>
 					<!-- End of img form -->
 					<div class="col"></div>
@@ -163,7 +176,6 @@ img {
 
 						<div class="btnGroup" style="margin-top: 20px">
 							<button type="button" class="btn btn-dark" onclick="onSubmit()">Submit</button>
-							<button type="button" class="btn btn-dark">임시저장</button>
 						</div>
 					</div>
 					<div class="col"></div>

@@ -12,16 +12,15 @@
 <main id="main">
 	<div class="container" style="margin-top: 10%; margin-bottom: 20%; width: 85%" data-aos="fade-up">
 		<div class="row" style="text-align: center">
-			<div class="col">
+			<div class="col-3"></div>
+			<div class="col-6">
 				<form action="/user/updt" class="form" id="form">
 					<table class="table table-borderless">
 						<!-- table-caption -->
 						<caption class="h2" style="caption-side: top; text-align: center">나의 정보</caption>
 
 						<tr>
-							<td rowspan="4">
-								<img src="/resources/template_imperial/assets/img/sample.jpg" class="img-thumbnail" alt="..." />
-							</td>
+
 							<td>이름</td>
 							<td>
 								<input type="text" class="form-control" name="memberName" value="<c:out value="${item.memberName}" />" />
@@ -43,9 +42,7 @@
 						<tr>
 						</tr>
 						<tr>
-							<td>
-								<a href="" style="color: black">프로필 사진 변경</a>
-							</td>
+
 							<td>주소</td>
 							<td>
 								<input type="text" class="form-control" name="memberPlace" value="<c:out value="${item.memberPlace}" />" />
@@ -53,10 +50,12 @@
 						</tr>
 					</table>
 				</form>
-				
+
 				<button class="btn btn-dark" onClick="onSubmit()">수정</button>
-				
+
 			</div>
+
+			<div class="col-3"></div>
 		</div>
 	</div>
 </main>

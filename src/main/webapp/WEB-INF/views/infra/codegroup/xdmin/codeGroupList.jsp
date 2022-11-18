@@ -122,16 +122,10 @@
 					<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
 					<!-- pagination e -->
 
-					<button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal" data-bs-target="#exampleModal">
-						<i class="fa-solid fa-trash-can"></i>
-					</button>
-
 					<button type="button " class="btn btn-primary" style="float: right" onclick="location.href='/codegroup/codeGroupForm'">
 						<i class="fa-solid fa-plus"></i>
 					</button>
-					<button type="button" class="btn btn-success" style="float: right">
-						<i class="fa-solid fa-file-excel"></i>
-					</button>
+
 				</div>
 			</div>
 		</div>

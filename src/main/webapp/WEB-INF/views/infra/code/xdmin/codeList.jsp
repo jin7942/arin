@@ -154,16 +154,10 @@
 						<!-- pagination s -->
 						<%@include file="../../common/xdmin/includeV1/pagination.jsp"%>
 						<!-- pagination e -->
-						<button type="button" class="btn btn-danger" style="float: left" onclick="delRow()">
-							<i class="fa-solid fa-trash-can"></i>
-						</button>
-
 						<button type="button" class="btn btn-primary" style="float: right" onClick="bntGoForm()">
 							<i class="fa-solid fa-plus"></i>
 						</button>
-						<button type="button" class="btn btn-success" style="float: right">
-							<i class="fa-solid fa-file-excel"></i>
-						</button>
+
 					</div>
 				</div>
 			</div>

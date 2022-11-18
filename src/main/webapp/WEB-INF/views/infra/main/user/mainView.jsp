@@ -46,7 +46,7 @@
 			<input type="hidden" name="sessName" id="sessName" value="<c:out value="${sessName}"/>" />
 
 			<div class="col-4">
-				<h2> 
+				<h2>
 					<b> <c:out value="${item.itemHeader}" />
 					</b>
 				</h2>
@@ -54,8 +54,11 @@
 					<fmt:formatNumber value="${item.itemPrice}" pattern="#,###,###" />
 					원
 				</h3>
-				<p>
+				<%-- 				<p>
 					<c:out value="${item.itemDescription}" />
+				</p> --%>
+				<p>
+					<c:out value="${fn:replace(item.itemDescription, br, '<br/>')}" escapeXml="false" />
 				</p>
 			</div>
 
@@ -76,21 +79,21 @@
 				</div>
 
 				<div style="text-align: center; margin-top: 20%">
-					<a href="" style="color: black; text-align: center">부적절한 상품 신고하기</a>
+					<!-- <a href="" style="color: black; text-align: center">부적절한 상품 신고하기</a> -->
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<!-- 리뷰 -->
 		<form action="" name="commentForm">
 			<div class="row gx-5" style="margin-top: 20%; width: 100%">
-			
+
 				<h3>리뷰</h3>
 				<hr />
-			
+
 				<div class="col-6">
-					
+
 					<div class="comment" id="comment">
 
 						<c:forEach items="${listComment}" var="listComment" varStatus="status">
@@ -99,22 +102,26 @@
 									<b><c:out value="${listComment.memberName}" /></b>
 								</h5>
 								<span style="float: right"><c:out value="${listComment.itemReviewModDatetime}" /></span>
-								<p><c:out value="${listComment.itemReviewComment}" /></p>
+								<p>
+									<c:out value="${listComment.itemReviewComment}" />
+								</p>
 								<hr />
 							</div>
 						</c:forEach>
 
 					</div>
-					
-					<h4><a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }"/></b>님</a></h4>
-					<input type="text" class="form-control" style="height: 150px" id="itemReviewComment" name="itemReviewComment"/>
+
+					<h4>
+						<a class="nav-link scrollto" href="/user/info"><b><c:out value="${sessName }" /></b>님</a>
+					</h4>
+					<input type="text" class="form-control" style="height: 150px" id="itemReviewComment" name="itemReviewComment" />
 					<br />
 					<button type="button" class="btn btn-dark" onclick="commentReject()">등록</button>
-				
+
 				</div>
 				<div class="col-3"></div>
-				
-				
+
+
 				<div class="col-3"></div>
 			</div>
 		</form>

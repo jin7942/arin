@@ -2,6 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ page session="true" %>
+<% pageContext.setAttribute("br", "\n"); %>
 
 <head>
 <meta charset="utf-8" />

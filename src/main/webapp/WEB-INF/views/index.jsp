@@ -96,7 +96,7 @@
 								<!-- ========== Login Form ========== -->
 								<form action="">
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="memberID" placeholder="temp@gmail.com" name="memberID" value="test" />
+										<input type="text" class="form-control" id="memberID" placeholder="temp@gmail.com" name="memberID" value="guest" />
 										<label for="floatingInput">ID</label>
 									</div>
 									<div class="form-floating">
@@ -104,29 +104,29 @@
 										<label for="floatingPassword">Password</label>
 									</div>
 
-									<div class="form-check d-flex justify-content-start mb-4">
+									<br />
+
+									<!-- <div class="form-check d-flex justify-content-start mb-4">
 										<input class="form-check-input" type="checkbox" value="" id="" />
 										<label class="form-check-label" for="form1Example3"> Remember password </label>
-									</div>
+									</div> -->
 
 									<div class="text-center">
 										<button class="btn btn-dark btn-lg btn-block" type="button" onclick="login()">Login</button>
 									</div>
-									<a href="" style="color: black">ID 및 PW 찾기</a>
+									<!-- <a href="" style="color: black">ID 및 PW 찾기</a> -->
 
 									<hr class="my-4" />
 
 									<div class="col-md-12">
 										<!-- Kakao Login -->
 										<button type="button" class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px" onclick="loginWithKakao()">Kakao</button>
-										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #eb4435; margin-top: 10px">Google</button>
-										
+
 										<!-- Naver Login -->
-<!-- 										<div class="btn_login_wrap">
+										<!-- 										<div class="btn_login_wrap">
 											<div id="naverIdLogin"></div>
 										</div> -->
-										<button type="button" class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white" id="naverIdLogin" >Naver</button>
-										<button class="btn btn-lg btn-block" style="width: 100%; background-color: #3b5998; margin-top: 10px; color: white">Facebook</button>
+										<button type="button" class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white" id="naverIdLogin">Naver</button>
 									</div>
 								</form>
 								<!-- ========== End Login Form ========== -->
@@ -184,29 +184,38 @@
 		var naverLogin = new naver.LoginWithNaverId({
 		    clientId: 'jE8UWZl0kEyD2QiHZhoH',
 		    callbackUrl: 'http://localhost:8080/index#about',
-		    isPopup: false,
+		    isPopup: true,
 		});
 	
 		naverLogin.init();
 		
 		document.getElementById('naverIdLogin').addEventListener('click', function(){
-			
 		    naverLogin.getLoginStatus(function (status) {
 		        if (status) {
-		            setLoginStatus();
+		        	setLoginStatus();
 		        } else {
 		        	naverLogin.authorize();
 		        }
 			});
 		})
-	
+	 
+		window.addEventListener('load', function () {
+			if (naverLogin.accessToken != null){
+				naverLogin.getLoginStatus(function(status) {
+					if(status){
+						setLoginStatus();
+					}
+				});
+			}
+		});
+			
 		function setLoginStatus() {
 		    const words = naverLogin.user.email.split('@');
 
 		    const memberMailName = words[0];
 		    const memberMailDoamin = words[1];
 		    const memberMobile = naverLogin.user.mobile.replaceAll('-', '');
-		    
+
 		    $.ajax({
 		        async: true,
 		        cache: false,
@@ -221,6 +230,7 @@
 		            type: 2,
 		        },
 		        success: function (response) {
+		        	console.log(response)
 		            if (response.rt == 'fail') {
 		                alert('아이디와 비밀번호를 다시 확인 후 시도해 주세요.');
 		                return false;

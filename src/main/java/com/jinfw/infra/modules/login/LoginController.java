@@ -147,7 +147,6 @@ public class LoginController extends BaseController {
 
         if (rtMember == null) {
             // 회원가입
-            dto.setMemberID(dto.getId());
             dto.setMemberName(memberName);
             dto.setMemberMailName(memberMailName);
             dto.setMemberMailDomain(memberMailDomain);

@@ -21,7 +21,7 @@ public class HomeController {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.info("server address => localhost:8080/");
 		
-		return "index";
+		return "redirect:index";
 	}
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)

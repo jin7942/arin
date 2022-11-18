@@ -191,12 +191,6 @@
 								<hr class="my-4" />
 
 								<div class="col-md-12">
-									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #f7e600; margin-top: 10px" onclick="loginWithKakao()">
-										Kakao
-									</button>
-									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #eb4435; margin-top: 10px">Google</button>
-									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #1ec800; margin-top: 10px; color: white">Naver</button>
-									<button class="btn btn-lg btn-block" style="width: 100%; background-color: #3b5998; margin-top: 10px; color: white">Facebook</button>
 								</div>
 							</div>
 						</div>

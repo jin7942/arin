@@ -92,16 +92,13 @@
 					
 					<div id="lita"></div>
 
-					<button type="button" class="btn btn-danger" style="float: left" data-bs-toggle="modal" data-bs-target="#exampleModal">
-						<i class="fa-solid fa-trash-can"></i>
-					</button>
-
 					<button type="button " class="btn btn-primary" style="float: right" onclick="location.href='./memberForm'">
 						<i class="fa-solid fa-plus"></i>
 					</button>
 					<button type="button" class="btn btn-success" style="float: right" id="btnExcel">
 						<i class="fa-solid fa-file-excel"></i>
 					</button>
+
 				</div>
 			</div>
 		</div>
