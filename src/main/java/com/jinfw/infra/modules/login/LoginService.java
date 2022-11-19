@@ -6,5 +6,6 @@ public interface LoginService {
 	public Login snsLogin(Login code) throws Exception;
 	public int snsInsert(Login dto) throws Exception;
 	public int loginLogInsert(Login dto) throws Exception;
+	public void logInsert(Login dto) throws Exception;
 	
 }

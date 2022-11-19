@@ -1,4 +1,5 @@
 package com.jinfw.infra.modules.login;
+
 /**
  * 로그인 모듈
  */
@@ -21,42 +22,47 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.jinfw.infra.common.base.BaseController;
 import com.jinfw.infra.common.constans.Constants;
 import com.jinfw.infra.common.utill.KakaoOauth;
-import com.jinfw.infra.modules.main.Main;
-import com.jinfw.infra.modules.main.MainServiceImpl;
+import com.jinfw.infra.common.utill.UtilClient;
 
 @Controller
 @RequestMapping(value = "/")
-public class LoginController extends BaseController {
+public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     LoginServiceImpl service;
-    
+
+    @Autowired
+    HttpSession httpSession;
+
     public static String getSessionSeqCore(HttpServletRequest httpServletRequest) {
         HttpSession httpSession = httpServletRequest.getSession();
-        String rtSeq = (String) httpSession.getAttribute("sessSeq");
-        return rtSeq;
+        return httpSession.getAttribute("sessSeq").toString();
     }
+
     /**
      * 로그인 로그 기록 함수
-     * @param Login dto
+     * 
+     * @param Login              dto
      * @param HttpServletRequest request
-     * @param String seq
+     * @param String             seq
      * @throws Exception
      */
     public void loginLoger(Login dto, HttpServletRequest request, String seq) throws Exception {
-        String ip = getClientIp(request);
-        
+        String ip = UtilClient.getClientIp(request);
+
         logger.info("=== Client Login ===");
         logger.info("=== Ip : " + ip);
-        
+
         dto.setLoginLogMemberSeq(seq);
         dto.setLoginLogIp(ip);
         service.loginLogInsert(dto);
     }
+
     /**
      * 세션 부여 함수
-     * @param Login rtMember
+     * 
+     * @param Login       rtMember
      * @param httpSession
      * @throws Exception
      */
@@ -67,7 +73,7 @@ public class LoginController extends BaseController {
         httpSession.setAttribute("sessName", rtMember.getMemberName());
         httpSession.setAttribute("sessPlace", rtMember.getMemberPlace());
     }
-    
+
     @RequestMapping(value = "login")
     public String login() throws Exception {
 
@@ -85,7 +91,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "loginProc")
     @ResponseBody
-    public Map<String, Object> loginProc(Login dto, HttpSession httpSession, HttpServletRequest request)
+    public Map<String, Object> loginProc(Login dto, HttpServletRequest request)
             throws Exception {
 
         Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -113,16 +119,16 @@ public class LoginController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "logoutProc")
-    public Map<String, Object> logoutProc(HttpSession httpSession) throws Exception {
+    public Map<String, Object> logoutProc() throws Exception {
         Map<String, Object> returnMap = new HashMap<String, Object>();
         httpSession.invalidate();
         returnMap.put("rt", "success");
         return returnMap;
     }
 
-    
     /**
      * 카카오 로그인
+     * 
      * @param code
      * @param dto
      * @param httpSession
@@ -133,7 +139,7 @@ public class LoginController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/login/kakao/oauth")
-    public String loginWithKakao(String code, Login dto, HttpSession httpSession, Model model,
+    public String loginWithKakao(String code, Login dto, Model model,
             RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 
         Map<String, Object> returnMap = KakaoOauth.getUserInfoByToken(KakaoOauth.getAccessToken(code));
@@ -156,7 +162,7 @@ public class LoginController extends BaseController {
 
             return "redirect:/index#about";
         } else {
-            
+
             // 로그인 로그 기록
             loginLoger(dto, request, rtMember.getSeq());
             // 세션부여
@@ -166,14 +172,15 @@ public class LoginController extends BaseController {
         }
 
     }
-    
+
     @RequestMapping(value = "/login/naver/oauth")
     @ResponseBody
-    public Map<String, Object> naverLogin(Login dto, HttpSession httpSession, HttpServletRequest request) throws Exception{
-        
+    public Map<String, Object> naverLogin(Login dto, HttpServletRequest request)
+            throws Exception {
+
         Map<String, Object> returnMap = new HashMap<String, Object>();
         Login rtMember = service.snsLogin(dto);
-        
+
         if (rtMember != null) {
             // 로그인 로그 기록
             loginLoger(dto, request, rtMember.getSeq());

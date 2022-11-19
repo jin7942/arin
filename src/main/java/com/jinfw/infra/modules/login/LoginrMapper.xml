@@ -79,4 +79,22 @@
 			,now()
 		)
 	</insert>
+	
+	<!-- 접속 로그 -->
+	<insert id="logInsert">
+		INSERT INTO clientLog (
+			ctIp
+			,ctBrowser
+			,ctDevice
+			,ctReqUri
+			,ctReqDate
+		) VALUES (
+			#{clientIp}
+			,#{clientBrowser}
+			,#{clientDevice}
+			,#{clientReqUri}
+			,now()
+		)
+	</insert>
+	
 </mapper>

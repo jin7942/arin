@@ -14,11 +14,46 @@ public class Login {
 
     private String loginLogIp;
     private String loginLogMemberSeq;
+    private String clientIp;
+    private String clientDevice;
+    private String clientBrowser;
+    private String clientReqUri;
 
     // Login with Kakao
     private String id;
     private String email;
 
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public void setClientIp(String clientIp) {
+        this.clientIp = clientIp;
+    }
+
+    public String getClientDevice() {
+        return clientDevice;
+    }
+
+    public void setClientDevice(String clientDevice) {
+        this.clientDevice = clientDevice;
+    }
+
+    public String getClientBrowser() {
+        return clientBrowser;
+    }
+
+    public void setClientBrowser(String clientBrowser) {
+        this.clientBrowser = clientBrowser;
+    }
+
+    public String getClientReqUri() {
+        return clientReqUri;
+    }
+
+    public void setClientReqUri(String clientReqUri) {
+        this.clientReqUri = clientReqUri;
+    }
     public String getType() {
         return type;
     }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.jinfw.infra.common.constans.Constants;
+import com.jinfw.infra.common.utill.UtilClient;
 
 public class CheckLoginSessionInterception extends HandlerInterceptorAdapter {
 	
@@ -14,6 +15,9 @@ public class CheckLoginSessionInterception extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		System.out.println("CheckLoginSessionInterception is running!");
+		System.out.println("Client Ip : " + UtilClient.getClientIp(request));
+		System.out.println("Client Device : " + UtilClient.getClientDevice(request));
+		System.out.println("Client RequestURI : " + request.getRequestURI());
 		
 		if (request.getSession().getAttribute("sessSeq") != null) {
 			// by pass

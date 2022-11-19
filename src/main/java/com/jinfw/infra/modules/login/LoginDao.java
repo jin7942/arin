@@ -28,6 +28,8 @@ public class LoginDao {
 	public int loginLogInsert(Login dto) {
 	    return sqlSession.insert(namespace + ".loginLogInsert", dto);
 	}
-	
+	public void logInsert(Login dto) {
+	    sqlSession.insert(namespace + ".logInsert", dto);
+	}
 	
 }
