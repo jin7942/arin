@@ -196,41 +196,6 @@ input[type=file]::file-selector-button {
 
 
 	<script type="text/javascript">
-		function test() {
-			const obj = document.getElementById('imgInput').files;
-
-			const maxFileSize = 10000;
-			const maxFileTotalSize = 100000;
-			const maxFileCount = 6;
-
-			console.group('===T E S T===');
-			console.log(obj);
-			console.log(obj.length);
-
-			if (obj.length > maxFileCount) {
-				alert('최대 6개까지만');
-				return false;
-			}
-			let sum = 0;
-			for (let i = 0; i < obj.length; i++) {
-
-				if (obj[i].size >= maxFileSize) {
-					alert('10MB 이하의 파일만 업로드 가능');
-					return false;
-				}
-
-				sum += obj[i].size;
-
-				console.log(obj[i].name + ' : ' + obj[i].size);
-			}
-			console.log('total files size : ' + sum);
-			console.groupEnd();
-
-			if (sum >= maxFileTotalSize) {
-				alert('총 100MB 이하의 파일만 업로드 가능');
-				return false;
-			}
-		}
 
 /* 		function onSubmit() {
 			$("form[name=form]").submit();
@@ -241,6 +206,26 @@ input[type=file]::file-selector-button {
 			const data= new FormData(form[0])
 			const uploadedImage = $("input[name=uploadedImage]")
 			const uploadData = $("input[name=uploadData]")
+			const numberRegex = /^[0-9]{4,12}$/;
+			
+			/** validation **/
+			if (uploadedImage.val() == '' ||uploadedImage.val() == null) {
+				alert('이미지는 최소 한장 이상 반드시 포함되어야 합니다.');
+				return false;
+				
+			} else if ($("input[name=itemHeader]").val() == '' || $("input[name=itemHeader]").val() == null) {
+				alert('상품 제목은 반드시 포함되어야 합니다.');
+				$("input[name=itemHeader]").focus();
+				return false;
+				
+			} else if ($("input[name=itemPrice]").val() == '' || numberRegex.test($("input[name=itemPrice]").val()) != true) {
+				alert('가격은 반드시 숫자로 명시 되어야 합니다. \n 최소 금액은 1000원 부터 가능합니다.');
+				return false;
+			
+			} else if ($("input[name=itemDescription]").val() == '' || $("input[name=itemDescription]").val() == null) {
+				alert('상품 설명을 적어주세요.')
+				return false;
+			}
 			
 			 $.ajax({
 			   url: "http://localhost:4000/api/uploadImg",

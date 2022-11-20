@@ -115,6 +115,7 @@
 		JOIN itemImgUpload b on a.itemSeq = b.itemSeq
 		WHERE 1=1
 			AND a.itemSaleNY = 0
+			AND b.defaultNy = 1
 		ORDER BY RAND() LIMIT 3;
 	</select>
 	
