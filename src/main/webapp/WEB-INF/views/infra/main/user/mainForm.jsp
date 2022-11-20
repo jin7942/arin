@@ -222,7 +222,7 @@ input[type=file]::file-selector-button {
 				alert('가격은 반드시 숫자로 명시 되어야 합니다. \n 최소 금액은 1000원 부터 가능합니다.');
 				return false;
 			
-			} else if ($("input[name=itemDescription]").val() == '' || $("input[name=itemDescription]").val() == null) {
+			} else if ($("textarea[name=itemDescription]").val() == '' || $("textarea[name=itemDescription]").val() == null) {
 				alert('상품 설명을 적어주세요.')
 				return false;
 			}
