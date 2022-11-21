@@ -176,14 +176,14 @@
 	
 	    function loginWithKakao() {
 	        Kakao.Auth.authorize({ 
-	        	redirectUri: 'http://localhost:8080/login/kakao/oauth' 
+	        	redirectUri: 'http://arin.jin7942.co.kr:80/login/kakao/oauth' 
 	        }); // 등록한 리다이렉트uri 입력
 	    }
 	</script>
 	<script>
 		var naverLogin = new naver.LoginWithNaverId({
 		    clientId: 'jE8UWZl0kEyD2QiHZhoH',
-		    callbackUrl: 'http://localhost:8080/index#about',
+		    callbackUrl: 'http://arin.jin7942.co.kr:80/index#about',
 		    isPopup: true,
 		});
 	
