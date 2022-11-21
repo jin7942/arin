@@ -17,5 +17,6 @@ public interface MainService {
 	public int selectOneCartCount(MainVo vo) throws Exception;
 	public int selectOneCount(MainVo vo) throws Exception;
 	public int regComment(Main dto) throws Exception;
+	public int itemUpdt(Main dto) throws Exception;
 	
 }

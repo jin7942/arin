@@ -53,6 +53,14 @@ public class MainDao {
 		return sqlSession.insert(namespace + ".itemImgUpload", dto);
 	}
 	
+	// 상품 수정
+	public int itemUpdt(Main dto) {
+		return sqlSession.update(namespace + ".itemUpdt", dto);
+	}
+	public int itemImgUpdt(Main dto) {
+		return sqlSession.update(namespace + ".itemImgUpdt", dto);
+	}
+	
 	// 상품 구매
 	public int buyItem(MainVo vo) {
 		return sqlSession.update(namespace + ".buyItem", vo);

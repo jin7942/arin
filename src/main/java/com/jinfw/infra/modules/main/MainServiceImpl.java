@@ -106,7 +106,33 @@ public class MainServiceImpl implements MainService {
 //
 //        return result;
 //    }
+    
+    // 상품 수정
+    @Override
+    public int itemUpdt(Main dto) throws Exception {
+    	int result = dao.itemUpdt(dto);
 
+		/*
+		 * ObjectMapper objectMapper = new ObjectMapper(); Map<String, Object> map =
+		 * objectMapper.readValue(dto.getUploadData(), Map.class);
+		 * 
+		 * List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(); list =
+		 * (List<Map<String, Object>>) map.get("data");
+		 * 
+		 * for (int i = 0; i < list.size(); i++) {
+		 * dto.setPath(list.get(i).get("path").toString());
+		 * dto.setOriginalName(list.get(i).get("originalname").toString());
+		 * dto.setUuidName(list.get(i).get("uuidName").toString());
+		 * dto.setExt(list.get(i).get("ext").toString());
+		 * dto.setSize(list.get(i).get("fileSize").toString());
+		 * dto.setDefaultNy(list.get(i).get("defaultNy").toString()); dto.setSort(i +
+		 * 1);
+		 * 
+		 * dao.itemImgUpdt(dto); }
+		 */
+        return result;
+    }
+    
     // 상품 구매
     @Override
     public int buyItem(MainVo vo) throws Exception {

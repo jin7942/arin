@@ -155,11 +155,26 @@ public class MainController {
 
 	// 상품등록 폼
 	@RequestMapping(value = "form")
-	public String mainForm(@ModelAttribute("vo") MainVo vo, Model model) throws Exception {
-
+	public String mainForm(@ModelAttribute("vo") MainVo vo, Main dto, Model model) throws Exception {
+		
+		if (dto.getItemSeq() != null) {
+			vo.setMainKey(dto.getItemSeq());
+			Main item = service.selectOne(vo);
+			model.addAttribute("item", item);
+		}
+		
 		return "infra/main/user/mainForm";
 	}
-
+	@RequestMapping(value = "itemUpdt")
+	public String itemUpdt(MainVo vo, Main dto, Model model, RedirectAttributes redirectAttributes) throws Exception {
+		
+		service.itemUpdt(dto);
+		vo.setMainKey(dto.getItemSeq());
+		redirectAttributes.addFlashAttribute("vo", vo);
+		
+		return "redirect:view";
+	}
+	
 	/**
 	 * 상품등록 프로세스
 	 * 
@@ -178,18 +193,6 @@ public class MainController {
 		redirectAttributes.addFlashAttribute("vo", vo);
 
 		return "redirect:view";
-	}
-	
-	@RequestMapping(value = "test")
-	public String test(MainVo vo, Main dto, RedirectAttributes redirectAttributes) throws Exception {
-	    
-	    String apiUrl = "http://localhost:4000/api/uploadImg";
-	    System.out.println(apiUrl);
-	    
-	    vo.setMainKey(dto.getItemSeq());
-	    redirectAttributes.addFlashAttribute("vo", vo);
-	    
-	    return "redirect:view";
 	}
 
 	/**

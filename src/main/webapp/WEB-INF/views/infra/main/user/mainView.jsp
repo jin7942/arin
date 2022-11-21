@@ -11,6 +11,11 @@
 <!-- End of header -->
 
 <main id="main">
+	<form action="" name="goForm">
+		<input type="hidden" name="itemSeq" id="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
+		<input type="hidden" name="member_seq" id="member_seq" value="<c:out value="${item.member_seq}"/>" />
+	</form>
+	
 	<div class="container" style="margin-top: 10%; margin-bottom: 5%; width: 85%" data-aos="fade-up">
 		<div class="row gx-4">
 			<div class="col-4">
@@ -42,6 +47,7 @@
 
 			<input type="hidden" name="mainKey" id="mainKey" value="<c:out value="${vo.mainKey}"/>" />
 			<input type="hidden" name="itemSeq" id="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
+			<input type="hidden" name="member_seq" id="member_seq" value="<c:out value="${item.member_seq}"/>" />
 			<input type="hidden" name="sessSeq" id="sessSeq" value="<c:out value="${sessSeq}"/>" />
 			<input type="hidden" name="sessName" id="sessName" value="<c:out value="${sessName}"/>" />
 
@@ -79,7 +85,7 @@
 				</div>
 
 				<div style="text-align: center; margin-top: 20%">
-					<!-- <a href="" style="color: black; text-align: center">부적절한 상품 신고하기</a> -->
+					<%-- <a onclick="goModForm(<c:out value="${item.itemSeq}" />, <c:out value="${sessSeq}" />)" style="color: black; text-align: center; cursor: pointer">수정하기</a> --%>
 				</div>
 			</div>
 		</div>
@@ -275,6 +281,16 @@
 				alert("ajaxUpdate " + jqXHR.textStatus + " : " + jqXHR.errorThrown);
 			}
 		});
+	}
+	
+	const goModForm = (itemSeq, seq) => {
+		if ($("input[name=member_seq]").val() == seq) {
+			const form = $("form[name=goForm]");
+			form.attr("action", "/main/form").submit();
+			
+		} else {
+			alert("수정할 권한이 없습니다.");
+		}
 	}
 
 </script>

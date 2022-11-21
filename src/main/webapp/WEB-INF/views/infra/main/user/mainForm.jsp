@@ -135,7 +135,7 @@ input[type=file]::file-selector-button {
 	<!-- End Header -->
 
 	<main id="main">
-		<form action="/main/itemInst" name="form" id="form" method="post" enctype="multipart/form-data">
+		<form action="" name="form" id="form" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="uploadData" id="uploadData" value="" />
 			<div class="container" style="margin-top: 10%; margin-bottom: 10%; width: 85%" data-aos="fade-up">
 				<div class="row ">
@@ -160,18 +160,19 @@ input[type=file]::file-selector-button {
 					<div class="col-7">
 						<!-- item reg form -->
 						<input type="hidden" name="seq" id="seq" value="<c:out value="${vo.mainKey}"/>" />
+						<input type="hidden" name="itemSeq" value="<c:out value="${item.itemSeq}"/>" />
 
 						<div class="mb-3">
 							<label for="itemHeader" class="form-label">상품 제목</label>
-							<input type="text" class="form-control" id="itemHeader" name="itemHeader" value="" />
+							<input type="text" class="form-control" id="itemHeader" name="itemHeader" value="<c:out value="${item.itemHeader}"/>" />
 						</div>
 						<div class="mb-3">
 							<label for="itemPrice" class="form-label">가격</label>
-							<input type="text" class="form-control text-end" id="itemPrice" name="itemPrice" placeholder="(원)" />
+							<input type="text" class="form-control text-end" id="itemPrice" name="itemPrice" placeholder="(원)" value="<c:out value="${item.itemPrice}"/>" />
 						</div>
 						<div class="form-group">
 							<label for="itemDescription">상품설명</label>
-							<textarea class="form-control" id="itemDescription" name="itemDescription" value="" rows="10"> </textarea>
+							<textarea class="form-control" id="itemDescription" name="itemDescription" value="" rows="10"><c:out value="${item.itemDescription}"/></textarea>
 						</div>
 
 						<div class="btnGroup" style="margin-top: 20px">
@@ -208,6 +209,9 @@ input[type=file]::file-selector-button {
 			const uploadData = $("input[name=uploadData]")
 			const numberRegex = /^[0-9]{4,12}$/;
 			
+			const goUrlInst = "/main/itemInst";
+			const goUrlUpdt = "/main/itemUpdt"
+			
 			/** validation **/
 			if (uploadedImage.val() == '' ||uploadedImage.val() == null) {
 				alert('이미지는 최소 한장 이상 반드시 포함되어야 합니다.');
@@ -228,7 +232,7 @@ input[type=file]::file-selector-button {
 			}
 			
 			 $.ajax({
-			   url: "http://localhost:4000/api/uploadImg",
+			   url: "http://arin.jin7942.co.kr:4000/api/uploadImg",
 			   type: "POST",
 			   data: data,
 			   enctype: 'multipart/form-data',
@@ -239,7 +243,12 @@ input[type=file]::file-selector-button {
 					console.log(JSON.stringify(res));
 					uploadedImage.val('');
 					uploadData.val(JSON.stringify(res));
-					form.submit();
+					
+					if ($("input[name=itemSeq]").val() == '' || $("input[name=itemSeq]").val() == null) {
+						form.attr("action", goUrlInst).submit();
+					} else {
+ 						form.attr("action", goUrlUpdt).submit();
+					}
 		   		},
 			   error: function () {
 			     // Handle upload error
