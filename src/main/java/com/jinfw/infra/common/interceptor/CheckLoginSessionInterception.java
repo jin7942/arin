@@ -21,6 +21,7 @@ public class CheckLoginSessionInterception extends HandlerInterceptorAdapter {
 		
 		if (request.getSession().getAttribute("sessSeq") != null) {
 			// by pass
+			System.out.println("Member Name : " + request.getSession().getAttribute("sessName").toString());
 		} else {
 			
 			if (request.getRequestURI().contains("main") || request.getRequestURI().contains("user")) {

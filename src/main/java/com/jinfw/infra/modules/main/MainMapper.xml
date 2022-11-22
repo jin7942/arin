@@ -20,7 +20,7 @@
 				AND a.itemHeader LIKE CONCAT('%',#{shValue},'%')
 			</when>
 		</choose>
-		ORDER BY a.itemRegDatetime ASC
+		ORDER BY a.itemRegDatetime DESC
     </sql>
 	
 	<!-- 메인 리스트 조회 -->
