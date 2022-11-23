@@ -89,7 +89,6 @@
 					</h6>
 				</div>
 				<div class="card-body">
-					<c:set var="listCodeCarrier" value="${CodeServiceImpl.selectListCachedCode('1')}" />
 					<table class="table table-hover">
 						<!-- table-caption -->
 						<caption style="caption-side: top; text-align: right"></caption>
@@ -123,7 +122,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${list}" var="list" varStatus="status">
-									<tr>
+									<tr onclick="goForm(<c:out value="${list.seq}"/>)">
 										<td>
 											<input type="checkbox" name="" id="" />
 										</td>
@@ -193,6 +192,11 @@
 
 <!-- End of Main Content -->
 
+<!-- vo.jsp -->
+<form action="" name="formVo" id="formVo">
+	<%@include file="memberVo.jsp"%>
+</form>
+
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
 	<div class="container my-auto">
@@ -232,11 +236,16 @@
 	function refresh() {
 		location.href = "/member/memberList";
 	}
-
+	
+	const formVo = $("form[name=formVo]");
 	const form = $("form[name=form]");
+	
+	const goForm = "/member/memberForm";
 	const goUrlList = "/member/memberList";
 	const excelUri = "/member/excelDownload"
 	const goUrlLita ="/member/memberAjaxLita";
+	
+	const mainKey = $("input[name=mainKey]");
 	
 	$("#btnExcel").click(() => {
 		form.attr("action", excelUri).submit();
@@ -247,6 +256,11 @@
 		//form.attr("action", goUrlList).submit();
 		form.attr("action", goUrlLita).submit();
 		//setLita();
+	}
+	
+	const goForm = (seq) => {
+		mainKey.val(seq)
+		formVo.attr("action", goUrlForm).submit
 	}
 </script>
 </body>

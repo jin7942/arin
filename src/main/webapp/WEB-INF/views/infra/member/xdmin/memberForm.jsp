@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
 
@@ -12,7 +13,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	<!-- Page Heading -->
-	<h1 class="h3 mb-4 text-gray-800">코드 관리</h1>
+	<h1 class="h3 mb-4 text-gray-800">회원 관리</h1>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -24,94 +25,177 @@
 					<form method="GET" action="" id="form" name="form">
 						<div style="display: flex">
 							<div class="col-6">
-								<input type="hidden" id="infrCodeGroup_ifcgSeq" name="infrCodeGroup_ifcgSeq" value="<c:out value="${item.infrCodeGroup_ifcgSeq}"/>" />
 								<input type="hidden" id="mainKey" name="mainKey" value="<c:out value="${vo.mainKey}"/>" />
+								<input type="hidden" name="seq" id="seq" value="<c:out value="${item.seq}"/>" />
 
-								<label for="ifcgSeq" class="form-label">
-									코드그룹 <b>*</b>
+								<!-- 이름 -->
+								<label for="memberName" class="form-label">
+									회원 이름 <b>*</b>
 								</label>
-								
-								<select class="form-control" id="ifcgSeq" name="ifcgSeq">
-									<option value="0">선택하세요</option>
-									<c:forEach items="${list}" var="list" varStatus="status">
-										<option value="<c:out value="${list.ifcgSeq}"/>">
-											<c:out value="${list.ifcgNameKor}" />
-										</option>
-									</c:forEach>
-								</select>
-								<!--                                                 
-                                                    <label for="input1" class="form-label">코드그룹 코드</label>
-                                                    <input type="text" id="input1" class="form-control" placeholder="영문(대소문자),숫자" />
- -->
-								<label for="ifcgNameKor" class="form-label">
-									코드그룹 이름(한글) <b>*</b>
-								</label>
-								<input type="text" id="ifccNameKor" name="ifccNameKor" class="form-control" placeholder="한글, 숫자" value="<c:out value="${item.ifccNameKor}"/>" />
+								<input type="text" id="memberName" name="memberName" class="form-control" placeholder="이름" value="<c:out value="${item.memberName}"/>" />
 
-								<label for="ifccUseNY" class="form-label">
+								<!-- 삭제 여부 -->
+								<label for="memberDelNY" class="form-label">
 									사용여부 <b>*</b>
 								</label>
-								<select class="form-control" id="ifccUseNY" name="ifccUseNY">
-									<option value="0" <c:if test="${item.ifccUseNY eq 0}"  >selected</c:if>>N</option>
-									<option value="1" <c:if test="${item.ifccUseNY eq 1}"  >selected</c:if>>Y</option>
+								<select class="form-control" id="memberDelNY" name="memberDelNY">
+									<option value="0" <c:if test="${item.memberDelNY eq '0'}"  >checked="checked"</c:if>>N</option>
+									<option value="1" <c:if test="${item.memberDelNY eq '1'}"  >checked="checked"</c:if>>Y</option>
 								</select>
 
-								<label for="ifccDescription" class="form-label">설명</label>
-								<textarea class="form-control" name="ifccDescription" id="ifccDescription" cols="10" rows="2" style="text-align: left;"><c:out value="${item.ifccDescription}" /></textarea>
+								<br />
 
+								<!-- toggle -->
+								<div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" role="switch" id="btnRegHistory">
+									<label class="form-check-label" for="btnregHistory">등록한 상품 보기</label>
+								</div>
+								<div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" role="switch" id="btnBuyHistory">
+									<label class="form-check-label" for="btnBuyHistory">구매한 상품 보기</label>
+								</div>
+								
+								<!-- 등록한 상품 -->
+								<div id="regHistory" style="display: none">
+									<!-- Table -->
+									<table class="table table-hover">
+										<!-- table-caption -->
+										<caption style="caption-side: top; text-align: left">등록 상품</caption>
+										<!-- table-header -->
 
-								<label for="input5" class="form-label">예비1 (varchar type)</label>
-								<input type="text" id="input5" class="form-control" placeholder="영문(대소문자),숫자" />
+										<!-- table-body -->
+										<c:choose>
+											<c:when test="${fn:length(regHistory) eq 0 }">
+												<tr>
+													<td colspan="5">No Data..</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${regHistory}" var="regHistory" varStatus="status">
+													<tr onclick="goView(<c:out value="${regHistory.itemSeq}"/>)">
+														<td>#</td>
+														<td>
+															<c:out value="${regHistory.itemRegDatetime}" />
+														</td>
+														<td>
+															<c:out value="${regHistory.itemHeader}" />
+														</td>
+														<td>
+															<fmt:formatNumber value="${regHistory.itemPrice}" pattern="#,###,###" />
+															원
+														</td>
 
-								<label for="input6" class="form-label">예비3 (varchar type)</label>
-								<input type="text" id="input6" class="form-control" placeholder="영문(대소문자),숫자" />
+														<c:set var="itemSaleNY" value="${regHistory.itemSaleNY}" />
+														<c:choose>
+															<c:when test="${itemSaleNY eq '0'}">
+																<td>판매중</td>
+															</c:when>
+															<c:otherwise>
+																<td>판매완료</td>
+															</c:otherwise>
+														</c:choose>
 
-								<label for="input7" class="form-label">예비1 (int type)</label>
-								<input type="text" id="input7" class="form-control" placeholder="숫자" />
+														<%-- <td><c:out value="${list.itemSaleNY}" /></td> --%>
 
-								<label for="input8" class="form-label">예비3 (int type)</label>
-								<input type="text" id="input8" class="form-control" placeholder="숫자" />
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</table>
+									<!-- End of Table -->
+								</div>
+
+								<!-- 구매 내역 -->
+								<div id="buyHistory" style="display: none">
+									<!-- Table -->
+									<table class="table table-hover">
+										<!-- table-caption -->
+										<caption style="caption-side: top; text-align: left">구매 내역</caption>
+										<!-- table-header -->
+
+										<!-- table-body -->
+										<c:choose>
+											<c:when test="${fn:length(buyList) eq 0 }">
+												<tr>
+													<td colspan="5">No Data..</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${buyList}" var="buyList" varStatus="status">
+													<tr onclick="goView(<c:out value="${buyList.itemSeq}"/>)">
+														<td>#</td>
+														<td>
+															<c:out value="${buyList.itemRegDatetime}" />
+														</td>
+														<td>
+															<c:out value="${buyList.itemHeader}" />
+														</td>
+														<td>
+															<fmt:formatNumber value="${buyList.itemPrice}" pattern="#,###,###" />
+															원
+														</td>
+
+														<c:set var="itemSaleNY" value="${buyList.itemSaleNY}" />
+														<c:choose>
+															<c:when test="${itemSaleNY eq '0'}">
+																<td>판매중</td>
+															</c:when>
+															<c:otherwise>
+																<td>판매완료</td>
+															</c:otherwise>
+														</c:choose>
+
+														<%-- <td><c:out value="${buyList.itemSaleNY}" /></td> --%>
+
+													</tr>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</table>
+									<!-- End of Table -->
+								</div>
 							</div>
 
 							<div class="col-6">
-								<label for="input9" class="form-label">코드그룹 코드 (Another)</label>
-								<input type="text" id="input9" class="form-control" placeholder="영문(대소문자),숫자" />
 
-								<label for="ifccNameEng" class="form-label">
-									코드그룹 이름 (영문) <b>*</b>
+								<!-- ID -->
+								<label for="memberID" class="form-label">
+									아이디<b>*</b>
 								</label>
-								<input type="text" id="ifccNameEng" name="ifccNameEng" class="form-control" placeholder="영문(대소문자),숫자" value="<c:out value="${item.ifccNameEng}"/>" />
+								<input type="text" id="memberID" class="form-control" name="memberID" placeholder="ID" />
 
-								<label for="input11" class="form-label">숫자</label>
-								<input type="text" id="input11" class="form-control" placeholder="숫자" />
-
-								<label for="ifccDelNY" class="form-label">
-									삭제여부 <b>*</b>
+								<!-- PW -->
+								<label for="memberPW" class="form-label">
+									비밀번호 <b>*</b>
 								</label>
-								<select class="form-control" id="ifccDelNY" name="ifccDelNY">
-									<option value="0" <c:if test="${item.ifccDelNY eq 0}"  >selected</c:if>>N</option>
-									<option value="1" <c:if test="${item.ifccDelNY eq 1}"  >selected</c:if>>Y</option>
-								</select>
+								<input type="password" id="memberPW" name="memberPW" class="form-control" placeholder="비밀번호" value="<c:out value="${item.memberPW}"/>" />
 
-								<label for="input13" class="form-label">예비2 (varchar type)</label>
-								<input type="text" id="input13" class="form-control" placeholder="영문(대소문자),숫자" />
+								<!-- Mobile -->
+								<label for="memberMobile" class="form-label">연락처</label>
+								<input type="text" id="memberMobile" class="form-control" placeholder="연락처" value="<c:out value="${item.memberMobile}"/>" />
 
-								<label for="input14" class="form-label">예비1 (int type)</label>
-								<input type="text" id="input14" class="form-control" placeholder="숫자" />
+								<!-- Email -->
+								<label for="email" class="form-label">
+									이메일 <b>*</b>
+								</label>
+								<input type="text" class="form-control" id="email" placeholder="name@example.com" />
+
+								<input type="hidden" name="memberMailName" id="memberMailName" />
+								<input type="hidden" name="memberMailDomain" id="memberMailDomain" />
 
 								<br />
 
 								<p class="form-control">
 									등록일 :
-									<c:out value="${item.ifccRegDatetime }" />
+									<c:out value="${item.memberRegDateTime}" />
 								</p>
 								<p class="form-control">
 									수정일 :
-									<c:out value="${item.ifccModDatetime }" />
+									<c:out value="${item.memberModDatetime}" />
 								</p>
 								<div>
 									<button type="button" class="btn btn-primary" id="btnList">목록</button>
-									<button type="button" class="btn btn-primary" id="btnSave">등록</button>
+									<button type="button" class="btn btn-primary" id="btnSave">저장</button>
 									<button type="button" class="btn btn-danger" id="btnUelete">삭제</button>
 								</div>
 							</div>
@@ -124,6 +208,11 @@
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
+
+<!-- vo.jsp -->
+<form action="" name="formVo" id="formVo">
+	<%@include file="memberVo.jsp"%>
+</form>
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
@@ -160,16 +249,16 @@
 <script src="/resources/js/validation/validationInst.js"></script>
 
 <script type="text/javascript">
-	var goUrlList = "/code/codeList"; /* #-> */
-	var goUrlInst = "/code/codeInst"; /* #-> */
-	var goUrlUpdt = "/code/codeUpdt"; /* #-> */
-	var goUrlUele = "/code/codeUele"; /* #-> */
-	var goUrlDele = "/code/codeDele"; /* #-> */
+	const goUrlList = "/member/memberList"; /* #-> */
+	const goUrlInst = "/member/memberInst"; /* #-> */
+	const goUrlUpdt = "/member/memberUpdt"; /* #-> */
+	const goUrlUele = "/member/memberUele"; /* #-> */
+	const goUrlDele = "/member/memberDele"; /* #-> */
 
-	var seq = $("input:hidden[name=infrCodeGroup_ifcgSeq]"); /* #-> */
+	const seq = $("input:hidden[name=seq]"); /* #-> */
 
-	var form = $("form[name=form]");
-	var formVo = $("form[name=formVo]");
+	const form = $("form[name=form]");
+	const formVo = $("form[name=formVo]");
 
 	const nameEng = $("input[name=ifccNameEng]");
 	const nameKor = $("input[name=ifccNameKor]");
@@ -183,27 +272,27 @@
 	$("#btnSave").on("click", function() {
 		if (seq.val() == "0" || seq.val() == "") {
 			// insert
-			if (validationInst(nameEng, nameKor, useNY, delNY) == false)
-				return false;
 			form.attr("action", goUrlInst).submit();
 		} else {
 			// update
-			/* keyName.val(atob(keyName.val())); */
-			/* if (validationUpdt() == false) return false; */
 			form.attr("action", goUrlUpdt).submit();
 		}
 	});
-
-	$("#btnUelete").on("click", function() {
-		if (seq.val() == "0" || seq.val() == "") {
-			// insert
-			/* if (validationInst() == false) return false; */
-			alert("tset");
-			return false;
+	
+	$("#btnRegHistory").on("click", (e) => {
+		if (e.target.checked) {
+			document.getElementById("regHistory").style.display = 'block';
 		} else {
-			form.attr("action", goUrlUele).submit();
+			document.getElementById("regHistory").style.display = 'none';
 		}
-	});
+	})
+	$("#btnBuyHistory").on("click", (e) => {
+		if (e.target.checked) {
+			document.getElementById("buyHistory").style.display = 'block';
+		} else {
+			document.getElementById("buyHistory").style.display = 'none';
+		}
+	})
 </script>
 </body>
 </html>

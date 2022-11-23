@@ -52,12 +52,6 @@ public class MemberController {
         return "infra/member/xdmin/memberAjaxList";
     }
     
-    @RequestMapping(value = "memberAjaxList")
-    public String memberAjaxList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
-
-        return "infra/member/xdmin/memberAjaxList";
-    }
-    
     @RequestMapping(value = "memberAjaxLita")
     public String memberAjaxLita(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 
@@ -70,7 +64,11 @@ public class MemberController {
 
     @RequestMapping(value = "memberForm")
     public String codeForm(@ModelAttribute("vo") CodeVo vo, Code dto, Model model) throws Exception {
-
+    	
+    	if (vo.getMainKey() != null) {
+    		// insert
+    	}
+    	
         return "infra/member/xdmin/memberForm";
     }
 
