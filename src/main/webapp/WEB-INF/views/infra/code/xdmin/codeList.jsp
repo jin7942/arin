@@ -168,7 +168,7 @@
 <!-- End of Main Content -->
 
 <!-- vo.jsp -->
-<form action="" name="formVo" id="formVo">
+<form action="" name="formVo" id="formVo" method="POST">
 	<%@include file="codeVo.jsp"%>
 </form>
 <!-- vo.jsp -->

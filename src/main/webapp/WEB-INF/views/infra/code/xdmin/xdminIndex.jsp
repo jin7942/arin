@@ -110,7 +110,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${itemList}" var="itemList" varStatus="status">
-								<h4 class="small font-weight-bold">
+								<h4 class="small font-weight-bold" onclick="goItemForm(<c:out value="${itemList.itemSeq}"/>)" style="cursor: pointer">
 									<c:out value="${itemList.itemHeader}" />
 									<span style="float: right"><c:out value="${itemList.itemRegDatetime}" /></span>
 								</h4>
@@ -222,7 +222,7 @@
 <!-- End of logout modal -->
 
 <!-- vo.jsp -->
-<form action="" name="formVo" id="formVo">
+<form action="" name="formVo" id="formVo" method="POST">
 	<%@include file="codeVo.jsp"%>
 </form>
 <!-- vo.jsp -->
@@ -245,6 +245,16 @@
 	goList = function(thisPage) {
 		$("input:hidden[name=thisPage]").val(thisPage);
 		setLita();
+	}
+	
+	const goItemForm = (keyValue) => {
+		$("input[name=mainKey]").val(keyValue)
+		$("form[name=formVo]").attr("action", "/code/itemForm").submit()
+	}
+	
+	const goMemberForm = (keyValue) => {
+		$("input[name=mainKey]").val(keyValue)
+		$("form[name=formVo]").attr("action", "/member/memberForm").submit()
 	}
 
 	function setLita() {

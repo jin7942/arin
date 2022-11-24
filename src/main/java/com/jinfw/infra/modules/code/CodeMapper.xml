@@ -257,6 +257,7 @@
 	<select id="selectVisitList" resultMap="resultMapObj">
 		<include refid="Base.selectListUpperForMysql" />
 			SELECT
+				a.seq,
 				a.memberName,
 				a.memberID,
 				b.loginLogIp,
@@ -271,6 +272,7 @@
 
 	<select id="selectIndexItem" resultMap="resultMapObj">
 		SELECT
+			a.itemSeq,
 		    a.itemHeader,
 		    a.itemRegDatetime
 		from item a

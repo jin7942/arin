@@ -20,7 +20,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${visitList}" var="visitList" varStatus="status">
-				<tr>
+				<tr onclick="goMemberForm(<c:out value="${visitList.seq}"/>)" style="cursor: pointer">
 					<td>
 						<c:out value="${visitList.memberName }" />
 					</td>
