@@ -24,7 +24,7 @@
 				<div class="card-body">
 
 					<!-- Search Form -->
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="GET" action="/code/itemList">
+					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST" action="/code/itemList">
 						<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 						<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}" />">
 
@@ -110,7 +110,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${list}" var="list" varStatus="status">
-									<tr>
+									<tr onclick="goForm(<c:out value="${list.itemSeq}"/>)">
 										<td>
 											<input type="checkbox" class="chkbox" onclick="event.cancelBubble=true" />
 										</td>
@@ -161,9 +161,15 @@
 </div>
 <!-- /.container-fluid -->
 <!-- End of Main Content -->
-<form action="" name="form">
+<form action="POST" name="form">
 	<input type="hidden" name="thisPage" />
 </form>
+
+<!-- vo.jsp -->
+<form action="" method="POST"  name="formVo" id="formVo">
+	<%@include file="itemVo.jsp"%>
+</form>
+<!-- vo.jsp -->
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
@@ -206,16 +212,21 @@
 		location.href = "/code/itemList";
 	}
 
-	var form = $("form[name=form]");
-	var formVo = $("form[name=formVo]");
+	const form = $("form[name=form]");
+	const formVo = $("form[name=formVo]");
 
-	var goUrlList = "/code/itemList";
-	var goUrlView = "/code/itemView";
+	const goUrlList = "/code/itemList";
+	const goUrlView = "/code/itemView";
+	const goUrlForm = "/code/itemForm"
 
 	goList = function(thisPage) {
 		$("input:hidden[name=thisPage]").val(thisPage);
 		form.attr("action", goUrlList).submit();
-
+	}
+	
+	const goForm = (keyValue) => {
+		$("input[name=mainKey]").val(keyValue);
+		formVo.attr("action", goUrlForm).submit();
 	}
 </script>
 

@@ -22,7 +22,7 @@
 				<div class="card-body">
 
 
-					<form method="GET" action="" id="form" name="form">
+					<form method="POST" action="" id="form" name="form">
 						<div style="display: flex">
 							<div class="col-6">
 								<input type="hidden" id="mainKey" name="mainKey" value="<c:out value="${vo.mainKey}"/>" />
@@ -36,12 +36,31 @@
 
 								<!-- 삭제 여부 -->
 								<label for="memberDelNY" class="form-label">
-									사용여부 <b>*</b>
+									삭제여부 <b>*</b>
 								</label>
+
 								<select class="form-control" id="memberDelNY" name="memberDelNY">
 									<option value="0" <c:if test="${item.memberDelNY eq '0'}"  >checked="checked"</c:if>>N</option>
 									<option value="1" <c:if test="${item.memberDelNY eq '1'}"  >checked="checked"</c:if>>Y</option>
 								</select>
+
+								<!-- 타입 -->
+								<label for="type" class="form-label">
+									타입
+								</label>
+								
+								<c:set var="type" value="${item.type}" />
+								<c:choose>
+									<c:when test="${type eq '3'}">
+										<p class="form-control">네이버</p>
+									</c:when>
+									<c:when test="${type eq '1'}">
+										<p class="form-control">카카오</p>
+									</c:when>
+									<c:otherwise>
+										<p class="form-control">일반</p>
+									</c:otherwise>
+								</c:choose>
 
 								<br />
 
@@ -54,7 +73,7 @@
 									<input class="form-check-input" type="checkbox" role="switch" id="btnBuyHistory">
 									<label class="form-check-label" for="btnBuyHistory">구매한 상품 보기</label>
 								</div>
-								
+
 								<!-- 등록한 상품 -->
 								<div id="regHistory" style="display: none">
 									<!-- Table -->
@@ -162,13 +181,13 @@
 								<label for="memberID" class="form-label">
 									아이디<b>*</b>
 								</label>
-								<input type="text" id="memberID" class="form-control" name="memberID" placeholder="ID" />
+								<input type="text" id="memberID" class="form-control" name="memberID" placeholder="ID" value="<c:out value="${item.memberID}"/>" />
 
 								<!-- PW -->
 								<label for="memberPW" class="form-label">
 									비밀번호 <b>*</b>
 								</label>
-								<input type="password" id="memberPW" name="memberPW" class="form-control" placeholder="비밀번호" value="<c:out value="${item.memberPW}"/>" />
+								<input type="password" id="memberPW" name="memberPW" class="form-control" placeholder="비밀번호" value="<c:out value="${item.memberPW}"/>" readonly />
 
 								<!-- Mobile -->
 								<label for="memberMobile" class="form-label">연락처</label>
@@ -178,7 +197,7 @@
 								<label for="email" class="form-label">
 									이메일 <b>*</b>
 								</label>
-								<input type="text" class="form-control" id="email" placeholder="name@example.com" />
+								<input type="text" class="form-control" id="email" placeholder="name@example.com" value="<c:out value="${item.memberMailName}@${item.memberMailDomain}"/>" />
 
 								<input type="hidden" name="memberMailName" id="memberMailName" />
 								<input type="hidden" name="memberMailDomain" id="memberMailDomain" />
@@ -187,7 +206,7 @@
 
 								<p class="form-control">
 									등록일 :
-									<c:out value="${item.memberRegDateTime}" />
+									<c:out value="${item.memberSignDatetime}" />
 								</p>
 								<p class="form-control">
 									수정일 :
@@ -195,8 +214,8 @@
 								</p>
 								<div>
 									<button type="button" class="btn btn-primary" id="btnList">목록</button>
-									<button type="button" class="btn btn-primary" id="btnSave">저장</button>
-									<button type="button" class="btn btn-danger" id="btnUelete">삭제</button>
+<!-- 									<button type="button" class="btn btn-primary" id="btnSave">저장</button>
+									<button type="button" class="btn btn-danger" id="btnUelete">삭제</button> -->
 								</div>
 							</div>
 						</div>
@@ -210,7 +229,7 @@
 <!-- End of Main Content -->
 
 <!-- vo.jsp -->
-<form action="" name="formVo" id="formVo">
+<form action="" method="POST" name="formVo" id="formVo">
 	<%@include file="memberVo.jsp"%>
 </form>
 
@@ -291,6 +310,17 @@
 			document.getElementById("buyHistory").style.display = 'block';
 		} else {
 			document.getElementById("buyHistory").style.display = 'none';
+		}
+	})
+	
+	$("#memberPW").on("click", (e) => {
+		if (!alert("비밀번호를 수정하시겠습니까?")) {
+			$("#memberPW").attr("readonly", false);
+			$("#memberPW").on("focusout", (e) => {
+				$("#memberPW").attr("readonly", true)
+			})
+		} else {
+			$("#memberPW").attr("readonly", false)
 		}
 	})
 </script>

@@ -18,5 +18,5 @@ public interface CodeService {
 	public List<Code> selectIndexItem() throws Exception;
 	public List<Code> selectVisitList(CodeVo vo) throws Exception;
 	public int selectVisitListCnt(CodeVo vo) throws Exception;
-	
+	public Code selectOneItem(CodeVo vo) throws Exception;
 }

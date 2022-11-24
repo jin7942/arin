@@ -286,5 +286,35 @@
 		    ,(SELECT COUNT(*) FROM item WHERE itemSaleNY = 0 AND itemDelNY = 0) AS itemCntSaleTrue
 		    ,(SELECT COUNT(*) FROM loginLog WHERE date_format(loginLogDatetime, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')) AS visitCnt
 	</select>
+	
+	<!-- 상품 상세화면 -->
+	<select id="selectOneItem" resultMap="resultMapObj">
+		SELECT
+			a.itemSeq
+		    ,a.itemHeader
+		    ,a.itemPrice
+		    ,a.itemDescription
+		    ,a.itemPlace
+		    ,a.member_seq
+		    ,a.member_seq1
+		    ,(select b.memberName from member b where a.member_seq = b.seq) as seller
+		    ,(select b.memberName from member b where a.member_seq1 = b.seq) as buyer
+		    ,a.itemRegDatetime
+		    ,a.itemModDatetime
+		    ,a.itemDelNY
+		    ,a.itemBuyDatetime
+		from item a
+		WHERE 1 = 1
+		    AND a.itemSeq = #{mainKey}
+		ORDER BY a.itemRegDatetime DESC
+	</select>
+	<select id="selectListItemImg" resultMap="resultMapObj">
+		SELECT
+			a.uuidName
+			,a.path
+		FROM itemImgUpload a
+		WHERE 1=1
+			AND a.itemSeq = #{mainKey}
+	</select>
 
 </mapper>

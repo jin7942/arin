@@ -15,9 +15,18 @@ public class Member {
     private String memberSignDatetime;
 	private String memberModDatetime;
 	private String memberDelNY;
+	private String type;
+	
+	
 	
 	// ########################################
 	// Generate Getters and Setters
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getMemberMailDomain() {
 	    return memberMailDomain;
 	}

@@ -63,13 +63,24 @@ public class MemberController {
     }
 
     @RequestMapping(value = "memberForm")
-    public String codeForm(@ModelAttribute("vo") CodeVo vo, Code dto, Model model) throws Exception {
+    public String selectOneMember(@ModelAttribute("vo") MemberVo vo, Code dto, Model model) throws Exception {
     	
     	if (vo.getMainKey() != null) {
-    		// insert
+    		// view
+    		Member item = service.selectOneMember(vo);
+    		model.addAttribute("item", item);
+    	} else {
+    		// by pass
     	}
     	
         return "infra/member/xdmin/memberForm";
+    }
+   
+    @RequestMapping(value = "memberUpdt")
+    public String memberUpdt(@ModelAttribute("vo") MemberVo vo, Code dto, Model model) throws Exception {
+    	
+    	
+    	return "redirect:memberForm";
     }
 
     @RequestMapping("excelDownload")

@@ -143,6 +143,11 @@ public class CodeServiceImpl implements CodeService {
     public int selectVisitListCnt(CodeVo vo) throws Exception {
         return dao.selectVisitListCnt(vo);
     }
+    
+    @Override
+    public Code selectOneItem(CodeVo vo) throws Exception {
+    	return dao.selectOneItem(vo);
+    }
 
 	
 	

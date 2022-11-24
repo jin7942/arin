@@ -39,7 +39,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${list}" var="list" varStatus="status">
-				<tr>
+				<tr onclick="goForm(<c:out value="${list.seq}"/>)" style="cursor: pointer">
 					<td>
 						<input type="checkbox" name="" id="" />
 					</td>

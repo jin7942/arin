@@ -27,5 +27,10 @@ public class MemberDao {
 		return sqlSession.selectOne(namespace + ".selectOneCount", vo);
 	}
 	
+	// 멤버 상세 조회
+	public Member selectOneMember(MemberVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneMember", vo);
+	}
+	
 	
 }

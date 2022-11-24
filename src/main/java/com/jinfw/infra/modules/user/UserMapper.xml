@@ -121,7 +121,7 @@
 	</select>
 	
 	<!-- 수정 -->
-	<insert id="userUpdt">
+	<update id="userUpdt">
 		UPDATE member 
 		SET 
 			memberMailName = #{memberMailName}
@@ -131,7 +131,7 @@
 			,memberModDatetime = now()
 		WHERE 1=1
 			AND seq = #{seq}
-	</insert>
+	</update>
 	
 	<!-- 장바구니 -->
 	<select id="selectListItemCart" resultMap="resultMapObj">

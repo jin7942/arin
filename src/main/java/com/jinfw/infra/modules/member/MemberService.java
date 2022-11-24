@@ -6,5 +6,6 @@ public interface MemberService {
 
 	public List<Member> selectList(MemberVo vo) throws Exception;
 	public int selectOneCount(MemberVo vo) throws Exception;
+	public Member selectOneMember(MemberVo vo) throws Exception;
 	
 }

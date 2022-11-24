@@ -58,6 +58,7 @@
 			,memberSignDatetime
 			,memberModDatetime
 			,memberDelNY
+			,type
 		)
 		VALUES (
 			#{memberID}
@@ -70,6 +71,7 @@
 			,#{memberPlace}	
 			,now()	
 			,now()
+			,0
 			,0	
 		)
 		<selectKey resultType="String" keyProperty="seq" order="AFTER">

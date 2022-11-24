@@ -74,4 +74,9 @@ public class CodeDao {
 	public int selectVisitListCnt(CodeVo vo) {
 	    return sqlSession.selectOne(namespace + ".selectVisitListCnt", vo);
 	}
+	
+	// 아이템
+	public Code selectOneItem(CodeVo vo) {
+		return sqlSession.selectOne(namespace + ".selectOneItem", vo);
+	}
 }

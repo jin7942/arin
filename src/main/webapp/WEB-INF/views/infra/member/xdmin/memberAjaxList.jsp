@@ -108,6 +108,11 @@
 
 <!-- End of Main Content -->
 
+<!-- vo.jsp -->
+<form action="" name="formVo" id="formVo">
+	<%@include file="memberVo.jsp"%>
+</form>
+
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
 	<div class="container my-auto">
@@ -152,9 +157,15 @@
 		location.href = "/member/memberList";
 	}
 
+	const formVo = $("form[name=formVo]");
 	const form = $("form[name=form]");
+	
 	const goUrlList = "/member/memberList";
+	const goUrlForm = "/member/memberForm";
+	
 	const excelUri = "/member/excelDownload"
+	
+	const mainKey = $("input[name=mainKey]");
 	
 	$("#btnExcel").click(() => {
 		form.attr("action", excelUri).submit();
@@ -164,6 +175,11 @@
 		$("input:hidden[name=thisPage]").val(thisPage);
 		//form.attr("action", goUrlList).submit();
 		setLita();
+	}
+	
+	goForm = function(seq) {
+		mainKey.val(seq);
+		formVo.attr("action", goUrlForm).submit();
 	}
 	
 	function setLita() {

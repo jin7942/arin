@@ -260,7 +260,7 @@
 	
 	const goForm = (seq) => {
 		mainKey.val(seq)
-		formVo.attr("action", goUrlForm).submit
+		formVo.attr("action", goUrlForm).submit();
 	}
 </script>
 </body>

@@ -165,4 +165,15 @@ public class CodeController {
         return "infra/code/xdmin/xdminIndexLita";
     }
     
+    @RequestMapping(value = "itemForm")
+    public String itemForm(@ModelAttribute("vo") CodeVo vo, Code dto, Model model) throws Exception {
+
+    	if (vo.getMainKey() != null) {
+    		Code item = service.selectOneItem(vo);
+    		model.addAttribute("item", item);
+    	}
+    	
+        return "infra/item/xdmin/itemForm";
+    }
+    
 }

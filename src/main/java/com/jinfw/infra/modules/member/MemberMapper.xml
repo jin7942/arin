@@ -75,6 +75,71 @@
 		<include refid="selectCommon" />
 	</select>
 	
+	<!-- 회원가입 -->
+	<insert id="insertMember">
+		INSERT INTO member(
+			memberID
+			,memberPW
+			,memberName
+			,memberMobile
+			,memberCarrier
+			,memberMailName
+			,memberMailDomain
+			,memberPlace
+			,memberSignDatetime
+			,memberModDatetime
+			,memberDelNY
+		)
+		VALUES (
+			#{memberID}
+			,#{memberPW}	
+			,#{memberName}	
+			,#{memberMobile}	
+			,2	
+			,#{memberMailName}
+			,#{memberMailDomain}	
+			,#{memberPlace}	
+			,now()	
+			,now()
+			,0	
+		)
+		<selectKey resultType="String" keyProperty="seq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<!-- 유저 상세조회 -->
+	<select id="selectOneMember" resultMap="resultMapObj">
+		SELECT 
+			a.seq
+			,a.memberID
+			,a.memberPW
+			,a.memberName
+			,a.memberMobile
+			,a.memberMailName
+			,a.memberMailDomain
+			,a.memberPlace
+			,a.memberSignDatetime
+			,a.memberModDatetime
+			,a.memberDelNY
+			,a.type
+		FROM member a
+		WHERE 1=1
+			AND seq = #{mainKey}
+	</select>
+	<!-- 수정 -->
+	<update id="userUpdt">
+		UPDATE member 
+		SET 
+			memberMailName = #{memberMailName}
+			,memberMailDomain= #{memberMailDomain}
+			,memberMobile = #{memberMobile}
+			,memberPlace = #{memberPlace}
+			,memberModDatetime = now()
+		WHERE 1=1
+			AND seq = #{seq}
+	</update>
+	
 	<!-- 로그인 -->
 	<select id="selectOneId" resultMap="resultMapObj">
 		SELECT

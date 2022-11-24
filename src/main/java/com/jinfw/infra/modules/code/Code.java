@@ -27,9 +27,12 @@ public class Code {
     private String itemDescription;
     private String itemRegDatetime;
     private String itemModDatetime;
+    private String itemBuyDatetime;
     private String itemPlace;
     private String member_seq;
-    private String seller;
+    private String member_seq1;
+	private String seller;
+    private String buyer;
     private String itemDelNY;
     private String itemSaleNY;
     
@@ -46,281 +49,308 @@ public class Code {
     private String loginLogIp;
     private String loginLogDatetime;
     private String loginLogMemberSeq;
-    
-    
-
-    public String getMemberCnt() {
-        return memberCnt;
-    }
-
-    public void setMemberCnt(String memberCnt) {
-        this.memberCnt = memberCnt;
-    }
-
-    public String getItemCnt() {
-        return itemCnt;
-    }
-
-    public void setItemCnt(String itemCnt) {
-        this.itemCnt = itemCnt;
-    }
-
-    public String getItemCntSaleTrue() {
-        return itemCntSaleTrue;
-    }
-
-    public void setItemCntSaleTrue(String itemCntSaleTrue) {
-        this.itemCntSaleTrue = itemCntSaleTrue;
-    }
-
-    public String getVisitCnt() {
-        return visitCnt;
-    }
-
-    public void setVisitCnt(String visitCnt) {
-        this.visitCnt = visitCnt;
-    }
-
-    public String getSeq() {
-        return seq;
-    }
-
-    public void setSeq(String seq) {
-        this.seq = seq;
-    }
-
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
-
-    public String getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(String memberID) {
-        this.memberID = memberID;
-    }
-
-    public String getMemberSignDatetime() {
-        return memberSignDatetime;
-    }
-
-    public void setMemberSignDatetime(String memberSignDatetime) {
-        this.memberSignDatetime = memberSignDatetime;
-    }
-
-    public String getLoginLogIp() {
-        return loginLogIp;
-    }
-
-    public void setLoginLogIp(String loginLogIp) {
-        this.loginLogIp = loginLogIp;
-    }
-
-    public String getLoginLogDatetime() {
-        return loginLogDatetime;
-    }
-
-    public void setLoginLogDatetime(String loginLogDate) {
-        this.loginLogDatetime = loginLogDate;
-    }
-
-    public String getLoginLogMemberSeq() {
-        return loginLogMemberSeq;
-    }
-
-    public void setLoginLogMemberSeq(String loginLogMemberSeq) {
-        this.loginLogMemberSeq = loginLogMemberSeq;
-    }
-
-    public static void setCachedCodeArrayList(List<Code> cachedCodeArrayList) {
-        Code.cachedCodeArrayList = cachedCodeArrayList;
-    }
 
     /* for cache */
     public static List<Code> cachedCodeArrayList = new ArrayList<Code>();
 
+    
     // ########################################
     // Generate Getters and Setters
-    public String getItemSaleNY() {
-        return itemSaleNY;
-    }
     
-    public void setItemSaleNY(String itemSaleNY) {
-        this.itemSaleNY = itemSaleNY;
-    }
-    public String getItemDelNY() {
-        return itemDelNY;
-    }
-    
-    public void setItemDelNY(String itemDelNY) {
-        this.itemDelNY = itemDelNY;
-    }
-    public String getItemModDatetime() {
-        return itemModDatetime;
-    }
-    
-    public void setItemModDatetime(String itemModDatetime) {
-        this.itemModDatetime = itemModDatetime;
-    }
-    public String getItemSeq() {
-        return itemSeq;
-    }
+    public String getMember_seq1() {
+		return member_seq1;
+	}
 
-    public void setItemSeq(String itemSeq) {
-        this.itemSeq = itemSeq;
-    }
+	public void setMember_seq1(String member_seq1) {
+		this.member_seq1 = member_seq1;
+	}
+	public String getIfccSeq() {
+		return ifccSeq;
+	}
 
-    public String getItemHeader() {
-        return itemHeader;
-    }
+	public void setIfccSeq(String ifccSeq) {
+		this.ifccSeq = ifccSeq;
+	}
 
-    public void setItemHeader(String itemHeader) {
-        this.itemHeader = itemHeader;
-    }
+	public String getIfccNameEng() {
+		return ifccNameEng;
+	}
 
-    public String getItemPrice() {
-        return itemPrice;
-    }
+	public void setIfccNameEng(String ifccNameEng) {
+		this.ifccNameEng = ifccNameEng;
+	}
 
-    public void setItemPrice(String itemPrice) {
-        this.itemPrice = itemPrice;
-    }
+	public String getIfccNameKor() {
+		return ifccNameKor;
+	}
 
-    public String getItemDescription() {
-        return itemDescription;
-    }
+	public void setIfccNameKor(String ifccNameKor) {
+		this.ifccNameKor = ifccNameKor;
+	}
 
-    public void setItemDescription(String itemDescription) {
-        this.itemDescription = itemDescription;
-    }
+	public String getIfccUseNY() {
+		return ifccUseNY;
+	}
 
-    public String getItemRegDatetime() {
-        return itemRegDatetime;
-    }
+	public void setIfccUseNY(String ifccUseNY) {
+		this.ifccUseNY = ifccUseNY;
+	}
 
-    public void setItemRegDatetime(String itemRegDatetime) {
-        this.itemRegDatetime = itemRegDatetime;
-    }
+	public String getIfccDelNY() {
+		return ifccDelNY;
+	}
 
-    public String getItemPlace() {
-        return itemPlace;
-    }
+	public void setIfccDelNY(String ifccDelNY) {
+		this.ifccDelNY = ifccDelNY;
+	}
 
-    public void setItemPlace(String itemPlace) {
-        this.itemPlace = itemPlace;
-    }
+	public String getIfccDescription() {
+		return ifccDescription;
+	}
 
-    public String getMember_seq() {
-        return member_seq;
-    }
+	public void setIfccDescription(String ifccDescription) {
+		this.ifccDescription = ifccDescription;
+	}
 
-    public void setMember_seq(String member_seq) {
-        this.member_seq = member_seq;
-    }
+	public String getIfccRegDatetime() {
+		return ifccRegDatetime;
+	}
 
-    public String getSeller() {
-        return seller;
-    }
+	public void setIfccRegDatetime(String ifccRegDatetime) {
+		this.ifccRegDatetime = ifccRegDatetime;
+	}
 
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
+	public String getIfccModDatetime() {
+		return ifccModDatetime;
+	}
 
-    public static List<Code> getCachedCodeArrayList() {
-        return cachedCodeArrayList;
-    }
+	public void setIfccModDatetime(String ifccModDatetime) {
+		this.ifccModDatetime = ifccModDatetime;
+	}
 
-    public String getIfccSeq() {
-        return ifccSeq;
-    }
+	public String getInfrCodeGroup_ifcgSeq() {
+		return infrCodeGroup_ifcgSeq;
+	}
 
-    public void setIfccSeq(String ifccSeq) {
-        this.ifccSeq = ifccSeq;
-    }
+	public void setInfrCodeGroup_ifcgSeq(String infrCodeGroup_ifcgSeq) {
+		this.infrCodeGroup_ifcgSeq = infrCodeGroup_ifcgSeq;
+	}
 
-    public String getIfccNameEng() {
-        return ifccNameEng;
-    }
+	public String getIfcgNameKor() {
+		return ifcgNameKor;
+	}
 
-    public void setIfccNameEng(String ifccNameEng) {
-        this.ifccNameEng = ifccNameEng;
-    }
+	public void setIfcgNameKor(String ifcgNameKor) {
+		this.ifcgNameKor = ifcgNameKor;
+	}
 
-    public String getIfccNameKor() {
-        return ifccNameKor;
-    }
+	public String getIfcgSeq() {
+		return ifcgSeq;
+	}
 
-    public void setIfccNameKor(String ifccNameKor) {
-        this.ifccNameKor = ifccNameKor;
-    }
+	public void setIfcgSeq(String ifcgSeq) {
+		this.ifcgSeq = ifcgSeq;
+	}
 
-    public String getIfccUseNY() {
-        return ifccUseNY;
-    }
+	public String getItemSeq() {
+		return itemSeq;
+	}
 
-    public void setIfccUseNY(String ifccUseNY) {
-        this.ifccUseNY = ifccUseNY;
-    }
+	public void setItemSeq(String itemSeq) {
+		this.itemSeq = itemSeq;
+	}
 
-    public String getIfccDelNY() {
-        return ifccDelNY;
-    }
+	public String getItemHeader() {
+		return itemHeader;
+	}
 
-    public void setIfccDelNY(String ifccDelNY) {
-        this.ifccDelNY = ifccDelNY;
-    }
+	public void setItemHeader(String itemHeader) {
+		this.itemHeader = itemHeader;
+	}
 
-    public String getIfccDescription() {
-        return ifccDescription;
-    }
+	public String getItemPrice() {
+		return itemPrice;
+	}
 
-    public void setIfccDescription(String ifccDescription) {
-        this.ifccDescription = ifccDescription;
-    }
+	public void setItemPrice(String itemPrice) {
+		this.itemPrice = itemPrice;
+	}
 
-    public String getIfccRegDatetime() {
-        return ifccRegDatetime;
-    }
+	public String getItemDescription() {
+		return itemDescription;
+	}
 
-    public void setIfccRegDatetime(String ifccRegDatetime) {
-        this.ifccRegDatetime = ifccRegDatetime;
-    }
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
 
-    public String getIfccModDatetime() {
-        return ifccModDatetime;
-    }
+	public String getItemRegDatetime() {
+		return itemRegDatetime;
+	}
 
-    public void setIfccModDatetime(String ifccModDatetime) {
-        this.ifccModDatetime = ifccModDatetime;
-    }
+	public void setItemRegDatetime(String itemRegDatetime) {
+		this.itemRegDatetime = itemRegDatetime;
+	}
 
-    public String getInfrCodeGroup_ifcgSeq() {
-        return infrCodeGroup_ifcgSeq;
-    }
+	public String getItemModDatetime() {
+		return itemModDatetime;
+	}
 
-    public void setInfrCodeGroup_ifcgSeq(String infrCodeGroup_ifcgSeq) {
-        this.infrCodeGroup_ifcgSeq = infrCodeGroup_ifcgSeq;
-    }
+	public void setItemModDatetime(String itemModDatetime) {
+		this.itemModDatetime = itemModDatetime;
+	}
 
-    public String getIfcgNameKor() {
-        return ifcgNameKor;
-    }
+	public String getItemBuyDatetime() {
+		return itemBuyDatetime;
+	}
 
-    public void setIfcgNameKor(String ifcgNameKor) {
-        this.ifcgNameKor = ifcgNameKor;
-    }
+	public void setItemBuyDatetime(String itemBuyDatetime) {
+		this.itemBuyDatetime = itemBuyDatetime;
+	}
 
-    public String getIfcgSeq() {
-        return ifcgSeq;
-    }
+	public String getItemPlace() {
+		return itemPlace;
+	}
 
-    public void setIfcgSeq(String ifcgSeq) {
-        this.ifcgSeq = ifcgSeq;
-    }
+	public void setItemPlace(String itemPlace) {
+		this.itemPlace = itemPlace;
+	}
 
+	public String getMember_seq() {
+		return member_seq;
+	}
+
+	public void setMember_seq(String member_seq) {
+		this.member_seq = member_seq;
+	}
+
+	public String getSeller() {
+		return seller;
+	}
+
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+
+	public String getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(String buyer) {
+		this.buyer = buyer;
+	}
+
+	public String getItemDelNY() {
+		return itemDelNY;
+	}
+
+	public void setItemDelNY(String itemDelNY) {
+		this.itemDelNY = itemDelNY;
+	}
+
+	public String getItemSaleNY() {
+		return itemSaleNY;
+	}
+
+	public void setItemSaleNY(String itemSaleNY) {
+		this.itemSaleNY = itemSaleNY;
+	}
+
+	public String getMemberCnt() {
+		return memberCnt;
+	}
+
+	public void setMemberCnt(String memberCnt) {
+		this.memberCnt = memberCnt;
+	}
+
+	public String getItemCnt() {
+		return itemCnt;
+	}
+
+	public void setItemCnt(String itemCnt) {
+		this.itemCnt = itemCnt;
+	}
+
+	public String getItemCntSaleTrue() {
+		return itemCntSaleTrue;
+	}
+
+	public void setItemCntSaleTrue(String itemCntSaleTrue) {
+		this.itemCntSaleTrue = itemCntSaleTrue;
+	}
+
+	public String getVisitCnt() {
+		return visitCnt;
+	}
+
+	public void setVisitCnt(String visitCnt) {
+		this.visitCnt = visitCnt;
+	}
+
+	public String getSeq() {
+		return seq;
+	}
+
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public String getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+
+	public String getMemberSignDatetime() {
+		return memberSignDatetime;
+	}
+
+	public void setMemberSignDatetime(String memberSignDatetime) {
+		this.memberSignDatetime = memberSignDatetime;
+	}
+
+	public String getLoginLogIp() {
+		return loginLogIp;
+	}
+
+	public void setLoginLogIp(String loginLogIp) {
+		this.loginLogIp = loginLogIp;
+	}
+
+	public String getLoginLogDatetime() {
+		return loginLogDatetime;
+	}
+
+	public void setLoginLogDatetime(String loginLogDatetime) {
+		this.loginLogDatetime = loginLogDatetime;
+	}
+
+	public String getLoginLogMemberSeq() {
+		return loginLogMemberSeq;
+	}
+
+	public void setLoginLogMemberSeq(String loginLogMemberSeq) {
+		this.loginLogMemberSeq = loginLogMemberSeq;
+	}
+
+	public static List<Code> getCachedCodeArrayList() {
+		return cachedCodeArrayList;
+	}
+
+	public static void setCachedCodeArrayList(List<Code> cachedCodeArrayList) {
+		Code.cachedCodeArrayList = cachedCodeArrayList;
+	}
+
+   
 }

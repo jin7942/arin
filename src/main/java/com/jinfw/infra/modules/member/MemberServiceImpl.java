@@ -33,5 +33,10 @@ public class MemberServiceImpl implements MemberService {
 		return dao.selectOneCount(vo);
 	}
 	
+	@Override
+	public Member selectOneMember(MemberVo vo) throws Exception {
+		return dao.selectOneMember(vo);
+	}
+	
 	
 }
