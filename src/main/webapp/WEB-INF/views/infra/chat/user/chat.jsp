@@ -271,7 +271,7 @@ div {
 											</div>
 											<div class="chat_product_info">
 												<!-- 아래 mmNickName  도 본인의 dto field에 맞게 수정 -->
-												<span class="status"><c:out value="${list.mmNickName }" /></span>
+												<span class="status"><c:out value="${list.memberName }" /></span>
 												<p>TEST TEXT FIELD</p>
 											</div>
 										</div>
@@ -500,7 +500,7 @@ div {
 								txt+='</div>';
 								txt+='<div class="chat_product_info">';
 								txt+='<span class="status">';
-								txt+=result.newChat.id;
+								txt+=result.newChat.memberName;
 								txt+='</span>';
 								txt+='<p>TEST TEXT FIELD</p>';
 								txt+='</div>';

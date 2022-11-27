@@ -112,7 +112,7 @@
 									</div> -->
 
 									<div class="text-center">
-										<button class="btn btn-dark btn-lg btn-block" type="button" onclick="login()">Login</button>
+										<button class="btn btn-dark btn-lg btn-block" type="button" onclick="login()" id="btnLogin">Login</button>
 									</div>
 									<!-- <a href="" style="color: black">ID 및 PW 찾기</a> -->
 
@@ -146,6 +146,15 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d83d77585dfcb78cea837606843f75b&libraries=services"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
+	
+		$("#btnLogin").addEventListener("keyup", (e) => {
+			if (e.keyCode == 13) {
+				login()
+			} else {
+				// by pass
+			}
+		})
+	
 		function login() {
 			$.ajax({
 				async: true 
