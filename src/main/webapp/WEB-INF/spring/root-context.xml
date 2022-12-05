@@ -2,29 +2,75 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	
+
+
 	<!-- mysql s 2022.02.15 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!--  <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:log4jdbc:mysql://jin-mysql-1.cpdbjanyiyc9.ap-northeast-2.rds.amazonaws.com:3216/yena" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url"
+			value="jdbc:log4jdbc:mysql://jin-mysql-1.cpdbjanyiyc9.ap-northeast-2.rds.amazonaws.com:3216/yena" />
 		<property name="username" value="root" />
 		<property name="password" value="pkqwer77" />
 	</bean>
-	    
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/mybatis-config.xml" />
-	<!-- <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" /> -->	<!-- 기본설정 : 패키지 변경으로 아래와 같이 수정 -->
-	    <property name="mapperLocations" value="classpath:com/jinfw/infra/**/**/*Mapper.xml"/>
+		<property name="configLocation"
+			value="classpath:/mybatis-config.xml" />
+		<!-- <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" 
+			/> -->	<!-- 기본설정 : 패키지 변경으로 아래와 같이 수정 -->
+		<property name="mapperLocations"
+			value="classpath:com/jinfw/infra/**/**/*Mapper.xml" />
 	</bean>
-		
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
 	</bean>
 	<!-- mysql e 2022.02.25 -->
-		
+
+	<!-- oracle s 2022.06.03 -->
+	<bean id="dataSourceOracle"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" 
+			/> -->	<!-- log4j2로 디비 로그를 찍기 위하여 아래 내용으로 변경 -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521/xe" /> -->	<!-- log4j2로 디비 로그를 찍기 위하여 아래 내용으로 변경 -->
+		<property name="url"
+			value="jdbc:log4jdbc:oracle:thin:@localhost:1521/hr" />
+		<property name="username" value="hr" />
+		<property name="password" value="1234" />
+	</bean>
+
+	<bean id="sqlSessionFactoryOracle"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceOracle" />
+		<property name="configLocation"
+			value="classpath:/mybatis-config.xml" />
+		<!-- <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" 
+			/> -->	<!-- 기본설정 : 패키지 변경으로 아래와 같이 수정 -->
+			
+		<!-- 매퍼여러개 추가를 위해서 아래 내용으로 수정 -->
+		<!-- <property name="mapperLocations" value="classpath:com/jinfw/infra/**/**/*Mpp.xml"/> -->	
+		<property name="mapperLocations">
+				<value>classpath:com/jinfw/infra/**/**/*Mapper.xml</value>
+		</property>
+	</bean>
+
+	<bean id="sqlSessionOracle"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactoryOracle" />
+	</bean>
+	<!-- oracle e oracle s 2022.06.03 -->
 </beans>

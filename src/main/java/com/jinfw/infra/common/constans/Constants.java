@@ -19,7 +19,7 @@ public class Constants {
 	public static final int DATE_INTERVAL = -7;
 	
 	/* for upload */
-	public static final String UPLOAD_PATH_PREFIX = "D:/factory/ws_sts_4160/arin/src/main/webapp/resources/uploaded";
+	public static final String UPLOAD_PATH_PREFIX = "D:/factory/ws_sts_4151/arin/src/main/webapp/resources/uploaded";
 	public static final String UPLOAD_PATH_PREFIX_FOR_VIEW = "/resources/uploaded";
 	
     /* image upload server path */

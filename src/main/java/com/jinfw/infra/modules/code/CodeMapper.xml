@@ -40,19 +40,7 @@
 				AND date(#{shEndDate})
 			</when>
 		</choose>
-
-		<!-- 정렬 -->
-		<choose>
-			<when test="shOptionSort == 1">
-				ORDER BY a.itemSeq ASC
-			</when>
-			<when test="shOptionSort == 2">
-				ORDER BY a.itemRegDatetime ASC
-			</when>
-			<when test="shOptionSort == 3">
-				ORDER BY a.itemModDatetime ASC
-			</when>
-		</choose>
+		ORDER BY a.itemRegDatetime DESC
 	</sql>
 
 	<sql id="selectCommon">
@@ -304,6 +292,7 @@
 		    ,a.itemRegDatetime
 		    ,a.itemModDatetime
 		    ,a.itemDelNY
+		    ,a.itemSaleNY
 		    ,a.itemBuyDatetime
 		from item a
 		WHERE 1 = 1

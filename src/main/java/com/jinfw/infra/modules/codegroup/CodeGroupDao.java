@@ -15,6 +15,10 @@ public class CodeGroupDao {
 	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
 	
+	@Inject
+	@Resource(name = "sqlSession")
+	private SqlSession sqlSessionOracle;
+	
 	private static String namespace = "com.jinfw.infra.modules.codegroup.CodeGroupMapper";
 	
 	// 리스트 조회
