@@ -15,18 +15,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		logger.info("========= Sever Start =========");
-		logger.info("Server name is arin.");
-		logger.info("Welcome home! The client locale is {}.", locale);
-		logger.info("server address => localhost:8080/");
-		
+			
 		return "redirect:index";
 	}
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
-	    
 	    
 	    return "index";
 	}
