@@ -138,7 +138,7 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/login/kakao/oauth")
+    @RequestMapping(value = "login/kakao/oauth")
     public String loginWithKakao(String code, Login dto, Model model,
             RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
 
@@ -173,7 +173,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = "/login/naver/oauth")
+    @RequestMapping(value = "login/naver/oauth")
     @ResponseBody
     public Map<String, Object> naverLogin(Login dto, HttpServletRequest request)
             throws Exception {
